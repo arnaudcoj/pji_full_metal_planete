@@ -2,6 +2,7 @@
 #define HEXAGRID_H
 
 #include <iostream>
+#include <SFML/System/Vector2.hpp>
 
 class Hexagrid {
 
@@ -16,9 +17,9 @@ class Hexagrid {
   void printCell(int x, int y);
   void toString();
   void toStringCoord();  
-  
+  sf::Vector2i getTopCellCoord(int x, int y);
+  sf::Vector2i getBottomCellCoord(int x, int y);
 };
 
-int main (void);
 
 #endif //HEXAGRID_H

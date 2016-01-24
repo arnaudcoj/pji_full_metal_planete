@@ -40,6 +40,16 @@ void Hexagrid::printAdjacents(int x, int y) {
   printCell(x - 1, y - (x % 2));
 }
 
+//pour tester les tests...
+sf::Vector2i Hexagrid::getTopCellCoord(int x, int y) {
+    return sf::Vector2i(x, y - 1);
+}
+
+//pour tester les tests...
+sf::Vector2i Hexagrid::getBottomCellCoord(int x, int y) {
+    return sf::Vector2i(x, y + 1);
+}
+
 void Hexagrid::printCell(int x, int y) {
   if(x < 0 || y < 0 || x >= mwidth || y >= mheight)
     cout << x << ", " << y << " out of bounds" << endl;
@@ -84,24 +94,4 @@ void Hexagrid::toStringCoord() {
     }
     cout << endl;
   }
-}
-
-int main (void) {
-
-  Hexagrid grid(8, 6);
-  
-  grid.printAdjacents(9, 9);
-  cout << endl;
-  grid.printAdjacents(1, 1);
-  cout << endl;
-  grid.printAdjacents(2, 1);
-  cout << endl;
-  grid.printAdjacents(3, 1);
-  cout << endl;
-  grid.printAdjacents(3, 2);
-
-  grid.toString();
-  grid.toStringCoord();
-  
-  return 0;
 }

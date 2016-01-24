@@ -1,10 +1,17 @@
-TEMPLATE = app
+TEMPLATE = subdirs
+CONFIG+=ordered
+
 CONFIG += console c++11
 CONFIG -= app_bundle
 CONFIG -= qt
 
-SOURCES += main.cpp
+SOURCES += \
+    app/main.cpp
 
-LIBS += -L/usr/lib -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
+INCLUDEPATH += \
+    ../api
 
-INCLUDEPATH = usr/include
+SUBDIRS += \
+    app \
+    api \
+    tests

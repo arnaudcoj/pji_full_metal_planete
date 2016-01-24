@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include <Hexagrid.h>
 
 int main()
 {
@@ -19,6 +20,21 @@ int main()
         window.draw(shape);
         window.display();
     }
+
+    Hexagrid grid(8, 6);
+
+    grid.printAdjacents(9, 9);
+    std::cout << std::endl;
+    grid.printAdjacents(1, 1);
+    std::cout << std::endl;
+    grid.printAdjacents(2, 1);
+    std::cout << std::endl;
+    grid.printAdjacents(3, 1);
+    std::cout << std::endl;
+    grid.printAdjacents(3, 2);
+
+    grid.toString();
+    grid.toStringCoord();
 
     return 0;
 }
