@@ -10,9 +10,9 @@ SOURCES += \
 HEADERS += \
     catch.hpp
 
-INCLUDEPATH += \
-    ../api
+LIBS += -L/usr/local/lib -lsfml-audio -lsfml-graphics -lsfml-window -lsfml-system
 
 LIBS += -L../api -lapi
-
-DISTFILES +=
+INCLUDEPATH += \
+    /usr/local/include \
+    ../api

@@ -10,4 +10,7 @@ SOURCES += \
 HEADERS += \
     Hexagrid.h
 
-LIBS += -L/usr/lib -lsfml-system
+LIBS += -L/usr/local/lib -lsfml-audio -lsfml-graphics -lsfml-window -lsfml-system
+
+INCLUDEPATH += \
+    /usr/local/include
