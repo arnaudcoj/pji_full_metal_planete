@@ -1,4 +1,4 @@
-#include <Hexagrid.h>
+#include <hexagrid.h>
 #include <catch.hpp>
 
 TEST_CASE( "test up cell coord", "proves that top cell of (1, 1) is (1, 0)" ) {

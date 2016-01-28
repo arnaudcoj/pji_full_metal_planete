@@ -1,9 +1,9 @@
 #include <SFML/Graphics.hpp>
-#include <Hexagrid.h>
+#include <hexagrid.h>
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
+    /*sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
     sf::CircleShape shape(100.f);
     shape.setFillColor(sf::Color::Green);
 
@@ -19,7 +19,7 @@ int main()
         window.clear();
         window.draw(shape);
         window.display();
-    }
+    }*/
 
     Hexagrid grid(8, 6);
 

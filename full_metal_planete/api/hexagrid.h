@@ -6,9 +6,9 @@
 
 class Hexagrid {
 
-  bool **mgrid;
-  int mwidth;
-  int mheight;
+  bool **m_grid;
+  int m_width;
+  int m_height;
 
  public:
   
