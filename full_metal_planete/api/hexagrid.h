@@ -6,19 +6,19 @@
 
 class Hexagrid {
 
-  bool **m_grid;
-  int m_width;
-  int m_height;
+    bool **m_grid;
+    int m_width;
+    int m_height;
 
- public:
-  
-  Hexagrid(int width = 10, int height = 10);
-  void printAdjacents(int x, int y);
-  void printCell(int x, int y);
-  void toString();
-  void toStringCoord();  
-  sf::Vector2i getTopCellCoord(int x, int y);
-  sf::Vector2i getBottomCellCoord(int x, int y);
+public:
+
+    Hexagrid(int width = 10, int height = 10);
+    void printAdjacents(int x, int y);
+    void printCell(int x, int y);
+    void toString();
+    void toStringCoord();
+    sf::Vector2i getTopCellCoord(int x, int y);
+    sf::Vector2i getBottomCellCoord(int x, int y);
 };
 
 
