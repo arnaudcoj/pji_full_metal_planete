@@ -1,5 +1,9 @@
 #include "cell.h"
 
+Cell::Cell() : m_halfCell(false), m_coord(sf::Vector2i(-1, -1)) {
+    m_piece = nullptr;
+}
+
 Cell::Cell(sf::Vector2i coord, bool halfCell) : m_halfCell(halfCell), m_coord(coord) {
     m_piece = nullptr;
 }
@@ -37,4 +41,12 @@ bool Cell::placePiece(Piece *piece) {
 
 sf::Vector2i Cell::getCoord() {
     return m_coord;
+}
+
+int Cell::getX() {
+    return m_coord.x;
+}
+
+int Cell::getY() {
+    return m_coord.y;
 }

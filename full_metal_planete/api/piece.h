@@ -14,6 +14,4 @@ public:
     void setCell(Cell* cell);
 };
 
-#include "cell.h"
-
 #endif // PIECE_H
