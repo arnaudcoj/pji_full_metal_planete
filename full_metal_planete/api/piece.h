@@ -17,6 +17,4 @@ public:
     void setCell(std::shared_ptr<Cell> cell);
 };
 
-#include "cell.h"
-
 #endif // PIECE_H

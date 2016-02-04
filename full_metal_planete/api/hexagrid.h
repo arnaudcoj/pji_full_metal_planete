@@ -3,22 +3,29 @@
 
 #include <iostream>
 #include <SFML/System/Vector2.hpp>
+#include <memory>
+#include <vector>
+#include <list>
+
+#include "cell.h"
 
 class Hexagrid {
 
-    bool **m_grid;
-    int m_width;
-    int m_height;
+    std::vector<std::vector<Cell>> m_grid;
 
 public:
 
     Hexagrid(int width = 10, int height = 10);
-    void printAdjacents(int x, int y);
-    void printCell(int x, int y);
-    void toString();
-    void toStringCoord();
-    sf::Vector2i getTopCellCoord(int x, int y);
-    sf::Vector2i getBottomCellCoord(int x, int y);
+    int getWidth();
+    int getHeight();
+    std::shared_ptr<Cell> getCell(int x, int y);
+    std::shared_ptr<Cell> getTopCell(int x, int y);
+    std::shared_ptr<Cell> getBottomCell(int x, int y);
+    std::shared_ptr<Cell> getLeftTopCell(int x, int y);
+    std::shared_ptr<Cell> getLeftBottomCell(int x, int y);
+    std::shared_ptr<Cell> getRightTopCell(int x, int y);
+    std::shared_ptr<Cell> getRightBottomCell(int x, int y);
+    std::list<std::shared_ptr<Cell> > getAdjacents(int x, int y);
 };
 
 

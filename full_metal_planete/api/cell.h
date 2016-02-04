@@ -12,6 +12,7 @@ class Cell {
     sf::Vector2i m_coord;
 
 public:
+    Cell();
     Cell(sf::Vector2i coord, bool halfCell = false);
     Cell(int x, int y, bool halfCell = false);
     bool isHalfCell();
@@ -20,6 +21,8 @@ public:
     bool removePiece();
     bool placePiece(std::shared_ptr<Cell> cell, std::shared_ptr<Piece> piece);
     sf::Vector2i getCoord();
+    int getX();
+    int getY();
 };
 
 #endif // CELL_H
