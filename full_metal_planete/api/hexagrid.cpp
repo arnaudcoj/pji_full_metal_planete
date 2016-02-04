@@ -1,4 +1,4 @@
-#include "Hexagrid.h"
+#include "hexagrid.h"
 
 using namespace std;
 

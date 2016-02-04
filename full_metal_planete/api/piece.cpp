@@ -5,11 +5,14 @@ Piece::Piece() : m_cell(nullptr)
 
 }
 
+bool Piece::isOnCell() {
+    return m_cell != nullptr;
+}
 
-Cell* Piece::getCell() {
+std::shared_ptr<Cell> Piece::getCell() {
     return m_cell;
 }
 
-void Piece::setCell(Cell *cell) {
+void Piece::setCell(std::shared_ptr<Cell> cell) {
     m_cell = cell;
 }

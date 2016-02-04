@@ -12,7 +12,7 @@ bool Cell::isHalfCell() {
     return m_halfCell;
 }
 
-Piece* Cell::getPiece() {
+std::shared_ptr<Piece> Cell::getPiece() {
     return m_piece;
 }
 
@@ -20,17 +20,29 @@ bool Cell::isOccupied() {
     return m_piece != nullptr;
 }
 
-void Cell::removePiece() {
+bool Cell::removePiece() {
+    if(m_piece  == nullptr)
+        return false;
+
+    m_piece->setCell(nullptr);
     m_piece = nullptr;
+    return true;
 }
 
-bool Cell::placePiece(Piece *piece) {
+bool Cell::placePiece(std::shared_ptr<Cell> cell, std::shared_ptr<Piece> piece) {
     if(isOccupied()) {
         return false;
     }
+
+    if(cell == nullptr || piece == nullptr)
+        return false;
+
     m_piece = piece;
-    m_piece->getCell()->removePiece();
-    m_piece->setCell(this);
+
+    if(m_piece->isOnCell())
+        m_piece->getCell()->removePiece();
+    m_piece->setCell(cell);
+
     return true;
 }
 

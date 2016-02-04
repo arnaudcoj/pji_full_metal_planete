@@ -6,7 +6,8 @@ CONFIG -= qt
 
 SOURCES += \
     testHexagrid.cpp \
-    main.cpp
+    main.cpp \
+    testCell.cpp
 
 HEADERS += \
     catch.hpp
