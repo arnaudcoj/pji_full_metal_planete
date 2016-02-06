@@ -8,12 +8,14 @@ TARGET = api
 SOURCES += \
     cell.cpp \
     piece.cpp \
-    hexagrid.cpp
+    hexagrid.cpp \
+    piecestock.cpp
 
 HEADERS += \
     cell.h \
     piece.h \
-    hexagrid.h
+    hexagrid.h \
+    piecestock.h
 
 LIBS += -L/usr/local/lib -lsfml-audio -lsfml-graphics -lsfml-window -lsfml-system
 
