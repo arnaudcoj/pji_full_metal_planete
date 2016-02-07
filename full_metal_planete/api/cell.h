@@ -10,11 +10,12 @@ class Cell {
     bool m_halfCell;
     std::shared_ptr<Piece> m_piece;
     sf::Vector2i m_coord;
+    unsigned int mArea;
 
 public:
     Cell();
-    Cell(sf::Vector2i coord, bool halfCell = false);
-    Cell(int x, int y, bool halfCell = false);
+    Cell(sf::Vector2i coord, bool halfCell = false, unsigned int area = 0);
+    Cell(int x, int y, bool halfCell = false, unsigned int area = 0);
     bool isHalfCell();
     std::shared_ptr<Piece> getPiece();
     bool isOccupied();

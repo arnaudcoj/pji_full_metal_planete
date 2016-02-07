@@ -16,6 +16,9 @@ HEADERS += \
 LIBS += -L/usr/local/lib -lsfml-audio -lsfml-graphics -lsfml-window -lsfml-system
 
 LIBS += -L../api -lapi
+
+LIBS += -lyaml-cpp
+
 INCLUDEPATH += \
     /usr/local/include \
     ../api

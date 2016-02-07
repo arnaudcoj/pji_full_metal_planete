@@ -1,5 +1,6 @@
-#include <hexagrid.h>
 #include <catch.hpp>
+#include <hexagrid.h>
+#include <string>
 
 /* Test of constructors*/
 
@@ -112,4 +113,9 @@ TEST_CASE( "test right bottom cell", "proves that right bottom cell of (1, 1) is
         cell = grid.getRightBottomCell(2, 1);
         REQUIRE(cell->getCoord().x == 3);
         REQUIRE(cell->getCoord().y == 2);
+}
+
+TEST_CASE("tests yaml construction", "tests if we can load a grid from a yaml file") {
+    YAML::Node primes = YAML::Load("{name : terrain1, cells : [[[0,1], [0,1], [0,2], [0,3]],[[0,1], [0,1], [0,2], [0,3]],[[0,1], [0,2], [0,2], [0,3]], [[0,1], [0,2], [0,2], [0,3]]]}");
+    REQUIRE(primes["name"].as<std::string>() == "terrain1");
 }

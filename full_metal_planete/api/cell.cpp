@@ -1,14 +1,14 @@
 #include "cell.h"
 
-Cell::Cell() : m_halfCell(false), m_coord(sf::Vector2i(-1, -1)) {
+Cell::Cell() : m_halfCell(false), m_coord(sf::Vector2i(-1, -1)), mArea(0) {
     m_piece = nullptr;
 }
 
-Cell::Cell(sf::Vector2i coord, bool halfCell) : m_halfCell(halfCell), m_coord(coord) {
+Cell::Cell(sf::Vector2i coord, bool halfCell, unsigned int area) : m_halfCell(halfCell), m_coord(coord), mArea(area) {
     m_piece = nullptr;
 }
 
-Cell::Cell(int x, int y, bool halfCell) : m_halfCell(halfCell), m_coord(x, y) {
+Cell::Cell(int x, int y, bool halfCell, unsigned int area) : m_halfCell(halfCell), m_coord(x, y), mArea(area) {
     m_piece = nullptr;
 }
 

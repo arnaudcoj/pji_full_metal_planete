@@ -9,15 +9,15 @@ SOURCES += \
     cell.cpp \
     piece.cpp \
     hexagrid.cpp \
-    piecestock.cpp
+    piecestock.cpp \
+    game.cpp
 
 HEADERS += \
     cell.h \
     piece.h \
     hexagrid.h \
-    piecestock.h
-
-LIBS += -L/usr/local/lib -lsfml-audio -lsfml-graphics -lsfml-window -lsfml-system
+    piecestock.h \
+    game.h
 
 INCLUDEPATH += \
     /usr/local/include
