@@ -18,6 +18,7 @@ public:
 
     Hexagrid(int width = 10, int height = 10);
     Hexagrid(std::string gridFile);
+    Hexagrid(YAML::Node gridInfo);
     int getWidth();
     int getHeight();
     std::shared_ptr<Cell> getCell(int x, int y);

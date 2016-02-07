@@ -1,11 +1,10 @@
 #include "game.h"
 
-Game::Game(const std::string &gridFile) : mGrid(generateGridFromFile(gridFile))
+Game::Game(const std::string& gridFile) : m_grid(gridFile)
 {
 
 }
 
-Hexagrid Game::generateGridFromFile(const std::string& gridFile) {
-    YAML::Node gridInfo = YAML::LoadFile(gridFile);
-    return Hexagrid();
+Game::Game(Hexagrid& grid) : m_grid(grid) {
+
 }

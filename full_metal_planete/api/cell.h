@@ -10,7 +10,7 @@ class Cell {
     bool m_halfCell;
     std::shared_ptr<Piece> m_piece;
     sf::Vector2i m_coord;
-    unsigned int mArea;
+    unsigned int m_area;
 
 public:
     Cell();
@@ -24,6 +24,7 @@ public:
     sf::Vector2i getCoord();
     int getX();
     int getY();
+    unsigned int getArea();
 };
 
 #endif // CELL_H

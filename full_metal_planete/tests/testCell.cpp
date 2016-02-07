@@ -70,5 +70,14 @@ TEST_CASE("tests cell.placePiece and cell.removePiece","tests if we can place a 
     REQUIRE(cell->isOccupied());
 }
 
+TEST_CASE("test getArea", "tests if the area returned is the one given at construction ") {
+    Cell c1(1,2, false, 2);
+    Cell c2(3, 2, false, 32);
+
+    REQUIRE(c1.getArea() == 2);
+    REQUIRE(c2.getArea() == 32);
+
+}
+
 //TODO TEST DEPLACEMENT SUR AUTRE CASE
 //TODO TESTS FUITE MEMOIRE

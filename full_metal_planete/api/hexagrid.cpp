@@ -41,46 +41,56 @@ Hexagrid::Hexagrid(int width, int height) {
     }
 }
 
-Hexagrid::Hexagrid(string gridFile) {/*
-    int i, j;
+//appelle Hexagrid(YAML::Node gridInfo) avec comme node le fichier yaml donné en paramètre
+Hexagrid::Hexagrid(string gridFile) : Hexagrid(YAML::LoadFile(gridFile)) {
 
-    YAML::Node gridInfo = YAML::LoadFile(gridFile);
+}
 
+// a reproprer
+Hexagrid::Hexagrid(YAML::Node gridInfo) {
+    unsigned int i, j;
+    size_t width, height;
+
+    std::vector<std::vector<std::vector<int>>> yGrid = gridInfo["cells"].as<std::vector<std::vector<std::vector<int>>>>();
+
+    //plus simple d'écrire ligne par ligne dans yaml mais nous on écrit colonnes par colonnes, donc inversons i, j, width et height
+    width = yGrid[0].size();
+    height = yGrid.size();
 
     m_grid.resize(width);
-    for (int i = 0; i < width; ++i)
+    for (i = 0; i < width; ++i)
       m_grid[i].resize(height);
 
     for(i = 1; i < width - 1; i++) {
         for(j = 1; j < height - 1; j++)
-            m_grid[i][j] = Cell(i, j, false);
+            m_grid[i][j] = Cell(i, j, false, yGrid[j][i][1]);
     }
 
     //1ere colonne
     for(j = 0; j < height; j++)
-        m_grid[0][j] = Cell(0, j, true);
+        m_grid[0][j] = Cell(0, j, true, yGrid[j][0][1]);
 
     //derniere colonne
     for(j = 0; j < height; j++)
-        m_grid[width - 1][j] = Cell(width - 1, j, true);
+        m_grid[width - 1][j] = Cell(width - 1, j, true, yGrid[j][width - 1][1]);
 
     //premiere ligne
     for(i = 1; i < width - 1; i += 2) {
-        m_grid[i][0] = Cell(i, 0, true);
+        m_grid[i][0] = Cell(i, 0, true, yGrid[0][i][1]);
     }
 
     for(i = 2; i < width - 1; i += 2) {
-        m_grid[i][0] = Cell(i, 0, false);
+        m_grid[i][0] = Cell(i, 0, false, yGrid[0][i][1]);
     }
 
     //derniere ligne
     for(i = 1; i < width - 1; i += 2) {
-        m_grid[i][height - 1] = Cell(i, height - 1, false);
+        m_grid[i][height - 1] = Cell(i, height - 1, false, yGrid[height - 1][i][1]);
     }
 
     for(i = 2; i < width - 1; i += 2) {
-        m_grid[i][height - 1] = Cell(i, height - 1, true);
-    }*/
+        m_grid[i][height - 1] = Cell(i, height - 1, true, yGrid[height - 1][i][1]);
+    }
 }
 
 int Hexagrid::getWidth() {

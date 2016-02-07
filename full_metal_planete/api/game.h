@@ -7,11 +7,11 @@
 
 class Game
 {
-
-    Hexagrid mGrid;
+    Hexagrid m_grid;
 
 public:
-    Game(const std::string &gridFile);
+    Game(const std::string& gridFile);
+    Game(Hexagrid& grid);
 
 private:
     Hexagrid generateGridFromFile(const std::string &gridFile);
