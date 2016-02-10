@@ -9,13 +9,17 @@ SOURCES += \
     cell.cpp \
     piece.cpp \
     hexagrid.cpp \
-    piecestock.cpp
+    piecestock.cpp \
+    game.cpp \
+    player.cpp
 
 HEADERS += \
     cell.h \
     piece.h \
     hexagrid.h \
-    piecestock.h
+    piecestock.h \
+    game.h \
+    player.h
 
 LIBS += -L/usr/local/lib -lsfml-audio -lsfml-graphics -lsfml-window -lsfml-system
 

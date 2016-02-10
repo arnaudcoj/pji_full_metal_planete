@@ -17,6 +17,7 @@ public:
     Cell(int x, int y, bool halfCell = false);
     bool isHalfCell();
     std::shared_ptr<Piece> getPiece();
+    bool setPiece(std::shared_ptr<Piece> piece);
     bool isOccupied();
     bool removePiece();
     bool placePiece(std::shared_ptr<Cell> cell, std::shared_ptr<Piece> piece);

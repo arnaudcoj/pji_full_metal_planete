@@ -20,6 +20,13 @@ std::shared_ptr<Piece> Cell::getPiece() {
     return m_piece;
 }
 
+bool Cell::setPiece(std::shared_ptr<Piece> piece) {
+    if(m_piece != nullptr)
+        return false;
+    m_piece = piece;
+    return true;
+}
+
 bool Cell::isOccupied() {
     return m_piece != nullptr;
 }
