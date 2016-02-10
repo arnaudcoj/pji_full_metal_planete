@@ -1,7 +1,7 @@
 #include <catch.hpp>
 #include <piecestock.h>
 
-TEST_CASE("test pieceStock Construction", "tests if the stock contains the given amount of Pieces after construction") {
+TEST_CASE("test pieceStock Construction and size", "tests if the stock contains the given amount of Pieces after construction") {
     PieceStock stock1(5);
     PieceStock stock2;
 

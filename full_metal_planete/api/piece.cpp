@@ -1,17 +1,17 @@
 #include "piece.h"
 #include "cell.h"
 
-Piece::Piece() : m_cell(nullptr)
+Piece::Piece() : m_cell()
 {
 
 }
 
 bool Piece::isOnCell() {
-    return m_cell != nullptr;
+    return !m_cell.expired();
 }
 
-Cell Piece::getCell() {
-    return *m_cell;
+Cell& Piece::getCell() {
+    return *(m_cell.lock());
 }
 
 void Piece::setCell(Cell &cell) {
@@ -19,10 +19,11 @@ void Piece::setCell(Cell &cell) {
 }
 
 bool Piece::removeCell() {
-    if(m_cell == nullptr)
+    if(!isOnCell())
         return false;
 
-    m_cell->removePiece();
-    m_cell = nullptr;
+    std::shared_ptr<Cell> cell = m_cell.lock();
+    cell->removePiece();
+    cell = nullptr;
     return true;
 }

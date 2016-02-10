@@ -32,42 +32,13 @@ TEST_CASE("test cell.isHalfCell", "tests if the created cells are halfCells or n
     REQUIRE_FALSE(cell3.isHalfCell());
 }
 
-TEST_CASE("tests cell.placePiece and cell.isOccupied", "tests if we can place a Piece and if the cell is occupied when the Piece is placed") {
-    std::shared_ptr<Cell> cell = std::make_shared<Cell>(Cell(1,2));
-    std::shared_ptr<Piece> piece = std::make_shared<Piece>(Piece());
+TEST_CASE("test getArea", "tests if the area returned is the one given at construction ") {
+    Cell c1(1,2, false, 2);
+    Cell c2(3, 2, false, 32);
 
-    REQUIRE_FALSE(cell->isOccupied());
-    REQUIRE_FALSE(cell->placePiece(nullptr, nullptr));
+    REQUIRE(c1.getArea() == 2);
+    REQUIRE(c2.getArea() == 32);
 
-    REQUIRE(cell->placePiece(cell, piece));
-    REQUIRE(cell->isOccupied());
-
-    REQUIRE_FALSE(cell->placePiece(cell, piece));
-}
-
-TEST_CASE("tests cell.placePiece and cell.getPiece", "tests if we can place a Piece and if we can get a pointer to it") {
-    std::shared_ptr<Cell> cell = std::make_shared<Cell>(Cell(1,2));
-    std::shared_ptr<Piece> piece = std::make_shared<Piece>(Piece());
-    std::shared_ptr<Piece> p2;
-
-    cell->placePiece(cell, piece);
-
-    p2 = cell->getPiece();
-
-    REQUIRE(p2 == piece);
-}
-
-TEST_CASE("tests cell.placePiece and cell.removePiece","tests if we can place a Piece and remove it") {
-    std::shared_ptr<Cell> cell = std::make_shared<Cell>(Cell(1,2));
-    std::shared_ptr<Piece> piece = std::make_shared<Piece>(Piece());
-
-    cell->placePiece(cell, piece);
-    cell->removePiece();
-
-    REQUIRE_FALSE(cell->isOccupied());
-
-    REQUIRE(cell->placePiece(cell, piece));
-    REQUIRE(cell->isOccupied());
 }
 
 //TODO TEST DEPLACEMENT SUR AUTRE CASE

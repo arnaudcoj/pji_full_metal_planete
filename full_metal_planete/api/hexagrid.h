@@ -5,7 +5,8 @@
 #include <SFML/System/Vector2.hpp>
 #include <memory>
 #include <vector>
-#include <list>
+#include <string>
+#include <yaml-cpp/yaml.h>
 
 #include "cell.h"
 
@@ -16,6 +17,8 @@ class Hexagrid {
 public:
 
     Hexagrid(int width = 10, int height = 10);
+    Hexagrid(std::string gridFile);
+    Hexagrid(YAML::Node gridInfo);
     int getWidth();
     int getHeight();
     std::shared_ptr<Cell> getCell(int x, int y);

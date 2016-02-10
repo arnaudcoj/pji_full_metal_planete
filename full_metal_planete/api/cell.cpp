@@ -1,14 +1,14 @@
 #include "cell.h"
 
-Cell::Cell() : m_halfCell(false), m_coord(sf::Vector2i(-1, -1)) {
+Cell::Cell() : m_halfCell(false), m_coord(sf::Vector2i(-1, -1)), m_area(0) {
     m_piece = nullptr;
 }
 
-Cell::Cell(sf::Vector2i coord, bool halfCell) : m_halfCell(halfCell), m_coord(coord) {
+Cell::Cell(sf::Vector2i coord, bool halfCell, unsigned int area) : m_halfCell(halfCell), m_coord(coord), m_area(area) {
     m_piece = nullptr;
 }
 
-Cell::Cell(int x, int y, bool halfCell) : m_halfCell(halfCell), m_coord(x, y) {
+Cell::Cell(int x, int y, bool halfCell, unsigned int area) : m_halfCell(halfCell), m_coord(x, y), m_area(area) {
     m_piece = nullptr;
 }
 
@@ -16,7 +16,7 @@ bool Cell::isHalfCell() {
     return m_halfCell;
 }
 
-Piece Cell::getPiece() {
+Piece &Cell::getPiece() {
     return *m_piece;
 }
 
@@ -47,4 +47,8 @@ int Cell::getX() {
 
 int Cell::getY() {
     return m_coord.y;
+}
+
+unsigned int Cell::getArea() {
+    return m_area;
 }

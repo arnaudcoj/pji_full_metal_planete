@@ -8,12 +8,12 @@ class Cell;
 class Piece
 {
 
-    std::shared_ptr<Cell> m_cell;
+    std::weak_ptr<Cell> m_cell;
 
 public:
     Piece();
     bool isOnCell();
-    Cell getCell();
+    Cell& getCell();
     void setCell(Cell& cell);
     bool removeCell();
 };

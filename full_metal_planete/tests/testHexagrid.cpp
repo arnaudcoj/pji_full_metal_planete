@@ -1,5 +1,8 @@
-#include <hexagrid.h>
 #include <catch.hpp>
+#include <hexagrid.h>
+#include <cell.h>
+
+#include <string>
 
 /* Test of constructors*/
 
@@ -112,4 +115,28 @@ TEST_CASE( "test right bottom cell", "proves that right bottom cell of (1, 1) is
         cell = grid.getRightBottomCell(2, 1);
         REQUIRE(cell->getCoord().x == 3);
         REQUIRE(cell->getCoord().y == 2);
+}
+
+TEST_CASE("tests construction with yaml", "tests if we can create a grid from a (correct) yaml node") {
+    YAML::Node primes = YAML::Load("{name : terrain1, cells : ["
+                                   "[[0,0], [0,10], [0,20], [0,30]],"
+                                   "[[0,1], [0,11], [0,21], [0,31]],"
+                                   "[[0,2], [0,12], [0,22], [0,32]],"
+                                   "[[0,3], [0,13], [0,23], [0,33]]]}");
+
+    Hexagrid grid(primes);
+
+    REQUIRE(primes["name"].as<std::string>() == "terrain1");
+
+    REQUIRE(grid.getCell(0, 0)->getArea() == 0);
+    REQUIRE(grid.getCell(1, 3)->getArea() == 13);
+    REQUIRE(grid.getCell(2, 2)->getArea() == 22);
+
+    REQUIRE(grid.getCell(0,0)->isHalfCell());
+    REQUIRE(grid.getCell(1,0)->isHalfCell());
+    REQUIRE_FALSE(grid.getCell(2,0)->isHalfCell());
+    REQUIRE_FALSE(grid.getCell(2,1)->isHalfCell());
+    REQUIRE(grid.getCell(2,3)->isHalfCell());
+    REQUIRE_FALSE(grid.getCell(1,3)->isHalfCell());
+
 }

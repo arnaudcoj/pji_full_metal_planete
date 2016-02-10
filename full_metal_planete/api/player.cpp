@@ -12,9 +12,10 @@ bool Player::move(Piece& piece, Cell& cell) {
 
     cell.setPiece(piece);
 
-    if(cell.getPiece().isOnCell())
-        cell.getPiece().getCell().removePiece();
-    cell.getPiece().setCell(cell);
+    if(piece.isOnCell())
+        piece.getCell().removePiece();
+
+    piece.setCell(cell);
 
     return true;
 }
