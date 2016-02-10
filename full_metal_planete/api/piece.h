@@ -13,8 +13,9 @@ class Piece
 public:
     Piece();
     bool isOnCell();
-    std::shared_ptr<Cell> getCell();
-    void setCell(std::shared_ptr<Cell> cell);
+    Cell getCell();
+    void setCell(Cell& cell);
+    bool removeCell();
 };
 
 #endif // PIECE_H

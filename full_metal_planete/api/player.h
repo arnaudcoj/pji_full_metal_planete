@@ -8,7 +8,7 @@ class Player
 {
 public:
     Player();
-    bool move(std::shared_ptr<Piece> piece, std::shared_ptr<Cell> cell);
+    bool move(Piece &piece, Cell &cell);
 };
 
 #endif // PLAYER_H

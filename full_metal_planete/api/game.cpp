@@ -11,7 +11,7 @@ Game::Game() : m_hexagrid(Hexagrid())
 }
 
 void Game::start() {
-    std::shared_ptr<Piece> piece = std::make_shared<Piece>();
-    std::shared_ptr<Cell> cell = std::make_shared<Cell>();
+    Piece piece;
+    Cell cell;
     m_players[0].move(piece, cell);
 }

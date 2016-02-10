@@ -16,15 +16,12 @@ bool Cell::isHalfCell() {
     return m_halfCell;
 }
 
-std::shared_ptr<Piece> Cell::getPiece() {
-    return m_piece;
+Piece Cell::getPiece() {
+    return *m_piece;
 }
 
-bool Cell::setPiece(std::shared_ptr<Piece> piece) {
-    if(m_piece != nullptr)
-        return false;
-    m_piece = piece;
-    return true;
+void Cell::setPiece(Piece& piece) {
+    m_piece = std::make_shared<Piece>(piece);
 }
 
 bool Cell::isOccupied() {
@@ -32,31 +29,13 @@ bool Cell::isOccupied() {
 }
 
 bool Cell::removePiece() {
-    if(m_piece  == nullptr)
+    if(m_piece == nullptr)
         return false;
 
-    m_piece->setCell(nullptr);
+    m_piece->removeCell();
     m_piece = nullptr;
     return true;
 }
-
-bool Cell::placePiece(std::shared_ptr<Cell> cell, std::shared_ptr<Piece> piece) {
-    if(isOccupied()) {
-        return false;
-    }
-
-    if(cell == nullptr || piece == nullptr)
-        return false;
-
-    m_piece = piece;
-
-    if(m_piece->isOnCell())
-        m_piece->getCell()->removePiece();
-    m_piece->setCell(cell);
-
-    return true;
-}
-
 
 sf::Vector2i Cell::getCoord() {
     return m_coord;

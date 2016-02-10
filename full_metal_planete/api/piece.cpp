@@ -10,10 +10,19 @@ bool Piece::isOnCell() {
     return m_cell != nullptr;
 }
 
-std::shared_ptr<Cell> Piece::getCell() {
-    return m_cell;
+Cell Piece::getCell() {
+    return *m_cell;
 }
 
-void Piece::setCell(std::shared_ptr<Cell> cell) {
-    m_cell = cell;
+void Piece::setCell(Cell &cell) {
+    m_cell = std::make_shared<Cell>(cell);
+}
+
+bool Piece::removeCell() {
+    if(m_cell == nullptr)
+        return false;
+
+    m_cell->removePiece();
+    m_cell = nullptr;
+    return true;
 }

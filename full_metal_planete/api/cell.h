@@ -16,11 +16,10 @@ public:
     Cell(sf::Vector2i coord, bool halfCell = false);
     Cell(int x, int y, bool halfCell = false);
     bool isHalfCell();
-    std::shared_ptr<Piece> getPiece();
-    bool setPiece(std::shared_ptr<Piece> piece);
+    Piece getPiece();
+    void setPiece(Piece& piece);
     bool isOccupied();
     bool removePiece();
-    bool placePiece(std::shared_ptr<Cell> cell, std::shared_ptr<Piece> piece);
     sf::Vector2i getCoord();
     int getX();
     int getY();
