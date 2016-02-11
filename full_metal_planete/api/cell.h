@@ -17,8 +17,8 @@ public:
     Cell(sf::Vector2i coord, bool halfCell = false, unsigned int area = 0);
     Cell(int x, int y, bool halfCell = false, unsigned int area = 0);
     bool isHalfCell();
-    Piece& getPiece();
-    void setPiece(Piece& piece);
+    std::shared_ptr<Piece> getPiece();
+    void setPiece(std::shared_ptr<Piece> piece);
     bool isOccupied();
     bool removePiece();
     sf::Vector2i getCoord();

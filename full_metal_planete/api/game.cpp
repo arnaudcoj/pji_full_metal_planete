@@ -22,5 +22,5 @@ Game::Game(Hexagrid& grid) : m_hexagrid(grid) {
 void Game::start() {
     Piece piece;
     Cell cell;
-    m_players[0].move(piece, cell);
+    m_players[0].move(make_shared<Piece>(piece), make_shared<Cell>(cell));
 }

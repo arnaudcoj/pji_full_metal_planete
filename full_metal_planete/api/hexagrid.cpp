@@ -11,33 +11,33 @@ Hexagrid::Hexagrid(int width, int height) {
 
     for(i = 1; i < width - 1; i++) {
         for(j = 1; j < height - 1; j++)
-            m_grid[i][j] = Cell(i, j, false);
+            m_grid[i][j] = make_shared<Cell>(i, j, false);
     }
 
     //1ere colonne
     for(j = 0; j < height; j++)
-        m_grid[0][j] = Cell(0, j, true);
+        m_grid[0][j] = make_shared<Cell>(0, j, true);
 
     //derniere colonne
     for(j = 0; j < height; j++)
-        m_grid[width - 1][j] = Cell(width - 1, j, true);
+        m_grid[width - 1][j] = make_shared<Cell>(width - 1, j, true);
 
     //premiere ligne
     for(i = 1; i < width - 1; i += 2) {
-        m_grid[i][0] = Cell(i, 0, true);
+        m_grid[i][0] = make_shared<Cell>(i, 0, true);
     }
 
     for(i = 2; i < width - 1; i += 2) {
-        m_grid[i][0] = Cell(i, 0, false);
+        m_grid[i][0] = make_shared<Cell>(i, 0, false);
     }
 
     //derniere ligne
     for(i = 1; i < width - 1; i += 2) {
-        m_grid[i][height - 1] = Cell(i, height - 1, false);
+        m_grid[i][height - 1] = make_shared<Cell>(i, height - 1, false);
     }
 
     for(i = 2; i < width - 1; i += 2) {
-        m_grid[i][height - 1] = Cell(i, height - 1, true);
+        m_grid[i][height - 1] = make_shared<Cell>(i, height - 1, true);
     }
 }
 
@@ -63,33 +63,33 @@ Hexagrid::Hexagrid(YAML::Node gridInfo) {
 
     for(i = 1; i < width - 1; i++) {
         for(j = 1; j < height - 1; j++)
-            m_grid[i][j] = Cell(i, j, false, yGrid[j][i][1]);
+            m_grid[i][j] = make_shared<Cell>(i, j, false, yGrid[j][i][1]);
     }
 
     //1ere colonne
     for(j = 0; j < height; j++)
-        m_grid[0][j] = Cell(0, j, true, yGrid[j][0][1]);
+        m_grid[0][j] = make_shared<Cell>(0, j, true, yGrid[j][0][1]);
 
     //derniere colonne
     for(j = 0; j < height; j++)
-        m_grid[width - 1][j] = Cell(width - 1, j, true, yGrid[j][width - 1][1]);
+        m_grid[width - 1][j] = make_shared<Cell>(width - 1, j, true, yGrid[j][width - 1][1]);
 
     //premiere ligne
     for(i = 1; i < width - 1; i += 2) {
-        m_grid[i][0] = Cell(i, 0, true, yGrid[0][i][1]);
+        m_grid[i][0] = make_shared<Cell>(i, 0, true, yGrid[0][i][1]);
     }
 
     for(i = 2; i < width - 1; i += 2) {
-        m_grid[i][0] = Cell(i, 0, false, yGrid[0][i][1]);
+        m_grid[i][0] = make_shared<Cell>(i, 0, false, yGrid[0][i][1]);
     }
 
     //derniere ligne
     for(i = 1; i < width - 1; i += 2) {
-        m_grid[i][height - 1] = Cell(i, height - 1, false, yGrid[height - 1][i][1]);
+        m_grid[i][height - 1] = make_shared<Cell>(i, height - 1, false, yGrid[height - 1][i][1]);
     }
 
     for(i = 2; i < width - 1; i += 2) {
-        m_grid[i][height - 1] = Cell(i, height - 1, true, yGrid[height - 1][i][1]);
+        m_grid[i][height - 1] = make_shared<Cell>(i, height - 1, true, yGrid[height - 1][i][1]);
     }
 }
 
@@ -102,31 +102,31 @@ int Hexagrid::getHeight() {
 }
 
 std::shared_ptr<Cell> Hexagrid::getCell(int x, int y) {
-    return std::make_shared<Cell>(m_grid[x][y]);
+    return m_grid[x][y];
 }
 
 std::shared_ptr<Cell> Hexagrid::getTopCell(int x, int y) {
-    return std::make_shared<Cell>(Cell(x, y - 1));
+    return m_grid[x][y - 1];
 }
 
 std::shared_ptr<Cell> Hexagrid::getBottomCell(int x, int y) {
-    return std::make_shared<Cell>(Cell(x, y + 1));
+    return m_grid[x][y + 1];
 }
 
 std::shared_ptr<Cell> Hexagrid::getLeftTopCell(int x, int y) {
-    return std::make_shared<Cell>(Cell(x - 1, y - (x % 2)));
+    return m_grid[x - 1][y - (x % 2)];
 }
 
 std::shared_ptr<Cell> Hexagrid::getLeftBottomCell(int x, int y) {
-    return std::make_shared<Cell>(Cell(x - 1, y + (1 - (x % 2))));
+    return m_grid[x - 1][y + (1 - (x % 2))];
 }
 
 std::shared_ptr<Cell> Hexagrid::getRightTopCell(int x, int y) {
-    return std::make_shared<Cell>(Cell(x + 1, y - (x % 2)));
+    return m_grid[x + 1][y - (x % 2)];
 }
 
 std::shared_ptr<Cell> Hexagrid::getRightBottomCell(int x, int y) {
-    return std::make_shared<Cell>(Cell(x + 1, y + (1 - (x % 2))));
+    return m_grid[x + 1][y + (1 - (x % 2))];
 }
 
 

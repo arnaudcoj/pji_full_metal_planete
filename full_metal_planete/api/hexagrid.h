@@ -12,7 +12,7 @@
 
 class Hexagrid {
 
-    std::vector<std::vector<Cell>> m_grid;
+    std::vector<std::vector<std::shared_ptr<Cell>>> m_grid;
 
 public:
 
