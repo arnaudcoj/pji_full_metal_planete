@@ -8,14 +8,12 @@ using namespace std;
 
 int main()
 {
-    Hexagrid hexagrid = Hexagrid(16, 16);
+    Hexagrid hexagrid = Hexagrid(15, 15);
     Game game = Game(hexagrid);
 
     float size = 100;
-    float width = size * (game.getHexagrid().getWidth() / 2);
-    width += size * (game.getHexagrid().getWidth() / 2) / 2;
-    if (game.getHexagrid().getWidth() % 2 == 0)
-        width -= size * 3/4;
+    float width = size * (game.getHexagrid().getWidth() - 1) * 3/4;
+
     float height = sqrt(3)/2 * size * (game.getHexagrid().getHeight() - 1);
 
     sf::RenderWindow window(sf::VideoMode(width, height), "Full Metal Planete");
