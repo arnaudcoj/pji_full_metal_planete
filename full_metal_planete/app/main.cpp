@@ -15,6 +15,9 @@ int main()
     Hexagrid hexagrid = Hexagrid(10, 10);
     Game game = Game(hexagrid);
 
+    Player player;
+    player.move(std::make_shared<Piece>(), hexagrid.getCell(1, 2));
+
     float size = 100;
 
     float width = size * (game.getHexagrid().getWidth() - 1) * 3/4;

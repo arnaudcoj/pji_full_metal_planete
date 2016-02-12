@@ -13,6 +13,9 @@ Grid::Grid(Hexagrid hexagrid)
             else
                 hexagon.setFillColor(sf::Color(255, 255, 255, 200));
 
+            if(hexagrid.getCell(i, j)->getPiece() != nullptr)
+                hexagon.setFillColor(sf::Color(255, 0, 0, 200));
+
             float width = hexagon.getGlobalBounds().width;
             float height = hexagon.getGlobalBounds().height;
 
