@@ -23,9 +23,6 @@ bool Piece::removeCell() {
         return false;
 
     m_cell.reset();
-/*    std::shared_ptr<Cell> cell = m_cell.lock();
-    cell->removePiece();
-    cell = nullptr;
-    */
+
     return true;
 }
