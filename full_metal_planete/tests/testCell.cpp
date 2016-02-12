@@ -1,10 +1,11 @@
+#include <memory>
 #include <cell.h>
 #include <piece.h>
 #include <catch.hpp>
 
 #include <SFML/System/Vector2.hpp>
 
-TEST_CASE( "test cell.getCoord", "tests if the coordinates returned are given to the constructor" ) {
+TEST_CASE( "test cell.getCoord", "tests if the coordinates returned are the ones given to the constructor" ) {
     Cell cell1(sf::Vector2i(2, 3));
     Cell cell2(sf::Vector2i(4, 2));
     Cell cell3(1, 5);
@@ -39,6 +40,44 @@ TEST_CASE("test getArea", "tests if the area returned is the one given at constr
     REQUIRE(c1.getArea() == 2);
     REQUIRE(c2.getArea() == 32);
 
+}
+
+TEST_CASE("tests setPiece & getPiece", "tests if we can set a piece and retrieve it from the cell") {
+    std::shared_ptr<Cell> c = std::make_shared<Cell>(1,2, false, 2);
+    std::shared_ptr<Piece> p = std::make_shared<Piece>();
+
+    REQUIRE_FALSE(c->isOccupied());
+    c->setPiece(p);
+    REQUIRE(c->isOccupied());
+
+    std::shared_ptr<Piece> p2 = c->getPiece();
+    REQUIRE(p2 == p);
+}
+
+TEST_CASE("tests setPiece & removePiece", "tests if we can set a piece and remove it from the cell") {
+    std::shared_ptr<Cell> c = std::make_shared<Cell>(1,2, false, 2);
+    std::shared_ptr<Piece> p = std::make_shared<Piece>();
+    std::shared_ptr<Piece> p2 = std::make_shared<Piece>();
+    std::shared_ptr<Piece> pp;
+
+    REQUIRE_FALSE(c->isOccupied());
+    c->setPiece(p);
+    REQUIRE(c->isOccupied());
+
+    c->removePiece();
+    REQUIRE_FALSE(c->isOccupied());
+
+    pp = c->getPiece();
+    REQUIRE(pp == nullptr);
+
+    c->setPiece(p2);
+    REQUIRE(c->isOccupied());
+
+    pp = c->getPiece();
+    REQUIRE(pp == p2);
+
+    c->removePiece();
+    REQUIRE_FALSE(c->isOccupied());
 }
 
 //TODO TEST DEPLACEMENT SUR AUTRE CASE
