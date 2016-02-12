@@ -140,3 +140,24 @@ TEST_CASE("tests construction with yaml", "tests if we can create a grid from a 
     REQUIRE_FALSE(grid.getCell(1,3)->isHalfCell());
 
 }
+
+TEST_CASE("tests construction from yaml file", "tests if we can create a grid from a (correct) yaml file") {
+
+    YAML::Node primes = YAML::LoadFile("../../media/grids/test.yaml");
+
+    Hexagrid grid(primes);
+
+    REQUIRE(primes["name"].as<std::string>() == "terrain1");
+
+    REQUIRE(grid.getCell(0, 0)->getArea() == 0);
+    REQUIRE(grid.getCell(1, 3)->getArea() == 13);
+    REQUIRE(grid.getCell(2, 2)->getArea() == 22);
+
+    REQUIRE(grid.getCell(0,0)->isHalfCell());
+    REQUIRE(grid.getCell(1,0)->isHalfCell());
+    REQUIRE_FALSE(grid.getCell(2,0)->isHalfCell());
+    REQUIRE_FALSE(grid.getCell(2,1)->isHalfCell());
+    REQUIRE(grid.getCell(2,3)->isHalfCell());
+    REQUIRE_FALSE(grid.getCell(1,3)->isHalfCell());
+
+}
