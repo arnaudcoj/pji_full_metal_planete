@@ -2,16 +2,23 @@
 
 Grid::Grid(Hexagrid hexagrid)
 {
-    Hexagon hexagon = Hexagon(0, 0, 50);
-    hexagon.setFillColor(sf::Color(255, 255, 255, 200));
-
-    float width = hexagon.getGlobalBounds().width;
-    float height = hexagon.getGlobalBounds().height;
-
     for(int i = 0; i < hexagrid.getWidth(); i++)
     {
         for(int j = 0; j < hexagrid.getHeight(); j++)
         {
+            Hexagon hexagon = Hexagon(0, (sqrt(3)/2 * 100) / 2, 50);
+
+            if(hexagrid.getCell(i, j)->isHalfCell())
+                hexagon.setFillColor(sf::Color(255, 255, 200, 200));
+            else
+                hexagon.setFillColor(sf::Color(255, 255, 255, 200));
+
+            if(hexagrid.getCell(i, j)->getPiece() != nullptr)
+                hexagon.setFillColor(sf::Color(255, 0, 0, 200));
+
+            float width = hexagon.getGlobalBounds().width;
+            float height = hexagon.getGlobalBounds().height;
+
             if(i % 2 == 0)
                 hexagon.setPosition(i * width * 3/4, j * height);
             else
