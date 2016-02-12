@@ -3,12 +3,17 @@
 
 #include <SFML/Graphics.hpp>
 #include <math.h>
+#include <memory>
+
+#include "cell.h"
 
 class Hexagon : public sf::ConvexShape
 {
+    std::shared_ptr<Cell> m_cell;
 
 public:
-    Hexagon(float x, float y, float size);
+    Hexagon(std::shared_ptr<Cell> cell, float size);
+    void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 };
 
 #endif // HEXAGON_H

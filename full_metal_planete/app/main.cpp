@@ -1,5 +1,4 @@
 #include <SFML/Graphics.hpp>
-#include <iostream>
 
 #include "game.h"
 #include "grid.h"
@@ -21,7 +20,6 @@ int main()
     float size = 100;
 
     float width = size * (game.getHexagrid().getWidth() - 1) * 3/4;
-    std::cout << width << std::endl;
     float height = sqrt(3)/2 * size * (game.getHexagrid().getHeight() - 0.5);
 
     // float size = width / (game.getHexagrid().getWidth() - 1) / 3/4

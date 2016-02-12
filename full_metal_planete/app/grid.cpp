@@ -6,18 +6,18 @@ Grid::Grid(Hexagrid hexagrid)
     {
         for(int j = 0; j < hexagrid.getHeight(); j++)
         {
-            Hexagon hexagon = Hexagon(0, (sqrt(3)/2 * 100) / 2, 50);
-
-            if(hexagrid.getCell(i, j)->isHalfCell())
-                hexagon.setFillColor(sf::Color(255, 255, 200, 200));
-            else
-                hexagon.setFillColor(sf::Color(255, 255, 255, 200));
-
-            if(hexagrid.getCell(i, j)->getPiece() != nullptr)
-                hexagon.setFillColor(sf::Color(255, 0, 0, 200));
+            std::shared_ptr<Cell> cell = hexagrid.getCell(i, j);
+            Hexagon hexagon = Hexagon(cell, 50);
 
             float width = hexagon.getGlobalBounds().width;
             float height = hexagon.getGlobalBounds().height;
+
+            hexagon.setOrigin(0, -(height / 2));
+
+            if(cell->isHalfCell())
+                hexagon.setFillColor(sf::Color(255, 255, 200, 200));
+            else
+                hexagon.setFillColor(sf::Color(255, 255, 255, 200));
 
             if(i % 2 == 0)
                 hexagon.setPosition(i * width * 3/4, j * height);
@@ -30,7 +30,7 @@ Grid::Grid(Hexagrid hexagrid)
 
 void Grid::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-    std::vector<sf::ConvexShape>::const_iterator hexagone;
+    std::vector<Hexagon>::const_iterator hexagone;
     for(hexagone = m_grid.begin(); hexagone != m_grid.end(); ++hexagone)
     {
         target.draw(*hexagone, states);

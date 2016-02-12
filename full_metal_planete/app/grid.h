@@ -3,13 +3,14 @@
 
 #include <vector>
 #include <SFML/Graphics.hpp>
+#include <memory>
 #include "hexagon.h"
 #include "hexagrid.h"
 
 class Grid : public sf::Drawable
 {
     private:
-        std::vector<sf::ConvexShape> m_grid;
+        std::vector<Hexagon> m_grid;
 
     public:
         Grid(Hexagrid hexagrid);
