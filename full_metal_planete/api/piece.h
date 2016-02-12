@@ -13,8 +13,8 @@ class Piece
 public:
     Piece();
     bool isOnCell();
-    Cell& getCell();
-    void setCell(Cell& cell);
+    std::shared_ptr<Cell> getCell();
+    void setCell(std::shared_ptr<Cell> cell);
     bool removeCell();
 };
 
