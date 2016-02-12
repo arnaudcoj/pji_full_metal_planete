@@ -19,8 +19,6 @@ Game::Game(Hexagrid& grid) : m_hexagrid(grid) {
 
 }
 
-void Game::start() {
-    Piece piece;
-    Cell cell;
-    m_players[0].move(piece, cell);
+Hexagrid Game::getHexagrid() {
+    return m_hexagrid;
 }

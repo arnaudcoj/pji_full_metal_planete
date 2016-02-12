@@ -15,8 +15,7 @@ public:
     Game();
     Game(const std::string& gridFile);
     Game(Hexagrid& grid);
-    void start();
-
+    Hexagrid getHexagrid();
 };
 
 #endif // GAME_H

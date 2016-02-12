@@ -1,16 +1,20 @@
 #include <SFML/Graphics.hpp>
+
 #include "game.h"
-#include<iostream>
+#include "grid.h"
+
 
 using namespace std;
 
 int main()
 {
-#include <SFML/Graphics.hpp>
+    Game game = Game();
 
-    sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
-    sf::CircleShape hexagon(100, 6);
-    hexagon.setFillColor(sf::Color(255, 255, 255, 255));
+    float width = 100 * (game.getHexagrid().getWidth() - 3) - 25;
+    float height = sqrt(3)/2 * 100 * (game.getHexagrid().getHeight() - 1);
+
+    sf::RenderWindow window(sf::VideoMode(width, height), "Full Metal Planete");
+    Grid grid = Grid(game.getHexagrid());
 
     while (window.isOpen())
     {
@@ -22,11 +26,9 @@ int main()
         }
 
         window.clear();
-        window.draw(hexagon);
+        window.draw(grid);
         window.display();
     }
 
-    Game game = Game();
-    game.start();
     return 0;
 }

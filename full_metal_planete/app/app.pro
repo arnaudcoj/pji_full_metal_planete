@@ -8,7 +8,9 @@ DEPENDPATH += .
 INCLUDEPATH += .
 
 # Input
-SOURCES += main.cpp
+SOURCES += main.cpp \
+    hexagon.cpp \
+    grid.cpp
 
 LIBS += -L/usr/local/lib -lsfml-audio -lsfml-graphics -lsfml-window -lsfml-system
 
@@ -19,3 +21,7 @@ LIBS += -lyaml-cpp
 INCLUDEPATH += \
     /usr/local/include \
     ../api
+
+HEADERS += \
+    hexagon.h \
+    grid.h
