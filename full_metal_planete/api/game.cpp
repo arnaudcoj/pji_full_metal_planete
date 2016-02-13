@@ -1,10 +1,8 @@
 #include "game.h"
 
-#include <iostream>
-
 using namespace std;
 
-Game::Game() : m_hexagrid(Hexagrid())
+Game::Game() : m_hexagrid(Hexagrid()), m_nbTurns(MAX_TURNS)
 {
     m_players.resize(1);
     m_players[0] = Player();
@@ -12,12 +10,12 @@ Game::Game() : m_hexagrid(Hexagrid())
     initTideList();
 }
     
-Game::Game(const std::string& gridFile) : m_hexagrid(gridFile)
+Game::Game(const std::string& gridFile) : m_hexagrid(gridFile), m_nbTurns(MAX_TURNS)
 {
     initTideList();
 }
 
-Game::Game(Hexagrid& grid) : m_hexagrid(grid) {
+Game::Game(Hexagrid grid) : m_hexagrid(grid), m_nbTurns(MAX_TURNS) {
     initTideList();
 }
 
@@ -38,10 +36,21 @@ void Game::initTideList() {
     m_tideList.push_back(mt);
 }
 
-const std::list<std::shared_ptr<Tide>> Game::getTideList() {
+std::list<std::shared_ptr<Tide>> Game::getTideList() {
     return m_tideList;
 }
 
+int Game::getNbTurns() {
+    return m_nbTurns;
+}
+
+int Game::getMaxTurns() {
+    return MAX_TURNS;
+}
+
+void Game::nextTurn() {
+    m_nbTurns--;
+}
 
 Game::~Game() {
     m_tideList.clear();
