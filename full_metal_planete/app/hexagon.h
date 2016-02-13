@@ -10,9 +10,13 @@
 class Hexagon : public sf::ConvexShape
 {
     std::shared_ptr<Cell> m_cell;
+    const float X = 0;
+    const float Y = 0;
 
 public:
-    Hexagon(std::shared_ptr<Cell> cell, float size);
+    static constexpr float SIZE = 50;
+    static constexpr float WIDTH = SIZE * 2;
+    Hexagon(std::shared_ptr<Cell> cell);
     void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 };
 

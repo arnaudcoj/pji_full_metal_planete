@@ -2,32 +2,29 @@
 
 Grid::Grid(Hexagrid hexagrid)
 {
+    // for each cell of the hexagrid
     for(int i = 0; i < hexagrid.getWidth(); i++)
     {
         for(int j = 0; j < hexagrid.getHeight(); j++)
         {
-            std::shared_ptr<Cell> cell = hexagrid.getCell(i, j);
-            Hexagon hexagon = Hexagon(cell, 50);
+            Hexagon hexagon = Hexagon(hexagrid.getCell(i, j));
 
             float width = hexagon.getGlobalBounds().width;
             float height = hexagon.getGlobalBounds().height;
 
-            hexagon.setOrigin(0, -(height / 2));
+            hexagon.setOrigin(0, -height / 2);
 
-            if(cell->isHalfCell())
-                hexagon.setFillColor(sf::Color(255, 255, 200, 200));
-            else
-                hexagon.setFillColor(sf::Color(255, 255, 255, 200));
-
+            // setting the position of the hexagon
             if(i % 2 == 0)
                 hexagon.setPosition(i * width * 3/4, j * height);
             else
-                hexagon.setPosition(i * width * 3/4, j * height - height * 0.5);
+                hexagon.setPosition(i * width * 3/4, (j - 0.5) * height); // above the previous one
             m_grid.push_back(hexagon);
         }
     }
 }
 
+// calls the draw function of each hexagon of the grid
 void Grid::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
     std::vector<Hexagon>::const_iterator hexagone;
