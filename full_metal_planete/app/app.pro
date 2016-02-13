@@ -1,4 +1,4 @@
- TEMPLATE = app
+TEMPLATE = app
 
 CONFIG += c++11
 CONFIG -= app_bundle
@@ -10,7 +10,8 @@ INCLUDEPATH += .
 # Input
 SOURCES += main.cpp \
     hexagon.cpp \
-    grid.cpp
+    grid.cpp \
+    pion.cpp
 
 LIBS += -L/usr/local/lib -lsfml-audio -lsfml-graphics -lsfml-window -lsfml-system
 
@@ -24,4 +25,5 @@ INCLUDEPATH += \
 
 HEADERS += \
     hexagon.h \
-    grid.h
+    grid.h \
+    pion.h

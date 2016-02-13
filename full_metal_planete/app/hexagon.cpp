@@ -35,7 +35,8 @@ void Hexagon::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 
     // if the cell is occupied
     if (m_cell->isOccupied()) {
-        sf::CircleShape pion(SIZE / 2); // creating a pion
+        Pion pion; // creating a pion
+
         pion.setFillColor(sf::Color(0, 0, 250)); // setting blue color
 
         // setting the origin of the pion so that it is centered.

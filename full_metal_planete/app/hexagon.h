@@ -6,6 +6,7 @@
 #include <memory>
 
 #include "cell.h"
+#include "pion.h"
 
 class Hexagon : public sf::ConvexShape
 {
@@ -16,6 +17,7 @@ class Hexagon : public sf::ConvexShape
 public:
     static constexpr float SIZE = 50;
     static constexpr float WIDTH = SIZE * 2;
+
     Hexagon(std::shared_ptr<Cell> cell);
     void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 };
