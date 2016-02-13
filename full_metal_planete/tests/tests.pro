@@ -10,7 +10,8 @@ SOURCES += \
     testCell.cpp \
     testpiecestock.cpp \
     testplayer.cpp \
-    testpiece.cpp
+    testpiece.cpp \
+    testgame.cpp
 
 HEADERS += \
     catch.hpp
