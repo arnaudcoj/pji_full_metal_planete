@@ -1,0 +1,12 @@
+TODO :
+
+Interface :
+
+Corriger pour plus de Cast
+move dans Hexagon
+gérer le décalage plus proprement
+gérer le fait que le cercle se fasse sur le coté et pas l'hexagon
+
+API :
+
+	Cell : La Cell doit connaitre sa position x et y
