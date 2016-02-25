@@ -102,41 +102,54 @@ int Hexagrid::getHeight() {
 }
 
 std::shared_ptr<Cell> Hexagrid::getCell(int x, int y) {
-    return m_grid[x][y];
+    int width = m_grid.size();
+    int height = m_grid.front().size();
+
+    if(0 <= x && x < width &&
+            0 <= y && y < height)
+        return m_grid[x][y];
+    else
+        return nullptr;
 }
 
-std::shared_ptr<Cell> Hexagrid::getTopCell(int x, int y) {
-    return m_grid[x][y - 1];
+std::shared_ptr<Cell> Hexagrid::getTopCell(std::shared_ptr<Cell> cell) {
+    sf::Vector2i coord = cell->getCoord();
+    return m_grid[coord.x][coord.y - 1];
 }
 
-std::shared_ptr<Cell> Hexagrid::getBottomCell(int x, int y) {
-    return m_grid[x][y + 1];
+std::shared_ptr<Cell> Hexagrid::getBottomCell(std::shared_ptr<Cell> cell) {
+    sf::Vector2i coord = cell->getCoord();
+    return m_grid[coord.x][coord.y + 1];
 }
 
-std::shared_ptr<Cell> Hexagrid::getLeftTopCell(int x, int y) {
-    return m_grid[x - 1][y - (x % 2)];
+std::shared_ptr<Cell> Hexagrid::getLeftTopCell(std::shared_ptr<Cell> cell) {
+    sf::Vector2i coord = cell->getCoord();
+    return m_grid[coord.x - 1][coord.y - (coord.x % 2)];
 }
 
-std::shared_ptr<Cell> Hexagrid::getLeftBottomCell(int x, int y) {
-    return m_grid[x - 1][y + (1 - (x % 2))];
+std::shared_ptr<Cell> Hexagrid::getLeftBottomCell(std::shared_ptr<Cell> cell) {
+    sf::Vector2i coord = cell->getCoord();
+    return m_grid[coord.x - 1][coord.y + (1 - (coord.x % 2))];
 }
 
-std::shared_ptr<Cell> Hexagrid::getRightTopCell(int x, int y) {
-    return m_grid[x + 1][y - (x % 2)];
+std::shared_ptr<Cell> Hexagrid::getRightTopCell(std::shared_ptr<Cell> cell) {
+    sf::Vector2i coord = cell->getCoord();
+    return m_grid[coord.x + 1][coord.y - (coord.x % 2)];
 }
 
-std::shared_ptr<Cell> Hexagrid::getRightBottomCell(int x, int y) {
-    return m_grid[x + 1][y + (1 - (x % 2))];
+std::shared_ptr<Cell> Hexagrid::getRightBottomCell(std::shared_ptr<Cell> cell) {
+    sf::Vector2i coord = cell->getCoord();
+    return m_grid[coord.x + 1][coord.y + (1 - (coord.x % 2))];
 }
 
 
-std::list<std::shared_ptr<Cell>> Hexagrid::getAdjacents(int x, int y) {
+std::list<std::shared_ptr<Cell>> Hexagrid::getAdjacents(std::shared_ptr<Cell> cell) {
     std::list<std::shared_ptr<Cell>> adjacents;
-    adjacents.push_back(getTopCell(x, y));
-    adjacents.push_back(getBottomCell(x, y));
-    adjacents.push_back(getLeftTopCell(x, y));
-    adjacents.push_back(getLeftBottomCell(x, y));
-    adjacents.push_back(getRightTopCell(x, y));
-    adjacents.push_back(getRightBottomCell(x, y));
+    adjacents.push_back(getTopCell(cell));
+    adjacents.push_back(getBottomCell(cell));
+    adjacents.push_back(getLeftTopCell(cell));
+    adjacents.push_back(getLeftBottomCell(cell));
+    adjacents.push_back(getRightTopCell(cell));
+    adjacents.push_back(getRightBottomCell(cell));
     return adjacents;
 }

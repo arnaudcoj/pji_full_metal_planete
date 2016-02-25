@@ -6,7 +6,6 @@
 #include "piece.h"
 
 class Cell {
-
     bool m_halfCell;
     std::shared_ptr<Piece> m_piece;
     sf::Vector2i m_coord;
