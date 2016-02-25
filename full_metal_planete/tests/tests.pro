@@ -11,7 +11,8 @@ SOURCES += \
     testpiecestock.cpp \
     testplayer.cpp \
     testpiece.cpp \
-    testgame.cpp
+    testgame.cpp \
+    testgamestate.cpp
 
 HEADERS += \
     catch.hpp

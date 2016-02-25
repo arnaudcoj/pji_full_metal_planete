@@ -3,6 +3,7 @@
 #include <list>
 #include <game.h>
 #include <hexagrid.h>
+#include <gamestate.h>
 
 TEST_CASE("test Hexagrid constructor & getHexagrid", "tests if the hexagrid returned is the one given at the construction") {
     Hexagrid h(13, 37);
@@ -21,22 +22,11 @@ TEST_CASE("test yaml file constructor & getHexagrid", "tests if the hexagrid ret
     REQUIRE(g.getHexagrid().getCell(2, 2)->getArea() == 22);
 }
 
-TEST_CASE("test getNbTurns and getMaxTurns", "tests if the nbTurns is the same as maxTurns when the game is created") {
+TEST_CASE("test getGameState", "tests if getGameState returns a correct gameState") {
     Game g;
-    REQUIRE(g.getNbTurns() == g.getMaxTurns());
-}
+    GameState gs = g.getGameState();
 
-TEST_CASE("test nextTurn", "tests if the nbTurns is updated when we call nextTurn") {
-    Game g;
-    REQUIRE(g.getNbTurns() == g.getMaxTurns());
-    g.nextTurn();
-    REQUIRE(g.getNbTurns() == g.getMaxTurns() - 1);
-    g.nextTurn();
-    REQUIRE(g.getNbTurns() == g.getMaxTurns() - 2);
-}
+    REQUIRE(gs.getNbTurns() == gs.getMaxTurns());
+    REQUIRE(gs.getTides().size() == 9);
 
-TEST_CASE("test getTideList()", "tests if we can retrieve globally the tideList and if there are enough tide for the game") {
-    Game g;
-    REQUIRE(g.getTideList() == Game::getTideList());
-    REQUIRE(Game::getTideList().size() == g.getNbTurns() / 5);
 }

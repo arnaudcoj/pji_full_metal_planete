@@ -8,14 +8,11 @@ TARGET = api
 SOURCES += \
     cell.cpp \
     piece.cpp \
-    hexagrid.cpp \
     piecestock.cpp \
     game.cpp \
     player.cpp \
-    tide.cpp \
-    hightide.cpp \
-    mediumtide.cpp \
-    lowtide.cpp
+    hexagrid.cpp \
+    gamestate.cpp
 
 HEADERS += \
     cell.h \
@@ -25,9 +22,7 @@ HEADERS += \
     game.h \
     player.h \
     tide.h \
-    hightide.h \
-    mediumtide.h \
-    lowtide.h
+    gamestate.h
 
 LIBS += -L/usr/local/lib -lsfml-audio -lsfml-graphics -lsfml-window -lsfml-system
 LIBS += -lyaml-cpp
