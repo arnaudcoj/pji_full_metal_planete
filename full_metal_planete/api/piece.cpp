@@ -1,7 +1,7 @@
 #include "piece.h"
 #include "cell.h"
 
-Piece::Piece() : m_cell()
+Piece::Piece(Engine engine) : m_cell(), m_engine(engine)
 {
 
 }

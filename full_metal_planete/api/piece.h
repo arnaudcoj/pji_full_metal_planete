@@ -14,7 +14,7 @@ class Piece
     Engine m_engine;
 
 public:
-    Piece();
+    Piece(Engine engine = Engine::TERRESTRIAL_ENGINE);
     bool isOnCell();
     std::shared_ptr<Cell> getCell();
     void setCell(std::shared_ptr<Cell> cell);

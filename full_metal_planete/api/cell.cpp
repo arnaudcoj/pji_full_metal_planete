@@ -56,5 +56,5 @@ unsigned int Cell::getArea() {
 
 bool Cell::isPracticable(std::shared_ptr<Piece> piece, GameState gameState) {
     assert(piece != nullptr);
-    return (piece == nullptr) && !isHalfCell() && isPracticableCurrent(piece, gameState);
+    return (piece != nullptr) && !isHalfCell() && isPracticableCurrent(piece, gameState);
 }

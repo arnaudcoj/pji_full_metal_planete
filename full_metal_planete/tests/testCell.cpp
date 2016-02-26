@@ -81,5 +81,13 @@ TEST_CASE("tests setPiece & removePiece", "tests if we can set a piece and remov
     REQUIRE_FALSE(c->isOccupied());
 }
 
-//TODO TEST DEPLACEMENT SUR AUTRE CASE
-//TODO TESTS FUITE MEMOIRE
+TEST_CASE("tests HillCell", "tests the behavior of an hill cell") {
+    std::shared_ptr<Cell> c = std::make_shared<HillCell>(1,2, false, 2);
+    std::shared_ptr<Piece> t = std::make_shared<Piece>(Engine::TERRESTRIAL_ENGINE);
+    std::shared_ptr<Piece> m = std::make_shared<Piece>(Engine::MARINE_ENGINE);
+    GameState gs;
+
+    REQUIRE(c->isPracticable(t, gs));
+    REQUIRE_FALSE(c->isPracticable(m, gs));
+
+}
