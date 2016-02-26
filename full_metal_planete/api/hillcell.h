@@ -14,7 +14,7 @@ public:
     HillCell();
     HillCell(sf::Vector2i coord, bool halfCell = false, unsigned int area = 0);
     HillCell(int x, int y, bool halfCell = false, unsigned int area = 0);
-    virtual bool isPracticableCurrent(std::shared_ptr<Piece> piece, GameState);
+    virtual bool isPracticableCurrent(std::shared_ptr<Piece> piece, Tide);
 };
 
 #endif // HILLCELL_H

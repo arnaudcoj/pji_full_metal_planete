@@ -5,7 +5,7 @@
 
 class Cell;
 
-enum class Engine {TERRESTRIAL_ENGINE, MARINE_ENGINE};
+enum class Engine {TERRESTRIAL_ENGINE, HEAVY_TERRESTRIAL_ENGINE, MARINE_ENGINE};
 
 class Piece
 {
@@ -22,6 +22,7 @@ public:
 
     bool isTerrestrial();
     bool isMarine();
+    bool canClimb();
 };
 
 #endif // PIECE_H

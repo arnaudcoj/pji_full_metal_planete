@@ -29,9 +29,13 @@ bool Piece::removeCell() {
 
 
 bool Piece::isTerrestrial() {
-    return m_engine == Engine::TERRESTRIAL_ENGINE;
+    return m_engine != Engine::MARINE_ENGINE;
 }
 
 bool Piece::isMarine() {
     return m_engine == Engine::MARINE_ENGINE;
+}
+
+bool Piece::canClimb() {
+    return m_engine == Engine::TERRESTRIAL_ENGINE;
 }

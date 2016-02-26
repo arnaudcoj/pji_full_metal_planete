@@ -5,7 +5,7 @@
 #include <memory>
 #include <cassert>
 #include "piece.h"
-#include "gamestate.h"
+#include "tide.h"
 
 
 class Cell {
@@ -27,10 +27,10 @@ public:
     int getX();
     int getY();
     unsigned int getArea();
-    bool isPracticable(std::shared_ptr<Piece> piece, GameState gameState);
+    bool isPracticable(std::shared_ptr<Piece> piece, Tide tide);
 
 private:
-    virtual bool isPracticableCurrent(std::shared_ptr<Piece> piece, GameState gameState) = 0;
+    virtual bool isPracticableCurrent(std::shared_ptr<Piece> piece, Tide tide) = 0;
 };
 
 #endif // CELL_H
