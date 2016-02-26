@@ -1,14 +1,15 @@
 #include <memory>
 #include <cell.h>
+#include <hillcell.h>
 #include <piece.h>
 #include <catch.hpp>
 
 #include <SFML/System/Vector2.hpp>
 
 TEST_CASE( "test cell.getCoord", "tests if the coordinates returned are the ones given to the constructor" ) {
-    Cell cell1(sf::Vector2i(2, 3));
-    Cell cell2(sf::Vector2i(4, 2));
-    Cell cell3(1, 5);
+    HillCell cell1(sf::Vector2i(2, 3));
+    HillCell cell2(sf::Vector2i(4, 2));
+    HillCell cell3(1, 5);
 
     sf::Vector2i coord1 = cell1.getCoord();
     REQUIRE(coord1.x == 2);
@@ -24,9 +25,9 @@ TEST_CASE( "test cell.getCoord", "tests if the coordinates returned are the ones
 }
 
 TEST_CASE("test cell.isHalfCell", "tests if the created cells are halfCells or not") {
-    Cell cell1(1, 2, false);
-    Cell cell2(3, 4, true);
-    Cell cell3(5, 6);
+    HillCell cell1(1, 2, false);
+    HillCell cell2(3, 4, true);
+    HillCell cell3(5, 6);
 
     REQUIRE_FALSE(cell1.isHalfCell());
     REQUIRE(cell2.isHalfCell());
@@ -34,8 +35,8 @@ TEST_CASE("test cell.isHalfCell", "tests if the created cells are halfCells or n
 }
 
 TEST_CASE("test getArea", "tests if the area returned is the one given at construction ") {
-    Cell c1(1,2, false, 2);
-    Cell c2(3, 2, false, 32);
+    HillCell c1(1,2, false, 2);
+    HillCell c2(3, 2, false, 32);
 
     REQUIRE(c1.getArea() == 2);
     REQUIRE(c2.getArea() == 32);
@@ -43,7 +44,7 @@ TEST_CASE("test getArea", "tests if the area returned is the one given at constr
 }
 
 TEST_CASE("tests setPiece & getPiece", "tests if we can set a piece and retrieve it from the cell") {
-    std::shared_ptr<Cell> c = std::make_shared<Cell>(1,2, false, 2);
+    std::shared_ptr<Cell> c = std::make_shared<HillCell>(1,2, false, 2);
     std::shared_ptr<Piece> p = std::make_shared<Piece>();
 
     REQUIRE_FALSE(c->isOccupied());
@@ -55,7 +56,7 @@ TEST_CASE("tests setPiece & getPiece", "tests if we can set a piece and retrieve
 }
 
 TEST_CASE("tests setPiece & removePiece", "tests if we can set a piece and remove it from the cell") {
-    std::shared_ptr<Cell> c = std::make_shared<Cell>(1,2, false, 2);
+    std::shared_ptr<Cell> c = std::make_shared<HillCell>(1,2, false, 2);
     std::shared_ptr<Piece> p = std::make_shared<Piece>();
     std::shared_ptr<Piece> p2 = std::make_shared<Piece>();
     std::shared_ptr<Piece> pp;

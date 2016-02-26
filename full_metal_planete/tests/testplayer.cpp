@@ -1,10 +1,11 @@
 #include <cell.h>
+#include <hillcell.h>
 #include <piece.h>
 #include <player.h>
 #include <catch.hpp>
 
 TEST_CASE("tests player.move and cell.isOccupied", "tests if we can move a Piece, if the cell is occupied when the Piece is placed and checks that we can't add more piece to the cell") {
-    std::shared_ptr<Cell> cell = std::make_shared<Cell>(1,2);
+    std::shared_ptr<Cell> cell = std::make_shared<HillCell>(1,2);
     std::shared_ptr<Piece> piece = std::make_shared<Piece>();
     Player player;
 
@@ -30,7 +31,7 @@ TEST_CASE("tests player.move and cell.isOccupied", "tests if we can move a Piece
 }
 
 TEST_CASE("tests cell.move and cell.removePiece","tests if we can move a Piece and remove it") {
-    std::shared_ptr<Cell> cell = std::make_shared<Cell>(1,2);
+    std::shared_ptr<Cell> cell = std::make_shared<HillCell>(1,2);
     std::shared_ptr<Piece> piece = std::make_shared<Piece>();
     Player player;
 
@@ -44,8 +45,8 @@ TEST_CASE("tests cell.move and cell.removePiece","tests if we can move a Piece a
 }
 
 TEST_CASE("tests player.useActionPoints","test if a player uses action points when he tries to move") {
-    Cell cell = Cell(Cell(1,2));
-    Piece piece = Piece(Piece());
+    HillCell cell(1,2);
+    Piece piece;
     Player player;
 
     REQUIRE(player.useActionPoints());

@@ -9,6 +9,7 @@
 #include <yaml-cpp/yaml.h>
 
 #include "cell.h"
+#include "hillcell.h"
 
 class Hexagrid {
 

@@ -26,3 +26,12 @@ bool Piece::removeCell() {
 
     return true;
 }
+
+
+bool Piece::isTerrestrial() {
+    return m_engine == Engine::TERRESTRIAL_ENGINE;
+}
+
+bool Piece::isMarine() {
+    return m_engine == Engine::MARINE_ENGINE;
+}

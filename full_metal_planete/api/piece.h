@@ -5,10 +5,13 @@
 
 class Cell;
 
+enum class Engine {TERRESTRIAL_ENGINE, MARINE_ENGINE};
+
 class Piece
 {
 
     std::weak_ptr<Cell> m_cell;
+    Engine m_engine;
 
 public:
     Piece();
@@ -16,6 +19,9 @@ public:
     std::shared_ptr<Cell> getCell();
     void setCell(std::shared_ptr<Cell> cell);
     bool removeCell();
+
+    bool isTerrestrial();
+    bool isMarine();
 };
 
 #endif // PIECE_H

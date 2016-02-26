@@ -12,7 +12,8 @@ SOURCES += \
     game.cpp \
     player.cpp \
     hexagrid.cpp \
-    gamestate.cpp
+    gamestate.cpp \
+    hillcell.cpp
 
 HEADERS += \
     cell.h \
@@ -22,7 +23,8 @@ HEADERS += \
     game.h \
     player.h \
     tide.h \
-    gamestate.h
+    gamestate.h \
+    hillcell.h
 
 LIBS += -L/usr/local/lib -lsfml-audio -lsfml-graphics -lsfml-window -lsfml-system
 LIBS += -lyaml-cpp
