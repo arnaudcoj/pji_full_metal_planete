@@ -1,4 +1,5 @@
 #include <catch.hpp>
+#include <memory>
 #include <piecestock.h>
 
 TEST_CASE("test pieceStock Construction and size", "tests if the stock contains the given amount of Pieces after construction") {
@@ -7,12 +8,13 @@ TEST_CASE("test pieceStock Construction and size", "tests if the stock contains 
 
     REQUIRE(stock1.size() == 5);
     REQUIRE(stock2.size() == 0);
+    REQUIRE(stock1.takePiece() != nullptr);
 }
 
 TEST_CASE("test addPiece ", "tests if the stock is correctly updated when adding a piece") {
     PieceStock stock;
-    Piece piece;
-    Piece piece2;
+    std::shared_ptr<Piece> piece = std::make_shared<Piece>();
+    std::shared_ptr<Piece> piece2 = std::make_shared<Piece>();
 
     stock.addPiece(piece);
     REQUIRE(stock.size() == 1);

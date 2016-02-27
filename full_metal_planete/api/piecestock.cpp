@@ -3,18 +3,18 @@
 PieceStock::PieceStock(int nbPieces) : mPieces()
 {
     for(int i = 0; i < nbPieces; i++)
-        mPieces.emplace_back();
+        mPieces.push_back(std::make_shared<Piece>());
 }
 
-Piece PieceStock::takePiece() {
+std::shared_ptr<Piece> PieceStock::takePiece() {
     if(mPieces.empty())
         throw std::logic_error("PieceStock is empty");
-    Piece p = mPieces.back();
+    std::shared_ptr<Piece> p = mPieces.back();
     mPieces.pop_back();
     return p;
 }
 
-void PieceStock::addPiece(Piece &piece) {
+void PieceStock::addPiece(std::shared_ptr<Piece> piece) {
     mPieces.push_back(piece);
 }
 
