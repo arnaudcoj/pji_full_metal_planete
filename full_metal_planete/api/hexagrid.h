@@ -10,6 +10,10 @@
 
 #include "cell.h"
 #include "hillcell.h"
+#include "mountaincell.h"
+#include "seacell.h"
+#include "swampcell.h"
+#include "reefcell.h"
 
 class Hexagrid {
 

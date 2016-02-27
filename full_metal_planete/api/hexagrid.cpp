@@ -159,7 +159,18 @@ std::list<std::shared_ptr<Cell>> Hexagrid::getAdjacents(std::shared_ptr<Cell> ce
 
 std::shared_ptr<Cell> createCell(int i, int j, bool halfCell, int type, int area) {
   switch(type) {
-    default:
+  case 0:
       return std::make_shared<HillCell>(i, j, halfCell, area);
+  case 1:
+      return std::make_shared<MountainCell>(i, j, halfCell, area);
+  case 2:
+      return std::make_shared<SeaCell>(i, j, halfCell, area);
+  case 3:
+      return std::make_shared<SwampCell>(i, j, halfCell, area);
+  case 4:
+      return std::make_shared<ReefCell>(i, j, halfCell, area);
+
+    default:
+      throw std::logic_error("No cell associated to value " + type);
   }
 }
