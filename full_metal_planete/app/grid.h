@@ -14,6 +14,7 @@ class Grid : public sf::Drawable
 
     public:
         Grid(Hexagrid hexagrid);
+        void update();
         void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 };
 

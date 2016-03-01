@@ -10,6 +10,7 @@ public:
     static constexpr float SIZE = 25;
 
     Pion();
+    void update();
     void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 };
 

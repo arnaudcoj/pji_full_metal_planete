@@ -16,9 +16,11 @@ class Hexagon : public sf::ConvexShape
 
 public:
     static constexpr float SIZE = 50;
+    static constexpr float HEIGHT = 86.6025;
     static constexpr float WIDTH = SIZE * 2;
 
     Hexagon(std::shared_ptr<Cell> cell);
+    void update();
     void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 };
 

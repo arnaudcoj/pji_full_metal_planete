@@ -3,6 +3,12 @@
 Pion::Pion() : sf::CircleShape(SIZE)
 {
     this->setFillColor(sf::Color(0, 0, 250)); // setting blue color
+    this->setOrigin(SIZE, SIZE);
+}
+
+// updates the pion
+void Pion::update() {
+
 }
 
 // draws the pion

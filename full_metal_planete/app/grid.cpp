@@ -1,4 +1,27 @@
 #include "grid.h"
+#include <SFML/System/Vector2.hpp>
+
+sf::Vector2f HexToPix(std::shared_ptr<Cell> cell) {
+    float x;
+    float y;
+    float width = Hexagon::WIDTH;
+    float height = Hexagon::HEIGHT;
+    int xCell = cell->getX();
+    int yCell = cell->getY();
+
+    // setting the position of the hexagon
+    if(xCell % 2 == 0) {
+        x = xCell * width * 3/4;
+        y = yCell * height;
+    } else {
+        x = xCell * width * 3/4;
+        y = (yCell - 0.5) * height; // above the previous one
+    }
+
+    x -= width / 2; // adding an offset
+
+    return sf::Vector2f(x, y);
+}
 
 Grid::Grid(Hexagrid hexagrid)
 {
@@ -9,18 +32,20 @@ Grid::Grid(Hexagrid hexagrid)
         {
             Hexagon hexagon = Hexagon(hexagrid.getCell(i, j));
 
-            float width = hexagon.getGlobalBounds().width;
-            float height = hexagon.getGlobalBounds().height;
+            hexagon.setPosition(HexToPix(hexagrid.getCell(i, j)));
 
-            hexagon.setOrigin(0, -height / 2);
-
-            // setting the position of the hexagon
-            if(i % 2 == 0)
-                hexagon.setPosition(i * width * 3/4, j * height);
-            else
-                hexagon.setPosition(i * width * 3/4, (j - 0.5) * height); // above the previous one
             m_grid.push_back(hexagon);
         }
+    }
+}
+
+// updates the grid
+void Grid::update()
+{
+    std::vector<Hexagon>::iterator hexagone;
+    for(hexagone = m_grid.begin(); hexagone != m_grid.end(); ++hexagone)
+    {
+        hexagone->update();
     }
 }
 

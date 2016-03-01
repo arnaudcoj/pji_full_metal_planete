@@ -25,6 +25,19 @@ Hexagon::Hexagon(std::shared_ptr<Cell> cell) : m_cell(cell)
         setFillColor(sf::Color(255, 255, 255, 200));
     else
         setFillColor(sf::Color(255, 255, 255));
+
+    setOrigin(-SIZE, -HEIGHT / 2);
+}
+
+// updates the hexagon
+void Hexagon::update() {
+    if (m_cell->isOccupied()) {
+        setOutlineColor(sf::Color::Red);
+        setOutlineThickness(-5);
+    } else {
+        setOutlineColor(sf::Color::Black);
+        setOutlineThickness(-2);
+    }
 }
 
 // draws the hexagon the the entities inside of it
@@ -37,12 +50,8 @@ void Hexagon::draw(sf::RenderTarget& target, sf::RenderStates states) const {
     if (m_cell->isOccupied()) {
         Pion pion; // creating a pion
 
-        pion.setFillColor(sf::Color(0, 0, 250)); // setting blue color
-
-        // setting the origin of the pion so that it is centered.
-        pion.setOrigin(SIZE / 2, SIZE / 2 - (this->getGlobalBounds().height / 2));
         // setting the position of the pion in the middle of the hexagon
-        pion.setPosition(this->getPosition());
+        pion.setPosition(this->getPosition().x + SIZE, this->getPosition().y + HEIGHT / 2);
 
         // drawing the pion on the target
         target.draw(pion, states);
