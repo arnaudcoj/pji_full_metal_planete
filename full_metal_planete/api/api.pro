@@ -13,11 +13,18 @@ SOURCES += \
     player.cpp \
     hexagrid.cpp \
     gamestate.cpp \
-    hillcell.cpp \
     seacell.cpp \
     mountaincell.cpp \
     swampcell.cpp \
-    reefcell.cpp
+    reefcell.cpp \
+    tankpiece.cpp \
+    weatherlayerpiece.cpp \
+    bigtankpiece.cpp \
+    patrolboatpiece.cpp \
+    crabpiece.cpp \
+    bargepiece.cpp \
+    pontoonpiece.cpp \
+    plaincell.cpp
 
 HEADERS += \
     cell.h \
@@ -28,11 +35,18 @@ HEADERS += \
     player.h \
     tide.h \
     gamestate.h \
-    hillcell.h \
     seacell.h \
     mountaincell.h \
     swampcell.h \
-    reefcell.h
+    reefcell.h \
+    tankpiece.h \
+    weatherlayerpiece.h \
+    bigtankpiece.h \
+    patrolboatpiece.h \
+    crabpiece.h \
+    bargepiece.h \
+    pontoonpiece.h \
+    plaincell.h
 
 LIBS += -L/usr/local/lib -lsfml-audio -lsfml-graphics -lsfml-window -lsfml-system
 LIBS += -lyaml-cpp
