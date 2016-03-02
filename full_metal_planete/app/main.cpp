@@ -46,8 +46,12 @@ int main()
     Hexagrid hexagrid = Hexagrid(10, 10);
     Game game = Game(hexagrid);
     Player player;
+
     std::shared_ptr<Piece> piece = std::make_shared<Piece>();
-    player.move(piece, hexagrid.getCell(1, 0)); // put a piece on the grid
+    player.move(piece, hexagrid.getCell(1, 1)); // put a piece on the grid
+
+    std::shared_ptr<Piece> piece2 = std::make_shared<Piece>();
+    player.move(piece2, hexagrid.getCell(5, 5)); // put a piece on the grid
     
     // calculate the window dimensions
     float width = Hexagon::WIDTH * (game.getHexagrid().getWidth() - 1) * 3/4;
@@ -59,6 +63,7 @@ int main()
 
     // Creating the graphical objects
     Grid grid = Grid(game.getHexagrid()); // creating the grid using the hexagrid of the game
+    std::shared_ptr<Piece> selectedPiece = nullptr;
 
     //Game loop
     while (window.isOpen())
@@ -81,9 +86,17 @@ int main()
                 }
                 break;
             case sf::Event::MouseButtonReleased:
-                // When we click on a cell: Move the player to the cell
-                player.move(piece, PixToHex(event.mouseButton.x, event.mouseButton.y, game.getHexagrid()));
+            {
+                std::shared_ptr<Cell> cell = PixToHex(event.mouseButton.x, event.mouseButton.y, game.getHexagrid());
+                if(selectedPiece != nullptr) {
+                    // When we click on a cell: Move the selected piece to the cell
+                    player.move(selectedPiece, cell);
+                    selectedPiece = nullptr;
+                } else if(cell->isOccupied()){
+                    selectedPiece = cell->getPiece();
+                }
                 break;
+            }
             default:
                 break;
             }
