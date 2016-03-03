@@ -1,11 +1,11 @@
 #include <catch.hpp>
 #include <piece.h>
 #include <cell.h>
-#include <hillcell.h>
+#include <plaincell.h>
 #include <memory>
 
 TEST_CASE("test setCell & getCell ", "tests if we can set a cell and retrieve it from the piece") {
-    std::shared_ptr<Cell> c = std::make_shared<HillCell>(1,2, false, 2);
+    std::shared_ptr<Cell> c = std::make_shared<PlainCell>(1,2, false, 2);
     std::shared_ptr<Piece> p = std::make_shared<Piece>();
 
     REQUIRE_FALSE(p->isOnCell());
@@ -17,8 +17,8 @@ TEST_CASE("test setCell & getCell ", "tests if we can set a cell and retrieve it
 }
 
 TEST_CASE("tests setCell & removeCell", "tests if we can set a cell and remove it from the piece") {
-    std::shared_ptr<Cell> c = std::make_shared<HillCell>(1,2, false, 2);
-    std::shared_ptr<Cell> c2 = std::make_shared<HillCell>(2,2, false, 2);
+    std::shared_ptr<Cell> c = std::make_shared<PlainCell>(1,2, false, 2);
+    std::shared_ptr<Cell> c2 = std::make_shared<PlainCell>(2,2, false, 2);
     std::shared_ptr<Piece> p = std::make_shared<Piece>();
     std::shared_ptr<Cell> cc;
 

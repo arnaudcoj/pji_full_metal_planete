@@ -9,7 +9,7 @@
 #include <yaml-cpp/yaml.h>
 
 #include "cell.h"
-#include "hillcell.h"
+#include "plaincell.h"
 #include "mountaincell.h"
 #include "seacell.h"
 #include "swampcell.h"
