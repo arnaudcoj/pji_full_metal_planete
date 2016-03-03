@@ -1,17 +1,17 @@
-#include "pion.h"
+#include "pawn.h"
 
-Pion::Pion() : sf::CircleShape(SIZE)
+Pawn::Pawn() : sf::CircleShape(SIZE)
 {
     this->setFillColor(sf::Color(0, 0, 250)); // setting blue color
     this->setOrigin(SIZE, SIZE);
 }
 
 // updates the pion
-void Pion::update() {
+void Pawn::update() {
 
 }
 
 // draws the pion
-void Pion::draw(sf::RenderTarget& target, sf::RenderStates states) const {
+void Pawn::draw(sf::RenderTarget& target, sf::RenderStates states) const {
     target.draw((sf::CircleShape)*this, states);
 }

@@ -2,43 +2,9 @@
 
 #include "game.h"
 #include "grid.h"
-
-#include <math.h>
+#include "tools.h"
 
 using namespace std;
-
-std::shared_ptr<Cell> PixToHex(int xCursor, int yCursor, Hexagrid grid) {
-    int x;
-    int y;
-    float size = Hexagon::SIZE;
-    float width = Hexagon::WIDTH;
-    float height = Hexagon::HEIGHT;
-    float side = size * 3 / 2;;
-
-    xCursor += width / 2;
-
-    int ci = floor(xCursor / side);
-    int cx = xCursor - side * ci;
-
-    int ty = yCursor - (ci % 2) * height / 2;
-    int cj = floor(ty / height);
-    int cy = ty - height * cj;
-
-    if (cx > abs(size / 2 - size * cy / height)) {
-        x = ci;
-        y = cj;
-    } else {
-        x = ci - 1;
-        y = cj + (ci % 2) - ((cy < height / 2) ? 1 : 0);
-    }
-
-    if(x % 2)
-        y++;
-
-    // A COMMENTER !
-
-    return grid.getCell(x, y);
-}
 
 int main()
 {
@@ -87,7 +53,8 @@ int main()
                 break;
             case sf::Event::MouseButtonReleased:
             {
-                std::shared_ptr<Cell> cell = PixToHex(event.mouseButton.x, event.mouseButton.y, game.getHexagrid());
+                sf::Vector2f vector = Tools::PixToHex(event.mouseButton.x, event.mouseButton.y);
+                std::shared_ptr<Cell> cell = hexagrid.getCell(vector.x, vector.y);
                 if(selectedPiece != nullptr) {
                     // When we click on a cell: Move the selected piece to the cell
                     player.move(selectedPiece, cell);

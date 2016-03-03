@@ -11,7 +11,8 @@ INCLUDEPATH += .
 SOURCES += main.cpp \
     hexagon.cpp \
     grid.cpp \
-    pion.cpp
+    pawn.cpp \
+    tools.cpp
 
 LIBS += -L/usr/local/lib -lsfml-audio -lsfml-graphics -lsfml-window -lsfml-system
 
@@ -26,4 +27,5 @@ INCLUDEPATH += \
 HEADERS += \
     hexagon.h \
     grid.h \
-    pion.h
+    pawn.h \
+    tools.h

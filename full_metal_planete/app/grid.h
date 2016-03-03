@@ -6,6 +6,7 @@
 #include <memory>
 #include "hexagon.h"
 #include "hexagrid.h"
+#include <tools.h>
 
 class Grid : public sf::Drawable
 {

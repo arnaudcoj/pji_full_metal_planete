@@ -6,7 +6,7 @@
 #include <memory>
 
 #include "cell.h"
-#include "pion.h"
+#include "pawn.h"
 
 class Hexagon : public sf::ConvexShape
 {

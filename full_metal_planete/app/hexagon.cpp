@@ -48,7 +48,7 @@ void Hexagon::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 
     // if the cell is occupied
     if (m_cell->isOccupied()) {
-        Pion pion; // creating a pion
+        Pawn pion; // creating a pion
 
         // setting the position of the pion in the middle of the hexagon
         pion.setPosition(this->getPosition().x + SIZE, this->getPosition().y + HEIGHT / 2);

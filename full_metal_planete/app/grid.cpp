@@ -1,27 +1,4 @@
 #include "grid.h"
-#include <SFML/System/Vector2.hpp>
-
-sf::Vector2f HexToPix(std::shared_ptr<Cell> cell) {
-    float x;
-    float y;
-    float width = Hexagon::WIDTH;
-    float height = Hexagon::HEIGHT;
-    int xCell = cell->getX();
-    int yCell = cell->getY();
-
-    // setting the position of the hexagon
-    if(xCell % 2 == 0) {
-        x = xCell * width * 3/4;
-        y = yCell * height;
-    } else {
-        x = xCell * width * 3/4;
-        y = (yCell - 0.5) * height; // above the previous one
-    }
-
-    x -= width / 2; // adding an offset
-
-    return sf::Vector2f(x, y);
-}
 
 Grid::Grid(Hexagrid hexagrid)
 {
@@ -32,7 +9,7 @@ Grid::Grid(Hexagrid hexagrid)
         {
             Hexagon hexagon = Hexagon(hexagrid.getCell(i, j));
 
-            hexagon.setPosition(HexToPix(hexagrid.getCell(i, j)));
+            hexagon.setPosition(Tools::HexToPix(i, j));
 
             m_grid.push_back(hexagon);
         }
