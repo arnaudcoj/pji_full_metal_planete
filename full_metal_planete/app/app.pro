@@ -1,6 +1,6 @@
- TEMPLATE = app
+TEMPLATE = app
 
-CONFIG += console c++11
+CONFIG += c++11
 CONFIG -= app_bundle
 CONFIG -= qt
 
@@ -10,7 +10,9 @@ INCLUDEPATH += .
 # Input
 SOURCES += main.cpp \
     hexagon.cpp \
-    grid.cpp
+    grid.cpp \
+    pawn.cpp \
+    tools.cpp
 
 LIBS += -L/usr/local/lib -lsfml-audio -lsfml-graphics -lsfml-window -lsfml-system
 
@@ -24,4 +26,6 @@ INCLUDEPATH += \
 
 HEADERS += \
     hexagon.h \
-    grid.h
+    grid.h \
+    pawn.h \
+    tools.h
