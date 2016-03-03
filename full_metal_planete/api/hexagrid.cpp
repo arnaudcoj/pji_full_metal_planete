@@ -212,7 +212,7 @@ void Hexagrid::draw(sf::RenderTarget& target, sf::RenderStates states) const
 std::shared_ptr<Cell> createCell(int i, int j, bool halfCell, int type, int area) {
   switch(type) {
   case 0:
-      return std::make_shared<HillCell>(i, j, halfCell, area);
+      return std::make_shared<PlainCell>(i, j, halfCell, area);
   case 1:
       return std::make_shared<MountainCell>(i, j, halfCell, area);
   case 2:

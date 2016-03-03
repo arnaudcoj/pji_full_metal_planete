@@ -13,10 +13,11 @@ int main()
     Player player;
 
     std::shared_ptr<Piece> piece = std::make_shared<Piece>();
-    player.move(piece, hexagrid.getCell(1, 1)); // put a piece on the grid
+    player.move(piece, hexagrid.getCell(1, 1), Tide::MEDIUM_TIDE); // put a piece on the grid
 
     std::shared_ptr<Piece> piece2 = std::make_shared<Piece>();
-    player.move(piece2, hexagrid.getCell(2, 2)); // put a piece on the grid
+
+    player.move(piece2, hexagrid.getCell(2, 2), Tide::MEDIUM_TIDE); // put a piece on the grid
 
     // calculate the window dimensions
     float width = Cell::WIDTH * (game.getHexagrid().getWidth() - 1) * 3/4;
@@ -54,7 +55,7 @@ int main()
                 std::shared_ptr<Cell> cell = hexagrid.getCell(vector.x, vector.y);
                 if(selectedPiece != nullptr) {
                     // When we click on a cell: Move the selected piece to the cell
-                    player.move(selectedPiece, cell);
+                    player.move(selectedPiece, cell, Tide::MEDIUM_TIDE);
                     selectedPiece = nullptr;
                 } else if(cell->isOccupied()){
                     selectedPiece = cell->getPiece();
