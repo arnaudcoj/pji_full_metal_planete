@@ -3,7 +3,7 @@
 
 Piece::Piece(Engine engine) : m_cell(), m_engine(engine)
 {
-
+    initSprite();
 }
 
 bool Piece::isOnCell() {
@@ -38,4 +38,21 @@ bool Piece::isMarine() {
 
 bool Piece::canClimb() {
     return m_engine == Engine::TERRESTRIAL_ENGINE;
+}
+
+void Piece::initSprite()
+{
+    m_sprite = sf::CircleShape(SIZE);
+    m_sprite.setFillColor(sf::Color(0, 0, 250)); // setting blue color
+    m_sprite.setOrigin(SIZE, SIZE);
+}
+
+// updates the pion
+void Piece::update() {
+
+}
+
+// draws the pion
+void Piece::draw(sf::RenderTarget& target, sf::RenderStates states) const {
+    target.draw(m_sprite, states);
 }
