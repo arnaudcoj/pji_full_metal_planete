@@ -130,8 +130,8 @@ TEST_CASE( "test right bottom cell", "proves that right bottom cell of (1, 1) is
 
 TEST_CASE("tests construction with yaml", "tests if we can create a grid from a (correct) yaml node") {
     YAML::Node primes = YAML::Load("{name : terrain1, cells : ["
-                                   "[[0,0], [0,10], [0,20], [0,30]],"
-                                   "[[0,1], [0,11], [0,21], [0,31]],"
+                                   "[[0,0], [1,10], [2,20], [3,30]],"
+                                   "[[4,1], [0,11], [0,21], [0,31]],"
                                    "[[0,2], [0,12], [0,22], [0,32]],"
                                    "[[0,3], [0,13], [0,23], [0,33]]]}");
 
@@ -149,6 +149,18 @@ TEST_CASE("tests construction with yaml", "tests if we can create a grid from a 
     REQUIRE_FALSE(grid.getCell(2,1)->isHalfCell());
     REQUIRE(grid.getCell(2,3)->isHalfCell());
     REQUIRE_FALSE(grid.getCell(1,3)->isHalfCell());
+
+    //check le type des cases
+}
+
+TEST_CASE("tests construction with yaml with incorrect cell type", "tests if the grid constructor throws an error when a cell type is incorrect") {
+    YAML::Node primes = YAML::Load("{name : terrain1, cells : ["
+                                   "[[12,0], [1,10], [2,20], [3,30]],"
+                                   "[[4,1], [0,11], [0,21], [0,31]],"
+                                   "[[0,2], [0,12], [0,22], [0,32]],"
+                                   "[[0,3], [0,13], [0,23], [0,33]]]}");
+
+    REQUIRE_THROWS(Hexagrid grid(primes));
 
 }
 

@@ -1,14 +1,20 @@
+#include <catch.hpp>
 #include <memory>
 #include <cell.h>
+#include <hillcell.h>
+#include <seacell.h>
+#include <mountaincell.h>
+#include <swampcell.h>
+#include <reefcell.h>
 #include <piece.h>
-#include <catch.hpp>
+#include <tide.h>
 
 #include <SFML/System/Vector2.hpp>
 
 TEST_CASE( "test cell.getCoord", "tests if the coordinates returned are the ones given to the constructor" ) {
-    Cell cell1(sf::Vector2i(2, 3));
-    Cell cell2(sf::Vector2i(4, 2));
-    Cell cell3(1, 5);
+    HillCell cell1(sf::Vector2i(2, 3));
+    HillCell cell2(sf::Vector2i(4, 2));
+    HillCell cell3(1, 5);
 
     sf::Vector2i coord1 = cell1.getCoord();
     REQUIRE(coord1.x == 2);
@@ -24,9 +30,9 @@ TEST_CASE( "test cell.getCoord", "tests if the coordinates returned are the ones
 }
 
 TEST_CASE("test cell.isHalfCell", "tests if the created cells are halfCells or not") {
-    Cell cell1(1, 2, false);
-    Cell cell2(3, 4, true);
-    Cell cell3(5, 6);
+    HillCell cell1(1, 2, false);
+    HillCell cell2(3, 4, true);
+    HillCell cell3(5, 6);
 
     REQUIRE_FALSE(cell1.isHalfCell());
     REQUIRE(cell2.isHalfCell());
@@ -34,8 +40,8 @@ TEST_CASE("test cell.isHalfCell", "tests if the created cells are halfCells or n
 }
 
 TEST_CASE("test getArea", "tests if the area returned is the one given at construction ") {
-    Cell c1(1,2, false, 2);
-    Cell c2(3, 2, false, 32);
+    HillCell c1(1,2, false, 2);
+    HillCell c2(3, 2, false, 32);
 
     REQUIRE(c1.getArea() == 2);
     REQUIRE(c2.getArea() == 32);
@@ -43,7 +49,7 @@ TEST_CASE("test getArea", "tests if the area returned is the one given at constr
 }
 
 TEST_CASE("tests setPiece & getPiece", "tests if we can set a piece and retrieve it from the cell") {
-    std::shared_ptr<Cell> c = std::make_shared<Cell>(1,2, false, 2);
+    std::shared_ptr<Cell> c = std::make_shared<HillCell>(1,2, false, 2);
     std::shared_ptr<Piece> p = std::make_shared<Piece>();
 
     REQUIRE_FALSE(c->isOccupied());
@@ -55,7 +61,7 @@ TEST_CASE("tests setPiece & getPiece", "tests if we can set a piece and retrieve
 }
 
 TEST_CASE("tests setPiece & removePiece", "tests if we can set a piece and remove it from the cell") {
-    std::shared_ptr<Cell> c = std::make_shared<Cell>(1,2, false, 2);
+    std::shared_ptr<Cell> c = std::make_shared<HillCell>(1,2, false, 2);
     std::shared_ptr<Piece> p = std::make_shared<Piece>();
     std::shared_ptr<Piece> p2 = std::make_shared<Piece>();
     std::shared_ptr<Piece> pp;
@@ -80,5 +86,112 @@ TEST_CASE("tests setPiece & removePiece", "tests if we can set a piece and remov
     REQUIRE_FALSE(c->isOccupied());
 }
 
-//TODO TEST DEPLACEMENT SUR AUTRE CASE
-//TODO TESTS FUITE MEMOIRE
+TEST_CASE("tests HillCell", "tests the behavior of an hill cell") {
+    std::shared_ptr<Cell> c = std::make_shared<HillCell>(1,2, false, 2);
+    std::shared_ptr<Piece> h = std::make_shared<Piece>(Engine::HEAVY_TERRESTRIAL_ENGINE);
+    std::shared_ptr<Piece> t = std::make_shared<Piece>(Engine::TERRESTRIAL_ENGINE);
+    std::shared_ptr<Piece> m = std::make_shared<Piece>(Engine::MARINE_ENGINE);
+
+    SECTION("Low Tide")
+    REQUIRE(c->isPracticable(h, Tide::LOW_TIDE));
+    REQUIRE(c->isPracticable(t, Tide::LOW_TIDE));
+    REQUIRE_FALSE(c->isPracticable(m, Tide::LOW_TIDE));
+
+    SECTION("Medium Tide")
+    REQUIRE(c->isPracticable(h, Tide::MEDIUM_TIDE));
+    REQUIRE(c->isPracticable(t, Tide::MEDIUM_TIDE));
+    REQUIRE_FALSE(c->isPracticable(m, Tide::MEDIUM_TIDE));
+
+    SECTION("High Tide")
+    REQUIRE(c->isPracticable(h, Tide::HIGH_TIDE));
+    REQUIRE(c->isPracticable(t, Tide::HIGH_TIDE));
+    REQUIRE_FALSE(c->isPracticable(m, Tide::HIGH_TIDE));
+}
+
+TEST_CASE("tests SeaCell", "tests the behavior of a sea cell") {
+    std::shared_ptr<Cell> c = std::make_shared<SeaCell>(1,2, false, 2);
+    std::shared_ptr<Piece> h = std::make_shared<Piece>(Engine::HEAVY_TERRESTRIAL_ENGINE);
+    std::shared_ptr<Piece> t = std::make_shared<Piece>(Engine::TERRESTRIAL_ENGINE);
+    std::shared_ptr<Piece> m = std::make_shared<Piece>(Engine::MARINE_ENGINE);
+
+    SECTION("Low Tide")
+    REQUIRE_FALSE(c->isPracticable(h, Tide::LOW_TIDE));
+    REQUIRE_FALSE(c->isPracticable(t, Tide::LOW_TIDE));
+    REQUIRE(c->isPracticable(m, Tide::LOW_TIDE));
+
+    SECTION("Medium Tide")
+    REQUIRE_FALSE(c->isPracticable(h, Tide::MEDIUM_TIDE));
+    REQUIRE_FALSE(c->isPracticable(t, Tide::MEDIUM_TIDE));
+    REQUIRE(c->isPracticable(m, Tide::MEDIUM_TIDE));
+
+    SECTION("High Tide")
+    REQUIRE_FALSE(c->isPracticable(h, Tide::HIGH_TIDE));
+    REQUIRE_FALSE(c->isPracticable(t, Tide::HIGH_TIDE));
+    REQUIRE(c->isPracticable(m, Tide::HIGH_TIDE));
+}
+
+TEST_CASE("tests MountainCell", "tests the behavior of a mountain cell") {
+    std::shared_ptr<Cell> c = std::make_shared<MountainCell>(1,2, false, 2);
+    std::shared_ptr<Piece> h = std::make_shared<Piece>(Engine::HEAVY_TERRESTRIAL_ENGINE);
+    std::shared_ptr<Piece> t = std::make_shared<Piece>(Engine::TERRESTRIAL_ENGINE);
+    std::shared_ptr<Piece> m = std::make_shared<Piece>(Engine::MARINE_ENGINE);
+
+    SECTION("Low Tide")
+    REQUIRE_FALSE(c->isPracticable(h, Tide::LOW_TIDE));
+    REQUIRE(c->isPracticable(t, Tide::LOW_TIDE));
+    REQUIRE_FALSE(c->isPracticable(m, Tide::LOW_TIDE));
+
+    SECTION("Medium Tide")
+    REQUIRE_FALSE(c->isPracticable(h, Tide::MEDIUM_TIDE));
+    REQUIRE(c->isPracticable(t, Tide::MEDIUM_TIDE));
+    REQUIRE_FALSE(c->isPracticable(m, Tide::MEDIUM_TIDE));
+
+    SECTION("High Tide")
+    REQUIRE_FALSE(c->isPracticable(h, Tide::HIGH_TIDE));
+    REQUIRE(c->isPracticable(t, Tide::HIGH_TIDE));
+    REQUIRE_FALSE(c->isPracticable(m, Tide::HIGH_TIDE));
+}
+
+TEST_CASE("tests SwampCell", "tests the behavior of a swamp cell") {
+    std::shared_ptr<Cell> c = std::make_shared<SwampCell>(1,2, false, 2);
+    std::shared_ptr<Piece> h = std::make_shared<Piece>(Engine::HEAVY_TERRESTRIAL_ENGINE);
+    std::shared_ptr<Piece> t = std::make_shared<Piece>(Engine::TERRESTRIAL_ENGINE);
+    std::shared_ptr<Piece> m = std::make_shared<Piece>(Engine::MARINE_ENGINE);
+
+    SECTION("Low Tide")
+    REQUIRE(c->isPracticable(h, Tide::LOW_TIDE));
+    REQUIRE(c->isPracticable(t, Tide::LOW_TIDE));
+    REQUIRE_FALSE(c->isPracticable(m, Tide::LOW_TIDE));
+
+    SECTION("Medium Tide")
+    REQUIRE(c->isPracticable(h, Tide::MEDIUM_TIDE));
+    REQUIRE(c->isPracticable(t, Tide::MEDIUM_TIDE));
+    REQUIRE_FALSE(c->isPracticable(m, Tide::MEDIUM_TIDE));
+
+    SECTION("High Tide")
+    REQUIRE_FALSE(c->isPracticable(h, Tide::HIGH_TIDE));
+    REQUIRE_FALSE(c->isPracticable(t, Tide::HIGH_TIDE));
+    REQUIRE(c->isPracticable(m, Tide::HIGH_TIDE));
+}
+
+TEST_CASE("tests ReefCell", "tests the behavior of a reef cell") {
+    std::shared_ptr<Cell> c = std::make_shared<ReefCell>(1,2, false, 2);
+    std::shared_ptr<Piece> h = std::make_shared<Piece>(Engine::HEAVY_TERRESTRIAL_ENGINE);
+    std::shared_ptr<Piece> t = std::make_shared<Piece>(Engine::TERRESTRIAL_ENGINE);
+    std::shared_ptr<Piece> m = std::make_shared<Piece>(Engine::MARINE_ENGINE);
+
+    SECTION("Low Tide")
+    REQUIRE(c->isPracticable(h, Tide::LOW_TIDE));
+    REQUIRE(c->isPracticable(t, Tide::LOW_TIDE));
+    REQUIRE_FALSE(c->isPracticable(m, Tide::LOW_TIDE));
+
+    SECTION("Medium Tide")
+    REQUIRE_FALSE(c->isPracticable(h, Tide::MEDIUM_TIDE));
+    REQUIRE_FALSE(c->isPracticable(t, Tide::MEDIUM_TIDE));
+    REQUIRE(c->isPracticable(m, Tide::MEDIUM_TIDE));
+
+    SECTION("High Tide")
+    REQUIRE_FALSE(c->isPracticable(h, Tide::HIGH_TIDE));
+    REQUIRE_FALSE(c->isPracticable(t, Tide::HIGH_TIDE));
+    REQUIRE(c->isPracticable(m, Tide::HIGH_TIDE));
+}

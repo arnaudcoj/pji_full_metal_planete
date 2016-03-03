@@ -3,7 +3,10 @@
 
 #include <SFML/System/Vector2.hpp>
 #include <memory>
+#include <cassert>
 #include "piece.h"
+#include "tide.h"
+
 
 class Cell {
     bool m_halfCell;
@@ -24,6 +27,10 @@ public:
     int getX();
     int getY();
     unsigned int getArea();
+    bool isPracticable(std::shared_ptr<Piece> piece, Tide tide);
+
+private:
+    virtual bool isPracticableCurrent(std::shared_ptr<Piece> piece, Tide tide) = 0;
 };
 
 #endif // CELL_H

@@ -1,7 +1,7 @@
 #include "piece.h"
 #include "cell.h"
 
-Piece::Piece() : m_cell()
+Piece::Piece(Engine engine) : m_cell(), m_engine(engine)
 {
 
 }
@@ -25,4 +25,17 @@ bool Piece::removeCell() {
     m_cell.reset();
 
     return true;
+}
+
+
+bool Piece::isTerrestrial() {
+    return m_engine != Engine::MARINE_ENGINE;
+}
+
+bool Piece::isMarine() {
+    return m_engine == Engine::MARINE_ENGINE;
+}
+
+bool Piece::canClimb() {
+    return m_engine == Engine::TERRESTRIAL_ENGINE;
 }
