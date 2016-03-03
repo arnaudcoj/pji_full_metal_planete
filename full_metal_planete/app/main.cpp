@@ -42,6 +42,25 @@ int main()
                 break;
             case sf::Event::KeyReleased:
                 switch (event.key.code) {
+                case sf::Keyboard::Key:: Space:
+                {
+                    game.getGameState().nextTurn();
+
+                    switch (game.getGameState().getTide()) {
+                    case Tide::LOW_TIDE :
+                        std::cout << "Low" << std::endl;
+                        break;
+                    case Tide::MEDIUM_TIDE :
+                        std::cout << "Medium" << std::endl;
+                        break;
+                    case Tide::HIGH_TIDE :
+                        std::cout << "High" << std::endl;
+                        break;
+                    default:
+                        break;
+                    }
+                    break;
+                }
                 case sf::Keyboard::Key::Escape:
                     window.close();
                     break;
@@ -55,7 +74,7 @@ int main()
                 std::shared_ptr<Cell> cell = hexagrid.getCell(vector.x, vector.y);
                 if(selectedPiece != nullptr) {
                     // When we click on a cell: Move the selected piece to the cell
-                    player.move(selectedPiece, cell, Tide::MEDIUM_TIDE);
+                    player.move(selectedPiece, cell, game.getGameState().getTide());
                     selectedPiece = nullptr;
                 } else if(cell->isOccupied()){
                     selectedPiece = cell->getPiece();
