@@ -10,6 +10,7 @@
 
 class SwampCell : public Cell
 {
+
 public:
     SwampCell();
     SwampCell(sf::Vector2i coord, bool halfCell = false, unsigned int area = 0);

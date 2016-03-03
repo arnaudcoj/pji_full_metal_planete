@@ -7,8 +7,8 @@ using namespace std;
 int main()
 {
     // Creating the game objects
-    //Hexagrid hexagrid = Hexagrid("../../media/grids/test.yaml");
-    Hexagrid hexagrid = Hexagrid(10, 10);
+    Hexagrid hexagrid = Hexagrid("../../media/grids/first.yaml");
+    //Hexagrid hexagrid = Hexagrid(10, 10);
     Game game = Game(hexagrid);
     Player player;
 
@@ -72,7 +72,7 @@ int main()
         hexagrid.update();
 
         // Render frame
-        window.clear(sf::Color::Black);
+        window.clear(sf::Color::White);
 
         window.draw(hexagrid); // drawing the grid
 
