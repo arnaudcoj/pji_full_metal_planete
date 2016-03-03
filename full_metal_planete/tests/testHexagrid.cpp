@@ -184,3 +184,15 @@ TEST_CASE("tests construction from yaml file", "tests if we can create a grid fr
     REQUIRE_FALSE(grid.getCell(1,3)->isHalfCell());
 
 }
+
+TEST_CASE("test getCellInRange", "tests if getCellInRange returns the good amount of cells") {
+    Hexagrid grid = Hexagrid(10, 10);
+
+    REQUIRE(grid.getCellsInRange(grid.getCell(4, 4), 1).size() == 7);
+    REQUIRE(grid.getCellsInRange(grid.getCell(4, 4), 2).size() == 19);
+    REQUIRE(grid.getCellsInRange(grid.getCell(4, 4), 3).size() == 37);
+    REQUIRE(grid.getCellsInRange(grid.getCell(4, 4), 4).size() == 61);
+
+    //non existing cells are not in the list
+    REQUIRE(grid.getCellsInRange(grid.getCell(0, 0), 2).size() == 7);
+}

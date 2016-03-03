@@ -145,15 +145,66 @@ std::shared_ptr<Cell> Hexagrid::getRightBottomCell(std::shared_ptr<Cell> cell) {
 }
 
 
-std::list<std::shared_ptr<Cell>> Hexagrid::getAdjacents(std::shared_ptr<Cell> cell) {
-    std::list<std::shared_ptr<Cell>> adjacents;
-    adjacents.push_back(getTopCell(cell));
-    adjacents.push_back(getBottomCell(cell));
-    adjacents.push_back(getLeftTopCell(cell));
-    adjacents.push_back(getLeftBottomCell(cell));
-    adjacents.push_back(getRightTopCell(cell));
-    adjacents.push_back(getRightBottomCell(cell));
-    return adjacents;
+std::list<std::shared_ptr<Cell>> Hexagrid::getCellsInRange(std::shared_ptr<Cell> origin, int range) {
+    std::list<std::shared_ptr<Cell>> cellsInRange;
+    std::shared_ptr<Cell> tmpCell = nullptr;
+
+    int x = origin->getX();
+    int y = origin->getY();
+
+    int lineHeightTop = 1;
+    int lineHeightBottom = 0;
+
+    for(int i = range; i > 0; i--) {
+
+        for(int j = 1; j <= lineHeightTop; j++) {
+            tmpCell = getCell(x - j, y - i);
+            if(tmpCell != nullptr)
+                cellsInRange.push_back(tmpCell);
+
+            tmpCell = getCell(x + j, y - i);
+            if(tmpCell != nullptr)
+                cellsInRange.push_back(tmpCell);
+        }
+
+        tmpCell = getCell(x, y - i);
+        if(tmpCell != nullptr)
+            cellsInRange.push_back(tmpCell);
+
+        lineHeightTop = std::min(lineHeightTop + 2, range);
+
+        for(int j = 1; j <= lineHeightBottom; j++) {
+            tmpCell = getCell(x - j, y + i);
+            if(tmpCell != nullptr)
+                cellsInRange.push_back(tmpCell);
+
+            tmpCell = getCell(x + j, y + i);
+            if(tmpCell != nullptr)
+                cellsInRange.push_back(tmpCell);
+        }
+
+        tmpCell = getCell(x, y + i);
+        if(tmpCell != nullptr)
+            cellsInRange.push_back(tmpCell);
+
+        lineHeightBottom = std::min(lineHeightBottom + 2, range);
+    }
+
+    for(int j = 1; j <= lineHeightBottom; j++) {
+        tmpCell = getCell(x - j, y);
+        if(tmpCell != nullptr)
+            cellsInRange.push_back(tmpCell);
+
+        tmpCell = getCell(x + j, y);
+        if(tmpCell != nullptr)
+            cellsInRange.push_back(tmpCell);
+    }
+
+    tmpCell = getCell(x, y);
+    if(tmpCell != nullptr)
+        cellsInRange.push_back(tmpCell);
+
+    return cellsInRange;
 }
 
 sf::Vector2f Hexagrid::PixToCell(int xCursor, int yCursor) {

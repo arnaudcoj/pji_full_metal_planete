@@ -37,7 +37,7 @@ public:
     std::shared_ptr<Cell> getLeftBottomCell(std::shared_ptr<Cell> cell);
     std::shared_ptr<Cell> getRightTopCell(std::shared_ptr<Cell> cell);
     std::shared_ptr<Cell> getRightBottomCell(std::shared_ptr<Cell> cell);
-    std::list<std::shared_ptr<Cell> > getAdjacents(std::shared_ptr<Cell> cell);
+    std::list<std::shared_ptr<Cell> > getCellsInRange(std::shared_ptr<Cell> origin, int range = 1);
 
     sf::Vector2f PixToCell(int xCursor, int yCursor);
     void update();
