@@ -4,10 +4,9 @@
 #include <SFML/Graphics.hpp>
 #include <cmath>
 #include <memory>
+#include <engine.h>
 
 class Cell;
-
-enum class Engine {TERRESTRIAL_ENGINE, HEAVY_TERRESTRIAL_ENGINE, MARINE_ENGINE};
 
 class Piece
 {
@@ -19,15 +18,13 @@ class Piece
 public:
     static constexpr float SIZE = 25;
 
-    Piece(Engine engine = Engine::TERRESTRIAL_ENGINE);
+    Piece(Engine::Type engineType = Engine::Type::TERRESTRIAL_ENGINE);
     bool isOnCell();
     std::shared_ptr<Cell> getCell();
     void setCell(std::shared_ptr<Cell> cell);
     bool removeCell();
 
-    bool isTerrestrial();
-    bool isMarine();
-    bool canClimb();
+    Engine& getEngine();
 
     void initSprite();
     void update();

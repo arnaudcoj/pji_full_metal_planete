@@ -17,7 +17,8 @@ SOURCES += \
     mountaincell.cpp \
     swampcell.cpp \
     reefcell.cpp \
-    plaincell.cpp
+    plaincell.cpp \
+    engine.cpp
 
 HEADERS += \
     cell.h \
@@ -32,7 +33,8 @@ HEADERS += \
     mountaincell.h \
     swampcell.h \
     reefcell.h \
-    plaincell.h
+    plaincell.h \
+    engine.h
 
 LIBS += -L/usr/local/lib -lsfml-audio -lsfml-graphics -lsfml-window -lsfml-system
 LIBS += -lyaml-cpp

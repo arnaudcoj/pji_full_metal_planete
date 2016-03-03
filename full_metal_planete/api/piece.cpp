@@ -1,7 +1,7 @@
 #include "piece.h"
 #include "cell.h"
 
-Piece::Piece(Engine engine) : m_cell(), m_engine(engine)
+Piece::Piece(Engine::Type engineType) : m_cell(), m_engine(engineType)
 {
     initSprite();
 }
@@ -27,18 +27,10 @@ bool Piece::removeCell() {
     return true;
 }
 
-
-bool Piece::isTerrestrial() {
-    return m_engine != Engine::MARINE_ENGINE;
+Engine& Piece::getEngine() {
+    return m_engine;
 }
 
-bool Piece::isMarine() {
-    return m_engine == Engine::MARINE_ENGINE;
-}
-
-bool Piece::canClimb() {
-    return m_engine == Engine::TERRESTRIAL_ENGINE;
-}
 
 void Piece::initSprite()
 {

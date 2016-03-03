@@ -8,5 +8,5 @@ SeaCell::SeaCell(int x, int y, bool halfCell, unsigned int area) : Cell(x, y, ha
 
 
 bool SeaCell::isPracticableCurrent(std::shared_ptr<Piece> piece, Tide) {
-    return piece->isMarine();
+    return piece->getEngine().isMarine();
 }
