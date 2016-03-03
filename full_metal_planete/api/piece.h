@@ -5,7 +5,7 @@
 
 class Cell;
 
-enum class Engine {TERRESTRIAL_ENGINE, HEAVY_TERRESTRIAL_ENGINE, MARINE_ENGINE};
+enum class Engine {TERRESTRIAL_ENGINE, HEAVY_TERRESTRIAL_ENGINE, MARINE_ENGINE, NO_ENGINE};
 
 class Piece
 {
@@ -14,7 +14,7 @@ class Piece
     Engine m_engine;
 
 public:
-    Piece(Engine engine = Engine::TERRESTRIAL_ENGINE);
+    Piece(Engine engine = Engine::NO_ENGINE);
     bool isOnCell();
     std::shared_ptr<Cell> getCell();
     void setCell(std::shared_ptr<Cell> cell);
