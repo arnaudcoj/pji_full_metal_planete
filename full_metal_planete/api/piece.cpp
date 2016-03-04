@@ -37,9 +37,14 @@ Weapon& Piece::getWeapon() {
 
 void Piece::initSprite()
 {
-    m_sprite = sf::CircleShape(SIZE);
-    m_sprite.setFillColor(sf::Color(0, 0, 250)); // setting blue color
-    m_sprite.setOrigin(SIZE, SIZE);
+    /*m_sprite = sf::CircleShape(SIZE);
+    m_sprite.setFillColor(sf::Color(0, 0, 250)); // setting blue color*/
+
+    m_texture.loadFromFile("../../media/textures/char.png");
+
+    m_sprite = sf::Sprite(m_texture);
+
+    m_sprite.setOrigin(m_sprite.getGlobalBounds().width / 2, m_sprite.getGlobalBounds().height / 2);
 }
 
 // updates the pion

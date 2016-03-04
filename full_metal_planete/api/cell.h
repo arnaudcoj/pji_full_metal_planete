@@ -7,7 +7,7 @@
 #include <cassert>
 #include "piece.h"
 #include "tide.h"
-
+#include <cmath>
 
 class Cell
 {
@@ -18,10 +18,13 @@ class Cell
 
     sf::ConvexShape m_sprite;
 
+protected:
+    sf::Texture m_texture;
+
 public:
-    static constexpr float SIZE = 50;
-    static constexpr float HEIGHT = 86.6025;
-    static constexpr float WIDTH = SIZE * 2;
+    static const float SIZE;
+    static const float WIDTH;
+    static const float HEIGHT;
 
     Cell();
     Cell(sf::Vector2i coord, bool halfCell = false, unsigned int area = 0);

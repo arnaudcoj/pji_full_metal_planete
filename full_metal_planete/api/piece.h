@@ -15,12 +15,12 @@ class Piece
     Engine m_engine;
     Weapon m_weapon;
 
-    sf::CircleShape m_sprite;
+    sf::Sprite m_sprite;
+    sf::Texture m_texture;
 
 public:
-    static constexpr float SIZE = 25;
-
     Piece(Engine::Type engineType = Engine::Type::TERRESTRIAL_ENGINE, Weapon::Type weaponType = Weapon::Type::NO_WEAPON);
+
     bool isOnCell();
     std::shared_ptr<Cell> getCell();
     void setCell(std::shared_ptr<Cell> cell);
