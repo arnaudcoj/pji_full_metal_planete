@@ -9,7 +9,8 @@
 #include "cell.h"
 
 class PlainCell : public Cell
-{
+{  
+
 public:
     PlainCell();
     PlainCell(sf::Vector2i coord, bool halfCell = false, unsigned int area = 0);

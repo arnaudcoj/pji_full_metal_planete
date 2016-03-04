@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include <cmath>
 #include <memory>
+#include "assetmanager.h"
 
 class Cell;
 
@@ -14,11 +15,10 @@ class Piece
     std::weak_ptr<Cell> m_cell;
     Engine m_engine;
 
-    sf::CircleShape m_sprite;
+    sf::Sprite m_sprite;
+    sf::Texture m_texture;
 
 public:
-    static constexpr float SIZE = 25;
-
     Piece(Engine engine = Engine::TERRESTRIAL_ENGINE);
     bool isOnCell();
     std::shared_ptr<Cell> getCell();

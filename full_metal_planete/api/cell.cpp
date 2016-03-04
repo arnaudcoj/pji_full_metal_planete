@@ -1,18 +1,19 @@
 #include "cell.h"
 
+const float Cell::SIZE = { 50 };
+const float Cell::WIDTH = { SIZE * 2 };
+const float Cell::HEIGHT = { (float)sqrt(3)/2 * WIDTH };
+
 Cell::Cell() : m_halfCell(false), m_coord(sf::Vector2i(-1, -1)), m_area(0) {
     m_piece = nullptr;
-    initSprite();
 }
 
 Cell::Cell(sf::Vector2i coord, bool halfCell, unsigned int area) : m_halfCell(halfCell), m_coord(coord), m_area(area) {
     m_piece = nullptr;
-    initSprite();
 }
 
 Cell::Cell(int x, int y, bool halfCell, unsigned int area) : m_halfCell(halfCell), m_coord(x, y), m_area(area) {
     m_piece = nullptr;
-    initSprite();
 }
 
 bool Cell::isHalfCell() {
@@ -94,15 +95,15 @@ void Cell::initSprite() {
         m_sprite.setPoint(i, hex_corner(0, 0, SIZE, i));
     }
 
+    m_sprite.setTexture(&m_texture);
+
     // creating a black border inside the hexagon
     m_sprite.setOutlineThickness(-2);
     m_sprite.setOutlineColor(sf::Color(0, 0, 0, 255));
 
     // setting the color of the hexagon depending of if it's a half cell or not
     if(isHalfCell())
-        m_sprite.setFillColor(sf::Color(255, 255, 255, 200));
-    else
-        m_sprite.setFillColor(sf::Color(255, 255, 255));
+        m_sprite.setFillColor(sf::Color(150, 150, 150, 255));
 }
 
 // updates the hexagon

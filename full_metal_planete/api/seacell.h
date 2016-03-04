@@ -10,6 +10,7 @@
 
 class SeaCell: public Cell
 {
+
 public:
     SeaCell();
     SeaCell(sf::Vector2i coord, bool halfCell = false, unsigned int area = 0);

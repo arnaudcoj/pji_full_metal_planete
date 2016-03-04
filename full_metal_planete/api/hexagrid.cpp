@@ -274,7 +274,7 @@ std::shared_ptr<Cell> createCell(int i, int j, bool halfCell, int type, int area
       return std::make_shared<ReefCell>(i, j, halfCell, area);
 
     default:
-      throw std::logic_error("No cell associated to value ");
+      throw std::logic_error("No cell associated to value");
   }
 }
 
