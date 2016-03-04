@@ -7,3 +7,4 @@ Interface :
 
 API :
 	- Checker si l’on peut partir d’une case : La méthode move ne teste pas la case courante, mais seulement celle d’arrivée
+	- Organiser l’arborescence des classes pour plus de lisibilité
