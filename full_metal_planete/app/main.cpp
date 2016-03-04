@@ -24,7 +24,8 @@ int main()
     float height = Cell::HEIGHT * (game.getHexagrid().getHeight() - 0.5);
 
     // Creating the window
-    sf::RenderWindow window(sf::VideoMode(width, height), "Full Metal Planete");
+    sf::Uint32 style = sf::Style::Titlebar | sf::Style::Close;
+    sf::RenderWindow window(sf::VideoMode(width, height), "Full Metal Planete", style);
     //window.setFramerateLimit(60); // Set target Frames per second
 
     std::shared_ptr<Piece> selectedPiece = nullptr;
