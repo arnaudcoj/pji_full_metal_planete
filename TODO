@@ -1,12 +1,9 @@
 TODO :
 
 Interface :
-
-Corriger pour plus de Cast
-move dans Hexagon
-gérer le décalage plus proprement
-gérer le fait que le cercle se fasse sur le coté et pas l'hexagon
+	- Mettre en place le management des textures
+	- Ajouter un Feedback visuel à la selection d’un pion
+	- Démarrer la UI
 
 API :
-
-	Cell : La Cell doit connaitre sa position x et y
+	- Checker si l’on peut partir d’une case : La méthode move ne teste pas la case courante, mais seulement celle d’arrivée

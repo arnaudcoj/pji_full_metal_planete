@@ -29,6 +29,20 @@ int main()
 
     std::shared_ptr<Piece> selectedPiece = nullptr;
 
+    switch (game.getGameState().getTide()) {
+    case Tide::LOW_TIDE :
+        std::cout << "Low" << std::endl;
+        break;
+    case Tide::MEDIUM_TIDE :
+        std::cout << "Medium" << std::endl;
+        break;
+    case Tide::HIGH_TIDE :
+        std::cout << "High" << std::endl;
+        break;
+    default:
+        break;
+    }
+
     //Game loop
     while (window.isOpen())
     {
