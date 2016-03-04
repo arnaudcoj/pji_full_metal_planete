@@ -10,3 +10,7 @@ MountainCell::MountainCell(int x, int y, bool halfCell, unsigned int area) : Cel
 bool MountainCell::isPracticableCurrent(std::shared_ptr<Piece> piece, Tide) {
     return piece->getEngine().canClimb();
 }
+
+int MountainCell::getRangeBonus() {
+    return 1;
+}

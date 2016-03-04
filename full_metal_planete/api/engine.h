@@ -5,7 +5,7 @@
 class Engine
 {
 public:
-    enum class Type {TERRESTRIAL_ENGINE, HEAVY_TERRESTRIAL_ENGINE, MARINE_ENGINE};
+    enum class Type : char {TERRESTRIAL_ENGINE, HEAVY_TERRESTRIAL_ENGINE, MARINE_ENGINE, NO_ENGINE};
     Engine(Type type);
 
     bool isTerrestrial();

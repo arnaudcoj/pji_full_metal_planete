@@ -36,6 +36,7 @@ public:
     int getY() const;
     unsigned int getArea();
     bool isPracticable(std::shared_ptr<Piece> piece, Tide tide);
+    virtual int getRangeBonus();
 
     sf::Vector2f CellToPix(int xCell, int yCell) const;
     void initSprite();

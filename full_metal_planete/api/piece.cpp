@@ -1,7 +1,7 @@
 #include "piece.h"
 #include "cell.h"
 
-Piece::Piece(Engine::Type engineType) : m_cell(), m_engine(engineType)
+Piece::Piece(Engine::Type engineType, Weapon::Type weaponType) : m_cell(), m_engine(engineType), m_weapon(weaponType)
 {
     initSprite();
 }
@@ -31,6 +31,9 @@ Engine& Piece::getEngine() {
     return m_engine;
 }
 
+Weapon& Piece::getWeapon() {
+    return m_weapon;
+}
 
 void Piece::initSprite()
 {

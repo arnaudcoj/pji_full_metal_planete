@@ -18,7 +18,8 @@ SOURCES += \
     swampcell.cpp \
     reefcell.cpp \
     plaincell.cpp \
-    engine.cpp
+    engine.cpp \
+    weapon.cpp
 
 HEADERS += \
     cell.h \
@@ -34,7 +35,8 @@ HEADERS += \
     swampcell.h \
     reefcell.h \
     plaincell.h \
-    engine.h
+    engine.h \
+    weapon.h
 
 LIBS += -L/usr/local/lib -lsfml-audio -lsfml-graphics -lsfml-window -lsfml-system
 LIBS += -lyaml-cpp

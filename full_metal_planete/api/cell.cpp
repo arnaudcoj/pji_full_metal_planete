@@ -61,6 +61,11 @@ bool Cell::isPracticable(std::shared_ptr<Piece> piece, Tide tide) {
     return (piece != nullptr) && !isHalfCell() && isPracticableCurrent(piece, tide);
 }
 
+int Cell::getRangeBonus() {
+    return 0;
+}
+
+
 // returns a point of the hexagon thanks to its center, its size and the point's identifier
 sf::Vector2f hex_corner(float x, float y, float size, int i) {
     int angle_deg = 60 * i;
