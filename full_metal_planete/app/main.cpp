@@ -1,11 +1,14 @@
 #include <SFML/Graphics.hpp>
 
 #include "game.h"
+#include "assetmanager.h"
 
 using namespace std;
 
 int main()
 {
+    AssetManager manager;
+
     // Creating the game objects
     Hexagrid hexagrid = Hexagrid("../../media/grids/first.yaml");
     //Hexagrid hexagrid = Hexagrid(10, 10);
@@ -26,7 +29,7 @@ int main()
     // Creating the window
     sf::Uint32 style = sf::Style::Titlebar | sf::Style::Close;
     sf::RenderWindow window(sf::VideoMode(width, height), "Full Metal Planete", style);
-    //window.setFramerateLimit(60); // Set target Frames per second
+    window.setFramerateLimit(60); // Set target Frames per second
 
     std::shared_ptr<Piece> selectedPiece = nullptr;
 

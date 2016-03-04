@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include <cmath>
 #include <memory>
+#include "assetmanager.h"
 
 class Cell;
 

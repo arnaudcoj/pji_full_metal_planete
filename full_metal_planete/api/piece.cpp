@@ -42,10 +42,7 @@ bool Piece::canClimb() {
 
 void Piece::initSprite()
 {
-    /*m_sprite = sf::CircleShape(SIZE);
-    m_sprite.setFillColor(sf::Color(0, 0, 250)); // setting blue color*/
-
-    m_texture.loadFromFile("../../media/textures/char.png");
+    m_texture = AssetManager::GetTexture("../../media/textures/char.png");
 
     m_sprite = sf::Sprite(m_texture);
 
