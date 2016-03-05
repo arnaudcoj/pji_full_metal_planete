@@ -1,6 +1,8 @@
 #include "assetmanager.h"
 #include <assert.h>
 
+const std::string AssetManager::PATH = { "../../media/textures/" };
+
 AssetManager* AssetManager::sInstance = nullptr;
 
 AssetManager::AssetManager() {
@@ -21,7 +23,7 @@ sf::Texture& AssetManager::GetTexture(std::string const& filename) {
     } else { // Else, load the texture and return it
         // Create an element in the texture map
         auto& texture = textMap[filename];
-        texture.loadFromFile("../../media/textures/" + filename  + ".png");
+        texture.loadFromFile(PATH + filename  + ".png");
         return texture;
     }
 }

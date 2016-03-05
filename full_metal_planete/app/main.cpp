@@ -20,7 +20,6 @@ int main()
     player.move(piece, hexagrid.getCell(1, 1), Tide::MEDIUM_TIDE); // put a piece on the grid
 
     std::shared_ptr<Piece> piece2 = std::make_shared<Piece>();
-
     player.move(piece2, hexagrid.getCell(2, 2), Tide::MEDIUM_TIDE); // put a piece on the grid
 
     // calculate the window dimensions

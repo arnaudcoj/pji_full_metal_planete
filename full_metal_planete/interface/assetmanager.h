@@ -6,16 +6,16 @@
 
 class AssetManager
 {
-public:
-    AssetManager();
-
-    static sf::Texture& GetTexture(std::string const& filename);
-
 private:
     std::map<std::string, sf::Texture> m_textures;
+    static const std::string PATH;
 
     //AssetManager is a singleton, so only one instance can exist at a time
     static AssetManager* sInstance; // holds a static pointer to the single manager instance
+
+public:
+    AssetManager();
+    static sf::Texture& GetTexture(std::string const& filename);
 };
 
 #endif // ASSETMANAGER_H
