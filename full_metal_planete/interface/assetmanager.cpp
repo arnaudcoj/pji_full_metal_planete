@@ -21,7 +21,7 @@ sf::Texture& AssetManager::GetTexture(std::string const& filename) {
     } else { // Else, load the texture and return it
         // Create an element in the texture map
         auto& texture = textMap[filename];
-        texture.loadFromFile(filename);
+        texture.loadFromFile("../../media/textures/" + filename  + ".png");
         return texture;
     }
 }

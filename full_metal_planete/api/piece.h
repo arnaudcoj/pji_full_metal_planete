@@ -4,7 +4,6 @@
 #include <SFML/Graphics.hpp>
 #include <cmath>
 #include <memory>
-#include "assetmanager.h"
 
 class Cell;
 
@@ -12,11 +11,9 @@ enum class Engine {TERRESTRIAL_ENGINE, HEAVY_TERRESTRIAL_ENGINE, MARINE_ENGINE};
 
 class Piece
 {
+private:
     std::weak_ptr<Cell> m_cell;
     Engine m_engine;
-
-    sf::Sprite m_sprite;
-    sf::Texture m_texture;
 
 public:
     Piece(Engine engine = Engine::TERRESTRIAL_ENGINE);
@@ -28,10 +25,6 @@ public:
     bool isTerrestrial();
     bool isMarine();
     bool canClimb();
-
-    void initSprite();
-    void update();
-    void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 };
 
 #endif // PIECE_H

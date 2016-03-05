@@ -17,9 +17,7 @@
 #include "swampcell.h"
 #include "reefcell.h"
 
-#include <SFML/Graphics.hpp>
-
-class Hexagrid : public sf::Drawable {
+class Hexagrid {
 
     std::vector<std::vector<std::shared_ptr<Cell>>> m_grid;
 
@@ -38,10 +36,6 @@ public:
     std::shared_ptr<Cell> getRightTopCell(std::shared_ptr<Cell> cell);
     std::shared_ptr<Cell> getRightBottomCell(std::shared_ptr<Cell> cell);
     std::list<std::shared_ptr<Cell> > getAdjacents(std::shared_ptr<Cell> cell);
-
-    sf::Vector2f PixToCell(int xCursor, int yCursor);
-    void update();
-    void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 };
 
 
