@@ -1,4 +1,5 @@
 #include <cell.h>
+#include <swampcell.h>
 #include <plaincell.h>
 #include <piece.h>
 #include <player.h>
@@ -43,6 +44,20 @@ TEST_CASE("tests cell.move and cell.removePiece","tests if we can move a Piece a
 
     REQUIRE(player.move(piece, cell, Tide::MEDIUM_TIDE));
     REQUIRE(cell->isOccupied());
+}
+
+TEST_CASE("tests cell.move and tides","tests if the piece is blocked when it is on a not practicable cell") {
+    std::shared_ptr<Cell> cell1 = std::make_shared<SwampCell>(1,2);
+    std::shared_ptr<Cell> cell2 = std::make_shared<PlainCell>(3,2);
+    std::shared_ptr<Piece> piece = std::make_shared<Piece>();
+    Player player;
+
+    REQUIRE(player.move(piece, cell1, Tide::MEDIUM_TIDE));
+
+    REQUIRE_FALSE(player.move(piece, cell2, Tide::HIGH_TIDE));
+
+    REQUIRE(player.move(piece, cell2, Tide::LOW_TIDE));
+
 }
 
 TEST_CASE("tests player.useActionPoints","test if a player uses action points when he tries to move") {
