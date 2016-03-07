@@ -6,9 +6,11 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 INCLUDEPATH += \
-    ../api
+    ../api \
+    ../interface
 
 SUBDIRS += \
     app \
     api \
-    tests
+    tests \
+    interface

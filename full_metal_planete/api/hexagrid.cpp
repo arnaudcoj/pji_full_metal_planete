@@ -207,59 +207,6 @@ std::list<std::shared_ptr<Cell>> Hexagrid::getCellsInRange(std::shared_ptr<Cell>
     return cellsInRange;
 }
 
-sf::Vector2f Hexagrid::PixToCell(int xCursor, int yCursor) {
-    int x;
-    int y;
-    float size = Cell::SIZE;
-    float width = Cell::WIDTH;
-    float height = Cell::HEIGHT;
-    float side = size * 3 / 2;;
-
-    xCursor += width / 2;
-
-    int ci = floor(xCursor / side);
-    int cx = xCursor - side * ci;
-
-    int ty = yCursor - (ci % 2) * height / 2;
-    int cj = floor(ty / height);
-    int cy = ty - height * cj;
-
-    if (cx > std::abs(size / 2 - size * cy / height)) {
-        x = ci;
-        y = cj;
-    } else {
-        x = ci - 1;
-        y = cj + (ci % 2) - ((cy < height / 2) ? 1 : 0);
-    }
-
-    if(x % 2)
-        y++;
-
-    // A COMMENTER !
-
-    return sf::Vector2f(x, y);
-}
-
-// updates the grid
-void Hexagrid::update()
-{
-    for(std::vector<std::shared_ptr<Cell>> cells : m_grid) {
-        for(std::shared_ptr<Cell> cell : cells) {
-            cell->update();
-        }
-    }
-}
-
-// calls the draw function of each hexagon of the grid
-void Hexagrid::draw(sf::RenderTarget& target, sf::RenderStates states) const
-{
-    for(std::vector<std::shared_ptr<Cell>> cells : m_grid) {
-        for(std::shared_ptr<Cell> cell : cells) {
-            cell->draw(target, states);
-        }
-    }
-}
-
 std::shared_ptr<Cell> createCell(int i, int j, bool halfCell, int type, int area) {
   switch(type) {
   case 0:

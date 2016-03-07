@@ -10,12 +10,15 @@
 
 class SwampCell : public Cell
 {
+private:
+    std::string m_type = "swamp";
 
 public:
     SwampCell();
     SwampCell(sf::Vector2i coord, bool halfCell = false, unsigned int area = 0);
     SwampCell(int x, int y, bool halfCell = false, unsigned int area = 0);
     virtual bool isPracticableCurrent(std::shared_ptr<Piece> piece, Tide tide);
+    virtual std::string getType();
 };
 
 #endif // SWAMPCELL_H

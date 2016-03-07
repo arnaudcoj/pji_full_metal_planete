@@ -17,9 +17,7 @@
 #include "swampcell.h"
 #include "reefcell.h"
 
-#include <SFML/Graphics.hpp>
-
-class Hexagrid : public sf::Drawable {
+class Hexagrid {
 
     std::vector<std::vector<std::shared_ptr<Cell>>> m_grid;
 

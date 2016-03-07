@@ -10,12 +10,15 @@
 
 class MountainCell : public Cell
 {
+private:
+    std::string m_type = "mountain";
 
 public:
     MountainCell();
     MountainCell(sf::Vector2i coord, bool halfCell = false, unsigned int area = 0);
     MountainCell(int x, int y, bool halfCell = false, unsigned int area = 0);
     virtual bool isPracticableCurrent(std::shared_ptr<Piece> piece, Tide);
+    virtual std::string getType();
 };
 
 #endif // MOUNTAINCELL_H
