@@ -10,7 +10,7 @@ void Pawn::initSprite()
 
     m_sprite.setOrigin(m_sprite.getGlobalBounds().width / 2, m_sprite.getGlobalBounds().height / 2);
 
-    m_sprite.setScale(2, 2);
+    m_sprite.setScale(1.5, 1.5);
 }
 
 // updates the pion
