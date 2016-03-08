@@ -26,7 +26,8 @@ SOURCES += \
     patrolboatpiece.cpp \
     crabpiece.cpp \
     bargepiece.cpp \
-    pontoonpiece.cpp
+    pontoonpiece.cpp \
+    container.cpp
 
 HEADERS += \
     cell.h \
@@ -51,6 +52,7 @@ HEADERS += \
     crabpiece.h \
     bargepiece.h \
     pontoonpiece.h \
+    container.h
 
 LIBS += -L/usr/local/lib -lsfml-audio -lsfml-graphics -lsfml-window -lsfml-system
 LIBS += -lyaml-cpp

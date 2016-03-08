@@ -30,9 +30,9 @@ public:
     unsigned int getArea();
     bool isPracticable(std::shared_ptr<Piece> piece, Tide tide);
 
-    virtual int getRangeBonus();
-
     virtual std::string getType() = 0;
+
+    virtual int getRangeBonus();
 
 private:
     virtual bool isPracticableCurrent(std::shared_ptr<Piece> piece, Tide tide) = 0;
