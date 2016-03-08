@@ -2,9 +2,7 @@
 #include "cell.h"
 
 Piece::Piece(Engine engine) : m_cell(), m_engine(engine)
-{
-
-}
+{ }
 
 bool Piece::isOnCell() {
     return !m_cell.expired();

@@ -25,7 +25,7 @@ void Cell::setPiece(std::shared_ptr<Piece> piece) {
     m_piece = piece;
 }
 
-bool Cell::isOccupied() {
+bool Cell::isOccupied() const {
     return m_piece != nullptr;
 }
 
@@ -41,18 +41,17 @@ sf::Vector2i Cell::getCoord() {
     return m_coord;
 }
 
-int Cell::getX() {
+int Cell::getX() const {
     return m_coord.x;
 }
 
-int Cell::getY() {
+int Cell::getY() const {
     return m_coord.y;
 }
 
 unsigned int Cell::getArea() {
     return m_area;
 }
-
 
 bool Cell::isPracticable(std::shared_ptr<Piece> piece, Tide tide) {
     assert(piece != nullptr);

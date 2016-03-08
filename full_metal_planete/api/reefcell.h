@@ -10,11 +10,15 @@
 
 class ReefCell : public Cell
 {
+private:
+    std::string m_type = "reef";
+
 public:
     ReefCell();
     ReefCell(sf::Vector2i coord, bool halfCell = false, unsigned int area = 0);
     ReefCell(int x, int y, bool halfCell = false, unsigned int area = 0);
     virtual bool isPracticableCurrent(std::shared_ptr<Piece> piece, Tide tide);
+    virtual std::string getType();
 };
 
 #endif // REEFCELL_H

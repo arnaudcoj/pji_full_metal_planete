@@ -1,6 +1,8 @@
 #ifndef PIECE_H
 #define PIECE_H
 
+#include <SFML/Graphics.hpp>
+#include <cmath>
 #include <memory>
 
 class Cell;
@@ -9,7 +11,7 @@ enum class Engine {TERRESTRIAL_ENGINE, HEAVY_TERRESTRIAL_ENGINE, MARINE_ENGINE, 
 
 class Piece
 {
-
+private:
     std::weak_ptr<Cell> m_cell;
     Engine m_engine;
 

@@ -18,3 +18,7 @@ bool ReefCell::isPracticableCurrent(std::shared_ptr<Piece> piece, Tide tide) {
     }
     return false;
 }
+
+std::string ReefCell::getType() {
+    return m_type;
+}

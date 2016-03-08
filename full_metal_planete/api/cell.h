@@ -6,9 +6,10 @@
 #include <cassert>
 #include "piece.h"
 #include "tide.h"
+#include <cmath>
 
-
-class Cell {
+class Cell
+{
     bool m_halfCell;
     std::shared_ptr<Piece> m_piece;
     sf::Vector2i m_coord;
@@ -21,13 +22,14 @@ public:
     bool isHalfCell();
     std::shared_ptr<Piece> getPiece();
     void setPiece(std::shared_ptr<Piece> piece);
-    bool isOccupied();
+    bool isOccupied() const;
     bool removePiece();
     sf::Vector2i getCoord();
-    int getX();
-    int getY();
+    int getX() const;
+    int getY() const;
     unsigned int getArea();
     bool isPracticable(std::shared_ptr<Piece> piece, Tide tide);
+    virtual std::string getType() = 0;
 
 private:
     virtual bool isPracticableCurrent(std::shared_ptr<Piece> piece, Tide tide) = 0;

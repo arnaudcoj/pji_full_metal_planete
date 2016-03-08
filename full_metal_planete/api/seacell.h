@@ -10,11 +10,15 @@
 
 class SeaCell: public Cell
 {
+private:
+    std::string m_type = "sea";
+
 public:
     SeaCell();
     SeaCell(sf::Vector2i coord, bool halfCell = false, unsigned int area = 0);
     SeaCell(int x, int y, bool halfCell = false, unsigned int area = 0);
     virtual bool isPracticableCurrent(std::shared_ptr<Piece> piece, Tide);
+    virtual std::string getType();
 };
 
 #endif // SEACELL_H

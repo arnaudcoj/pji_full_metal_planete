@@ -18,3 +18,7 @@ bool SwampCell::isPracticableCurrent(std::shared_ptr<Piece> piece, Tide tide) {
     }
     return false;
 }
+
+std::string SwampCell::getType() {
+    return m_type;
+}

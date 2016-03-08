@@ -6,7 +6,10 @@ PlainCell::PlainCell(sf::Vector2i coord, bool halfCell, unsigned int area) : Cel
 
 PlainCell::PlainCell(int x, int y, bool halfCell, unsigned int area) : Cell(x, y, halfCell, area) { }
 
-
 bool PlainCell::isPracticableCurrent(std::shared_ptr<Piece> piece, Tide) {
     return piece->isTerrestrial();
+}
+
+std::string PlainCell::getType() {
+    return m_type;
 }
