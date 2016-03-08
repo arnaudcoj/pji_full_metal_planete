@@ -1,6 +1,6 @@
 #include "crabpiece.h"
 
-CrabPiece::CrabPiece() : Piece(Engine::TERRESTRIAL_ENGINE)
+CrabPiece::CrabPiece() : Piece(Engine::Type::TERRESTRIAL_ENGINE)
 {
 
 }
