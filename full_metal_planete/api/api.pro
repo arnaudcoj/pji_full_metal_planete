@@ -17,14 +17,16 @@ SOURCES += \
     mountaincell.cpp \
     swampcell.cpp \
     reefcell.cpp \
+    plaincell.cpp \
+    engine.cpp \
+    weapon.cpp \
     tankpiece.cpp \
     weatherlayerpiece.cpp \
     bigtankpiece.cpp \
     patrolboatpiece.cpp \
     crabpiece.cpp \
     bargepiece.cpp \
-    pontoonpiece.cpp \
-    plaincell.cpp
+    pontoonpiece.cpp
 
 HEADERS += \
     cell.h \
@@ -39,14 +41,16 @@ HEADERS += \
     mountaincell.h \
     swampcell.h \
     reefcell.h \
+    plaincell.h \
+    engine.h \
+    weapon.h \
     tankpiece.h \
     weatherlayerpiece.h \
     bigtankpiece.h \
     patrolboatpiece.h \
     crabpiece.h \
     bargepiece.h \
-    pontoonpiece.h \
-    plaincell.h
+    pontoonpiece.h
 
 LIBS += -L/usr/local/lib -lsfml-audio -lsfml-graphics -lsfml-window -lsfml-system
 LIBS += -lyaml-cpp

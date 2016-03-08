@@ -88,9 +88,9 @@ TEST_CASE("tests setPiece & removePiece", "tests if we can set a piece and remov
 
 TEST_CASE("tests PlainCell", "tests the behavior of an hill cell") {
     std::shared_ptr<Cell> c = std::make_shared<PlainCell>(1,2, false, 2);
-    std::shared_ptr<Piece> h = std::make_shared<Piece>(Engine::HEAVY_TERRESTRIAL_ENGINE);
-    std::shared_ptr<Piece> t = std::make_shared<Piece>(Engine::TERRESTRIAL_ENGINE);
-    std::shared_ptr<Piece> m = std::make_shared<Piece>(Engine::MARINE_ENGINE);
+    std::shared_ptr<Piece> h = std::make_shared<Piece>(Engine::Type::HEAVY_TERRESTRIAL_ENGINE);
+    std::shared_ptr<Piece> t = std::make_shared<Piece>(Engine::Type::TERRESTRIAL_ENGINE);
+    std::shared_ptr<Piece> m = std::make_shared<Piece>(Engine::Type::MARINE_ENGINE);
 
     SECTION("Low Tide")
     REQUIRE(c->isPracticable(h, Tide::LOW_TIDE));
@@ -110,9 +110,9 @@ TEST_CASE("tests PlainCell", "tests the behavior of an hill cell") {
 
 TEST_CASE("tests SeaCell", "tests the behavior of a sea cell") {
     std::shared_ptr<Cell> c = std::make_shared<SeaCell>(1,2, false, 2);
-    std::shared_ptr<Piece> h = std::make_shared<Piece>(Engine::HEAVY_TERRESTRIAL_ENGINE);
-    std::shared_ptr<Piece> t = std::make_shared<Piece>(Engine::TERRESTRIAL_ENGINE);
-    std::shared_ptr<Piece> m = std::make_shared<Piece>(Engine::MARINE_ENGINE);
+    std::shared_ptr<Piece> h = std::make_shared<Piece>(Engine::Type::HEAVY_TERRESTRIAL_ENGINE);
+    std::shared_ptr<Piece> t = std::make_shared<Piece>(Engine::Type::TERRESTRIAL_ENGINE);
+    std::shared_ptr<Piece> m = std::make_shared<Piece>(Engine::Type::MARINE_ENGINE);
 
     SECTION("Low Tide")
     REQUIRE_FALSE(c->isPracticable(h, Tide::LOW_TIDE));
@@ -132,9 +132,9 @@ TEST_CASE("tests SeaCell", "tests the behavior of a sea cell") {
 
 TEST_CASE("tests MountainCell", "tests the behavior of a mountain cell") {
     std::shared_ptr<Cell> c = std::make_shared<MountainCell>(1,2, false, 2);
-    std::shared_ptr<Piece> h = std::make_shared<Piece>(Engine::HEAVY_TERRESTRIAL_ENGINE);
-    std::shared_ptr<Piece> t = std::make_shared<Piece>(Engine::TERRESTRIAL_ENGINE);
-    std::shared_ptr<Piece> m = std::make_shared<Piece>(Engine::MARINE_ENGINE);
+    std::shared_ptr<Piece> h = std::make_shared<Piece>(Engine::Type::HEAVY_TERRESTRIAL_ENGINE);
+    std::shared_ptr<Piece> t = std::make_shared<Piece>(Engine::Type::TERRESTRIAL_ENGINE);
+    std::shared_ptr<Piece> m = std::make_shared<Piece>(Engine::Type::MARINE_ENGINE);
 
     SECTION("Low Tide")
     REQUIRE_FALSE(c->isPracticable(h, Tide::LOW_TIDE));
@@ -154,9 +154,9 @@ TEST_CASE("tests MountainCell", "tests the behavior of a mountain cell") {
 
 TEST_CASE("tests SwampCell", "tests the behavior of a swamp cell") {
     std::shared_ptr<Cell> c = std::make_shared<SwampCell>(1,2, false, 2);
-    std::shared_ptr<Piece> h = std::make_shared<Piece>(Engine::HEAVY_TERRESTRIAL_ENGINE);
-    std::shared_ptr<Piece> t = std::make_shared<Piece>(Engine::TERRESTRIAL_ENGINE);
-    std::shared_ptr<Piece> m = std::make_shared<Piece>(Engine::MARINE_ENGINE);
+    std::shared_ptr<Piece> h = std::make_shared<Piece>(Engine::Type::HEAVY_TERRESTRIAL_ENGINE);
+    std::shared_ptr<Piece> t = std::make_shared<Piece>(Engine::Type::TERRESTRIAL_ENGINE);
+    std::shared_ptr<Piece> m = std::make_shared<Piece>(Engine::Type::MARINE_ENGINE);
 
     SECTION("Low Tide")
     REQUIRE(c->isPracticable(h, Tide::LOW_TIDE));
@@ -176,9 +176,9 @@ TEST_CASE("tests SwampCell", "tests the behavior of a swamp cell") {
 
 TEST_CASE("tests ReefCell", "tests the behavior of a reef cell") {
     std::shared_ptr<Cell> c = std::make_shared<ReefCell>(1,2, false, 2);
-    std::shared_ptr<Piece> h = std::make_shared<Piece>(Engine::HEAVY_TERRESTRIAL_ENGINE);
-    std::shared_ptr<Piece> t = std::make_shared<Piece>(Engine::TERRESTRIAL_ENGINE);
-    std::shared_ptr<Piece> m = std::make_shared<Piece>(Engine::MARINE_ENGINE);
+    std::shared_ptr<Piece> h = std::make_shared<Piece>(Engine::Type::HEAVY_TERRESTRIAL_ENGINE);
+    std::shared_ptr<Piece> t = std::make_shared<Piece>(Engine::Type::TERRESTRIAL_ENGINE);
+    std::shared_ptr<Piece> m = std::make_shared<Piece>(Engine::Type::MARINE_ENGINE);
 
     SECTION("Low Tide")
     REQUIRE(c->isPracticable(h, Tide::LOW_TIDE));

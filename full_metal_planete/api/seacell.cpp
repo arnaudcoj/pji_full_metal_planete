@@ -7,7 +7,7 @@ SeaCell::SeaCell(sf::Vector2i coord, bool halfCell, unsigned int area) : Cell(co
 SeaCell::SeaCell(int x, int y, bool halfCell, unsigned int area) : Cell(x, y, halfCell, area) { }
 
 bool SeaCell::isPracticableCurrent(std::shared_ptr<Piece> piece, Tide) {
-    return piece->isMarine();
+    return piece->getEngine().isMarine();
 }
 
 std::string SeaCell::getType() {

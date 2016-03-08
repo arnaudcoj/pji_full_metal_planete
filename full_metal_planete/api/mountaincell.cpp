@@ -7,7 +7,11 @@ MountainCell::MountainCell(sf::Vector2i coord, bool halfCell, unsigned int area)
 MountainCell::MountainCell(int x, int y, bool halfCell, unsigned int area) : Cell(x, y, halfCell, area) { }
 
 bool MountainCell::isPracticableCurrent(std::shared_ptr<Piece> piece, Tide) {
-    return piece->canClimb();
+    return piece->getEngine().canClimb();
+}
+
+int MountainCell::getRangeBonus() {
+    return 1;
 }
 
 std::string MountainCell::getType() {

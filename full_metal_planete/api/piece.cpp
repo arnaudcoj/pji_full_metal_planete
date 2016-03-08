@@ -1,8 +1,10 @@
 #include "piece.h"
 #include "cell.h"
 
-Piece::Piece(Engine engine) : m_cell(), m_engine(engine)
-{ }
+Piece::Piece(Engine::Type engineType, Weapon::Type weaponType) : m_cell(), m_engine(engineType), m_weapon(weaponType)
+{
+    initSprite();
+}
 
 bool Piece::isOnCell() {
     return !m_cell.expired();
@@ -25,15 +27,10 @@ bool Piece::removeCell() {
     return true;
 }
 
-
-bool Piece::isTerrestrial() {
-    return m_engine != Engine::MARINE_ENGINE;
+Engine& Piece::getEngine() {
+    return m_engine;
 }
 
-bool Piece::isMarine() {
-    return m_engine == Engine::MARINE_ENGINE;
-}
-
-bool Piece::canClimb() {
-    return m_engine == Engine::TERRESTRIAL_ENGINE;
+Weapon& Piece::getWeapon() {
+    return m_weapon;
 }
