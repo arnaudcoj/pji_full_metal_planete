@@ -1,6 +1,6 @@
 #include "tankpiece.h"
 
-TankPiece::TankPiece() : Piece(Engine::TERRESTRIAL_ENGINE)
+TankPiece::TankPiece() : Piece(Engine::Type::TERRESTRIAL_ENGINE)
 {
 
 }

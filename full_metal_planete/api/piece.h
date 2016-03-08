@@ -11,12 +11,10 @@ class Cell;
 
 class Piece
 {
+private:
     std::weak_ptr<Cell> m_cell;
     Engine m_engine;
     Weapon m_weapon;
-
-    sf::Sprite m_sprite;
-    sf::Texture m_texture;
 
 public:
     Piece(Engine::Type engineType = Engine::Type::TERRESTRIAL_ENGINE, Weapon::Type weaponType = Weapon::Type::NO_WEAPON);
@@ -29,9 +27,6 @@ public:
     Engine& getEngine();
     Weapon& getWeapon();
 
-    void initSprite();
-    void update();
-    void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 };
 
 #endif // PIECE_H

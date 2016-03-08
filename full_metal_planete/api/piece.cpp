@@ -3,7 +3,6 @@
 
 Piece::Piece(Engine::Type engineType, Weapon::Type weaponType) : m_cell(), m_engine(engineType), m_weapon(weaponType)
 {
-    initSprite();
 }
 
 bool Piece::isOnCell() {
@@ -33,26 +32,4 @@ Engine& Piece::getEngine() {
 
 Weapon& Piece::getWeapon() {
     return m_weapon;
-}
-
-void Piece::initSprite()
-{
-    /*m_sprite = sf::CircleShape(SIZE);
-    m_sprite.setFillColor(sf::Color(0, 0, 250)); // setting blue color*/
-
-    m_texture.loadFromFile("../../media/textures/char.png");
-
-    m_sprite = sf::Sprite(m_texture);
-
-    m_sprite.setOrigin(m_sprite.getGlobalBounds().width / 2, m_sprite.getGlobalBounds().height / 2);
-}
-
-// updates the pion
-void Piece::update() {
-
-}
-
-// draws the pion
-void Piece::draw(sf::RenderTarget& target, sf::RenderStates states) const {
-    target.draw(m_sprite, states);
 }

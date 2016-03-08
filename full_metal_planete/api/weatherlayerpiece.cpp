@@ -1,5 +1,5 @@
 #include "weatherlayerpiece.h"
 
-WeatherLayerPiece::WeatherLayerPiece() : Piece(Engine::TERRESTRIAL_ENGINE)
+WeatherLayerPiece::WeatherLayerPiece() : Piece(Engine::Type::TERRESTRIAL_ENGINE)
 {
 }

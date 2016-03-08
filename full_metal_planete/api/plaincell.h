@@ -10,12 +10,15 @@
 
 class PlainCell : public Cell
 {  
+private:
+    std::string m_type = "plain";
 
 public:
     PlainCell();
     PlainCell(sf::Vector2i coord, bool halfCell = false, unsigned int area = 0);
     PlainCell(int x, int y, bool halfCell = false, unsigned int area = 0);
     virtual bool isPracticableCurrent(std::shared_ptr<Piece> piece, Tide);
+    virtual std::string getType();
 };
 
 #endif // PLAINCELL_H

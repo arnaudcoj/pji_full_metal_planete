@@ -1,19 +1,10 @@
 #include "reefcell.h"
 
-ReefCell::ReefCell() : Cell() {
-    m_texture.loadFromFile("../../media/textures/reef.png");
-    initSprite();
-}
+ReefCell::ReefCell() : Cell() { }
 
-ReefCell::ReefCell(sf::Vector2i coord, bool halfCell, unsigned int area) : Cell(coord, halfCell, area) {
-    m_texture.loadFromFile("../../media/textures/reef.png");
-    initSprite();
-}
+ReefCell::ReefCell(sf::Vector2i coord, bool halfCell, unsigned int area) : Cell(coord, halfCell, area) { }
 
-ReefCell::ReefCell(int x, int y, bool halfCell, unsigned int area) : Cell(x, y, halfCell, area) {
-    m_texture.loadFromFile("../../media/textures/reef.png");
-    initSprite();
-}
+ReefCell::ReefCell(int x, int y, bool halfCell, unsigned int area) : Cell(x, y, halfCell, area) { }
 
 
 bool ReefCell::isPracticableCurrent(std::shared_ptr<Piece> piece, Tide tide) {
@@ -26,4 +17,8 @@ bool ReefCell::isPracticableCurrent(std::shared_ptr<Piece> piece, Tide tide) {
         return piece->getEngine().isMarine();
     }
     return false;
+}
+
+std::string ReefCell::getType() {
+    return m_type;
 }

@@ -1,6 +1,6 @@
 #include "patrolboatpiece.h"
 
-PatrolBoatPiece::PatrolBoatPiece() : Piece(Engine::MARINE_ENGINE)
+PatrolBoatPiece::PatrolBoatPiece() : Piece(Engine::Type::MARINE_ENGINE)
 {
 
 }
