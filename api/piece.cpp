@@ -1,7 +1,7 @@
 #include "piece.h"
 #include "cell.h"
 
-Piece::Piece(Engine::Type engineType, Weapon::Type weaponType, Container::Type containerType, int weight) : m_cell(), m_engine(engineType), m_weapon(weaponType), m_container(containerType)
+Piece::Piece(Engine::Type engineType, Weapon::Type weaponType, Container::Type containerType, int weight) : m_cell(), m_engine(engineType), m_weapon(weaponType), m_container(containerType), m_weight(weight)
 {
 }
 

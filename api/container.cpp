@@ -1,34 +1,34 @@
 #include "container.h"
 #include "piece.h"
 
-Container::Container(Container::Type type) : m_type(type), m_MaxCapacity(0), m_carriedPieces()
+Container::Container(Container::Type type) : m_type(type), m_carriedPieces()
 {
+    int maxCapacity = 0;
     switch(type) {
     case Type::MINERAL_CONTAINER:
-        m_MaxCapacity = 1;
+        maxCapacity = 1;
         break;
     case Type::CLASSIC_CONTAINER:
-        m_MaxCapacity = 2;
+        maxCapacity = 2;
         break;
     case Type::BIG_CONTAINER:
-        m_MaxCapacity = 4;
+        maxCapacity = 4;
     default:
         break;
     }
     
-    for(int i = 0; i < m_MaxCapacity; i++)
-        m_carriedPieces.push_back(nullptr);
+    m_carriedPieces = std::vector< std::shared_ptr<Piece> >(maxCapacity, nullptr);
 }
 
 int Container::getMaxCapacity() const {
-    return m_MaxCapacity;
+    return m_carriedPieces.size();
 }
 
 int Container::getWeight() const {
     int size = 0;
-    for(std::shared_ptr<Piece> piece : m_carriedPieces)
-        if(piece != nullptr)
-            size = piece->getWeight();
+    for(int i = 0; i < getMaxCapacity(); i++)
+        if(m_carriedPieces[i] != nullptr)
+            size += m_carriedPieces[i]->getWeight();
     return size;
 }
 

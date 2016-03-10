@@ -24,7 +24,6 @@ public:
 
 private:
     Type m_type;
-    int m_MaxCapacity;
     std::vector< std::shared_ptr<Piece> > m_carriedPieces;
     
     int getFirstEmptyPlaceIndex() const;
