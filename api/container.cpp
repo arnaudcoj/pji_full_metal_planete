@@ -15,6 +15,9 @@ Container::Container(Container::Type type) : m_type(type), m_MaxCapacity(0), m_c
     default:
         break;
     }
+    
+    for(int i = 0; i < m_MaxCapacity; i++)
+        m_carriedPieces.push_back(nullptr);
 }
 
 int Container::getMaxCapacity() const {
@@ -24,10 +27,16 @@ int Container::getMaxCapacity() const {
 int Container::getWeight() const {
     int size = 0;
     for(std::shared_ptr<Piece> piece : m_carriedPieces)
-        size = piece->getWeight();
+        if(piece != nullptr)
+            size = piece->getWeight();
     return size;
 }
 
+Container::Type Container::getType() const {
+    return m_type;
+}
+
+//contient des nullptr
 std::vector< std::shared_ptr<Piece> > Container::getCarriedPieces() const {
     return m_carriedPieces;
 }
@@ -35,27 +44,52 @@ std::vector< std::shared_ptr<Piece> > Container::getCarriedPieces() const {
 bool Container::canCarry(std::shared_ptr<Piece> piece) const {
     assert(piece != nullptr);
     
-    if(piece->canBeCarried(m_type)) 
-        return getWeight() + piece->getWeight() <= getMaxCapacity();
-
-    return false;
+    if(!piece->canBeCarried(m_type)) 
+        return false;
+        
+    if(contains(piece))
+        return false;
+        
+    return getWeight() + piece->getWeight() <= getMaxCapacity();
 }
 
-Container::Type Container::getType() const {
-    return m_type;
+int Container::getFirstEmptyPlaceIndex() const {
+    for(int i =0; i < m_carriedPieces.size(); i++)
+        if(m_carriedPieces[i] == nullptr)
+            return i;
+    return -1;
+}
+
+int Container::getIndex(std::shared_ptr<Piece> piece) const {
+    for(int i = 0; i < m_carriedPieces.size(); i++)
+        if(m_carriedPieces[i] == piece)
+            return i;
+    return -1;
+}
+
+bool Container::contains(std::shared_ptr<Piece> piece) const {
+    for(int i = 0; i < m_carriedPieces.size(); i++)
+        if(m_carriedPieces[i] == piece)
+            return true;
+    return false;
 }
 
 bool Container::takePiece(std::shared_ptr<Piece> piece) {
     if(canCarry(piece)) {
-            m_carriedPieces.push_back(piece);
+        int index = getFirstEmptyPlaceIndex();
+        if(index != -1) {
+            m_carriedPieces[index] = piece;
             return true;
+        }
     }
     return false;
 }
 
-std::shared_ptr<Piece> Container::deployPiece(int pieceID)
+bool Container::removePiece(std::shared_ptr<Piece> piece)
 {
-    if(0 > pieceID || pieceID >= m_carriedPieces.size())
-        return nullptr;
-    return m_carriedPieces[pieceID];
+    int index = getIndex(piece);
+    if(index == -1)
+        return false;
+    m_carriedPieces[index] = nullptr;
+    return true;
 }

@@ -19,13 +19,17 @@ public:
     std::vector< std::shared_ptr<Piece> > getCarriedPieces() const;
     bool canCarry(std::shared_ptr<Piece> piece) const;
     bool takePiece(std::shared_ptr<Piece> piece);
-    std::shared_ptr<Piece> deployPiece(int pieceID);
+    bool removePiece(std::shared_ptr<Piece> piece);
     Type getType() const;
 
 private:
     Type m_type;
     int m_MaxCapacity;
     std::vector< std::shared_ptr<Piece> > m_carriedPieces;
+    
+    int getFirstEmptyPlaceIndex() const;
+    int getIndex(std::shared_ptr<Piece> piece) const;
+    bool contains(std::shared_ptr<Piece> piece) const;
 };
 
 #endif // CONTAINER_H

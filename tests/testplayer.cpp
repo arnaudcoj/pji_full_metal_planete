@@ -13,10 +13,10 @@ TEST_CASE("tests player.move and cell.isOccupied", "tests if we can move a Piece
     REQUIRE_FALSE(cell->isOccupied());
 
     REQUIRE(player.move(piece, cell, Tide::MEDIUM_TIDE));
-    REQUIRE(cell->isOccupied()); //correct
-    REQUIRE(piece->getCell()->isOccupied()); //segfault
-    REQUIRE(piece->isOnCell()); // piece pas sur une cell
-    REQUIRE(cell->getPiece()->isOnCell()); // piece pas sur une cell
+    REQUIRE(cell->isOccupied());
+    REQUIRE(piece->getCell()->isOccupied()); 
+    REQUIRE(piece->isOnCell()); 
+    REQUIRE(cell->getPiece()->isOnCell()); 
 
     REQUIRE_FALSE(player.move(piece, cell, Tide::MEDIUM_TIDE));
 

@@ -11,6 +11,7 @@
     <File Name="testpiece.cpp"/>
     <File Name="testpiecestock.cpp"/>
     <File Name="testplayer.cpp"/>
+    <File Name="testContainers.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="include">
     <File Name="catch.hpp"/>
