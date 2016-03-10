@@ -1,1 +1,1 @@
-./Debug/assetmanager.cpp.o ./Debug/grid.cpp.o ./Debug/hexagon.cpp.o ./Debug/pawn.cpp.o
+./Debug/assetmanager.cpp.o ./Debug/grid.cpp.o ./Debug/hexagon.cpp.o ./Debug/pawn.cpp.o ./Debug/animator.cpp.o

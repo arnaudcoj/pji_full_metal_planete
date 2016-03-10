@@ -1,9 +1,11 @@
 #include <SFML/Graphics.hpp>
 
 #include "game.h"
-#include "assetmanager.h"
 
+#include "assetmanager.h"
+#include "animator.h"
 #include "grid.h"
+#include <iostream>
 
 using namespace std;
 
@@ -15,6 +17,7 @@ int main()
     Hexagrid hexagrid("../../assets/maps/first.yaml");
     Game game = Game(hexagrid);
     Player player;
+    game.getPieceStock();
 
     std::shared_ptr<Piece> piece = std::make_shared<Piece>();
     player.move(piece, hexagrid.getCell(1, 1), Tide::MEDIUM_TIDE); // put a piece on the grid
@@ -49,9 +52,14 @@ int main()
 
     Grid grid(hexagrid);
 
+    sf::Clock clock;
+    
     //Game loop
     while (window.isOpen())
     {
+        //Returns the elapsed time and restarts the clock
+        sf::Time deltaTime = clock.restart();
+        
         //Handle Input
         sf::Event event;
 
@@ -105,10 +113,9 @@ int main()
                 break;
             }
         }
-
+        
         //Update frame
-
-        grid.update();
+        grid.update(deltaTime);
 
         // Render frame
         window.clear(sf::Color::Black);

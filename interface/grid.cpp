@@ -2,6 +2,7 @@
 
 Grid::Grid(Hexagrid hexagrid)
 {
+    std::cout << "Grid" << std::endl;
     // for each cell of the hexagrid
     for(int i = 0; i < hexagrid.getWidth(); i++)
     {
@@ -46,12 +47,12 @@ sf::Vector2f Grid::PixToCell(int xCursor, int yCursor) {
 }
 
 // updates the grid
-void Grid::update()
+void Grid::update(sf::Time const& deltaTime)
 {
     std::vector<Hexagon>::iterator hexagone;
     for(hexagone = m_grid.begin(); hexagone != m_grid.end(); ++hexagone)
     {
-        hexagone->update();
+        hexagone->update(deltaTime);
     }
 }
 

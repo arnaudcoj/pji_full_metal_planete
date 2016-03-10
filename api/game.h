@@ -9,6 +9,7 @@
 #include "gamestate.h"
 #include "player.h"
 #include "tide.h"
+#include "piecestock.h"
 
 //contient les informations sur l'etat du jeu
 class Game
@@ -16,6 +17,7 @@ class Game
     Hexagrid m_hexagrid;
     std::vector<Player> m_players;
     GameState m_gameState;
+    PieceStock m_pieceStock;
 
 public:
 
@@ -24,6 +26,7 @@ public:
     Game(Hexagrid grid);
     Hexagrid& getHexagrid();
     GameState& getGameState();
+    PieceStock& getPieceStock();
 };
 
 #endif // GAME_H

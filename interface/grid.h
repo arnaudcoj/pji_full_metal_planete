@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include <memory>
 #include <vector>
+#include <iostream>
 
 #include "hexagrid.h"
 #include "hexagon.h"
@@ -16,7 +17,7 @@ private:
 public:
     Grid(Hexagrid hexagrid);
     sf::Vector2f PixToCell(int xCursor, int yCursor);
-    void update();
+    void update(sf::Time const& deltaTime);
     void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 };
 

@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <memory>
+#include <iostream>
 
 #include "cell.h"
 #include "pawn.h"
@@ -13,6 +14,7 @@ class Hexagon
 private:
     std::shared_ptr<Cell> m_cell;
     sf::ConvexShape m_sprite;
+    std::shared_ptr<Pawn> m_pawn;
 
 public:
     static const float SIZE;
@@ -20,7 +22,7 @@ public:
     static const float HEIGHT;
 
     Hexagon(std::shared_ptr<Cell> cell);
-    void update();
+    void update(sf::Time const& deltaTime);
     void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
 private:

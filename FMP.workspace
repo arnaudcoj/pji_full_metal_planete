@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<CodeLite_Workspace Name="FMP" Database="">
+<CodeLite_Workspace Name="FMP" Database="" SWTLW="Yes">
+  <WorkspaceParserMacros/>
+  <WorkspaceParserPaths/>
   <Project Name="api" Path="api/api.project" Active="No"/>
   <Project Name="interface" Path="interface/interface.project"/>
   <Project Name="game" Path="game/game.project" Active="Yes"/>
