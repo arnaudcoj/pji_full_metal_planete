@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CodeLite_Workspace Name="FMP" Database="">
-  <Project Name="api" Path="api/api.project" Active="No"/>
   <Project Name="interface" Path="interface/interface.project"/>
   <Project Name="game" Path="game/game.project" Active="Yes"/>
   <Project Name="tests" Path="tests/tests.project" Active="No"/>
+  <Project Name="api" Path="api/api.project" Active="No"/>
   <BuildMatrix>
     <WorkspaceConfiguration Name="Debug" Selected="yes">
       <Environment/>
-      <Project Name="api" ConfigName="Debug"/>
       <Project Name="interface" ConfigName="Debug"/>
       <Project Name="game" ConfigName="Debug"/>
       <Project Name="tests" ConfigName="Debug"/>
+      <Project Name="api" ConfigName="Debug"/>
     </WorkspaceConfiguration>
     <WorkspaceConfiguration Name="Release" Selected="yes">
       <Environment/>
-      <Project Name="api" ConfigName="Release"/>
       <Project Name="interface" ConfigName="Release"/>
       <Project Name="game" ConfigName="Release"/>
       <Project Name="tests" ConfigName="Release"/>
+      <Project Name="api" ConfigName="Release"/>
     </WorkspaceConfiguration>
   </BuildMatrix>
 </CodeLite_Workspace>

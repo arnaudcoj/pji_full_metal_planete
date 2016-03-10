@@ -1,8 +1,9 @@
 #include "piece.h"
 #include "cell.h"
 
-Piece::Piece(Engine engine) : m_cell(), m_engine(engine)
-{ }
+Piece::Piece(Engine::Type engineType, Weapon::Type weaponType, Container::Type containerType, int weight) : m_cell(), m_engine(engineType), m_weapon(weaponType), m_container(containerType)
+{
+}
 
 bool Piece::isOnCell() {
     return !m_cell.expired();
@@ -25,15 +26,23 @@ bool Piece::removeCell() {
     return true;
 }
 
-
-bool Piece::isTerrestrial() {
-    return m_engine != Engine::MARINE_ENGINE;
+Engine& Piece::getEngine() {
+    return m_engine;
 }
 
-bool Piece::isMarine() {
-    return m_engine == Engine::MARINE_ENGINE;
+Weapon& Piece::getWeapon() {
+    return m_weapon;
 }
 
-bool Piece::canClimb() {
-    return m_engine == Engine::TERRESTRIAL_ENGINE;
+Container& Piece::getContainer() {
+    return m_container;
+}
+
+int Piece::getWeight()
+{
+    return m_weight + m_container.getWeight();
+}
+
+bool Piece::canBeCarried(Container::Type containerType) const {
+    return false;
 }

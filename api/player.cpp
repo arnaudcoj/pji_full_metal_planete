@@ -19,7 +19,10 @@ bool Player::useActionPoints(int points) {
 }
 
 bool Player::move(std::shared_ptr<Piece> piece, std::shared_ptr<Cell> cell, Tide tide) {
-    if(cell->isOccupied() || !cell->isPracticable(piece, tide)) {
+    assert(cell != nullptr);
+
+    if(cell->isOccupied() || !cell->isPracticable(piece, tide) ||
+            (piece->getCell() != nullptr && !piece->getCell()->isPracticable(piece, tide))) {
         return false;
     }
 

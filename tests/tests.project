@@ -12,9 +12,6 @@
     <File Name="testpiecestock.cpp"/>
     <File Name="testplayer.cpp"/>
   </VirtualDirectory>
-  <Dependencies Name="Debug">
-    <Project Name="api"/>
-  </Dependencies>
   <VirtualDirectory Name="include">
     <File Name="catch.hpp"/>
   </VirtualDirectory>
@@ -112,4 +109,6 @@
       </Completion>
     </Configuration>
   </Settings>
+  <Dependencies Name="Debug"/>
+  <Dependencies Name="Release"/>
 </CodeLite_Project>

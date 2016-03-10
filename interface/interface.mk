@@ -5,22 +5,22 @@
 ## Debug
 ProjectName            :=interface
 ConfigurationName      :=Debug
-WorkspacePath          := "/Users/Kaendan/Documents/Code/Master/S2/PJI/FMP"
-ProjectPath            := "/Users/Kaendan/Documents/Code/Master/S2/PJI/FMP/interface"
+WorkspacePath          := "/home/non0w/Documents/M1/S2/pji_full_metal_planete"
+ProjectPath            := "/home/non0w/Documents/M1/S2/pji_full_metal_planete/interface"
 IntermediateDirectory  :=./Debug
 OutDir                 := $(IntermediateDirectory)
 CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
-User                   :=Tristan Camus
-Date                   :=08/03/2016
-CodeLitePath           :="/Users/Kaendan/Library/Application Support/codelite"
-LinkerName             :=g++
-SharedObjectLinkerName :=g++ -dynamiclib -fPIC
+User                   :=
+Date                   :=03/10/16
+CodeLitePath           :="/home/non0w/.codelite"
+LinkerName             :=/usr/bin/g++
+SharedObjectLinkerName :=/usr/bin/g++ -shared -fPIC
 ObjectSuffix           :=.o
 DependSuffix           :=.o.d
-PreprocessSuffix       :=.o.i
-DebugSwitch            :=-gstab
+PreprocessSuffix       :=.i
+DebugSwitch            :=-g 
 IncludeSwitch          :=-I
 LibrarySwitch          :=-l
 OutputSwitch           :=-o 
@@ -31,7 +31,7 @@ OutputFile             :=$(IntermediateDirectory)/lib$(ProjectName).a
 Preprocessors          :=
 ObjectSwitch           :=-o 
 ArchiveOutputSwitch    := 
-PreprocessOnlySwitch   :=-E 
+PreprocessOnlySwitch   :=-E
 ObjectsFileList        :="interface.txt"
 PCHCompileFlags        :=
 MakeDirCommand         :=mkdir -p
@@ -47,19 +47,19 @@ LibPath                := $(LibraryPathSwitch).
 ## Common variables
 ## AR, CXX, CC, AS, CXXFLAGS and CFLAGS can be overriden using an environment variables
 ##
-AR       := ar rcus
-CXX      := g++
-CC       := gcc
+AR       := /usr/bin/ar rcu
+CXX      := /usr/bin/g++
+CC       := /usr/bin/gcc
 CXXFLAGS :=  -g -std=c++11 $(Preprocessors)
 CFLAGS   :=  -g $(Preprocessors)
 ASFLAGS  := 
-AS       := as
+AS       := /usr/bin/as
 
 
 ##
 ## User defined environment variables
 ##
-CodeLiteDir:=/Users/Kaendan/Downloads/codelite.app/Contents/SharedSupport/
+CodeLiteDir:=/usr/share/codelite
 Objects0=$(IntermediateDirectory)/assetmanager.cpp$(ObjectSuffix) $(IntermediateDirectory)/grid.cpp$(ObjectSuffix) $(IntermediateDirectory)/hexagon.cpp$(ObjectSuffix) $(IntermediateDirectory)/pawn.cpp$(ObjectSuffix) 
 
 
@@ -76,9 +76,9 @@ $(OutputFile): $(Objects)
 	@$(MakeDirCommand) $(@D)
 	@echo "" > $(IntermediateDirectory)/.d
 	@echo $(Objects0)  > $(ObjectsFileList)
-	$(AR) $(ArchiveOutputSwitch)$(OutputFile) $(Objects) $(ArLibs)
-	@$(MakeDirCommand) "/Users/Kaendan/Documents/Code/Master/S2/PJI/FMP/.build-debug"
-	@echo rebuilt > "/Users/Kaendan/Documents/Code/Master/S2/PJI/FMP/.build-debug/interface"
+	$(AR) $(ArchiveOutputSwitch)$(OutputFile) @$(ObjectsFileList) $(ArLibs)
+	@$(MakeDirCommand) "/home/non0w/Documents/M1/S2/pji_full_metal_planete/.build-debug"
+	@echo rebuilt > "/home/non0w/Documents/M1/S2/pji_full_metal_planete/.build-debug/interface"
 
 MakeIntermediateDirs:
 	@test -d ./Debug || $(MakeDirCommand) ./Debug
@@ -94,7 +94,7 @@ PreBuild:
 ## Objects
 ##
 $(IntermediateDirectory)/assetmanager.cpp$(ObjectSuffix): assetmanager.cpp $(IntermediateDirectory)/assetmanager.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/Users/Kaendan/Documents/Code/Master/S2/PJI/FMP/interface/assetmanager.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/assetmanager.cpp$(ObjectSuffix) $(IncludePath)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/non0w/Documents/M1/S2/pji_full_metal_planete/interface/assetmanager.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/assetmanager.cpp$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/assetmanager.cpp$(DependSuffix): assetmanager.cpp
 	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/assetmanager.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/assetmanager.cpp$(DependSuffix) -MM "assetmanager.cpp"
 
@@ -102,7 +102,7 @@ $(IntermediateDirectory)/assetmanager.cpp$(PreprocessSuffix): assetmanager.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/assetmanager.cpp$(PreprocessSuffix) "assetmanager.cpp"
 
 $(IntermediateDirectory)/grid.cpp$(ObjectSuffix): grid.cpp $(IntermediateDirectory)/grid.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/Users/Kaendan/Documents/Code/Master/S2/PJI/FMP/interface/grid.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/grid.cpp$(ObjectSuffix) $(IncludePath)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/non0w/Documents/M1/S2/pji_full_metal_planete/interface/grid.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/grid.cpp$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/grid.cpp$(DependSuffix): grid.cpp
 	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/grid.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/grid.cpp$(DependSuffix) -MM "grid.cpp"
 
@@ -110,7 +110,7 @@ $(IntermediateDirectory)/grid.cpp$(PreprocessSuffix): grid.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/grid.cpp$(PreprocessSuffix) "grid.cpp"
 
 $(IntermediateDirectory)/hexagon.cpp$(ObjectSuffix): hexagon.cpp $(IntermediateDirectory)/hexagon.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/Users/Kaendan/Documents/Code/Master/S2/PJI/FMP/interface/hexagon.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/hexagon.cpp$(ObjectSuffix) $(IncludePath)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/non0w/Documents/M1/S2/pji_full_metal_planete/interface/hexagon.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/hexagon.cpp$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/hexagon.cpp$(DependSuffix): hexagon.cpp
 	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/hexagon.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/hexagon.cpp$(DependSuffix) -MM "hexagon.cpp"
 
@@ -118,7 +118,7 @@ $(IntermediateDirectory)/hexagon.cpp$(PreprocessSuffix): hexagon.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/hexagon.cpp$(PreprocessSuffix) "hexagon.cpp"
 
 $(IntermediateDirectory)/pawn.cpp$(ObjectSuffix): pawn.cpp $(IntermediateDirectory)/pawn.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/Users/Kaendan/Documents/Code/Master/S2/PJI/FMP/interface/pawn.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/pawn.cpp$(ObjectSuffix) $(IncludePath)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/non0w/Documents/M1/S2/pji_full_metal_planete/interface/pawn.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/pawn.cpp$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/pawn.cpp$(DependSuffix): pawn.cpp
 	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/pawn.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/pawn.cpp$(DependSuffix) -MM "pawn.cpp"
 

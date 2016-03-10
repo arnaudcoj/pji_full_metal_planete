@@ -18,6 +18,9 @@ public:
     MountainCell(sf::Vector2i coord, bool halfCell = false, unsigned int area = 0);
     MountainCell(int x, int y, bool halfCell = false, unsigned int area = 0);
     virtual bool isPracticableCurrent(std::shared_ptr<Piece> piece, Tide);
+
+    virtual int getRangeBonus();
+
     virtual std::string getType();
 };
 

@@ -1,6 +1,8 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
+#include <cassert>
+
 #include "piece.h"
 #include "cell.h"
 #include "tide.h"

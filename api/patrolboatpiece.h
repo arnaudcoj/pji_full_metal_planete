@@ -2,6 +2,9 @@
 #define PATROLBOATPIECE_H
 
 #include "piece.h"
+#include "engine.h"
+#include "weapon.h"
+#include "container.h"
 
 class PatrolBoatPiece : public Piece
 {

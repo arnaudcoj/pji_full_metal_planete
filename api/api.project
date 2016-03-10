@@ -3,25 +3,40 @@
   <Description/>
   <Dependencies/>
   <VirtualDirectory Name="src">
-    <File Name="cell.cpp"/>
     <File Name="game.cpp"/>
     <File Name="gamestate.cpp"/>
     <File Name="hexagrid.cpp"/>
-    <File Name="mountaincell.cpp"/>
-    <File Name="piece.cpp"/>
     <File Name="piecestock.cpp"/>
-    <File Name="plaincell.cpp"/>
     <File Name="player.cpp"/>
-    <File Name="reefcell.cpp"/>
-    <File Name="seacell.cpp"/>
-    <File Name="swampcell.cpp"/>
+    <VirtualDirectory Name="cells">
+      <File Name="cell.cpp"/>
+      <File Name="mountaincell.cpp"/>
+      <File Name="plaincell.cpp"/>
+      <File Name="reefcell.cpp"/>
+      <File Name="seacell.cpp"/>
+      <File Name="swampcell.cpp"/>
+    </VirtualDirectory>
+    <VirtualDirectory Name="pieces">
+      <File Name="bigtankpiece.cpp"/>
+      <File Name="patrolboatpiece.cpp"/>
+      <File Name="piece.cpp"/>
+      <File Name="pontoonpiece.cpp"/>
+      <File Name="tankpiece.cpp"/>
+      <File Name="weatherlayerpiece.cpp"/>
+      <VirtualDirectory Name="components">
+        <File Name="container.cpp"/>
+        <File Name="weapon.cpp"/>
+        <File Name="engine.cpp"/>
+      </VirtualDirectory>
+      <File Name="crabpiece.cpp"/>
+      <File Name="bargepiece.cpp"/>
+    </VirtualDirectory>
   </VirtualDirectory>
   <VirtualDirectory Name="include">
     <File Name="game.h"/>
     <File Name="gamestate.h"/>
     <File Name="hexagrid.h"/>
     <File Name="player.h"/>
-    <File Name="swampcell.h"/>
     <File Name="tide.h"/>
     <VirtualDirectory Name="cells">
       <File Name="cell.h"/>
@@ -29,11 +44,24 @@
       <File Name="reefcell.h"/>
       <File Name="mountaincell.h"/>
       <File Name="plaincell.h"/>
+      <File Name="swampcell.h"/>
     </VirtualDirectory>
     <VirtualDirectory Name="pieces">
       <File Name="piece.h"/>
-      <File Name="piecestock.h"/>
+      <File Name="bargepiece.h"/>
+      <File Name="bigtankpiece.h"/>
+      <File Name="crabpiece.h"/>
+      <File Name="patrolboatpiece.h"/>
+      <File Name="pontoonpiece.h"/>
+      <File Name="tankpiece.h"/>
+      <File Name="weatherlayerpiece.h"/>
+      <VirtualDirectory Name="components">
+        <File Name="container.h"/>
+        <File Name="engine.h"/>
+        <File Name="weapon.h"/>
+      </VirtualDirectory>
     </VirtualDirectory>
+    <File Name="piecestock.h"/>
   </VirtualDirectory>
   <Settings Type="Static Library">
     <GlobalSettings>

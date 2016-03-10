@@ -1,9 +1,12 @@
 #include "container.h"
+#include "piece.h"
 
 Container::Container(Container::Type type) : m_type(type), m_MaxCapacity(0), m_carriedPieces()
 {
-    //TODO vérifier valeurs
     switch(type) {
+    case Type::MINERAL_CONTAINER:
+        m_MaxCapacity = 1;
+        break;
     case Type::CLASSIC_CONTAINER:
         m_MaxCapacity = 2;
         break;
@@ -18,31 +21,41 @@ int Container::getMaxCapacity() const {
     return m_MaxCapacity;
 }
 
-int Container::getCapacity() const {
-    //TODO to be implemented (list.size)
-    return 0;
+int Container::getWeight() const {
+    int size = 0;
+    for(std::shared_ptr<Piece> piece : m_carriedPieces)
+        size = piece->getWeight();
+    return size;
 }
 
-std::list< std::shared_ptr<Piece> > Container::getCarriedPieces() const {
+std::vector< std::shared_ptr<Piece> > Container::getCarriedPieces() const {
     return m_carriedPieces;
 }
 
 bool Container::canCarry(std::shared_ptr<Piece> piece) const {
     assert(piece != nullptr);
-
-    //Type pieceType = piece->getContainer.getType();
+    
+    if(piece->canBeCarried(m_type)) 
+        return getWeight() + piece->getWeight() <= getMaxCapacity();
 
     return false;
-    //TODO to be implemented
 }
 
 Container::Type Container::getType() const {
     return m_type;
 }
 
-void Container::takePiece(std::shared_ptr<Piece> piece) {
+bool Container::takePiece(std::shared_ptr<Piece> piece) {
     if(canCarry(piece)) {
             m_carriedPieces.push_back(piece);
+            return true;
     }
+    return false;
 }
 
+std::shared_ptr<Piece> Container::deployPiece(int pieceID)
+{
+    if(0 > pieceID || pieceID >= m_carriedPieces.size())
+        return nullptr;
+    return m_carriedPieces[pieceID];
+}
