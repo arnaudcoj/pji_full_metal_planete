@@ -13,6 +13,7 @@ class Pawns : public sf::Drawable
 private:
     std::vector<std::shared_ptr<Pawn>> m_stock;
 
+
 public:
     Pawns(PieceStock const& stock);
     void update(sf::Time const& deltaTime);

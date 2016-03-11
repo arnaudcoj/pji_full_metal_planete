@@ -5,9 +5,13 @@ Grid::Grid(Hexagrid hexagrid)
     // for each cell of the hexagrid
     for(int i = 0; i < hexagrid.getWidth(); i++) {
         for(int j = 0; j < hexagrid.getHeight(); j++) {
-            m_grid.push_back(std::make_shared<Hexagon>(hexagrid.getCell(i, j)));
+            m_map.insert(std::make_pair(hexagrid.getCell(i, j), std::make_shared<Hexagon>(hexagrid.getCell(i, j))));
         }
     }
+}
+
+std::shared_ptr<Hexagon> Grid::getHexagon(std::shared_ptr<Cell> cell) {
+    return m_map.find(cell)->second;
 }
 
 sf::Vector2f Grid::PixToCell(int xCursor, int yCursor)
@@ -48,15 +52,15 @@ sf::Vector2f Grid::PixToCell(int xCursor, int yCursor)
 // updates the grid
 void Grid::update()
 {
-    for(std::shared_ptr<Hexagon> hexagon : m_grid) {
-        hexagon->update();
+    for(auto& pair : m_map) {
+        pair.second->update();
     }
 }
 
 // calls the draw function of each hexagon of the grid
 void Grid::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-    for(std::shared_ptr<Hexagon> hexagon : m_grid) {
-        hexagon->draw(target, states);
+    for(auto& pair : m_map) {
+        pair.second->draw(target, states);
     }
 }

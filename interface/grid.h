@@ -11,10 +11,11 @@
 class Grid : public sf::Drawable
 {
 private:
-    std::vector<std::shared_ptr<Hexagon>> m_grid;
+    std::map<std::shared_ptr<Cell>,std::shared_ptr<Hexagon>> m_map;
 
 public:
     Grid(Hexagrid hexagrid);
+    std::shared_ptr<Hexagon> getHexagon(std::shared_ptr<Cell> cell);
     sf::Vector2f PixToCell(int xCursor, int yCursor);
     void update();
     void draw(sf::RenderTarget& target, sf::RenderStates states) const;

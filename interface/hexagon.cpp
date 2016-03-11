@@ -12,7 +12,8 @@ sf::Vector2f hex_corner(float x, float y, float size, int i)
     return sf::Vector2f(x + size * cos(angle_rad), y + size * sin(angle_rad));
 }
 
-Hexagon::Hexagon(std::shared_ptr<Cell> cell) : m_cell(cell)
+Hexagon::Hexagon(std::shared_ptr<Cell> cell)
+    : m_cell(cell)
 {
     initSprite();
 }
@@ -50,19 +51,18 @@ void Hexagon::initSprite()
     // setting the color of the hexagon depending of if it's a half cell or not
     if(m_cell->isHalfCell())
         m_sprite.setFillColor(sf::Color(150, 150, 150, 255));
+
+    m_sprite.setOutlineColor(sf::Color::Black);
+    m_sprite.setOutlineThickness(-SIZE / 25);
+}
+
+sf::ConvexShape& Hexagon::getSprite() {
+    return m_sprite;
 }
 
 // updates the hexagon
 void Hexagon::update()
 {
-    m_sprite.setOutlineColor(sf::Color::Black);
-    if(m_cell->isOccupied()) {
-        m_sprite.setOutlineColor(sf::Color::Red);
-        m_sprite.setOutlineThickness(-SIZE / 10);
-    } else {
-        m_sprite.setOutlineColor(sf::Color::Black);
-        m_sprite.setOutlineThickness(-SIZE / 25);
-    }
 }
 
 // draws the hexagon the the entities inside of it

@@ -20,6 +20,7 @@ public:
     static const float HEIGHT;
 
     Hexagon(std::shared_ptr<Cell> cell);
+    sf::ConvexShape& getSprite();
     void update();
     void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
