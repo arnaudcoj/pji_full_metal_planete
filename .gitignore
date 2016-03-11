@@ -4,3 +4,4 @@
 */Debug
 .codelite
 .build-debug
+*.DS_Store
