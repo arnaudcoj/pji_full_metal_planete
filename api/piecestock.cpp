@@ -14,10 +14,14 @@ std::shared_ptr<Piece> PieceStock::takePiece() {
     return p;
 }
 
+std::shared_ptr<Piece> PieceStock::getPiece(int i) const{
+    return mPieces[i];
+}
+
 void PieceStock::addPiece(std::shared_ptr<Piece> piece) {
     mPieces.push_back(piece);
 }
 
-size_t PieceStock::size() {
+size_t PieceStock::size() const {
     return mPieces.size();
 }

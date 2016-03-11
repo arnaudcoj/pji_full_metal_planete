@@ -23,7 +23,7 @@ public:
     Piece(Engine::Type engineType = Engine::Type::TERRESTRIAL_ENGINE, Weapon::Type weaponType = Weapon::Type::NO_WEAPON, Container::Type container = Container::Type::NO_CONTAINER, int weight = 1);
 
     bool isOnCell();
-    std::shared_ptr<Cell> getCell();
+    std::shared_ptr<Cell> getCell() const;
     void setCell(std::shared_ptr<Cell> cell);
     bool removeCell();
     int getWeight();
