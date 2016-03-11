@@ -1,7 +1,7 @@
 #include "assetmanager.h"
 #include <assert.h>
 
-const std::string AssetManager::PATH = { "../../assets/textures/" };
+const std::string AssetManager::PATH = { "../../assets/tiles/" };
 
 AssetManager* AssetManager::sInstance = nullptr;
 
