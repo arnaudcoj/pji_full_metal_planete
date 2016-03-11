@@ -8,7 +8,7 @@ bool Piece::isOnCell() {
     return !m_cell.expired();
 }
 
-std::shared_ptr<Cell> Piece::getCell() {
+std::shared_ptr<Cell> Piece::getCell() const {
     return m_cell.lock();
 }
 

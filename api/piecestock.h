@@ -17,8 +17,9 @@ public:
     PieceStock(int nbPieces = 0);
 
     std::shared_ptr<Piece> takePiece();
+    std::shared_ptr<Piece> getPiece(int i) const;
     void addPiece(std::shared_ptr<Piece> piece);
-    size_t size();
+    size_t size() const;
 };
 
 #endif // PIECESTOCK_H

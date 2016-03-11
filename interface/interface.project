@@ -8,6 +8,7 @@
     <File Name="hexagon.cpp"/>
     <File Name="pawn.cpp"/>
     <File Name="animator.cpp"/>
+    <File Name="pawns.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="include">
     <File Name="assetmanager.h"/>
@@ -15,6 +16,7 @@
     <File Name="hexagon.h"/>
     <File Name="pawn.h"/>
     <File Name="animator.h"/>
+    <File Name="pawns.h"/>
   </VirtualDirectory>
   <Settings Type="Static Library">
     <GlobalSettings>

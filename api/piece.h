@@ -18,7 +18,7 @@ private:
 public:
     Piece(Engine engine = Engine::TERRESTRIAL_ENGINE);
     bool isOnCell();
-    std::shared_ptr<Cell> getCell();
+    std::shared_ptr<Cell> getCell() const;
     void setCell(std::shared_ptr<Cell> cell);
     bool removeCell();
 

@@ -2,24 +2,23 @@
 
 Grid::Grid(Hexagrid hexagrid)
 {
-    std::cout << "Grid" << std::endl;
     // for each cell of the hexagrid
-    for(int i = 0; i < hexagrid.getWidth(); i++)
-    {
-        for(int j = 0; j < hexagrid.getHeight(); j++)
-        {
-            m_grid.push_back(Hexagon(hexagrid.getCell(i, j)));
+    for(int i = 0; i < hexagrid.getWidth(); i++) {
+        for(int j = 0; j < hexagrid.getHeight(); j++) {
+            m_grid.push_back(std::make_shared<Hexagon>(hexagrid.getCell(i, j)));
         }
     }
 }
 
-sf::Vector2f Grid::PixToCell(int xCursor, int yCursor) {
+sf::Vector2f Grid::PixToCell(int xCursor, int yCursor)
+{
     int x;
     int y;
     float size = Hexagon::SIZE;
     float width = Hexagon::WIDTH;
     float height = Hexagon::HEIGHT;
-    float side = size * 3 / 2;;
+    float side = size * 3 / 2;
+    ;
 
     xCursor += width / 2;
 
@@ -30,7 +29,7 @@ sf::Vector2f Grid::PixToCell(int xCursor, int yCursor) {
     int cj = floor(ty / height);
     int cy = ty - height * cj;
 
-    if (cx > std::abs(size / 2 - size * cy / height)) {
+    if(cx > std::abs(size / 2 - size * cy / height)) {
         x = ci;
         y = cj;
     } else {
@@ -47,21 +46,17 @@ sf::Vector2f Grid::PixToCell(int xCursor, int yCursor) {
 }
 
 // updates the grid
-void Grid::update(sf::Time const& deltaTime)
+void Grid::update()
 {
-    std::vector<Hexagon>::iterator hexagone;
-    for(hexagone = m_grid.begin(); hexagone != m_grid.end(); ++hexagone)
-    {
-        hexagone->update(deltaTime);
+    for(std::shared_ptr<Hexagon> hexagon : m_grid) {
+        hexagon->update();
     }
 }
 
 // calls the draw function of each hexagon of the grid
 void Grid::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-    std::vector<Hexagon>::const_iterator hexagone;
-    for(hexagone = m_grid.begin(); hexagone != m_grid.end(); ++hexagone)
-    {
-        hexagone->draw(target, states);
+    for(std::shared_ptr<Hexagon> hexagon : m_grid) {
+        hexagon->draw(target, states);
     }
 }

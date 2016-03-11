@@ -60,7 +60,7 @@ AS       := /usr/bin/as
 ## User defined environment variables
 ##
 CodeLiteDir:=/Users/Kaendan/Downloads/codelite.app/Contents/SharedSupport/
-Objects0=$(IntermediateDirectory)/assetmanager.cpp$(ObjectSuffix) $(IntermediateDirectory)/grid.cpp$(ObjectSuffix) $(IntermediateDirectory)/hexagon.cpp$(ObjectSuffix) $(IntermediateDirectory)/pawn.cpp$(ObjectSuffix) $(IntermediateDirectory)/animator.cpp$(ObjectSuffix) 
+Objects0=$(IntermediateDirectory)/assetmanager.cpp$(ObjectSuffix) $(IntermediateDirectory)/grid.cpp$(ObjectSuffix) $(IntermediateDirectory)/hexagon.cpp$(ObjectSuffix) $(IntermediateDirectory)/pawn.cpp$(ObjectSuffix) $(IntermediateDirectory)/animator.cpp$(ObjectSuffix) $(IntermediateDirectory)/pawns.cpp$(ObjectSuffix) 
 
 
 
@@ -132,6 +132,14 @@ $(IntermediateDirectory)/animator.cpp$(DependSuffix): animator.cpp
 
 $(IntermediateDirectory)/animator.cpp$(PreprocessSuffix): animator.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/animator.cpp$(PreprocessSuffix) "animator.cpp"
+
+$(IntermediateDirectory)/pawns.cpp$(ObjectSuffix): pawns.cpp $(IntermediateDirectory)/pawns.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/Users/Kaendan/Documents/Code/Master/S2/PJI/FMP/interface/pawns.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/pawns.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/pawns.cpp$(DependSuffix): pawns.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/pawns.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/pawns.cpp$(DependSuffix) -MM "pawns.cpp"
+
+$(IntermediateDirectory)/pawns.cpp$(PreprocessSuffix): pawns.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/pawns.cpp$(PreprocessSuffix) "pawns.cpp"
 
 
 -include $(IntermediateDirectory)/*$(DependSuffix)

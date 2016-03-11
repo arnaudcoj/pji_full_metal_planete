@@ -6,6 +6,7 @@
 #include "animator.h"
 #include "grid.h"
 #include <iostream>
+#include "pawns.h"
 
 using namespace std;
 
@@ -15,15 +16,14 @@ int main()
 
     // Creating the game objects
     Hexagrid hexagrid("../../assets/maps/first.yaml");
+    Grid grid(hexagrid);
     Game game = Game(hexagrid);
     Player player;
-    game.getPieceStock();
-
-    std::shared_ptr<Piece> piece = std::make_shared<Piece>();
-    player.move(piece, hexagrid.getCell(1, 1), Tide::MEDIUM_TIDE); // put a piece on the grid
-
-    std::shared_ptr<Piece> piece2 = std::make_shared<Piece>();
-    player.move(piece2, hexagrid.getCell(2, 2), Tide::MEDIUM_TIDE); // put a piece on the grid
+    PieceStock stock = game.getPieceStock();
+    Pawns pawns(stock);
+    
+    player.move(stock.takePiece(), hexagrid.getCell(1, 1), Tide::MEDIUM_TIDE); // put a piece on the grid
+    player.move(stock.takePiece(), hexagrid.getCell(2, 2), Tide::MEDIUM_TIDE);
 
     // calculate the window dimensions
     float width = Hexagon::WIDTH * (game.getHexagrid().getWidth() - 1) * 3/4;
@@ -50,7 +50,6 @@ int main()
         break;
     }
 
-    Grid grid(hexagrid);
 
     sf::Clock clock;
     
@@ -115,12 +114,14 @@ int main()
         }
         
         //Update frame
-        grid.update(deltaTime);
+        grid.update();
+        pawns.update(deltaTime);
 
         // Render frame
         window.clear(sf::Color::Black);
 
         window.draw(grid); // drawing the grid
+        window.draw(pawns);
 
         window.display();
     }

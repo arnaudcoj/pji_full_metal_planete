@@ -4,7 +4,7 @@
   ../api/swampcell.h ../api/reefcell.h ../api/player.h \
   ../api/piecestock.h ../interface/assetmanager.h \
   ../interface/animator.h ../interface/grid.h ../interface/hexagon.h \
-  ../interface/pawn.h
+  ../interface/pawn.h ../interface/pawns.h
 
 ../api/game.h:
 
@@ -41,3 +41,5 @@
 ../interface/hexagon.h:
 
 ../interface/pawn.h:
+
+../interface/pawns.h:
