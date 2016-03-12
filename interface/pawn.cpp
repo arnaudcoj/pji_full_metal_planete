@@ -32,6 +32,10 @@ sf::Vector2f Pawn::PawnToPix(int xCell, int yCell) const
     return sf::Vector2f(x, y);
 }
 
+sf::Sprite& Pawn::getSprite() {
+    return m_sprite;
+}
+
 // updates the pion
 void Pawn::update(sf::Time const& deltaTime)
 {

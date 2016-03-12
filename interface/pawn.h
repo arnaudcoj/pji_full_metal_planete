@@ -19,6 +19,7 @@ private:
 
 public:
     Pawn(std::shared_ptr<Piece> const& piece);
+    sf::Sprite& getSprite();
     void update(sf::Time const& deltaTime);
     void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 

@@ -5,15 +5,15 @@
 ## Debug
 ProjectName            :=tests
 ConfigurationName      :=Debug
-WorkspacePath          := "/Users/Kaendan/Documents/Code/Master/S2/PJI/pji_full_metal_planete"
-ProjectPath            := "/Users/Kaendan/Documents/Code/Master/S2/PJI/pji_full_metal_planete/tests"
+WorkspacePath          := "/Users/Kaendan/Documents/Code/Master/S2/PJI/FMP"
+ProjectPath            := "/Users/Kaendan/Documents/Code/Master/S2/PJI/FMP/tests"
 IntermediateDirectory  :=./Debug
 OutDir                 := $(IntermediateDirectory)
 CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=Tristan Camus
-Date                   :=11/03/2016
+Date                   :=12/03/2016
 CodeLitePath           :="/Users/Kaendan/Library/Application Support/codelite"
 LinkerName             :=/usr/bin/g++
 SharedObjectLinkerName :=/usr/bin/g++ -dynamiclib -fPIC
@@ -92,7 +92,7 @@ PreBuild:
 ## Objects
 ##
 $(IntermediateDirectory)/main.cpp$(ObjectSuffix): main.cpp $(IntermediateDirectory)/main.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/Users/Kaendan/Documents/Code/Master/S2/PJI/pji_full_metal_planete/tests/main.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IncludePath)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/Users/Kaendan/Documents/Code/Master/S2/PJI/FMP/tests/main.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/main.cpp$(DependSuffix): main.cpp
 	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/main.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/main.cpp$(DependSuffix) -MM "main.cpp"
 
@@ -100,7 +100,7 @@ $(IntermediateDirectory)/main.cpp$(PreprocessSuffix): main.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/main.cpp$(PreprocessSuffix) "main.cpp"
 
 $(IntermediateDirectory)/testCell.cpp$(ObjectSuffix): testCell.cpp $(IntermediateDirectory)/testCell.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/Users/Kaendan/Documents/Code/Master/S2/PJI/pji_full_metal_planete/tests/testCell.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/testCell.cpp$(ObjectSuffix) $(IncludePath)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/Users/Kaendan/Documents/Code/Master/S2/PJI/FMP/tests/testCell.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/testCell.cpp$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/testCell.cpp$(DependSuffix): testCell.cpp
 	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/testCell.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/testCell.cpp$(DependSuffix) -MM "testCell.cpp"
 
@@ -108,7 +108,7 @@ $(IntermediateDirectory)/testCell.cpp$(PreprocessSuffix): testCell.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/testCell.cpp$(PreprocessSuffix) "testCell.cpp"
 
 $(IntermediateDirectory)/testgame.cpp$(ObjectSuffix): testgame.cpp $(IntermediateDirectory)/testgame.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/Users/Kaendan/Documents/Code/Master/S2/PJI/pji_full_metal_planete/tests/testgame.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/testgame.cpp$(ObjectSuffix) $(IncludePath)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/Users/Kaendan/Documents/Code/Master/S2/PJI/FMP/tests/testgame.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/testgame.cpp$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/testgame.cpp$(DependSuffix): testgame.cpp
 	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/testgame.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/testgame.cpp$(DependSuffix) -MM "testgame.cpp"
 
@@ -116,7 +116,7 @@ $(IntermediateDirectory)/testgame.cpp$(PreprocessSuffix): testgame.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/testgame.cpp$(PreprocessSuffix) "testgame.cpp"
 
 $(IntermediateDirectory)/testgamestate.cpp$(ObjectSuffix): testgamestate.cpp $(IntermediateDirectory)/testgamestate.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/Users/Kaendan/Documents/Code/Master/S2/PJI/pji_full_metal_planete/tests/testgamestate.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/testgamestate.cpp$(ObjectSuffix) $(IncludePath)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/Users/Kaendan/Documents/Code/Master/S2/PJI/FMP/tests/testgamestate.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/testgamestate.cpp$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/testgamestate.cpp$(DependSuffix): testgamestate.cpp
 	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/testgamestate.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/testgamestate.cpp$(DependSuffix) -MM "testgamestate.cpp"
 
@@ -124,7 +124,7 @@ $(IntermediateDirectory)/testgamestate.cpp$(PreprocessSuffix): testgamestate.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/testgamestate.cpp$(PreprocessSuffix) "testgamestate.cpp"
 
 $(IntermediateDirectory)/testHexagrid.cpp$(ObjectSuffix): testHexagrid.cpp $(IntermediateDirectory)/testHexagrid.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/Users/Kaendan/Documents/Code/Master/S2/PJI/pji_full_metal_planete/tests/testHexagrid.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/testHexagrid.cpp$(ObjectSuffix) $(IncludePath)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/Users/Kaendan/Documents/Code/Master/S2/PJI/FMP/tests/testHexagrid.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/testHexagrid.cpp$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/testHexagrid.cpp$(DependSuffix): testHexagrid.cpp
 	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/testHexagrid.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/testHexagrid.cpp$(DependSuffix) -MM "testHexagrid.cpp"
 
@@ -132,7 +132,7 @@ $(IntermediateDirectory)/testHexagrid.cpp$(PreprocessSuffix): testHexagrid.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/testHexagrid.cpp$(PreprocessSuffix) "testHexagrid.cpp"
 
 $(IntermediateDirectory)/testpiece.cpp$(ObjectSuffix): testpiece.cpp $(IntermediateDirectory)/testpiece.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/Users/Kaendan/Documents/Code/Master/S2/PJI/pji_full_metal_planete/tests/testpiece.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/testpiece.cpp$(ObjectSuffix) $(IncludePath)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/Users/Kaendan/Documents/Code/Master/S2/PJI/FMP/tests/testpiece.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/testpiece.cpp$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/testpiece.cpp$(DependSuffix): testpiece.cpp
 	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/testpiece.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/testpiece.cpp$(DependSuffix) -MM "testpiece.cpp"
 
@@ -140,7 +140,7 @@ $(IntermediateDirectory)/testpiece.cpp$(PreprocessSuffix): testpiece.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/testpiece.cpp$(PreprocessSuffix) "testpiece.cpp"
 
 $(IntermediateDirectory)/testpiecestock.cpp$(ObjectSuffix): testpiecestock.cpp $(IntermediateDirectory)/testpiecestock.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/Users/Kaendan/Documents/Code/Master/S2/PJI/pji_full_metal_planete/tests/testpiecestock.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/testpiecestock.cpp$(ObjectSuffix) $(IncludePath)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/Users/Kaendan/Documents/Code/Master/S2/PJI/FMP/tests/testpiecestock.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/testpiecestock.cpp$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/testpiecestock.cpp$(DependSuffix): testpiecestock.cpp
 	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/testpiecestock.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/testpiecestock.cpp$(DependSuffix) -MM "testpiecestock.cpp"
 
@@ -148,7 +148,7 @@ $(IntermediateDirectory)/testpiecestock.cpp$(PreprocessSuffix): testpiecestock.c
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/testpiecestock.cpp$(PreprocessSuffix) "testpiecestock.cpp"
 
 $(IntermediateDirectory)/testplayer.cpp$(ObjectSuffix): testplayer.cpp $(IntermediateDirectory)/testplayer.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/Users/Kaendan/Documents/Code/Master/S2/PJI/pji_full_metal_planete/tests/testplayer.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/testplayer.cpp$(ObjectSuffix) $(IncludePath)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/Users/Kaendan/Documents/Code/Master/S2/PJI/FMP/tests/testplayer.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/testplayer.cpp$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/testplayer.cpp$(DependSuffix): testplayer.cpp
 	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/testplayer.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/testplayer.cpp$(DependSuffix) -MM "testplayer.cpp"
 
@@ -156,7 +156,7 @@ $(IntermediateDirectory)/testplayer.cpp$(PreprocessSuffix): testplayer.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/testplayer.cpp$(PreprocessSuffix) "testplayer.cpp"
 
 $(IntermediateDirectory)/testContainers.cpp$(ObjectSuffix): testContainers.cpp $(IntermediateDirectory)/testContainers.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/Users/Kaendan/Documents/Code/Master/S2/PJI/pji_full_metal_planete/tests/testContainers.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/testContainers.cpp$(ObjectSuffix) $(IncludePath)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/Users/Kaendan/Documents/Code/Master/S2/PJI/FMP/tests/testContainers.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/testContainers.cpp$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/testContainers.cpp$(DependSuffix): testContainers.cpp
 	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/testContainers.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/testContainers.cpp$(DependSuffix) -MM "testContainers.cpp"
 

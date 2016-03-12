@@ -96,18 +96,18 @@ int main()
                 sf::Vector2f vector = grid.PixToCell(event.mouseButton.x, event.mouseButton.y);
                 std::shared_ptr<Cell> cell = hexagrid.getCell(vector.x, vector.y);
                 if(selectedPiece != nullptr) {
-                    sf::ConvexShape& sprite = grid.getHexagon(selectedPiece->getCell())->getSprite();
-                    sprite.setOutlineColor(sf::Color::Black);
-                    sprite.setOutlineThickness(-Hexagon::SIZE / 25);
+                    sf::ConvexShape& sprite_hexagon = grid.getHexagon(selectedPiece->getCell())->getSprite();
+                    sprite_hexagon.setOutlineColor(sf::Color::Black);
+                    sprite_hexagon.setOutlineThickness(-Hexagon::SIZE / 25);
 
                     // When we click on a cell: Move the selected piece to the cell
                     player.move(selectedPiece, cell, game.getGameState().getTide());
                     selectedPiece = nullptr;
                 } else if(cell->isOccupied()) {
                     selectedPiece = cell->getPiece();
-                    sf::ConvexShape& sprite = grid.getHexagon(cell)->getSprite();
-                    sprite.setOutlineColor(sf::Color(0, 128, 128));
-                    sprite.setOutlineThickness(-Hexagon::SIZE / 10);
+                    sf::ConvexShape& sprite_hexagon = grid.getHexagon(cell)->getSprite();
+                    sprite_hexagon.setOutlineColor(sf::Color(0, 128, 128));
+                    sprite_hexagon.setOutlineThickness(-Hexagon::SIZE / 10);
                 }
             } break;
             default:

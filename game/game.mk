@@ -5,15 +5,15 @@
 ## Debug
 ProjectName            :=game
 ConfigurationName      :=Debug
-WorkspacePath          := "/Users/Kaendan/Documents/Code/Master/S2/PJI/pji_full_metal_planete"
-ProjectPath            := "/Users/Kaendan/Documents/Code/Master/S2/PJI/pji_full_metal_planete/game"
+WorkspacePath          := "/Users/Kaendan/Documents/Code/Master/S2/PJI/FMP"
+ProjectPath            := "/Users/Kaendan/Documents/Code/Master/S2/PJI/FMP/game"
 IntermediateDirectory  :=./Debug
 OutDir                 := $(IntermediateDirectory)
 CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=Tristan Camus
-Date                   :=11/03/2016
+Date                   :=12/03/2016
 CodeLitePath           :="/Users/Kaendan/Library/Application Support/codelite"
 LinkerName             :=/usr/bin/g++
 SharedObjectLinkerName :=/usr/bin/g++ -dynamiclib -fPIC
@@ -99,7 +99,7 @@ PreBuild:
 ## Objects
 ##
 $(IntermediateDirectory)/main.cpp$(ObjectSuffix): main.cpp $(IntermediateDirectory)/main.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/Users/Kaendan/Documents/Code/Master/S2/PJI/pji_full_metal_planete/game/main.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IncludePath)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/Users/Kaendan/Documents/Code/Master/S2/PJI/FMP/game/main.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/main.cpp$(DependSuffix): main.cpp
 	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/main.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/main.cpp$(DependSuffix) -MM "main.cpp"
 
