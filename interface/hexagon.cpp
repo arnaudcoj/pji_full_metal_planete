@@ -18,7 +18,7 @@ Hexagon::Hexagon(std::shared_ptr<Cell> cell)
     initSprite();
 }
 
-sf::Vector2f Hexagon::CellToPix(int xCell, int yCell) const
+sf::Vector2f Hexagon::CellToPix(int xCell, int yCell)
 {
     float x;
     float y;
@@ -56,7 +56,8 @@ void Hexagon::initSprite()
     m_sprite.setOutlineThickness(-SIZE / 25);
 }
 
-sf::ConvexShape& Hexagon::getSprite() {
+sf::ConvexShape& Hexagon::getSprite()
+{
     return m_sprite;
 }
 

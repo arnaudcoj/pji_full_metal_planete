@@ -8,6 +8,8 @@
 #include <iostream>
 #include "pawns.h"
 
+#include <cmath>
+
 using namespace std;
 
 int main()
@@ -51,6 +53,9 @@ int main()
     }
 
     sf::Clock clock;
+    
+    int angle = 0;
+    bool rotation = false;
 
     // Game loop
     while(window.isOpen()) {
@@ -95,10 +100,45 @@ int main()
             case sf::Event::MouseButtonReleased: {
                 sf::Vector2f vector = grid.PixToCell(event.mouseButton.x, event.mouseButton.y);
                 std::shared_ptr<Cell> cell = hexagrid.getCell(vector.x, vector.y);
+
                 if(selectedPiece != nullptr) {
                     sf::ConvexShape& sprite_hexagon = grid.getHexagon(selectedPiece->getCell())->getSprite();
                     sprite_hexagon.setOutlineColor(sf::Color::Black);
                     sprite_hexagon.setOutlineThickness(-Hexagon::SIZE / 25);
+
+                    sf::Sprite& sprite_pawn = pawns.getPawn(selectedPiece)->getSprite();
+                    float angle;
+
+                    sf::Vector2f v1(
+                        Hexagon::CellToPix(selectedPiece->getCell()->getX(), selectedPiece->getCell()->getY()));
+                    sf::Vector2f v2(Hexagon::CellToPix(cell->getX(), cell->getY()));
+                    
+                    if(v1.x == v2.x && v1.y == v2.y) {
+                        angle = sprite_pawn.getRotation();
+                    } else {
+
+                        float distance = sqrt(pow((v2.x - v1.x), 2) + pow((v2.y - v1.y), 2));
+
+                        int alphaX = 1;
+                        int alphaY;
+
+                        if(v1.x == v2.x) {
+                            alphaY = (v1.y > v2.y) ? 0 : 180;
+                        } else if(v1.x < v2.x) {
+                            alphaY = (v1.y > v2.y) ? 60 : 120;
+                        } else {
+                            alphaY = (v1.y > v2.y) ? 300 : 240;
+                        }
+
+                        angle = alphaY * alphaX;
+                    }
+
+                    std::cout << angle << std::endl;
+
+                    while(sprite_pawn.getRotation() != angle) {
+                        std::cout << sprite_pawn.getRotation() << std::endl;
+                        sprite_pawn.rotate(-1);
+                    }
 
                     // When we click on a cell: Move the selected piece to the cell
                     player.move(selectedPiece, cell, game.getGameState().getTide());
@@ -116,6 +156,9 @@ int main()
         }
 
         // Update frame
+        /*if(rotation && sprite_pawn.getRotation() != angle) {            
+            sprite_pawn.rotate(-1);
+        }*/
         grid.update();
         pawns.update(deltaTime);
 

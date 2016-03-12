@@ -23,10 +23,10 @@ public:
     sf::ConvexShape& getSprite();
     void update();
     void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+    static sf::Vector2f CellToPix(int xCell, int yCell);
 
 private:
     void initSprite();
-    sf::Vector2f CellToPix(int xCell, int yCell) const;
 };
 
 #endif // HEXAGON_H
