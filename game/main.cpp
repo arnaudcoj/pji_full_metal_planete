@@ -54,7 +54,7 @@ int main()
 
     sf::Clock clock;
 
-    std::shared_ptr<Cell> cell = nullptr;
+    std::shared_ptr<Cell> destination = nullptr;
     bool rotating = false;
     float angle = 0;
     int direction = 0;
@@ -104,9 +104,9 @@ int main()
                 break;
             case sf::Event::MouseButtonReleased: {
                 sf::Vector2f vector = grid.PixToCell(event.mouseButton.x, event.mouseButton.y);
-                cell = hexagrid.getCell(vector.x, vector.y);
+                std::shared_ptr<Cell> cell = hexagrid.getCell(vector.x, vector.y);
 
-                if(selectedPiece != nullptr) {
+                if(selectedPiece != nullptr && !rotating && !moving) {
                     sf::ConvexShape& sprite_hexagon = grid.getHexagon(selectedPiece->getCell())->getSprite();
                     sprite_hexagon.setOutlineColor(sf::Color::Black);
                     sprite_hexagon.setOutlineThickness(-Hexagon::SIZE / 25);
@@ -147,8 +147,9 @@ int main()
                         }
                     }
 
+                    destination = cell;
                     rotating = true;
-                } else if(cell->isOccupied() && !rotating) {
+                } else if(cell->isOccupied() && !rotating && !moving) {
                     selectedPiece = cell->getPiece();
                     sf::ConvexShape& sprite_hexagon = grid.getHexagon(cell)->getSprite();
                     sprite_hexagon.setOutlineColor(sf::Color(0, 128, 128));
@@ -175,9 +176,9 @@ int main()
                 moving = false;
                 progress = 0;
                 sprite_pawn.setPosition(0, 0);
-                
+
                 // Move the selected piece to the cell
-                player.move(selectedPiece, cell, game.getGameState().getTide());
+                player.move(selectedPiece, destination, game.getGameState().getTide());
                 selectedPiece = nullptr;
             }
         }
