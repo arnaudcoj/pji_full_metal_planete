@@ -7,7 +7,7 @@ Pawn::Pawn(std::shared_ptr<Piece> const& piece)
     , m_animator(m_sprite)
 {
     m_sprite.setOrigin(m_size.x / 2, m_size.y / 2);
-    m_sprite.setScale(2.5, 2.5);
+    m_sprite.setScale(3, 3);
 
     auto& animation = m_animator.CreateAnimation("tank", "tank", sf::seconds(0.2), true);
     animation.AddFrames(sf::Vector2i(0, 0), m_size, 2);

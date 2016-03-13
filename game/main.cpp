@@ -60,6 +60,7 @@ int main()
     int direction = 0;
     bool moving = false;
     float distance;
+    float progress = 0;
 
     // Game loop
     while(window.isOpen()) {
@@ -129,7 +130,7 @@ int main()
                         } else {
                             angle = (v1.y > v2.y) ? 300 : 240;
                         }
-                        
+
                         if(sprite_pawn.getRotation() < 180) {
                             if(angle > sprite_pawn.getRotation() && angle <= sprite_pawn.getRotation() + 180) {
                                 direction = 1;
@@ -137,7 +138,8 @@ int main()
                                 direction = -1;
                             }
                         } else {
-                            if(angle > (int)(sprite_pawn.getRotation()) % 180 && angle <= (int)(sprite_pawn.getRotation()) % 180 + 180) {
+                            if(angle > (int)(sprite_pawn.getRotation()) % 180 &&
+                                angle <= (int)(sprite_pawn.getRotation()) % 180 + 180) {
                                 direction = -1;
                             } else {
                                 direction = 1;
@@ -165,6 +167,15 @@ int main()
                 sprite_pawn.rotate(direction);
             } else if(rotating) {
                 rotating = false;
+                moving = true;
+            } else if(moving && progress < distance) {
+                sprite_pawn.move(cos((90 - angle) * M_PI / 180.0), -sin((90 - angle) * M_PI / 180.0));
+                progress++;
+            } else if(moving) {
+                moving = false;
+                progress = 0;
+                sprite_pawn.setPosition(0, 0);
+                
                 // Move the selected piece to the cell
                 player.move(selectedPiece, cell, game.getGameState().getTide());
                 selectedPiece = nullptr;
