@@ -1,12 +1,8 @@
 .PHONY: clean All
 
 All:
-	@echo "----------Building project:[ interface - Debug ]----------"
-	@cd "interface" && "$(MAKE)" -f  "interface.mk"
-	@echo "----------Building project:[ game - Debug ]----------"
-	@cd "game" && "$(MAKE)" -f  "game.mk"
+	@echo "----------Building project:[ tests - Debug ]----------"
+	@cd "tests" && "$(MAKE)" -f  "tests.mk"
 clean:
-	@echo "----------Cleaning project:[ interface - Debug ]----------"
-	@cd "interface" && "$(MAKE)" -f  "interface.mk"  clean
-	@echo "----------Cleaning project:[ game - Debug ]----------"
-	@cd "game" && "$(MAKE)" -f  "game.mk" clean
+	@echo "----------Cleaning project:[ tests - Debug ]----------"
+	@cd "tests" && "$(MAKE)" -f  "tests.mk" clean

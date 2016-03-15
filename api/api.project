@@ -30,6 +30,7 @@
       </VirtualDirectory>
       <File Name="crabpiece.cpp"/>
       <File Name="bargepiece.cpp"/>
+      <File Name="MineralPiece.cpp"/>
     </VirtualDirectory>
   </VirtualDirectory>
   <VirtualDirectory Name="include">
@@ -60,6 +61,7 @@
         <File Name="engine.h"/>
         <File Name="weapon.h"/>
       </VirtualDirectory>
+      <File Name="MineralPiece.h"/>
     </VirtualDirectory>
     <File Name="piecestock.h"/>
   </VirtualDirectory>
