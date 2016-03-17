@@ -1,3 +1,5 @@
+#include <iostream>
+#include <memory>
 #include <cell.h>
 #include <plaincell.h>
 #include <piece.h>
@@ -46,8 +48,6 @@ TEST_CASE("tests cell.move and cell.removePiece","tests if we can move a Piece a
 }
 
 TEST_CASE("tests player.useActionPoints","test if a player uses action points when he tries to move") {
-    PlainCell cell(1,2);
-    Piece piece;
     Player player;
 
     REQUIRE(player.useActionPoints());
@@ -56,4 +56,15 @@ TEST_CASE("tests player.useActionPoints","test if a player uses action points wh
     REQUIRE(player.getActionPoints() == 0);
     REQUIRE_FALSE(player.useActionPoints(1));
     REQUIRE(player.getActionPoints() == 0);
+}
+
+TEST_CASE("getAccessibleCells", "testalarach") {
+    Hexagrid grid;
+    Player player;
+    std::shared_ptr<Piece> piece = std::make_shared<TankPiece>();
+    
+    
+    for(std::shared_ptr<Cell> cell : player->getAccessibleCells(grid, Tide::MEDIUM_TIDE, piece)) {
+        std::cout << cell->ge
+    }
 }

@@ -207,6 +207,37 @@ std::list<std::shared_ptr<Cell>> Hexagrid::getCellsInRange(std::shared_ptr<Cell>
     return cellsInRange;
 }
 
+std::list<std::shared_ptr<Cell> > Hexagrid::getDirectNeighbours(std::shared_ptr<Cell> origin)
+{
+  std::list<std::shared_ptr<Cell> > neighbours;
+  
+  if(getBottomCell(origin) != nullptr) {
+    neighbours.push_back(getBottomCell(origin));
+  }
+    
+  if(getLeftBottomCell(origin) != nullptr) {
+    neighbours.push_back(getLeftBottomCell(origin));
+  }
+    
+  if(getLeftTopCell(origin) != nullptr) {
+    neighbours.push_back(getLeftTopCell(origin));
+  }
+    
+  if(getTopCell(origin) != nullptr) {
+    neighbours.push_back(getTopCell(origin));
+  }
+  
+  if(getRightTopCell(origin) != nullptr) {
+    neighbours.push_back(getRightTopCell(origin));
+  }
+    
+  if(getRightBottomCell(origin) != nullptr) {
+    neighbours.push_back(getRightBottomCell(origin));
+  }
+    
+    return neighbours;
+}
+
 std::shared_ptr<Cell> createCell(int i, int j, bool halfCell, int type, int area) {
   switch(type) {
   case 0:
@@ -224,4 +255,3 @@ std::shared_ptr<Cell> createCell(int i, int j, bool halfCell, int type, int area
       throw std::logic_error("No cell associated to value");
   }
 }
-
