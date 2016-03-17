@@ -1,7 +1,7 @@
 #include "player.h"
 
-Player::Player()
-    : m_action_points(100)
+Player::Player(int actionPoints)
+    : m_action_points(actionPoints)
 {
 }
 
@@ -51,48 +51,3 @@ bool Player::removePiece(std::shared_ptr<Piece> piece)
     return false;
 }
 
-std::list<std::shared_ptr<Cell> > Player::getAccessibleCells(Hexagrid& grid, Tide tide, std::shared_ptr<Piece> piece)
-{
-    std::vector<std::vector<bool> > alreadyVisited(grid.getWidth());
-    for(int i = 0; i < grid.getWidth(); i++) {
-        alreadyVisited[i] = std::vector<bool>(grid.getHeight(), false);
-    }
-    
-    std::list<std::shared_ptr<Cell> > cells;
-    
-    return getAccessibleCells_rec(
-        grid, tide, piece, cells, piece->getCell(), alreadyVisited, m_action_points);
-}
-
-std::list<std::shared_ptr<Cell> > Player::getAccessibleCells_rec(Hexagrid& grid,
-    Tide tide,
-    std::shared_ptr<Piece> piece,
-    std::list<std::shared_ptr<Cell> >& cells,
-    std::shared_ptr<Cell> currentCell,
-    std::vector<std::vector<bool> > alreadyVisited,
-    int actionPoints)
-{
-    if(actionPoints > 0) {
-        for(std::shared_ptr<Cell> neighbour : grid.getDirectNeighbours(currentCell)) {
-            sf::Vector2i coord = neighbour->getCoord();
-            if(neighbour->isPracticable(piece, tide) && !alreadyVisited[coord.x][coord.y]) {
-                alreadyVisited[coord.x][coord.y] = true;
-                cells.push_back(neighbour);
-                getAccessibleCells_rec(grid, tide, piece, cells, neighbour, alreadyVisited, actionPoints -1);
-            }
-        }
-    }
-
-    return cells;
-}
-
-/*
-std::list<std::shared_ptr<Cell> > Player::getAccessibleCells(Hexagrid& grid, Tide tide, std::shared_ptr<Piece> piece)
-{
-  std::list<std::shared_ptr<Cell> > list = grid.getCellsInRange(piece->getCell(), m_action_points);
-
-  list.remove_if([&](std::shared_ptr<Cell> cell) -> bool { return !cell->isPracticable(piece, tide);  });
-
-  return list;
-  }
-*/

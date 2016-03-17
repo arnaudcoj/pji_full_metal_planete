@@ -1,8 +1,16 @@
 #include <catch.hpp>
+#include <stack>
 #include <hexagrid.h>
 #include <cell.h>
+#include <piece.h>
+#include <tankpiece.h>
+#include <player.h>
+#include <tide.h>
+#include <algorithm>
 
 #include <string>
+
+#include <iostream>
 
 /* Test of constructors*/
 
@@ -183,4 +191,65 @@ TEST_CASE("tests construction from yaml file", "tests if we can create a grid fr
     REQUIRE(grid.getCell(2,3)->isHalfCell());
     REQUIRE_FALSE(grid.getCell(1,3)->isHalfCell());
 
+}
+
+TEST_CASE("getAccessibleCells", "checks if cells are accessibles or not according for the piece, with an amount of 2 action points") {
+    YAML::Node primes = YAML::Load("{name : terrain1, cells : ["
+                                   "[[0,0], [0,10], [0,20], [0,30]],"
+                                   "[[0,1], [0,11], [0,21], [0,31]],"
+                                   "[[0,2], [2,12], [0,22], [0,32]],"
+                                   "[[0,3], [0,13], [0,23], [0,33]]]}");
+
+    Hexagrid grid(primes);
+    
+    Player player(2);
+    std::shared_ptr<Piece> piece = std::make_shared<TankPiece>();
+    player.move(piece, grid.getCell(1, 1), Tide::MEDIUM_TIDE);
+    
+    std::unordered_set<std::shared_ptr<Cell> > accessibleCells = grid.getAccessibleCells(
+    player, Tide::MEDIUM_TIDE, piece);
+    
+    
+    //il doit y avoir 20 21 et 22
+    REQUIRE(accessibleCells.size() == 3);
+    REQUIRE(accessibleCells.count(grid.getCell(2,0)));
+    REQUIRE(accessibleCells.count(grid.getCell(2,1)));
+    REQUIRE(accessibleCells.count(grid.getCell(2,2)));
+    
+    REQUIRE_FALSE(accessibleCells.count(grid.getCell(1,1)));
+    REQUIRE_FALSE(accessibleCells.count(grid.getCell(1,2)));
+    REQUIRE_FALSE(accessibleCells.count(grid.getCell(1,3)));
+    
+} 
+
+TEST_CASE("tests A*pathfinding", "tests if the piece avoids the obstacle and gets to the destination") {
+    YAML::Node primes = YAML::Load("{name : terrain1, cells : ["
+                                   "[[0,0], [0,10], [0,20], [0,30], [0,40], [0,50]],"
+                                   "[[0,1], [0,11], [0,21], [0,31], [0,41], [0,51]],"
+                                   "[[0,2], [0,12], [0,22], [2,32], [0,42], [0,52]],"
+                                   "[[0,3], [0,13], [0,23], [2,33], [0,43], [0,53]],"
+                                   "[[0,4], [0,14], [0,24], [2,34], [0,44], [0,54]],"
+                                   "[[0,5], [0,15], [0,25], [2,35], [0,45], [0,55]]"
+                                   "]}");
+
+    Hexagrid grid(primes);
+    std::shared_ptr<Piece> piece = std::make_shared<TankPiece>();
+    Player player;
+    player.move(piece, grid.getCell(1,3), Tide::MEDIUM_TIDE);
+    
+    std::stack<std::shared_ptr<Cell> > path = grid.getPath_Astar(piece->getCell(), grid.getCell(4,3), piece, Tide::MEDIUM_TIDE);
+    
+    REQUIRE(path.top()->getArea() == 13);
+        path.pop();
+    REQUIRE(path.top()->getArea() == 22);
+        path.pop();
+    REQUIRE(path.top()->getArea() == 21);
+        path.pop();
+    REQUIRE(path.top()->getArea() == 31);
+        path.pop();
+    REQUIRE(path.top()->getArea() == 41);
+        path.pop();
+    REQUIRE(path.top()->getArea() == 42);
+        path.pop();
+    REQUIRE(path.top()->getArea() == 43);
 }
