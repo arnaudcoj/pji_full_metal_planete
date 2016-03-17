@@ -8,9 +8,13 @@
 
 class PontoonPiece : public Piece
 {
+private:
+    std::string m_type = "pontoon";
+
 public:
     PontoonPiece();
     virtual bool canBeCarried(Container::Type containerType) const;
+    virtual std::string getType();
 };
 
 #endif // PONTOONPIECE_H

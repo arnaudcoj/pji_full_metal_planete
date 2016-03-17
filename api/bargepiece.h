@@ -8,8 +8,12 @@
 
 class BargePiece : public Piece
 {
+private:
+    std::string m_type = "barge";
+
 public:
     BargePiece();
+    virtual std::string getType();
 };
 
 #endif // BARGEPIECE_H

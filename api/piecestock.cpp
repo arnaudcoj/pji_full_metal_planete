@@ -1,9 +1,8 @@
 #include "piecestock.h"
 
-PieceStock::PieceStock(int nbPieces) : mPieces()
+PieceStock::PieceStock() : mPieces()
 {
-    for(int i = 0; i < nbPieces; i++)
-        mPieces.push_back(std::make_shared<Piece>());
+    
 }
 
 std::shared_ptr<Piece> PieceStock::takePiece() {

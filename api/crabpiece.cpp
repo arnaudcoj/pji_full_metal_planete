@@ -14,3 +14,7 @@ bool CrabPiece::canBeCarried(Container::Type containerType) const
             return false;
     }
 }
+
+std::string CrabPiece::getType() {
+    return m_type;
+}

@@ -14,7 +14,7 @@ class PieceStock
     std::vector<std::shared_ptr<Piece>> mPieces;
 
 public:
-    PieceStock(int nbPieces = 0);
+    PieceStock();
 
     std::shared_ptr<Piece> takePiece();
     std::shared_ptr<Piece> getPiece(int i) const;

@@ -4,3 +4,7 @@ BargePiece::BargePiece() : Piece(Engine::Type::MARINE_ENGINE, Weapon::Type::NO_W
 {
 
 }
+
+std::string BargePiece::getType() {
+    return m_type;
+}

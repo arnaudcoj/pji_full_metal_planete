@@ -14,6 +14,7 @@ public:
     Player();
     int getActionPoints();
     bool useActionPoints(int points = 1);
+    bool canMove(std::shared_ptr<Piece> piece, std::shared_ptr<Cell> cell, Tide tide);
     bool move(std::shared_ptr<Piece> piece, std::shared_ptr<Cell> cell, Tide tide);
     bool removePiece(std::shared_ptr<Piece> piece);
 };

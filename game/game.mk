@@ -13,7 +13,7 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=Tristan Camus
-Date                   :=13/03/2016
+Date                   :=17/03/2016
 CodeLitePath           :="/Users/Kaendan/Library/Application Support/codelite"
 LinkerName             :=/usr/bin/g++
 SharedObjectLinkerName :=/usr/bin/g++ -dynamiclib -fPIC
@@ -72,11 +72,16 @@ Objects=$(Objects0)
 .PHONY: all clean PreBuild PrePreBuild PostBuild MakeIntermediateDirs
 all: $(OutputFile)
 
-$(OutputFile): $(IntermediateDirectory)/.d "../.build-debug/interface" $(Objects) 
+$(OutputFile): $(IntermediateDirectory)/.d "../.build-debug/api" "../.build-debug/interface" $(Objects) 
 	@$(MakeDirCommand) $(@D)
 	@echo "" > $(IntermediateDirectory)/.d
 	@echo $(Objects0)  > $(ObjectsFileList)
 	$(LinkerName) $(OutputSwitch)$(OutputFile) $(Objects) $(LibPath) $(Libs) $(LinkOptions)
+
+"../.build-debug/api":
+	@$(MakeDirCommand) "../.build-debug"
+	@echo stam > "../.build-debug/api"
+
 
 "../.build-debug/interface":
 	@$(MakeDirCommand) "../.build-debug"

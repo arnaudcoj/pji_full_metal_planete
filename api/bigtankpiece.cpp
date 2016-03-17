@@ -16,3 +16,7 @@ bool BigTankPiece::canBeCarried(Container::Type containerType) const
             return false;
     }
 }
+
+std::string BigTankPiece::getType() {
+    return m_type;
+}
