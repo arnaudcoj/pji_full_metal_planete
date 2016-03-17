@@ -20,6 +20,7 @@ public:
     bool canCarry(std::shared_ptr<Piece> piece) const;
     bool takePiece(std::shared_ptr<Piece> piece);
     bool removePiece(std::shared_ptr<Piece> piece);
+    unsigned getNbCarriedPieces() const;
     Type getType() const;
 
 private:

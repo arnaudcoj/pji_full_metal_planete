@@ -1,6 +1,6 @@
-#include "Animator.h"
+#include "animator.h"
 
-#include "AssetManager.h"
+#include "assetmanager.h"
 
 Animator::Animator(sf::Sprite& sprite)
 

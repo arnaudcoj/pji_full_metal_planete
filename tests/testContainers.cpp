@@ -56,7 +56,6 @@ TEST_CASE("removePiece", "tests if we can remove a piece or not depending on the
 }
 
 //INCORRECT car retourne toujours 2 car contient les nullptr
-/*
 TEST_CASE("getCarriedPieces", "tests if getCarriedPieces returns the pieces stored in the container") {
     Container cl_c(Container::Type::CLASSIC_CONTAINER);
     
@@ -64,22 +63,21 @@ TEST_CASE("getCarriedPieces", "tests if getCarriedPieces returns the pieces stor
     std::shared_ptr<Piece> p2 = std::make_shared<PontoonPiece>();
     std::shared_ptr<Piece> p3 = std::make_shared<PontoonPiece>();
     
-    REQUIRE(cl_c.getCarriedPieces().size() == 0);
+    REQUIRE(cl_c.getNbCarriedPieces() == 0);
     
     cl_c.takePiece(p1);
     
-    REQUIRE(cl_c.getCarriedPieces().size() == 1);
+    REQUIRE(cl_c.getNbCarriedPieces() == 1);
        
     cl_c.takePiece(p2);
   
-    REQUIRE(cl_c.getCarriedPieces().size() == 2);
+    REQUIRE(cl_c.getNbCarriedPieces() == 2);
     
     cl_c.removePiece(p2);
     
-    REQUIRE(cl_c.getCarriedPieces().size() == 1);
+    REQUIRE(cl_c.getNbCarriedPieces() == 1);
     
 }
-*/
 
 TEST_CASE("test getWeight", "tests if the weight returned is correct according to the shipment of the container") {
     Container cl_c(Container::Type::CLASSIC_CONTAINER);

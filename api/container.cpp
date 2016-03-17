@@ -93,3 +93,11 @@ bool Container::removePiece(std::shared_ptr<Piece> piece)
     m_carriedPieces[index] = nullptr;
     return true;
 }
+
+unsigned Container::getNbCarriedPieces() const {
+  unsigned cpt = 0;
+  for(std::shared_ptr<Piece> piece : m_carriedPieces)
+    if(piece != nullptr)
+      cpt++;
+  return cpt;
+}
