@@ -3,14 +3,39 @@
 Pawn::Pawn(std::shared_ptr<Piece> const& piece)
     : m_piece(piece)
     , m_sprite()
-    , m_size(30, 38)
+    , m_size(0, 0)
     , m_animator(m_sprite)
 {
-    m_sprite.setOrigin(m_size.x / 2, m_size.y / 2);
-    m_sprite.setScale(3, 3);
+    int nbSprites = 1;
 
-    auto& animation = m_animator.CreateAnimation("tank", "tank", sf::seconds(0.2), true);
-    animation.AddFrames(sf::Vector2i(0, 0), m_size, 2);
+    if(m_piece->getType() == "tank") {
+        m_size = sf::Vector2i(30, 38);
+        nbSprites = 2;
+    } else if(m_piece->getType() == "big_tank") {
+        m_size = sf::Vector2i(32, 48);
+        nbSprites = 1;
+    } else if(m_piece->getType() == "boat") {
+        m_size = sf::Vector2i(27, 52);
+        nbSprites = 1;
+    } else if(m_piece->getType() == "crab") {
+        m_size = sf::Vector2i(56, 54);
+        nbSprites = 1;
+    } else if(m_piece->getType() == "barge") {
+        m_size = sf::Vector2i(40, 101);
+        nbSprites = 1;
+    } else if(m_piece->getType() == "pontoon") {
+        m_size = sf::Vector2i(32, 52);
+        nbSprites = 1;
+    } else if(m_piece->getType() == "weather_layer") {
+        m_size = sf::Vector2i(56, 56);
+        nbSprites = 1;
+    }
+
+    m_sprite.setOrigin(m_size.x / 2, m_size.y / 2);
+    m_sprite.setScale(1.5, 1.5);
+
+    auto& animation = m_animator.CreateAnimation(m_piece->getType(), m_piece->getType(), sf::seconds(0.2), true);
+    animation.AddFrames(sf::Vector2i(0, 0), m_size, nbSprites);
 }
 
 sf::Vector2f Pawn::PawnToPix(int xCell, int yCell) const
@@ -32,7 +57,8 @@ sf::Vector2f Pawn::PawnToPix(int xCell, int yCell) const
     return sf::Vector2f(x, y);
 }
 
-sf::Sprite& Pawn::getSprite() {
+sf::Sprite& Pawn::getSprite()
+{
     return m_sprite;
 }
 
@@ -45,7 +71,9 @@ void Pawn::update(sf::Time const& deltaTime)
 // draws the pion
 void Pawn::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-    states.transform.translate(PawnToPix(m_piece->getCell()->getX(), m_piece->getCell()->getY()));
+    if(m_piece->getCell() != nullptr) {
+        states.transform.translate(PawnToPix(m_piece->getCell()->getX(), m_piece->getCell()->getY()));
 
-    target.draw(m_sprite, states);
+        target.draw(m_sprite, states);
+    }
 }

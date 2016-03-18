@@ -29,6 +29,7 @@ public:
     int getWeight();
     
     virtual bool canBeCarried(Container::Type containerType) const;
+    virtual std::string getType() = 0;
 
     Engine& getEngine();
     Weapon& getWeapon();

@@ -13,3 +13,7 @@ bool WeatherLayerPiece::canBeCarried(Container::Type containerType) const
             return false;
     }
 }
+
+std::string WeatherLayerPiece::getType() {
+    return m_type;
+}

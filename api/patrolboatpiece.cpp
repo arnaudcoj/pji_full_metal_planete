@@ -4,3 +4,7 @@ PatrolBoatPiece::PatrolBoatPiece() : Piece(Engine::Type::MARINE_ENGINE, Weapon::
 {
 
 }
+
+std::string PatrolBoatPiece::getType() {
+    return m_type;
+}

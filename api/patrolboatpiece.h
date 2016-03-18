@@ -8,8 +8,12 @@
 
 class PatrolBoatPiece : public Piece
 {
+private:
+    std::string m_type = "boat";
+
 public:
     PatrolBoatPiece();
+    virtual std::string getType();
 };
 
 #endif // PATROLBOATPIECE_H

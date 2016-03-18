@@ -9,9 +9,6 @@ Game::Game()
 {
     m_players.resize(1);
     m_players[0] = Player();
-    
-    m_pieceStock.addPiece(std::make_shared<Piece>());
-    m_pieceStock.addPiece(std::make_shared<Piece>());
 }
 
 Game::Game(const std::string& gridFile)
@@ -19,8 +16,13 @@ Game::Game(const std::string& gridFile)
     , m_gameState()
     , m_pieceStock()
 {
-    m_pieceStock.addPiece(std::make_shared<Piece>());
-    m_pieceStock.addPiece(std::make_shared<Piece>());
+    m_pieceStock.addPiece(std::make_shared<TankPiece>());
+    m_pieceStock.addPiece(std::make_shared<BigTankPiece>());
+    m_pieceStock.addPiece(std::make_shared<BargePiece>());
+    m_pieceStock.addPiece(std::make_shared<CrabPiece>());
+    m_pieceStock.addPiece(std::make_shared<PatrolBoatPiece>());
+    m_pieceStock.addPiece(std::make_shared<PontoonPiece>());
+    m_pieceStock.addPiece(std::make_shared<WeatherLayerPiece>());
 }
 
 Game::Game(Hexagrid grid)
@@ -28,8 +30,6 @@ Game::Game(Hexagrid grid)
     , m_gameState()
     , m_pieceStock()
 {
-    m_pieceStock.addPiece(std::make_shared<Piece>());
-    m_pieceStock.addPiece(std::make_shared<Piece>());
 }
 
 Hexagrid& Game::getHexagrid()
