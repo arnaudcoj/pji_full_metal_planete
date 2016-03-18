@@ -62,6 +62,8 @@ int main()
     std::shared_ptr<Cell> destination_cell = nullptr;
     std::stack<std::shared_ptr<Cell> > path;
 
+    bool travelling = false;
+
     bool rotating = false;
     float angle = 0;
     int direction = 0;
@@ -126,48 +128,15 @@ int main()
                         path = game.getHexagrid().getPath_Astar(
                             selectedPiece->getCell(), cell, selectedPiece, game.getGameState().getTide());
 
+                        path.pop();
+
                         sf::Sprite& sprite_pawn = pawns.getPawn(selectedPiece)->getSprite();
-
-                        sf::Vector2f v1(
-                            Hexagon::CellToPix(selectedPiece->getCell()->getX(), selectedPiece->getCell()->getY()));
-                        sf::Vector2f v2(Hexagon::CellToPix(cell->getX(), cell->getY()));
-
-                        if(v1.x == v2.x && v1.y == v2.y) {
-                            angle = sprite_pawn.getRotation();
-                        } else {
-
-                            distance = sqrt(pow((v2.x - v1.x), 2) + pow((v2.y - v1.y), 2));
-
-                            if(v1.x == v2.x) {
-                                angle = (v1.y > v2.y) ? 0 : 180;
-                            } else if(v1.x < v2.x) {
-                                angle = (v1.y > v2.y) ? 60 : 120;
-                            } else {
-                                angle = (v1.y > v2.y) ? 300 : 240;
-                            }
-
-                            if(sprite_pawn.getRotation() < 180) {
-                                if(angle > sprite_pawn.getRotation() && angle <= sprite_pawn.getRotation() + 180) {
-                                    direction = 1;
-                                } else {
-                                    direction = -1;
-                                }
-                            } else {
-                                if(angle > (int)(sprite_pawn.getRotation()) % 180 &&
-                                    angle <= (int)(sprite_pawn.getRotation()) % 180 + 180) {
-                                    direction = -1;
-                                } else {
-                                    direction = 1;
-                                }
-                            }
-                        }
 
                         sf::ConvexShape& sprite_hexagon = grid.getHexagon(previous_cell)->getSprite();
                         sprite_hexagon.setOutlineColor(sf::Color::Black);
                         sprite_hexagon.setOutlineThickness(-Hexagon::SIZE / 25);
 
-                        destination_cell = cell;
-                        rotating = true;
+                        travelling = true;
                     } else {
                         selectedPiece = nullptr;
                         sf::ConvexShape& sprite_destination = grid.getHexagon(cell)->getSprite();
@@ -216,6 +185,47 @@ int main()
         }
 
         // Update frame
+
+        if(travelling && !rotating && !moving) {
+            sf::Vector2f v1(Hexagon::CellToPix(selectedPiece->getCell()->getX(), selectedPiece->getCell()->getY()));
+            sf::Vector2f v2(Hexagon::CellToPix(path.top()->getX(), path.top()->getY()));
+
+            sf::Sprite& sprite_pawn = pawns.getPawn(selectedPiece)->getSprite();
+
+            if(v1.x == v2.x && v1.y == v2.y) {
+                angle = sprite_pawn.getRotation();
+            } else {
+
+                distance = sqrt(pow((v2.x - v1.x), 2) + pow((v2.y - v1.y), 2));
+
+                if(v1.x == v2.x) {
+                    angle = (v1.y > v2.y) ? 0 : 180;
+                } else if(v1.x < v2.x) {
+                    angle = (v1.y > v2.y) ? 60 : 120;
+                } else {
+                    angle = (v1.y > v2.y) ? 300 : 240;
+                }
+
+                if(sprite_pawn.getRotation() < 180) {
+                    if(angle > sprite_pawn.getRotation() && angle <= sprite_pawn.getRotation() + 180) {
+                        direction = 1;
+                    } else {
+                        direction = -1;
+                    }
+                } else {
+                    if(angle > (int)(sprite_pawn.getRotation()) % 180 &&
+                        angle <= (int)(sprite_pawn.getRotation()) % 180 + 180) {
+                        direction = -1;
+                    } else {
+                        direction = 1;
+                    }
+                }
+            }
+
+            destination_cell = path.top();
+            rotating = true;
+        }
+
         if(selectedPiece != nullptr) {
             sf::Sprite& sprite_pawn = pawns.getPawn(selectedPiece)->getSprite();
             if(rotating && sprite_pawn.getRotation() != angle) {
@@ -229,12 +239,18 @@ int main()
             } else if(moving) {
                 moving = false;
                 progress = 0;
-                sprite_pawn.setPosition(0, 0);
+                distance = 0;
 
                 // Move the selected piece to the cell
-                player.move(selectedPiece, destination_cell, game.getGameState().getTide());
-                selectedPiece = nullptr;
-                distance = 0;
+                player.move(selectedPiece, path.top(), game.getGameState().getTide());
+                sprite_pawn.setPosition(0, 0);
+                
+                path.pop();
+
+                if(path.empty()) {
+                    selectedPiece = nullptr;
+                    travelling = false;
+                }
             }
         }
         grid.update();
