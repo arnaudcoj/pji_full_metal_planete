@@ -112,9 +112,6 @@ int main()
             case sf::Event::MouseButtonReleased: {
                 sf::Vector2f vector = grid.PixToCell(event.mouseButton.x, event.mouseButton.y);
                 std::shared_ptr<Cell> cell = game.getHexagrid().getCell(vector.x, vector.y);
-                
-                std::cout << vector.x << std::endl;
-                std::cout << vector.y << std::endl;
 
                 if(selectedPiece != nullptr && !rotating && !moving) {
                     sf::ConvexShape& sprite_hexagon = grid.getHexagon(selectedPiece->getCell())->getSprite();
@@ -180,7 +177,7 @@ int main()
             case sf::Event::MouseMoved: {
                 if(selectedPiece != nullptr && !rotating && !moving) {
                     sf::Vector2f vector = grid.PixToCell(event.mouseMove.x, event.mouseMove.y);
-                    // std::cout << "x: " << event.mouseMove.x << " y:" << event.mouseMove.y << std::endl;
+                    
                     if(event.mouseMove.x >= 0 && event.mouseMove.y >= 0 && event.mouseMove.x <= window.getSize().x &&
                         event.mouseMove.y <= window.getSize().y) {
                         if(previous_cell != nullptr) {

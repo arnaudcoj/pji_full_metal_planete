@@ -21,7 +21,7 @@ Pawn::Pawn(std::shared_ptr<Piece> const& piece)
         m_size = sf::Vector2i(56, 54);
         nbSprites = 1;
     } else if(m_piece->getType() == "barge") {
-        m_size = sf::Vector2i(103, 42);
+        m_size = sf::Vector2i(40, 101);
         nbSprites = 1;
     } else if(m_piece->getType() == "pontoon") {
         m_size = sf::Vector2i(32, 52);
