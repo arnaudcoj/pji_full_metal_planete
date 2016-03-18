@@ -24,8 +24,9 @@ int main()
     Pawns pawns(stock);
 
     player.move(stock.takePiece(), game.getHexagrid().getCell(1, 1), Tide::MEDIUM_TIDE);
-    //player.move(stock.takePiece(), game.getHexagrid().getCell(6, 4), Tide::MEDIUM_TIDE);
-    std::cout << stock.takePiece()->getType() << std:: endl;
+    // player.move(stock.takePiece(), game.getHexagrid().getCell(6, 4), Tide::MEDIUM_TIDE);
+    // std::cout << stock.takePiece()->getType() << std::endl;
+    stock.takePiece();
     player.move(stock.takePiece(), game.getHexagrid().getCell(5, 4), Tide::MEDIUM_TIDE);
     player.move(stock.takePiece(), game.getHexagrid().getCell(1, 3), Tide::MEDIUM_TIDE);
     player.move(stock.takePiece(), game.getHexagrid().getCell(5, 5), Tide::MEDIUM_TIDE);
@@ -59,6 +60,7 @@ int main()
 
     std::shared_ptr<Piece> selectedPiece = nullptr;
     std::shared_ptr<Cell> destination_cell = nullptr;
+    std::stack<std::shared_ptr<Cell> > path;
 
     bool rotating = false;
     float angle = 0;
@@ -113,15 +115,17 @@ int main()
             case sf::Event::MouseButtonReleased: {
                 sf::Vector2f vector = grid.PixToCell(event.mouseButton.x, event.mouseButton.y);
                 std::shared_ptr<Cell> cell = game.getHexagrid().getCell(vector.x, vector.y);
-                
-                std::cout << vector.x << " " << vector.y << std::endl; 
+
+                // std::cout << vector.x << " " << vector.y << std::endl;
 
                 if(selectedPiece != nullptr && !rotating && !moving) {
                     sf::ConvexShape& sprite_hexagon = grid.getHexagon(selectedPiece->getCell())->getSprite();
                     sprite_hexagon.setOutlineColor(sf::Color::Black);
                     sprite_hexagon.setOutlineThickness(-Hexagon::SIZE / 25);
-
                     if(player.canMove(selectedPiece, cell, game.getGameState().getTide())) {
+                        path = game.getHexagrid().getPath_Astar(
+                            selectedPiece->getCell(), cell, selectedPiece, game.getGameState().getTide());
+
                         sf::Sprite& sprite_pawn = pawns.getPawn(selectedPiece)->getSprite();
 
                         sf::Vector2f v1(
@@ -180,7 +184,7 @@ int main()
             case sf::Event::MouseMoved: {
                 if(selectedPiece != nullptr && !rotating && !moving) {
                     sf::Vector2f vector = grid.PixToCell(event.mouseMove.x, event.mouseMove.y);
-                    
+
                     if(event.mouseMove.x >= 0 && event.mouseMove.y >= 0 && event.mouseMove.x <= window.getSize().x &&
                         event.mouseMove.y <= window.getSize().y) {
                         if(previous_cell != nullptr) {
