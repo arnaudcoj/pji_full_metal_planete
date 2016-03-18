@@ -4,8 +4,8 @@
   <WorkspaceParserPaths/>
   <Project Name="api" Path="api/api.project" Active="No"/>
   <Project Name="interface" Path="interface/interface.project"/>
-  <Project Name="game" Path="game/game.project" Active="Yes"/>
-  <Project Name="tests" Path="tests/tests.project" Active="No"/>
+  <Project Name="game" Path="game/game.project" Active="No"/>
+  <Project Name="tests" Path="tests/tests.project" Active="Yes"/>
   <BuildMatrix>
     <WorkspaceConfiguration Name="Debug" Selected="yes">
       <Environment/>

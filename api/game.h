@@ -11,13 +11,13 @@
 #include "tide.h"
 #include "piecestock.h"
 
-#include "TankPiece.h"
-#include "BigTankPiece.h"
-#include "BargePiece.h"
-#include "CrabPiece.h"
-#include "PatrolBoatPiece.h"
-#include "PontoonPiece.h"
-#include "WeatherLayerPiece.h"
+#include "tankpiece.h"
+#include "bigtankpiece.h"
+#include "bargepiece.h"
+#include "crabpiece.h"
+#include "patrolboatpiece.h"
+#include "pontoonpiece.h"
+#include "weatherlayerpiece.h"
 
 //contient les informations sur l'etat du jeu
 class Game
