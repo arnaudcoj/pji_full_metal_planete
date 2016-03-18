@@ -9,7 +9,7 @@
 
 TEST_CASE("tests player.move and cell.isOccupied", "tests if we can move a Piece, if the cell is occupied when the Piece is placed and checks that we can't add more piece to the cell") {
     std::shared_ptr<Cell> cell = std::make_shared<PlainCell>(1,2);
-    std::shared_ptr<Piece> piece = std::make_shared<Piece>();
+    std::shared_ptr<Piece> piece = std::make_shared<TankPiece>();
     Player player;    
 
     REQUIRE_FALSE(cell->isOccupied());
@@ -35,7 +35,7 @@ TEST_CASE("tests player.move and cell.isOccupied", "tests if we can move a Piece
 
 TEST_CASE("tests cell.move and cell.removePiece","tests if we can move a Piece and remove it") {
     std::shared_ptr<Cell> cell = std::make_shared<PlainCell>(1,2);
-    std::shared_ptr<Piece> piece = std::make_shared<Piece>();
+    std::shared_ptr<Piece> piece = std::make_shared<TankPiece>();
     Player player;
 
     player.move(piece, cell, Tide::MEDIUM_TIDE);

@@ -13,3 +13,7 @@ bool MineralPiece::canBeCarried(Container::Type containerType) const
             return true;
     }
 }
+
+std::string MineralPiece::getType() {
+    return m_type;
+}
