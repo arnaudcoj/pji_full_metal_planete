@@ -59,8 +59,9 @@ int main()
     sf::Clock clock;
 
     std::shared_ptr<Piece> selectedPiece = nullptr;
-    std::shared_ptr<Cell> destination_cell = nullptr;
     std::stack<std::shared_ptr<Cell> > path;
+    std::unordered_set<std::shared_ptr<Cell> > accessibleCells;
+    std::shared_ptr<Cell> destination_cell = nullptr;
 
     bool travelling = false;
 
@@ -124,7 +125,8 @@ int main()
                     sf::ConvexShape& sprite_hexagon = grid.getHexagon(selectedPiece->getCell())->getSprite();
                     sprite_hexagon.setOutlineColor(sf::Color::Black);
                     sprite_hexagon.setOutlineThickness(-Hexagon::SIZE / 25);
-                    if(player.canMove(selectedPiece, cell, game.getGameState().getTide())) {
+
+                    if(accessibleCells.count(cell) == 1) {
                         path = game.getHexagrid().getPath_Astar(
                             selectedPiece->getCell(), cell, selectedPiece, game.getGameState().getTide());
 
@@ -145,6 +147,8 @@ int main()
                     }
                 } else if(cell->isOccupied() && !rotating && !moving) {
                     selectedPiece = cell->getPiece();
+                    accessibleCells =
+                        game.getHexagrid().getAccessibleCells(player, game.getGameState().getTide(), selectedPiece);
                     sf::ConvexShape& sprite_hexagon = grid.getHexagon(cell)->getSprite();
                     sprite_hexagon.setOutlineColor(sf::Color(0, 128, 128));
                     sprite_hexagon.setOutlineThickness(-Hexagon::SIZE / 10);
@@ -165,7 +169,7 @@ int main()
                         std::shared_ptr<Cell> cell = game.getHexagrid().getCell(vector.x, vector.y);
                         if(cell->getPiece() != selectedPiece) {
                             sf::ConvexShape& sprite_hexagon = grid.getHexagon(cell)->getSprite();
-                            if(player.canMove(selectedPiece, cell, game.getGameState().getTide())) {
+                            if(accessibleCells.count(cell) == 1 && player.canMove(selectedPiece, cell, game.getGameState().getTide())) {
                                 sprite_hexagon.setOutlineColor(sf::Color::Green);
                                 sprite_hexagon.setOutlineThickness(-Hexagon::SIZE / 10);
                             } else {
@@ -244,7 +248,7 @@ int main()
                 // Move the selected piece to the cell
                 player.move(selectedPiece, path.top(), game.getGameState().getTide());
                 sprite_pawn.setPosition(0, 0);
-                
+
                 path.pop();
 
                 if(path.empty()) {
