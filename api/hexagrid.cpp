@@ -264,32 +264,32 @@ Hexagrid::getDirectPracticableNeighbours(std::shared_ptr<Cell> origin, std::shar
     std::shared_ptr<Cell> tmpCell = nullptr;
 
     tmpCell = getBottomCell(origin);
-    if(tmpCell != nullptr && tmpCell->isPracticable(piece, tide)) {
+    if(tmpCell != nullptr && tmpCell->isPracticable(piece, tide) && !tmpCell->isOccupied()) {
         neighbours.push_back(tmpCell);
     }
 
     tmpCell = getLeftBottomCell(origin);
-    if(tmpCell != nullptr && tmpCell->isPracticable(piece, tide)) {
+    if(tmpCell != nullptr && tmpCell->isPracticable(piece, tide) && !tmpCell->isOccupied()) {
         neighbours.push_back(tmpCell);
     }
 
     tmpCell = getLeftTopCell(origin);
-    if(tmpCell != nullptr && tmpCell->isPracticable(piece, tide)) {
+    if(tmpCell != nullptr && tmpCell->isPracticable(piece, tide) && !tmpCell->isOccupied()) {
         neighbours.push_back(tmpCell);
     }
 
     tmpCell = getTopCell(origin);
-    if(tmpCell != nullptr && tmpCell->isPracticable(piece, tide)) {
+    if(tmpCell != nullptr && tmpCell->isPracticable(piece, tide) && !tmpCell->isOccupied()) {
         neighbours.push_back(tmpCell);
     }
 
     tmpCell = getRightTopCell(origin);
-    if(tmpCell != nullptr && tmpCell->isPracticable(piece, tide)) {
+    if(tmpCell != nullptr && tmpCell->isPracticable(piece, tide) && !tmpCell->isOccupied()) {
         neighbours.push_back(tmpCell);
     }
 
     tmpCell = getRightBottomCell(origin);
-    if(tmpCell != nullptr && tmpCell->isPracticable(piece, tide)) {
+    if(tmpCell != nullptr && tmpCell->isPracticable(piece, tide) && !tmpCell->isOccupied()) {
         neighbours.push_back(tmpCell);
     }
 
@@ -390,47 +390,6 @@ std::unordered_set<std::shared_ptr<Cell> > Hexagrid::getAccessibleCells_rec(Play
 
     return cells;
 }
-
-/*
- * 
-std::unordered_set<std::shared_ptr<Cell> > Player::getAccessibleCells(Hexagrid& grid, Tide tide, std::shared_ptr<Piece> piece)
-{
-    assert(piece != nullptr);
-    assert(piece->getCell() != nullptr);
-    std::vector<std::vector<bool> > alreadyVisited(grid.getWidth());
-    for(int i = 0; i < grid.getWidth(); i++) {
-        alreadyVisited[i] = std::vector<bool>(grid.getHeight(), false);
-    }
-    sf::Vector2i coord = piece->getCell()->getCoord();
-    alreadyVisited[coord.x][coord.y] = true;
-
-    std::unordered_set<std::shared_ptr<Cell> > cells;
-
-    return getAccessibleCells_rec(grid, tide, piece, cells, piece->getCell(), alreadyVisited, m_action_points);
-}
-
-std::unordered_set<std::shared_ptr<Cell> > Player::getAccessibleCells_rec(Hexagrid& grid,
-    Tide tide,
-    std::shared_ptr<Piece> piece,
-    std::unordered_set<std::shared_ptr<Cell> >& cells,
-    std::shared_ptr<Cell> currentCell,
-    std::vector<std::vector<bool> >& alreadyVisited,
-    int actionPoints)
-{
-    if(currentCell != nullptr && actionPoints > 0) {
-        for(std::shared_ptr<Cell> neighbour : grid.getDirectPracticableNeighbours(currentCell, piece, tide)) {
-            sf::Vector2i coord = neighbour->getCoord();
-            if(!alreadyVisited[coord.x][coord.y]) {
-                alreadyVisited[coord.x][coord.y] = true;
-                cells.push_back(neighbour);
-            }
-            getAccessibleCells_rec(grid, tide, piece, cells, neighbour, alreadyVisited, actionPoints - 1);
-        }
-    }
-
-    return cells;
-}
-*/
 
 std::shared_ptr<Cell> createCell(int i, int j, bool halfCell, int type, int area)
 {

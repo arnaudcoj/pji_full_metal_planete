@@ -234,7 +234,9 @@ TEST_CASE("tests A*pathfinding", "tests if the piece avoids the obstacle and get
 
     Hexagrid grid(primes);
     std::shared_ptr<Piece> piece = std::make_shared<TankPiece>();
+    std::shared_ptr<Piece> blockingpiece = std::make_shared<TankPiece>();
     Player player;
+    //player.move(blockingpiece, grid.getCell(3,3), Tide::MEDIUM_TIDE);
     player.move(piece, grid.getCell(1,3), Tide::MEDIUM_TIDE);
     
     std::stack<std::shared_ptr<Cell> > path = grid.getPath_Astar(piece->getCell(), grid.getCell(4,3), piece, Tide::MEDIUM_TIDE);
