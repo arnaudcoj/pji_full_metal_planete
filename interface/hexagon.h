@@ -13,7 +13,7 @@ class Hexagon
 private:
     std::shared_ptr<Cell> m_cell;
     sf::ConvexShape m_sprite;
-    
+
     bool m_selected;
     bool m_focused;
     bool m_accessible;

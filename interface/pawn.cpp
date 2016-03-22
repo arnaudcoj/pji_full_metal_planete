@@ -17,6 +17,7 @@ Pawn::Pawn(std::shared_ptr<Piece> const& piece)
 
     if(m_piece->getType() == "tank") {
         m_size = sf::Vector2i(30, 38);
+        nbSprites = 2;
     } else if(m_piece->getType() == "big_tank") {
         m_size = sf::Vector2i(32, 48);
     } else if(m_piece->getType() == "boat") {
@@ -34,8 +35,11 @@ Pawn::Pawn(std::shared_ptr<Piece> const& piece)
     m_sprite.setOrigin(m_size.x / 2, m_size.y / 2);
     m_sprite.setScale(1.5, 1.5);
 
-    auto& animation = m_animator.CreateAnimation(m_piece->getType(), m_piece->getType(), sf::seconds(0.2), true);
-    animation.AddFrames(sf::Vector2i(0, 0), m_size, nbSprites);
+    auto& animation_idle = m_animator.CreateAnimation("idle", m_piece->getType(), sf::seconds(0.2), true);
+    animation_idle.AddFrames(sf::Vector2i(0, 0), m_size, 1);
+
+    auto& animation_moving = m_animator.CreateAnimation("moving", m_piece->getType(), sf::seconds(0.2), true);
+    animation_moving.AddFrames(sf::Vector2i(0, 0), m_size, nbSprites);
 }
 
 sf::Vector2f Pawn::PawnToPix(int xCell, int yCell) const
@@ -109,12 +113,13 @@ void Pawn::update(sf::Time const& deltaTime)
     } else if(m_rotating) {
         m_rotating = false;
         m_moving = true;
+        m_animator.SwitchAnimation("moving");
     } else if(m_moving && m_progress < m_distance) {
-        // m_animator.setFrames...
         m_sprite.move(cos((90 - m_angle) * M_PI / 180.0), -sin((90 - m_angle) * M_PI / 180.0));
         m_progress++;
     } else if(m_moving) {
         m_moving = false;
+        m_animator.SwitchAnimation("idle");
         m_progress = 0;
         m_distance = 0;
 

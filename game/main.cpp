@@ -126,8 +126,8 @@ int main()
                             selectedPiece->getCell(), cell, selectedPiece, game.getGameState().getTide());
 
                         path.pop();
-
                         pawns.getPawn(selectedPiece)->travelTo(path.top());
+
                         travelling = true;
                     } else {
                         selectedPiece = nullptr;
@@ -178,10 +178,9 @@ int main()
 
         if(travelling && !pawns.getPawn(selectedPiece)->isTravelling()) {
             // Move the selected piece to the cell
+
             player.move(selectedPiece, path.top(), game.getGameState().getTide());
-            
             path.pop();
-            
 
             if(path.empty()) {
                 selectedPiece = nullptr;
