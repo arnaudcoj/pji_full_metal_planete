@@ -17,14 +17,24 @@ private:
     sf::Vector2i m_size;
     Animator m_animator;
 
+    bool m_travelling;
+    bool m_rotating;
+    bool m_moving;
+
+    int m_direction;
+    float m_angle;
+    float m_distance;
+    float m_progress;
+
 public:
     Pawn(std::shared_ptr<Piece> const& piece);
-    sf::Sprite& getSprite();
+    void setSelected(bool selected);
+    bool isTravelling();
+    void travelTo(std::shared_ptr<Cell> destination);
     void update(sf::Time const& deltaTime);
     void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
 private:
-    void initSprite();
     sf::Vector2f PawnToPix(int xCell, int yCell) const;
 };
 

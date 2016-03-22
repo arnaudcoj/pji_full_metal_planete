@@ -14,6 +14,10 @@ sf::Vector2f hex_corner(float x, float y, float size, int i)
 
 Hexagon::Hexagon(std::shared_ptr<Cell> cell)
     : m_cell(cell)
+    , m_sprite()
+    , m_selected(false)
+    , m_focused(false)
+    , m_accessible(false)
 {
     m_sprite.setPointCount(6); // the number of points
 
@@ -49,15 +53,47 @@ sf::Vector2f Hexagon::CellToPix(int xCell, int yCell)
     return sf::Vector2f(x, y);
 }
 
-sf::ConvexShape& Hexagon::getSprite()
+void Hexagon::setSelected(bool selected)
 {
-    return m_sprite;
+    m_selected = selected;
+
+    if(m_selected) {
+        m_sprite.setOutlineColor(sf::Color(0, 128, 128));
+        m_sprite.setOutlineThickness(-Hexagon::SIZE / 10);
+    } else {
+        m_sprite.setOutlineColor(sf::Color::Black);
+        m_sprite.setOutlineThickness(-Hexagon::SIZE / 25);
+    }
+}
+
+void Hexagon::setFocused(bool focused)
+{
+    m_focused = focused;
+
+    if(!m_selected) {
+        if(m_focused) {
+            m_sprite.setOutlineThickness(-Hexagon::SIZE / 10);
+            if(m_accessible) {
+                m_sprite.setOutlineColor(sf::Color::Green);
+            } else {
+                m_sprite.setOutlineColor(sf::Color::Red);
+            }
+        } else {
+            m_sprite.setOutlineColor(sf::Color::Black);
+            m_sprite.setOutlineThickness(-Hexagon::SIZE / 25);
+        }
+    }
+}
+
+void Hexagon::setAccessible(bool accessible)
+{
+    m_accessible = accessible;
 }
 
 // updates the hexagon
 void Hexagon::update(std::string tide)
 {
-    m_sprite.setTexture(&AssetManager::GetTexture(m_cell->getType() + "_"+ tide));
+    m_sprite.setTexture(&AssetManager::GetTexture(m_cell->getType() + "_" + tide));
 }
 
 // draws the hexagon the the entities inside of it
