@@ -17,7 +17,7 @@ public:
     Grid(Hexagrid hexagrid);
     std::shared_ptr<Hexagon> getHexagon(std::shared_ptr<Cell> cell);
     sf::Vector2f PixToCell(int xCursor, int yCursor);
-    void update();
+    void update(std::string tide);
     void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 };
 

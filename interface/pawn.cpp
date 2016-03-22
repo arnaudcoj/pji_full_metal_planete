@@ -10,25 +10,18 @@ Pawn::Pawn(std::shared_ptr<Piece> const& piece)
 
     if(m_piece->getType() == "tank") {
         m_size = sf::Vector2i(30, 38);
-        nbSprites = 2;
     } else if(m_piece->getType() == "big_tank") {
         m_size = sf::Vector2i(32, 48);
-        nbSprites = 1;
     } else if(m_piece->getType() == "boat") {
         m_size = sf::Vector2i(27, 52);
-        nbSprites = 1;
     } else if(m_piece->getType() == "crab") {
         m_size = sf::Vector2i(56, 54);
-        nbSprites = 1;
     } else if(m_piece->getType() == "barge") {
         m_size = sf::Vector2i(40, 101);
-        nbSprites = 1;
     } else if(m_piece->getType() == "pontoon") {
         m_size = sf::Vector2i(32, 52);
-        nbSprites = 1;
     } else if(m_piece->getType() == "weather_layer") {
         m_size = sf::Vector2i(56, 56);
-        nbSprites = 1;
     }
 
     m_sprite.setOrigin(m_size.x / 2, m_size.y / 2);

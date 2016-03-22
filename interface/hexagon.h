@@ -21,12 +21,9 @@ public:
 
     Hexagon(std::shared_ptr<Cell> cell);
     sf::ConvexShape& getSprite();
-    void update();
+    void update(std::string tide);
     void draw(sf::RenderTarget& target, sf::RenderStates states) const;
     static sf::Vector2f CellToPix(int xCell, int yCell);
-
-private:
-    void initSprite();
 };
 
 #endif // HEXAGON_H

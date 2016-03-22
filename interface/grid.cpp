@@ -50,10 +50,10 @@ sf::Vector2f Grid::PixToCell(int xCursor, int yCursor)
 }
 
 // updates the grid
-void Grid::update()
+void Grid::update(std::string tide)
 {
     for(auto& pair : m_map) {
-        pair.second->update();
+        pair.second->update(tide);
     }
 }
 

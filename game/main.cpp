@@ -42,15 +42,17 @@ int main()
     sf::RenderWindow window(sf::VideoMode(width, height), "Full Metal Planete", style);
     window.setFramerateLimit(60); // Set target Frames per second
 
+    string tide = "";
+
     switch(game.getGameState().getTide()) {
     case Tide::LOW_TIDE:
-        std::cout << "Low" << std::endl;
+        tide = "low";
         break;
     case Tide::MEDIUM_TIDE:
-        std::cout << "Medium" << std::endl;
+        tide = "medium";
         break;
     case Tide::HIGH_TIDE:
-        std::cout << "High" << std::endl;
+        tide = "high";
         break;
     default:
         break;
@@ -95,17 +97,20 @@ int main()
 
                     switch(game.getGameState().getTide()) {
                     case Tide::LOW_TIDE:
-                        std::cout << "Low" << std::endl;
+                        tide = "low";
                         break;
                     case Tide::MEDIUM_TIDE:
-                        std::cout << "Medium" << std::endl;
+                        tide = "medium";
                         break;
                     case Tide::HIGH_TIDE:
-                        std::cout << "High" << std::endl;
+                        tide = "high";
                         break;
                     default:
                         break;
                     }
+
+                    cout << tide << endl;
+
                     break;
                 }
                 case sf::Keyboard::Key::Escape:
@@ -169,7 +174,8 @@ int main()
                         std::shared_ptr<Cell> cell = game.getHexagrid().getCell(vector.x, vector.y);
                         if(cell->getPiece() != selectedPiece) {
                             sf::ConvexShape& sprite_hexagon = grid.getHexagon(cell)->getSprite();
-                            if(accessibleCells.count(cell) == 1 && player.canMove(selectedPiece, cell, game.getGameState().getTide())) {
+                            if(accessibleCells.count(cell) == 1 &&
+                                player.canMove(selectedPiece, cell, game.getGameState().getTide())) {
                                 sprite_hexagon.setOutlineColor(sf::Color::Green);
                                 sprite_hexagon.setOutlineThickness(-Hexagon::SIZE / 10);
                             } else {
@@ -238,6 +244,7 @@ int main()
                 rotating = false;
                 moving = true;
             } else if(moving && progress < distance) {
+                // pawns.getPawn(selectedPiece)->getAnimator().setFrames...
                 sprite_pawn.move(cos((90 - angle) * M_PI / 180.0), -sin((90 - angle) * M_PI / 180.0));
                 progress++;
             } else if(moving) {
@@ -257,7 +264,7 @@ int main()
                 }
             }
         }
-        grid.update();
+        grid.update(tide);
         pawns.update(deltaTime);
 
         // Render frame

@@ -1,10 +1,4 @@
 TODO :
 
-Interface :
-	- Mettre en place le management des textures
-	- Ajouter un Feedback visuel à la selection d’un pion
-	- Démarrer la UI
-
 API :
-	- Checker si l’on peut partir d’une case : La méthode move ne teste pas la case courante, mais seulement celle d’arrivée
-	- Organiser l’arborescence des classes pour plus de lisibilité
+	Gerer TYPE + TIDE

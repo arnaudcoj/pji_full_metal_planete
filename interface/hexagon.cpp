@@ -15,7 +15,19 @@ sf::Vector2f hex_corner(float x, float y, float size, int i)
 Hexagon::Hexagon(std::shared_ptr<Cell> cell)
     : m_cell(cell)
 {
-    initSprite();
+    m_sprite.setPointCount(6); // the number of points
+
+    // creating each point of the hexagon
+    for(int i = 0; i < 6; ++i) {
+        m_sprite.setPoint(i, hex_corner(0, 0, SIZE, i));
+    }
+
+    // setting the color of the hexagon depending of if it's a half cell or not
+    if(m_cell->isHalfCell())
+        m_sprite.setFillColor(sf::Color(150, 150, 150, 255));
+
+    m_sprite.setOutlineColor(sf::Color::Black);
+    m_sprite.setOutlineThickness(-SIZE / 25);
 }
 
 sf::Vector2f Hexagon::CellToPix(int xCell, int yCell)
@@ -37,33 +49,15 @@ sf::Vector2f Hexagon::CellToPix(int xCell, int yCell)
     return sf::Vector2f(x, y);
 }
 
-void Hexagon::initSprite()
-{
-    m_sprite.setPointCount(6); // the number of points
-
-    // creating each point of the hexagon
-    for(int i = 0; i < 6; ++i) {
-        m_sprite.setPoint(i, hex_corner(0, 0, SIZE, i));
-    }
-
-    m_sprite.setTexture(&AssetManager::GetTexture(m_cell->getType()));
-
-    // setting the color of the hexagon depending of if it's a half cell or not
-    if(m_cell->isHalfCell())
-        m_sprite.setFillColor(sf::Color(150, 150, 150, 255));
-
-    m_sprite.setOutlineColor(sf::Color::Black);
-    m_sprite.setOutlineThickness(-SIZE / 25);
-}
-
 sf::ConvexShape& Hexagon::getSprite()
 {
     return m_sprite;
 }
 
 // updates the hexagon
-void Hexagon::update()
+void Hexagon::update(std::string tide)
 {
+    m_sprite.setTexture(&AssetManager::GetTexture(m_cell->getType() + "_"+ tide));
 }
 
 // draws the hexagon the the entities inside of it
