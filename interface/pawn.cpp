@@ -36,7 +36,7 @@ Pawn::Pawn(std::shared_ptr<Piece> const& piece)
     }
 
     m_sprite.setOrigin(m_size.x / 2, m_size.y / 2);
-    m_sprite.setScale(4, 4);
+    m_sprite.setScale(2, 2);
 
     auto& animation_idle = m_animator.CreateAnimation("idle", m_piece->getType(), sf::seconds(0.2), true);
     animation_idle.AddFrames(sf::Vector2i(0, 0), m_size, 1);
