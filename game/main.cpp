@@ -86,23 +86,25 @@ int main()
             case sf::Event::KeyReleased:
                 switch(event.key.code) {
                 case sf::Keyboard::Key::Space: {
-                    game.getGameState().nextTurn();
+                    if (!travelling) {
+                        game.getGameState().nextTurn();
 
-                    switch(game.getGameState().getTide()) {
-                    case Tide::LOW_TIDE:
-                        tide = "low";
-                        break;
-                    case Tide::MEDIUM_TIDE:
-                        tide = "medium";
-                        break;
-                    case Tide::HIGH_TIDE:
-                        tide = "high";
-                        break;
-                    default:
-                        break;
+                        switch(game.getGameState().getTide()) {
+                        case Tide::LOW_TIDE:
+                            tide = "low";
+                            break;
+                        case Tide::MEDIUM_TIDE:
+                            tide = "medium";
+                            break;
+                        case Tide::HIGH_TIDE:
+                            tide = "high";
+                            break;
+                        default:
+                            break;
+                        }
+
+                        cout << tide << endl;
                     }
-
-                    cout << tide << endl;
 
                     break;
                 }

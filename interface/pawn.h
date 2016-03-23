@@ -7,7 +7,6 @@
 #include "piece.h"
 #include "animator.h"
 #include "hexagon.h"
-#include <iostream>
 
 class Pawn
 {

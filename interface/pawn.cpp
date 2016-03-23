@@ -20,11 +20,13 @@ Pawn::Pawn(std::shared_ptr<Piece> const& piece)
         m_size = sf::Vector2i(30, 38);
         nbSprites = 2;
     } else if(m_piece->getType() == "big_tank") {
-        m_size = sf::Vector2i(32, 48);
+        m_size = sf::Vector2i(30, 46);
+        nbSprites = 2;
     } else if(m_piece->getType() == "boat") {
         m_size = sf::Vector2i(27, 52);
     } else if(m_piece->getType() == "crab") {
-        m_size = sf::Vector2i(56, 54);
+        m_size = sf::Vector2i(54, 52);
+        nbSprites = 2;
     } else if(m_piece->getType() == "barge") {
         m_size = sf::Vector2i(40, 101);
     } else if(m_piece->getType() == "pontoon") {
@@ -34,7 +36,7 @@ Pawn::Pawn(std::shared_ptr<Piece> const& piece)
     }
 
     m_sprite.setOrigin(m_size.x / 2, m_size.y / 2);
-    m_sprite.setScale(1.5, 1.5);
+    m_sprite.setScale(4, 4);
 
     auto& animation_idle = m_animator.CreateAnimation("idle", m_piece->getType(), sf::seconds(0.2), true);
     animation_idle.AddFrames(sf::Vector2i(0, 0), m_size, 1);
