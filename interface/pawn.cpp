@@ -28,7 +28,7 @@ Pawn::Pawn(std::shared_ptr<Piece> const& piece)
         m_size = sf::Vector2i(54, 52);
         nbSprites = 2;
     } else if(m_piece->getType() == "barge") {
-        m_size = sf::Vector2i(40, 101);
+        m_size = sf::Vector2i(20, 50);
     } else if(m_piece->getType() == "pontoon") {
         m_size = sf::Vector2i(32, 52);
     } else if(m_piece->getType() == "weather_layer") {
@@ -36,7 +36,7 @@ Pawn::Pawn(std::shared_ptr<Piece> const& piece)
     }
 
     m_sprite.setOrigin(m_size.x / 2, m_size.y / 2);
-    m_sprite.setScale(2, 2);
+    m_sprite.setScale(0.8, 0.8);
 
     auto& animation_idle = m_animator.CreateAnimation("idle", m_piece->getType(), sf::seconds(0.2), true);
     animation_idle.AddFrames(sf::Vector2i(0, 0), m_size, 1);

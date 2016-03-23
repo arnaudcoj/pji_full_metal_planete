@@ -27,9 +27,9 @@ int main()
     // player.move(stock.takePiece(), game.getHexagrid().getCell(6, 4), Tide::MEDIUM_TIDE);
     // std::cout << stock.takePiece()->getType() << std::endl; // Pontoon
     stock.takePiece();
-    player.move(stock.takePiece(), game.getHexagrid().getCell(5, 4), Tide::MEDIUM_TIDE);
+    player.move(stock.takePiece(), game.getHexagrid().getCell(7, 7), Tide::MEDIUM_TIDE); // Boat
     player.move(stock.takePiece(), game.getHexagrid().getCell(1, 3), Tide::MEDIUM_TIDE);
-    player.move(stock.takePiece(), game.getHexagrid().getCell(5, 5), Tide::MEDIUM_TIDE);
+    player.move(stock.takePiece(), game.getHexagrid().getCell(7, 6), Tide::MEDIUM_TIDE); // Barge
     player.move(stock.takePiece(), game.getHexagrid().getCell(2, 2), Tide::MEDIUM_TIDE);
     player.move(stock.takePiece(), game.getHexagrid().getCell(2, 3), Tide::MEDIUM_TIDE);
 
