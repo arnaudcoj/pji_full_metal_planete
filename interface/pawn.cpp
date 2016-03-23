@@ -9,6 +9,7 @@ Pawn::Pawn(std::shared_ptr<Piece> const& piece)
     , m_rotating(false)
     , m_moving(false)
     , m_direction(0)
+    , m_speed(1.5)
     , m_angle(0)
     , m_distance(0)
     , m_progress(0)
@@ -76,7 +77,6 @@ void Pawn::travelTo(std::shared_ptr<Cell> destination)
     if(v1.x == v2.x && v1.y == v2.y) {
         m_angle = m_sprite.getRotation();
     } else {
-
         m_distance = sqrt(pow((v2.x - v1.x), 2) + pow((v2.y - v1.y), 2));
 
         if(v1.x == v2.x) {
@@ -109,14 +109,19 @@ void Pawn::travelTo(std::shared_ptr<Cell> destination)
 void Pawn::update(sf::Time const& deltaTime)
 {
     if(m_rotating && m_sprite.getRotation() != m_angle) {
-        m_sprite.rotate(m_direction);
+        m_sprite.rotate(m_direction * m_speed);
     } else if(m_rotating) {
         m_rotating = false;
         m_moving = true;
         m_animator.SwitchAnimation("moving");
     } else if(m_moving && m_progress < m_distance) {
-        m_sprite.move(cos((90 - m_angle) * M_PI / 180.0), -sin((90 - m_angle) * M_PI / 180.0));
-        m_progress++;
+        if(m_progress + m_speed > m_distance) {
+            m_sprite.setPosition(
+                cos((90 - m_angle) * M_PI / 180.0) * m_distance, -sin((90 - m_angle) * M_PI / 180.0) * m_distance);
+        } else {
+            m_sprite.move(cos((90 - m_angle) * M_PI / 180.0) * m_speed, -sin((90 - m_angle) * M_PI / 180.0) * m_speed);
+        }
+        m_progress += m_speed;
     } else if(m_moving) {
         m_moving = false;
         m_animator.SwitchAnimation("idle");

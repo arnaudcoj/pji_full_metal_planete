@@ -7,6 +7,7 @@
 #include "piece.h"
 #include "animator.h"
 #include "hexagon.h"
+#include <iostream>
 
 class Pawn
 {
@@ -22,6 +23,7 @@ private:
     bool m_moving;
 
     int m_direction;
+    float m_speed;
     float m_angle;
     float m_distance;
     float m_progress;
