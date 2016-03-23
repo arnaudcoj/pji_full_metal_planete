@@ -2,3 +2,4 @@ TODO :
 
 API :
 	Gerer TYPE + TIDE
+	Prendre en compte la case sur laquelle on est pour accessibleCells

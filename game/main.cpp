@@ -17,7 +17,7 @@ int main()
     AssetManager manager;
 
     // Creating the game objects
-    Game game = Game("../../assets/maps/first.yaml");
+    Game game = Game("../../assets/maps/fmp.yaml");
     Grid grid(game.getHexagrid());
     Player player;
     PieceStock stock = game.getPieceStock();
@@ -86,7 +86,7 @@ int main()
             case sf::Event::KeyReleased:
                 switch(event.key.code) {
                 case sf::Keyboard::Key::Space: {
-                    if (!travelling) {
+                    if(!travelling) {
                         game.getGameState().nextTurn();
 
                         switch(game.getGameState().getTide()) {
@@ -123,7 +123,8 @@ int main()
                     grid.getHexagon(selectedPiece->getCell())->setSelected(false);
                     grid.getHexagon(cell)->setFocused(false);
 
-                    if(accessibleCells.count(cell) == 1) {
+                    if(accessibleCells.count(cell) == 1 &&
+                        player.canMove(selectedPiece, cell, game.getGameState().getTide())) {
                         path = game.getHexagrid().getPath_Astar(
                             selectedPiece->getCell(), cell, selectedPiece, game.getGameState().getTide());
 
