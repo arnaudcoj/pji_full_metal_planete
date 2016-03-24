@@ -254,6 +254,15 @@ std::list<std::shared_ptr<Cell> > Hexagrid::getDirectNeighbours(std::shared_ptr<
     return neighbours;
 }
 
+void Hexagrid::update(Tide tide)
+{
+    for(std::vector<std::shared_ptr<Cell> > column : m_grid) {
+        for(std::shared_ptr<Cell> cell : column) {
+            cell->setTide(tide);
+        }
+    }
+}
+
 std::list<std::shared_ptr<Cell> >
 Hexagrid::getDirectPracticableNeighbours(std::shared_ptr<Cell> origin, std::shared_ptr<Piece> piece, Tide tide) const
 {
@@ -264,32 +273,32 @@ Hexagrid::getDirectPracticableNeighbours(std::shared_ptr<Cell> origin, std::shar
     std::shared_ptr<Cell> tmpCell = nullptr;
 
     tmpCell = getBottomCell(origin);
-    if(tmpCell != nullptr && tmpCell->isPracticable(piece, tide) && !tmpCell->isOccupied()) {
+    if(tmpCell != nullptr && tmpCell->isPracticable(piece) && !tmpCell->isOccupied()) {
         neighbours.push_back(tmpCell);
     }
 
     tmpCell = getLeftBottomCell(origin);
-    if(tmpCell != nullptr && tmpCell->isPracticable(piece, tide) && !tmpCell->isOccupied()) {
+    if(tmpCell != nullptr && tmpCell->isPracticable(piece) && !tmpCell->isOccupied()) {
         neighbours.push_back(tmpCell);
     }
 
     tmpCell = getLeftTopCell(origin);
-    if(tmpCell != nullptr && tmpCell->isPracticable(piece, tide) && !tmpCell->isOccupied()) {
+    if(tmpCell != nullptr && tmpCell->isPracticable(piece) && !tmpCell->isOccupied()) {
         neighbours.push_back(tmpCell);
     }
 
     tmpCell = getTopCell(origin);
-    if(tmpCell != nullptr && tmpCell->isPracticable(piece, tide) && !tmpCell->isOccupied()) {
+    if(tmpCell != nullptr && tmpCell->isPracticable(piece) && !tmpCell->isOccupied()) {
         neighbours.push_back(tmpCell);
     }
 
     tmpCell = getRightTopCell(origin);
-    if(tmpCell != nullptr && tmpCell->isPracticable(piece, tide) && !tmpCell->isOccupied()) {
+    if(tmpCell != nullptr && tmpCell->isPracticable(piece) && !tmpCell->isOccupied()) {
         neighbours.push_back(tmpCell);
     }
 
     tmpCell = getRightBottomCell(origin);
-    if(tmpCell != nullptr && tmpCell->isPracticable(piece, tide) && !tmpCell->isOccupied()) {
+    if(tmpCell != nullptr && tmpCell->isPracticable(piece) && !tmpCell->isOccupied()) {
         neighbours.push_back(tmpCell);
     }
 

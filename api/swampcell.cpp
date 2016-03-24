@@ -1,14 +1,23 @@
 #include "swampcell.h"
 
-SwampCell::SwampCell() : Cell() { }
+SwampCell::SwampCell()
+    : Cell()
+{
+}
 
-SwampCell::SwampCell(sf::Vector2i coord, bool halfCell, unsigned int area) : Cell(coord, halfCell, area) { }
+SwampCell::SwampCell(sf::Vector2i coord, bool halfCell, unsigned int area)
+    : Cell(coord, halfCell, area)
+{
+}
 
-SwampCell::SwampCell(int x, int y, bool halfCell, unsigned int area) : Cell(x, y, halfCell, area) { }
+SwampCell::SwampCell(int x, int y, bool halfCell, unsigned int area)
+    : Cell(x, y, halfCell, area)
+{
+}
 
-
-bool SwampCell::isPracticableCurrent(std::shared_ptr<Piece> piece, Tide tide) {
-    switch(tide) {
+bool SwampCell::isPracticableCurrent(std::shared_ptr<Piece> piece)
+{
+    switch(m_tide) {
     case Tide::LOW_TIDE:
         return piece->getEngine().isTerrestrial();
     case Tide::MEDIUM_TIDE:
@@ -19,6 +28,14 @@ bool SwampCell::isPracticableCurrent(std::shared_ptr<Piece> piece, Tide tide) {
     return false;
 }
 
-std::string SwampCell::getType() {
-    return m_type;
+std::string SwampCell::getType()
+{
+    switch(m_tide) {
+    case Tide::LOW_TIDE:
+        return m_type + "_low";
+    case Tide::HIGH_TIDE:
+        return m_type + "_high";
+    default:
+        return m_type + "_medium";
+    }
 }

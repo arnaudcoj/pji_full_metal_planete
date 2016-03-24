@@ -74,11 +74,18 @@ PieceStock& Game::getPieceStock()
 {
     return m_pieceStock;
 }
+
 void Game::passTurn()
 {
     m_currentPlayer++;
     if(m_currentPlayer == m_players.end()) {
         m_currentPlayer = m_players.begin();
-        m_gameState.nextTurn();
+        newTurn();
     }
+}
+
+void Game::newTurn()
+{
+    m_gameState.nextTurn();
+    m_hexagrid.update(m_gameState.getTide());
 }

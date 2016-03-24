@@ -26,19 +26,19 @@ bool Player::useActionPoints(int points)
     return true;
 }
 
-bool Player::canMove(std::shared_ptr<Piece> piece, std::shared_ptr<Cell> cell, Tide tide)
+bool Player::canMove(std::shared_ptr<Piece> piece, std::shared_ptr<Cell> cell)
 {
     assert(cell != nullptr);
 
-    return (!(cell->isOccupied() || !cell->isPracticable(piece, tide) ||
-        (piece->getCell() != nullptr && !piece->getCell()->isPracticable(piece, tide))));
+    return (!(cell->isOccupied() || !cell->isPracticable(piece) ||
+        (piece->getCell() != nullptr && !piece->getCell()->isPracticable(piece))));
 }
 
-bool Player::move(std::shared_ptr<Piece> piece, std::shared_ptr<Cell> cell, Tide tide)
+bool Player::move(std::shared_ptr<Piece> piece, std::shared_ptr<Cell> cell)
 {
     assert(cell != nullptr);
 
-    if(!canMove(piece, cell, tide)) {
+    if(!canMove(piece, cell)) {
         return false;
     }
 

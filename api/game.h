@@ -29,6 +29,7 @@ class Game
     GameState m_gameState;
     PieceStock m_pieceStock;
 
+    void newTurn();
 public:
 
     Game(int nbPlayer = 1);

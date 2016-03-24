@@ -1,7 +1,6 @@
 #ifndef HEXAGRID_H
 #define HEXAGRID_H
 
-#include <iostream>
 #include <SFML/Graphics.hpp>
 #include <SFML/System/Vector2.hpp>
 #include <memory>
@@ -47,6 +46,8 @@ public:
     std::list<std::shared_ptr<Cell> > getDirectNeighbours(std::shared_ptr<Cell> origin) const;
     std::list<std::shared_ptr<Cell> >
     getDirectPracticableNeighbours(std::shared_ptr<Cell> origin, std::shared_ptr<Piece> piece, Tide tide) const;
+
+    void update(Tide tide);
 
     // gets the cells where a piece can move
     std::unordered_set<std::shared_ptr<Cell> > getAccessibleCells(Player& player, Tide tide, std::shared_ptr<Piece> piece);

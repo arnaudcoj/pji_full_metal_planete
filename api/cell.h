@@ -15,6 +15,9 @@ class Cell
     sf::Vector2i m_coord;
     unsigned int m_area;
 
+protected:
+    Tide m_tide;
+
 public:
     Cell();
     Cell(sf::Vector2i coord, bool halfCell = false, unsigned int area = 0);
@@ -24,18 +27,21 @@ public:
     void setPiece(std::shared_ptr<Piece> piece);
     bool isOccupied() const;
     bool removePiece();
+
+    void setTide(Tide tide);
+
     sf::Vector2i getCoord();
     int getX() const;
     int getY() const;
     unsigned int getArea();
-    bool isPracticable(std::shared_ptr<Piece> piece, Tide tide);
+    bool isPracticable(std::shared_ptr<Piece> piece);
 
     virtual std::string getType() = 0;
 
     virtual int getRangeBonus();
 
 private:
-    virtual bool isPracticableCurrent(std::shared_ptr<Piece> piece, Tide tide) = 0;
+    virtual bool isPracticableCurrent(std::shared_ptr<Piece> piece) = 0;
 };
 
 #endif // CELL_H

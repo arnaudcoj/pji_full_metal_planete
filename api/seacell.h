@@ -17,7 +17,7 @@ public:
     SeaCell();
     SeaCell(sf::Vector2i coord, bool halfCell = false, unsigned int area = 0);
     SeaCell(int x, int y, bool halfCell = false, unsigned int area = 0);
-    virtual bool isPracticableCurrent(std::shared_ptr<Piece> piece, Tide);
+    virtual bool isPracticableCurrent(std::shared_ptr<Piece> piece);
     virtual std::string getType();
 };
 
