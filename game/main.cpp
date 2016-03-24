@@ -188,14 +188,14 @@ int main()
                     sf::Vector2f worldPos = window.mapPixelToCoords(pixelPos);
 
                     sf::Vector2f vector = grid.PixToCell(worldPos.x, worldPos.y);
+                    std::shared_ptr<Cell> cell = game.getHexagrid().getCell(vector.x, vector.y);
 
-                    if(event.mouseMove.x >= 0 && event.mouseMove.y >= 0 && event.mouseMove.x <= window.getSize().x &&
-                        event.mouseMove.y <= window.getSize().y) {
+                    if(cell != nullptr) {
+
                         if(previous_cell != nullptr) {
                             grid.getHexagon(previous_cell)->setFocused(false);
                         }
 
-                        std::shared_ptr<Cell> cell = game.getHexagrid().getCell(vector.x, vector.y);
                         if(cell->getPiece() != selectedPiece) {
                             std::shared_ptr<Hexagon> hexagon = grid.getHexagon(cell);
                             hexagon->setFocused(true);
@@ -221,6 +221,12 @@ int main()
         // Update frame
         grid.update(tide);
         pawns.update(deltaTime);
+
+        if(selectedPiece != nullptr) {
+            sf::Vector2f position = pawns.getPawn(selectedPiece)->m_sprite.getPosition();
+            view.setCenter(pawns.getPawn(selectedPiece)->m_sprite.getPosition());
+            window.setView(view);
+        }
 
         if(travelling && !pawns.getPawn(selectedPiece)->isTravelling()) {
             // Move the selected piece to the cell
