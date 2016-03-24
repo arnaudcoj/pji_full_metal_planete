@@ -193,6 +193,23 @@ TEST_CASE("tests construction from yaml file", "tests if we can create a grid fr
 
 }
 
+TEST_CASE("test update", "tests if update correctly updates the cells") {
+    YAML::Node primes = YAML::Load("{name : terrain1, cells : ["
+                                   "[[3,0], [3,10], [3,20], [3,30]],"
+                                   "[[3,1], [3,11], [3,21], [3,31]],"
+                                   "[[3,2], [3,12], [3,22], [3,32]],"
+                                   "[[3,3], [3,13], [3,23], [3,33]]]}");
+
+    Hexagrid grid(primes);
+    
+    grid.update(Tide::LOW_TIDE);
+    for(int i = 0; i < grid.getWidth(); i++) {
+        for(int j = 0; j < grid.getHeight(); j++) {
+            REQUIRE(grid.getCell(i, j)->getType() == "swamp_low");
+        }
+    }
+}
+
 TEST_CASE("getAccessibleCells", "checks if cells are accessibles or not according for the piece, with an amount of 2 action points") {
     YAML::Node primes = YAML::Load("{name : terrain1, cells : ["
                                    "[[0,0], [0,10], [0,20], [0,30]],"
