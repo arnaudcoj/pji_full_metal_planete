@@ -264,7 +264,7 @@ void Hexagrid::update(Tide tide)
 }
 
 std::list<std::shared_ptr<Cell> >
-Hexagrid::getDirectPracticableNeighbours(std::shared_ptr<Cell> origin, std::shared_ptr<Piece> piece, Tide tide) const
+Hexagrid::getDirectPracticableNeighbours(std::shared_ptr<Cell> origin, std::shared_ptr<Piece> piece) const
 {
     assert(piece != nullptr);
     assert(origin != nullptr);
@@ -316,8 +316,7 @@ int heuristic(std::shared_ptr<Cell> origin, std::shared_ptr<Cell> dest)
 
 std::stack<std::shared_ptr<Cell> > Hexagrid::getPath_Astar(std::shared_ptr<Cell> origin,
     std::shared_ptr<Cell> dest,
-    std::shared_ptr<Piece> piece,
-    Tide tide) const
+    std::shared_ptr<Piece> piece) const
 {
     // on associe un entier (priorité) et un pointeur de Cell
     // afin d'utiliser une priority_queue qui conservera l'élment de priorité la plus basse en top
@@ -337,7 +336,7 @@ std::stack<std::shared_ptr<Cell> > Hexagrid::getPath_Astar(std::shared_ptr<Cell>
         if(current == dest)
             break;
 
-        for(std::shared_ptr<Cell> neighbour : getDirectPracticableNeighbours(current, piece, tide)) {
+        for(std::shared_ptr<Cell> neighbour : getDirectPracticableNeighbours(current, piece)) {
             int new_cost = cost[current] + 1;
             int zone = neighbour->getArea();
             if(!cost.count(neighbour) || new_cost < cost[neighbour]) {
@@ -362,7 +361,7 @@ std::stack<std::shared_ptr<Cell> > Hexagrid::getPath_Astar(std::shared_ptr<Cell>
 
 
 
-std::unordered_set<std::shared_ptr<Cell> > Hexagrid::getAccessibleCells(Player& player, Tide tide, std::shared_ptr<Piece> piece)
+std::unordered_set<std::shared_ptr<Cell> > Hexagrid::getAccessibleCells(Player& player, std::shared_ptr<Piece> piece)
 {
     assert(piece != nullptr);
     assert(piece->getCell() != nullptr);
@@ -375,11 +374,10 @@ std::unordered_set<std::shared_ptr<Cell> > Hexagrid::getAccessibleCells(Player& 
 
     std::unordered_set<std::shared_ptr<Cell> > cells;
 
-    return getAccessibleCells_rec(player, tide, piece, cells, piece->getCell(), alreadyVisited, player.getActionPoints());
+    return getAccessibleCells_rec(player, piece, cells, piece->getCell(), alreadyVisited, player.getActionPoints());
 }
 
 std::unordered_set<std::shared_ptr<Cell> > Hexagrid::getAccessibleCells_rec(Player& player,
-    Tide tide,
     std::shared_ptr<Piece> piece,
     std::unordered_set<std::shared_ptr<Cell> >& cells,
     std::shared_ptr<Cell> currentCell,
@@ -387,13 +385,13 @@ std::unordered_set<std::shared_ptr<Cell> > Hexagrid::getAccessibleCells_rec(Play
     int actionPoints)
 {
     if(currentCell != nullptr && actionPoints > 0) {
-        for(std::shared_ptr<Cell> neighbour : getDirectPracticableNeighbours(currentCell, piece, tide)) {
+        for(std::shared_ptr<Cell> neighbour : getDirectPracticableNeighbours(currentCell, piece)) {
             sf::Vector2i coord = neighbour->getCoord();
             if(!alreadyVisited[coord.x][coord.y]) {
                 alreadyVisited[coord.x][coord.y] = true;
                 cells.insert(neighbour);
             }
-            getAccessibleCells_rec(player, tide, piece, cells, neighbour, alreadyVisited, actionPoints - 1);
+            getAccessibleCells_rec(player, piece, cells, neighbour, alreadyVisited, actionPoints - 1);
         }
     }
 

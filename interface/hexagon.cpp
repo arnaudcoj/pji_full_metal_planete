@@ -91,9 +91,9 @@ void Hexagon::setAccessible(bool accessible)
 }
 
 // updates the hexagon
-void Hexagon::update(std::string tide)
+void Hexagon::update()
 {
-    m_sprite.setTexture(&AssetManager::GetTexture(m_cell->getType() + "_" + tide));
+    m_sprite.setTexture(&AssetManager::GetTexture(m_cell->getType()));
 }
 
 // draws the hexagon the the entities inside of it

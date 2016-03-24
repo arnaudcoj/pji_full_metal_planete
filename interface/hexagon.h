@@ -27,7 +27,7 @@ public:
     void setSelected(bool selected);
     void setFocused(bool focused);
     void setAccessible(bool accessible);
-    void update(std::string tide);
+    void update();
     void draw(sf::RenderTarget& target, sf::RenderStates states) const;
     static sf::Vector2f CellToPix(int xCell, int yCell);
 };

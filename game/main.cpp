@@ -17,21 +17,21 @@ int main()
     AssetManager manager;
 
     // Creating the game objects
-    Game game = Game("../../assets/maps/fmp.yaml");
+    Game game = Game("../../assets/maps/fmp.yaml", 1);
     Grid grid(game.getHexagrid());
-    Player player;
+    Player player = game.getCurrentPlayer();
     PieceStock stock = game.getPieceStock();
     Pawns pawns(stock);
 
-    player.move(stock.takePiece(), game.getHexagrid().getCell(1, 1), Tide::MEDIUM_TIDE);
+    player.move(stock.takePiece(), game.getHexagrid().getCell(1, 1));
     // player.move(stock.takePiece(), game.getHexagrid().getCell(6, 4), Tide::MEDIUM_TIDE);
     // std::cout << stock.takePiece()->getType() << std::endl; // Pontoon
     stock.takePiece();
-    player.move(stock.takePiece(), game.getHexagrid().getCell(7, 7), Tide::MEDIUM_TIDE); // Boat
-    player.move(stock.takePiece(), game.getHexagrid().getCell(1, 3), Tide::MEDIUM_TIDE);
-    player.move(stock.takePiece(), game.getHexagrid().getCell(7, 6), Tide::MEDIUM_TIDE); // Barge
-    player.move(stock.takePiece(), game.getHexagrid().getCell(2, 2), Tide::MEDIUM_TIDE);
-    player.move(stock.takePiece(), game.getHexagrid().getCell(2, 3), Tide::MEDIUM_TIDE);
+    player.move(stock.takePiece(), game.getHexagrid().getCell(7, 7)); // Boat
+    player.move(stock.takePiece(), game.getHexagrid().getCell(1, 3));
+    player.move(stock.takePiece(), game.getHexagrid().getCell(7, 6)); // Barge
+    player.move(stock.takePiece(), game.getHexagrid().getCell(2, 2));
+    player.move(stock.takePiece(), game.getHexagrid().getCell(2, 3));
 
     // calculate the window dimensions
     float width = Hexagon::WIDTH * (game.getHexagrid().getWidth() - 1) * 3 / 4;
@@ -87,7 +87,7 @@ int main()
                 switch(event.key.code) {
                 case sf::Keyboard::Key::Space: {
                     if(!travelling) {
-                        game.getGameState().nextTurn();
+                        game.passTurn();
 
                         switch(game.getGameState().getTide()) {
                         case Tide::LOW_TIDE:
@@ -124,9 +124,9 @@ int main()
                     grid.getHexagon(cell)->setFocused(false);
 
                     if(accessibleCells.count(cell) == 1 &&
-                        player.canMove(selectedPiece, cell, game.getGameState().getTide())) {
+                        player.canMove(selectedPiece, cell)) {
                         path = game.getHexagrid().getPath_Astar(
-                            selectedPiece->getCell(), cell, selectedPiece, game.getGameState().getTide());
+                            selectedPiece->getCell(), cell, selectedPiece);
 
                         path.pop();
                         pawns.getPawn(selectedPiece)->travelTo(path.top());
@@ -138,7 +138,7 @@ int main()
                 } else if(cell->isOccupied() && !travelling) {
                     selectedPiece = cell->getPiece();
                     accessibleCells =
-                        game.getHexagrid().getAccessibleCells(player, game.getGameState().getTide(), selectedPiece);
+                        game.getHexagrid().getAccessibleCells(player, selectedPiece);
                     grid.getHexagon(cell)->setSelected(true);
                 }
             } break;
@@ -157,7 +157,7 @@ int main()
                             std::shared_ptr<Hexagon> hexagon = grid.getHexagon(cell);
                             hexagon->setFocused(true);
                             if(accessibleCells.count(cell) == 1 &&
-                                player.canMove(selectedPiece, cell, game.getGameState().getTide())) {
+                                player.canMove(selectedPiece, cell)) {
                                 hexagon->setAccessible(true);
 
                             } else {
@@ -176,13 +176,13 @@ int main()
         }
 
         // Update frame
-        grid.update(tide);
+        grid.update();
         pawns.update(deltaTime);
 
         if(travelling && !pawns.getPawn(selectedPiece)->isTravelling()) {
             // Move the selected piece to the cell
 
-            player.move(selectedPiece, path.top(), game.getGameState().getTide());
+            player.move(selectedPiece, path.top());
             path.pop();
 
             if(path.empty()) {

@@ -39,7 +39,6 @@ TEST_CASE("test getGameState", "tests if getGameState returns a correct gameStat
 
 TEST_CASE("test passTurn", "tests if all players are iterated over. And if we get the next turn and we start over when we reach the end of the list") {
     Game game(3);
-    std::list<Player> playerList = game.getPlayers();
     
     REQUIRE(game.getGameState().getNbTurns() == 25);
     REQUIRE(game.getCurrentPlayer().getNumber() == 1);
@@ -63,5 +62,33 @@ TEST_CASE("test passTurn", "tests if all players are iterated over. And if we ge
     
     REQUIRE(game.getGameState().getNbTurns() == 24);
     REQUIRE(game.getCurrentPlayer().getNumber() == 2);
+    
+}
+
+TEST_CASE("test passTurn when just 1 player", "tests if the turn changes and if the player stays the same each time we call passTurn") {
+    Game game(1);
+    
+    REQUIRE(game.getGameState().getNbTurns() == 25);
+    REQUIRE(game.getCurrentPlayer().getNumber() == 1);
+    
+    game.passTurn();
+    
+    REQUIRE(game.getGameState().getNbTurns() == 24);
+    REQUIRE(game.getCurrentPlayer().getNumber() == 1);
+    
+    game.passTurn();
+    
+    REQUIRE(game.getGameState().getNbTurns() == 23);
+    REQUIRE(game.getCurrentPlayer().getNumber() == 1);
+    
+    game.passTurn();
+    
+    REQUIRE(game.getGameState().getNbTurns() == 22);
+    REQUIRE(game.getCurrentPlayer().getNumber() == 1);
+    
+    game.passTurn();
+    
+    REQUIRE(game.getGameState().getNbTurns() == 21);
+    REQUIRE(game.getCurrentPlayer().getNumber() == 1);
     
 }

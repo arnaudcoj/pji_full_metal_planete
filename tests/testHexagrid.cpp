@@ -226,7 +226,7 @@ TEST_CASE("getAccessibleCells", "checks if cells are accessibles or not accordin
     player.move(piece, grid.getCell(1, 1));
     
     std::unordered_set<std::shared_ptr<Cell> > accessibleCells = grid.getAccessibleCells(
-    player, Tide::MEDIUM_TIDE, piece);
+    player, piece);
     
     
     //il doit y avoir 20 21 et 22
@@ -258,7 +258,7 @@ TEST_CASE("tests A*pathfinding", "tests if the piece avoids the obstacle and get
     //player.move(blockingpiece, grid.getCell(3,3), Tide::MEDIUM_TIDE);
     player.move(piece, grid.getCell(1,3));
     
-    std::stack<std::shared_ptr<Cell> > path = grid.getPath_Astar(piece->getCell(), grid.getCell(4,3), piece, Tide::MEDIUM_TIDE);
+    std::stack<std::shared_ptr<Cell> > path = grid.getPath_Astar(piece->getCell(), grid.getCell(4,3), piece);
     
     REQUIRE(path.top()->getArea() == 13);
         path.pop();
