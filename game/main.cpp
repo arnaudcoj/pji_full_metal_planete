@@ -17,19 +17,32 @@ int main()
     AssetManager manager;
 
     // Creating the game objects
-    Game game = Game("../../assets/maps/fmp.yaml");
+    /*Game game = Game("../../assets/maps/fmp.yaml");
     Grid grid(game.getHexagrid());
     Player player;
     PieceStock stock = game.getPieceStock();
     Pawns pawns(stock);
 
     player.move(stock.takePiece(), game.getHexagrid().getCell(1, 1), Tide::MEDIUM_TIDE);
-    // player.move(stock.takePiece(), game.getHexagrid().getCell(6, 4), Tide::MEDIUM_TIDE);
-    // std::cout << stock.takePiece()->getType() << std::endl; // Pontoon
+    // player.move(stock.takePiece(), game.getHexagrid().getCell(6, 4), Tide::MEDIUM_TIDE); // Pontoon
     stock.takePiece();
     player.move(stock.takePiece(), game.getHexagrid().getCell(7, 7), Tide::MEDIUM_TIDE); // Boat
     player.move(stock.takePiece(), game.getHexagrid().getCell(1, 3), Tide::MEDIUM_TIDE);
     player.move(stock.takePiece(), game.getHexagrid().getCell(7, 6), Tide::MEDIUM_TIDE); // Barge
+    player.move(stock.takePiece(), game.getHexagrid().getCell(2, 2), Tide::MEDIUM_TIDE);
+    player.move(stock.takePiece(), game.getHexagrid().getCell(2, 3), Tide::MEDIUM_TIDE);*/
+
+    Game game = Game("../../assets/maps/first.yaml");
+    Grid grid(game.getHexagrid());
+    Player player;
+    PieceStock stock = game.getPieceStock();
+    Pawns pawns(stock);
+
+    player.move(stock.takePiece(), game.getHexagrid().getCell(1, 1), Tide::MEDIUM_TIDE);
+    stock.takePiece();
+    player.move(stock.takePiece(), game.getHexagrid().getCell(5, 4), Tide::MEDIUM_TIDE); // Boat
+    player.move(stock.takePiece(), game.getHexagrid().getCell(1, 3), Tide::MEDIUM_TIDE);
+    player.move(stock.takePiece(), game.getHexagrid().getCell(5, 5), Tide::MEDIUM_TIDE); // Barge
     player.move(stock.takePiece(), game.getHexagrid().getCell(2, 2), Tide::MEDIUM_TIDE);
     player.move(stock.takePiece(), game.getHexagrid().getCell(2, 3), Tide::MEDIUM_TIDE);
 
