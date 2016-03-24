@@ -8,11 +8,14 @@
 #include "animator.h"
 #include "hexagon.h"
 
+#include <iostream>
+
 class Pawn
 {
 private:
     std::shared_ptr<Piece> m_piece;
 
+public:
     sf::Sprite m_sprite;
     sf::Vector2i m_size;
     Animator m_animator;
@@ -29,7 +32,6 @@ private:
 
 public:
     Pawn(std::shared_ptr<Piece> const& piece);
-    void setSelected(bool selected);
     bool isTravelling();
     void travelTo(std::shared_ptr<Cell> destination);
     void update(sf::Time const& deltaTime);

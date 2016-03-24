@@ -10,20 +10,20 @@ Grid::Grid(Hexagrid hexagrid)
     }
 }
 
-std::shared_ptr<Hexagon> Grid::getHexagon(std::shared_ptr<Cell> cell) {
+std::shared_ptr<Hexagon> Grid::getHexagon(std::shared_ptr<Cell> cell)
+{
     return m_map.find(cell)->second;
 }
 
-sf::Vector2f Grid::PixToCell(int xCursor, int yCursor)
-{
+sf::Vector2f Grid::PixToCell(float xCursor, float yCursor)
+{    
     int x;
     int y;
     float size = Hexagon::SIZE;
     float width = Hexagon::WIDTH;
     float height = Hexagon::HEIGHT;
     float side = size * 3 / 2;
-    ;
-
+    
     xCursor += width / 2;
 
     int ci = floor(xCursor / side);

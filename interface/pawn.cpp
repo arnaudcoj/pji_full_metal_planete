@@ -36,32 +36,16 @@ Pawn::Pawn(std::shared_ptr<Piece> const& piece)
     }
 
     m_sprite.setOrigin(m_size.x / 2, m_size.y / 2);
-    m_sprite.setScale(0.8, 0.8);
+
+    float size = 2.8 * Hexagon::SIZE / 100;
+
+    m_sprite.setScale(size, size);
 
     auto& animation_idle = m_animator.CreateAnimation("idle", m_piece->getType(), sf::seconds(0.2), true);
     animation_idle.AddFrames(sf::Vector2i(0, 0), m_size, 1);
 
     auto& animation_moving = m_animator.CreateAnimation("moving", m_piece->getType(), sf::seconds(0.2), true);
     animation_moving.AddFrames(sf::Vector2i(0, 0), m_size, nbSprites);
-}
-
-sf::Vector2f Pawn::PawnToPix(int xCell, int yCell) const
-{
-    float x;
-    float y;
-
-    // setting the position of the pawn
-    if(xCell % 2 == 0) {
-        x = xCell * Hexagon::WIDTH * 3 / 4;
-        y = yCell * Hexagon::HEIGHT;
-    } else {
-        x = xCell * Hexagon::WIDTH * 3 / 4;
-        y = (yCell - 0.5) * Hexagon::HEIGHT; // above the previous one
-    }
-
-    y += Hexagon::HEIGHT / 2; // adding an offset
-
-    return sf::Vector2f(x, y);
 }
 
 bool Pawn::isTravelling()
@@ -110,40 +94,43 @@ void Pawn::travelTo(std::shared_ptr<Cell> destination)
 // updates the pion
 void Pawn::update(sf::Time const& deltaTime)
 {
-    if(m_rotating && m_sprite.getRotation() != m_angle) {
-        m_sprite.rotate(m_direction * m_speed);
-    } else if(m_rotating) {
-        m_rotating = false;
-        m_moving = true;
-        m_animator.SwitchAnimation("moving");
-    } else if(m_moving && m_progress < m_distance) {
-        if(m_progress + m_speed > m_distance) {
-            m_sprite.setPosition(
-                cos((90 - m_angle) * M_PI / 180.0) * m_distance, -sin((90 - m_angle) * M_PI / 180.0) * m_distance);
-        } else {
-            m_sprite.move(cos((90 - m_angle) * M_PI / 180.0) * m_speed, -sin((90 - m_angle) * M_PI / 180.0) * m_speed);
+    if(m_piece->getCell() != nullptr) {
+        if(!m_travelling) {
+            sf::Vector2f position = Hexagon::CellToPix(m_piece->getCell()->getX(), m_piece->getCell()->getY());
+            m_sprite.setPosition(position.x, position.y);
         }
-        m_progress += m_speed;
-    } else if(m_moving) {
-        m_moving = false;
-        m_animator.SwitchAnimation("idle");
-        m_progress = 0;
-        m_distance = 0;
 
-        m_sprite.setPosition(0, 0);
+        if(m_rotating && m_sprite.getRotation() != m_angle) {
+            m_sprite.rotate(m_direction * m_speed);
+        } else if(m_rotating) {
+            m_rotating = false;
+            m_moving = true;
+            m_animator.SwitchAnimation("moving");
+        } else if(m_moving && m_progress < m_distance) {
+            float speed = m_speed;
+            if(m_progress + m_speed > m_distance) {
+                speed = m_distance - m_progress;
+            }
+            
+            m_sprite.move(cos((90 - m_angle) * M_PI / 180.0) * speed, -sin((90 - m_angle) * M_PI / 180.0) * speed);
+            m_progress += speed;
+        } else if(m_moving && m_progress == m_distance) {
+            m_moving = false;
+            m_animator.SwitchAnimation("idle");
+            m_progress = 0;
+            m_distance = 0;
 
-        m_travelling = false;
+            m_travelling = false;
+        }
+
+        m_animator.Update(deltaTime);
     }
-
-    m_animator.Update(deltaTime);
 }
 
 // draws the pion
 void Pawn::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
     if(m_piece->getCell() != nullptr) {
-        states.transform.translate(PawnToPix(m_piece->getCell()->getX(), m_piece->getCell()->getY()));
-
         target.draw(m_sprite, states);
     }
 }

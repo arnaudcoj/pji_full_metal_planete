@@ -24,8 +24,9 @@ int main()
     Pawns pawns(stock);
 
     player.move(stock.takePiece(), game.getHexagrid().getCell(1, 1));
-    // player.move(stock.takePiece(), game.getHexagrid().getCell(6, 4), Tide::MEDIUM_TIDE);
+    // player.move(stock.takePiece(), game.getHexagrid().getCell(6, 4));
     // std::cout << stock.takePiece()->getType() << std::endl; // Pontoon
+
     stock.takePiece();
     player.move(stock.takePiece(), game.getHexagrid().getCell(7, 7)); // Boat
     player.move(stock.takePiece(), game.getHexagrid().getCell(1, 3));
@@ -33,14 +34,18 @@ int main()
     player.move(stock.takePiece(), game.getHexagrid().getCell(2, 2));
     player.move(stock.takePiece(), game.getHexagrid().getCell(2, 3));
 
-    // calculate the window dimensions
-    float width = Hexagon::WIDTH * (game.getHexagrid().getWidth() - 1) * 3 / 4;
-    float height = Hexagon::HEIGHT * (game.getHexagrid().getHeight() - 0.5);
-
     // Creating the window
     sf::Uint32 style = sf::Style::Titlebar | sf::Style::Close;
-    sf::RenderWindow window(sf::VideoMode(width, height), "Full Metal Planete", style);
+    sf::RenderWindow window(sf::VideoMode(1024, 1024), "Full Metal Planete", style);
     window.setFramerateLimit(60); // Set target Frames per second
+
+    auto wSize = window.getSize();
+    sf::View view(sf::FloatRect(0, 0, wSize.x, wSize.y));
+
+    // Initialize the view
+    // view.move(0, -Hexagon::HEIGHT / 2);
+
+    window.setView(view);
 
     string tide = "";
 
@@ -115,8 +120,43 @@ int main()
                     break;
                 }
                 break;
+            case sf::Event::KeyPressed:
+                switch(event.key.code) {
+                case sf::Keyboard::Key::Up:
+                    view.move(0, -20);
+                    window.setView(view);
+                    break;
+                case sf::Keyboard::Key::Down:
+                    view.move(0, 20);
+                    window.setView(view);
+                    break;
+                case sf::Keyboard::Key::Right:
+                    view.move(20, 0);
+                    window.setView(view);
+                    break;
+                case sf::Keyboard::Key::Left:
+                    view.move(-20, 0);
+                    window.setView(view);
+                    break;
+                case sf::Keyboard::Key::Z:
+                    view.zoom(0.90);
+                    window.setView(view);
+                    break;
+                case sf::Keyboard::Key::S:
+                    view.zoom(1.10);
+                    window.setView(view);
+                    break;
+                default:
+                    break;
+                }
+                break;
             case sf::Event::MouseButtonReleased: {
-                sf::Vector2f vector = grid.PixToCell(event.mouseButton.x, event.mouseButton.y);
+                sf::Vector2i pixelPos = sf::Mouse::getPosition(window);
+
+                // conversion en coordonnées "monde"
+                sf::Vector2f worldPos = window.mapPixelToCoords(pixelPos);
+
+                sf::Vector2f vector = grid.PixToCell(worldPos.x, worldPos.y);
                 std::shared_ptr<Cell> cell = game.getHexagrid().getCell(vector.x, vector.y);
 
                 if(selectedPiece != nullptr && !travelling) {
@@ -144,15 +184,20 @@ int main()
             } break;
             case sf::Event::MouseMoved: {
                 if(selectedPiece != nullptr && !travelling) {
-                    sf::Vector2f vector = grid.PixToCell(event.mouseMove.x, event.mouseMove.y);
+                    sf::Vector2i pixelPos = sf::Mouse::getPosition(window);
 
-                    if(event.mouseMove.x >= 0 && event.mouseMove.y >= 0 && event.mouseMove.x <= window.getSize().x &&
-                        event.mouseMove.y <= window.getSize().y) {
+                    // conversion en coordonnées "monde"
+                    sf::Vector2f worldPos = window.mapPixelToCoords(pixelPos);
+
+                    sf::Vector2f vector = grid.PixToCell(worldPos.x, worldPos.y);
+                    std::shared_ptr<Cell> cell = game.getHexagrid().getCell(vector.x, vector.y);
+
+                    if(cell != nullptr) {
+
                         if(previous_cell != nullptr) {
                             grid.getHexagon(previous_cell)->setFocused(false);
                         }
 
-                        std::shared_ptr<Cell> cell = game.getHexagrid().getCell(vector.x, vector.y);
                         if(cell->getPiece() != selectedPiece) {
                             std::shared_ptr<Hexagon> hexagon = grid.getHexagon(cell);
                             hexagon->setFocused(true);
@@ -178,6 +223,12 @@ int main()
         // Update frame
         grid.update();
         pawns.update(deltaTime);
+
+        if(selectedPiece != nullptr) {
+            sf::Vector2f position = pawns.getPawn(selectedPiece)->m_sprite.getPosition();
+            view.setCenter(pawns.getPawn(selectedPiece)->m_sprite.getPosition());
+            window.setView(view);
+        }
 
         if(travelling && !pawns.getPawn(selectedPiece)->isTravelling()) {
             // Move the selected piece to the cell

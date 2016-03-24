@@ -1,6 +1,6 @@
 #include "hexagon.h"
 
-const float Hexagon::SIZE = { 30 };
+const float Hexagon::SIZE = { 100 };
 const float Hexagon::WIDTH = { SIZE * 2 };
 const float Hexagon::HEIGHT = { (float)sqrt(3) / 2 * WIDTH };
 
@@ -32,6 +32,9 @@ Hexagon::Hexagon(std::shared_ptr<Cell> cell)
 
     m_sprite.setOutlineColor(sf::Color::Black);
     m_sprite.setOutlineThickness(-SIZE / 25);
+
+    sf::Vector2f position = CellToPix(m_cell->getX(), m_cell->getY());
+    m_sprite.setPosition(position.x, position.y);
 }
 
 sf::Vector2f Hexagon::CellToPix(int xCell, int yCell)
@@ -48,7 +51,7 @@ sf::Vector2f Hexagon::CellToPix(int xCell, int yCell)
         y = (yCell - 0.5) * HEIGHT; // above the previous one
     }
 
-    y += HEIGHT / 2; // adding an offset
+    y += HEIGHT / 2;
 
     return sf::Vector2f(x, y);
 }
@@ -99,8 +102,6 @@ void Hexagon::update()
 // draws the hexagon the the entities inside of it
 void Hexagon::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-    states.transform.translate(CellToPix(m_cell->getX(), m_cell->getY()));
-
     // drawing the hexagon on the target
     target.draw(m_sprite, states);
 }
