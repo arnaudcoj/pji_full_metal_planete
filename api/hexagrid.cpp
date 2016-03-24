@@ -263,8 +263,8 @@ void Hexagrid::update(Tide tide)
     }
 }
 
-std::list<std::shared_ptr<Cell> >
-Hexagrid::getDirectPracticableNeighbours(std::shared_ptr<Cell> origin, std::shared_ptr<Piece> piece) const
+std::list<std::shared_ptr<Cell> > Hexagrid::getDirectPracticableNeighbours(std::shared_ptr<Cell> origin,
+    std::shared_ptr<Piece> piece) const
 {
     assert(piece != nullptr);
     assert(origin != nullptr);
@@ -314,9 +314,8 @@ int heuristic(std::shared_ptr<Cell> origin, std::shared_ptr<Cell> dest)
     return abs(coordOrigin.x - coordDest.x) + abs(coordOrigin.y - coordDest.y);
 }
 
-std::stack<std::shared_ptr<Cell> > Hexagrid::getPath_Astar(std::shared_ptr<Cell> origin,
-    std::shared_ptr<Cell> dest,
-    std::shared_ptr<Piece> piece) const
+std::stack<std::shared_ptr<Cell> >
+Hexagrid::getPath_Astar(std::shared_ptr<Cell> origin, std::shared_ptr<Cell> dest, std::shared_ptr<Piece> piece) const
 {
     // on associe un entier (priorité) et un pointeur de Cell
     // afin d'utiliser une priority_queue qui conservera l'élment de priorité la plus basse en top
@@ -328,7 +327,7 @@ std::stack<std::shared_ptr<Cell> > Hexagrid::getPath_Astar(std::shared_ptr<Cell>
     frontier.emplace(0, origin);
     cameFrom[origin] = origin;
     cost[origin] = 0;
-    
+
     while(!frontier.empty()) {
         std::shared_ptr<Cell> current = frontier.top().second;
         frontier.pop();
@@ -358,9 +357,7 @@ std::stack<std::shared_ptr<Cell> > Hexagrid::getPath_Astar(std::shared_ptr<Cell>
 
     return path;
 }
-
-
-
+/*
 std::unordered_set<std::shared_ptr<Cell> > Hexagrid::getAccessibleCells(Player& player, std::shared_ptr<Piece> piece)
 {
     assert(piece != nullptr);
@@ -396,6 +393,45 @@ std::unordered_set<std::shared_ptr<Cell> > Hexagrid::getAccessibleCells_rec(Play
     }
 
     return cells;
+}
+*/
+
+std::unordered_set<std::shared_ptr<Cell> > Hexagrid::getAccessibleCells(Player& player, std::shared_ptr<Piece> piece)
+{
+    assert(piece != nullptr);
+    assert(piece->getCell() != nullptr);
+
+    std::unordered_set<std::shared_ptr<Cell> > cells;
+
+    // return an empty set  (range < 1)
+    if(player.getActionPoints() < 1) {
+        return cells;
+    }
+
+    std::list<std::list<std::shared_ptr<Cell> > > fringes;
+
+    // add first cell's neighbours (range = 1)
+    fringes.emplace_back();
+    for(std::shared_ptr<Cell> neighbour : getDirectPracticableNeighbours(piece->getCell(), piece)) {
+        if(!cells.count(neighbour)) {
+            cells.insert(neighbour);
+            fringes.back().push_back(neighbour);
+        }
+    }
+
+    // flood-fill for the other cells (range > 2)
+    for(int k = 1; k < player.getActionPoints(); k++) {
+        fringes.emplace_back();
+        for(std::shared_ptr<Cell> cell : fringes.front()) {
+            for(std::shared_ptr<Cell> neighbour : getDirectPracticableNeighbours(cell, piece)) {
+                if(!cells.count(neighbour)) {
+                    cells.insert(neighbour);
+                    fringes.back().push_back(neighbour);
+                }
+            }
+        }
+        fringes.pop_front();
+    }
 }
 
 std::shared_ptr<Cell> createCell(int i, int j, bool halfCell, int type, int area)

@@ -63,12 +63,12 @@ public:
 
 private:
     //used by getAccessibleCells
-    std::unordered_set<std::shared_ptr<Cell> > getAccessibleCells_rec(Player& player,
+    /*std::unordered_set<std::shared_ptr<Cell> > getAccessibleCells_rec(Player& player,
         std::shared_ptr<Piece> piece,
         std::unordered_set<std::shared_ptr<Cell> >& cells,
         std::shared_ptr<Cell> currentCell,
         std::vector<std::vector<bool> >& alreadyVisited,
-        int actionPoints);
+        int actionPoints);*/
 };
 
 #endif // HEXAGRID_H
