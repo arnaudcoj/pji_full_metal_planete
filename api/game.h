@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <list>
+#include <iterator>
 #include <string>
 
 #include "hexagrid.h"
@@ -23,18 +24,24 @@
 class Game
 {
     Hexagrid m_hexagrid;
-    std::vector<Player> m_players;
+    std::list<Player> m_players;
+    std::list<Player>::iterator m_currentPlayer;
     GameState m_gameState;
     PieceStock m_pieceStock;
 
 public:
 
-    Game();
-    Game(const std::string& gridFile);
-    Game(Hexagrid grid);
-    Hexagrid& getHexagrid();
-    GameState& getGameState();
-    PieceStock& getPieceStock();
+    Game(int nbPlayer = 1);
+    Game(const std::string& gridFile, int nbPlayer = 1);
+    Game(Hexagrid grid, int nbPlayer = 1);
+    
+    void passTurn();
+    
+    std::list<Player> getPlayers() const;
+    Player& getCurrentPlayer() ;
+    Hexagrid& getHexagrid() ;
+    GameState& getGameState() ;
+    PieceStock& getPieceStock() ;
 };
 
 #endif // GAME_H

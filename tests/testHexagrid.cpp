@@ -202,7 +202,9 @@ TEST_CASE("getAccessibleCells", "checks if cells are accessibles or not accordin
 
     Hexagrid grid(primes);
     
-    Player player(2);
+    Player player(1);
+    player.useActionPoints(13); // we want the player to have 2 action points
+    
     std::shared_ptr<Piece> piece = std::make_shared<TankPiece>();
     player.move(piece, grid.getCell(1, 1), Tide::MEDIUM_TIDE);
     
@@ -235,7 +237,7 @@ TEST_CASE("tests A*pathfinding", "tests if the piece avoids the obstacle and get
     Hexagrid grid(primes);
     std::shared_ptr<Piece> piece = std::make_shared<TankPiece>();
     std::shared_ptr<Piece> blockingpiece = std::make_shared<TankPiece>();
-    Player player;
+    Player player(1);
     //player.move(blockingpiece, grid.getCell(3,3), Tide::MEDIUM_TIDE);
     player.move(piece, grid.getCell(1,3), Tide::MEDIUM_TIDE);
     

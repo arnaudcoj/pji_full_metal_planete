@@ -11,10 +11,13 @@
 class Player
 {
     int m_action_points;
-
+    int m_number;
+    
 public:
-    Player(int actionPoints = 5);
-    int getActionPoints();
+    Player(int number);
+    
+    int getNumber() const;
+    int getActionPoints() const;
     bool useActionPoints(int points = 1);
     bool canMove(std::shared_ptr<Piece> piece, std::shared_ptr<Cell> cell, Tide tide);
     bool move(std::shared_ptr<Piece> piece, std::shared_ptr<Cell> cell, Tide tide);

@@ -1,11 +1,17 @@
 #include "player.h"
 
-Player::Player(int actionPoints)
-    : m_action_points(actionPoints)
+Player::Player(int number)
+    : m_action_points(15)
+    , m_number(number)
 {
 }
 
-int Player::getActionPoints()
+int Player::getNumber() const
+{
+    return m_number;
+}
+
+int Player::getActionPoints() const
 {
     return m_action_points;
 }
@@ -57,4 +63,3 @@ bool Player::removePiece(std::shared_ptr<Piece> piece)
 
     return false;
 }
-
