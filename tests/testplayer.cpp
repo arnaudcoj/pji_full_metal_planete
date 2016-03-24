@@ -14,23 +14,23 @@ TEST_CASE("tests player.move and cell.isOccupied", "tests if we can move a Piece
 
     REQUIRE_FALSE(cell->isOccupied());
 
-    REQUIRE(player.move(piece, cell, Tide::MEDIUM_TIDE));
+    REQUIRE(player.move(piece, cell));
     REQUIRE(cell->isOccupied());
     REQUIRE(piece->getCell()->isOccupied()); 
     REQUIRE(piece->isOnCell()); 
     REQUIRE(cell->getPiece()->isOnCell()); 
 
-    REQUIRE_FALSE(player.move(piece, cell, Tide::MEDIUM_TIDE));
+    REQUIRE_FALSE(player.move(piece, cell));
 
     player.removePiece(piece);
     REQUIRE_FALSE(piece->isOnCell());
     REQUIRE_FALSE(cell->isOccupied());
 
-    REQUIRE(player.move(piece, cell, Tide::MEDIUM_TIDE));
+    REQUIRE(player.move(piece, cell));
 
-    player.useActionPoints(99);
+    player.useActionPoints(15);
 
-    REQUIRE_FALSE(player.move(piece, cell, Tide::MEDIUM_TIDE));
+    REQUIRE_FALSE(player.move(piece, cell));
 }
 
 TEST_CASE("tests cell.move and cell.removePiece","tests if we can move a Piece and remove it") {
@@ -38,12 +38,12 @@ TEST_CASE("tests cell.move and cell.removePiece","tests if we can move a Piece a
     std::shared_ptr<Piece> piece = std::make_shared<TankPiece>();
     Player player(1);
 
-    player.move(piece, cell, Tide::MEDIUM_TIDE);
+    player.move(piece, cell);
     player.removePiece(piece);
 
     REQUIRE_FALSE(cell->isOccupied());
 
-    REQUIRE(player.move(piece, cell, Tide::MEDIUM_TIDE));
+    REQUIRE(player.move(piece, cell));
     REQUIRE(cell->isOccupied());
 }
 

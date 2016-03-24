@@ -12,6 +12,8 @@
 #include <patrolboatpiece.h>
 #include <tide.h>
 
+#include <iostream>
+
 #include <SFML/System/Vector2.hpp>
 
 TEST_CASE( "test cell.getCoord", "tests if the coordinates returned are the ones given to the constructor" ) {
@@ -63,6 +65,25 @@ TEST_CASE("tests setPiece & getPiece", "tests if we can set a piece and retrieve
     REQUIRE(p2 == p);
 }
 
+TEST_CASE("tests  setTide", "tests if the tide field is updated after a call to set(Tide)") {
+    std::shared_ptr<Cell> c = std::make_shared<SwampCell>(1,2, false, 2);
+
+    REQUIRE(c->getType() == "swamp_medium");
+
+    c->setTide(Tide::MEDIUM_TIDE);
+    REQUIRE(c->getType() == "swamp_medium");
+    
+    c->setTide(Tide::LOW_TIDE);
+    REQUIRE(c->getType() == "swamp_low");
+    
+    c->setTide(Tide::MEDIUM_TIDE);
+    REQUIRE(c->getType() == "swamp_medium");
+    
+    c->setTide(Tide::HIGH_TIDE);
+    REQUIRE(c->getType() == "swamp_high");
+    
+}
+
 TEST_CASE("tests setPiece & removePiece", "tests if we can set a piece and remove it from the cell") {
     std::shared_ptr<Cell> c = std::make_shared<PlainCell>(1,2, false, 2);
     std::shared_ptr<Piece> p = std::make_shared<TankPiece>();
@@ -95,20 +116,23 @@ TEST_CASE("tests PlainCell", "tests the behavior of an hill cell") {
     std::shared_ptr<Piece> t = std::make_shared<TankPiece>();
     std::shared_ptr<Piece> m = std::make_shared<PatrolBoatPiece>();
 
-    SECTION("Low Tide")
-    REQUIRE(c->isPracticable(h, Tide::LOW_TIDE));
-    REQUIRE(c->isPracticable(t, Tide::LOW_TIDE));
-    REQUIRE_FALSE(c->isPracticable(m, Tide::LOW_TIDE));
+    SECTION("Low Tide");
+    c->setTide(Tide::LOW_TIDE);
+    REQUIRE(c->isPracticable(h));
+    REQUIRE(c->isPracticable(t));
+    REQUIRE_FALSE(c->isPracticable(m));
 
-    SECTION("Medium Tide")
-    REQUIRE(c->isPracticable(h, Tide::MEDIUM_TIDE));
-    REQUIRE(c->isPracticable(t, Tide::MEDIUM_TIDE));
-    REQUIRE_FALSE(c->isPracticable(m, Tide::MEDIUM_TIDE));
+    SECTION("Medium Tide");
+    c->setTide(Tide::MEDIUM_TIDE);
+    REQUIRE(c->isPracticable(h));
+    REQUIRE(c->isPracticable(t));
+    REQUIRE_FALSE(c->isPracticable(m));
 
-    SECTION("High Tide")
-    REQUIRE(c->isPracticable(h, Tide::HIGH_TIDE));
-    REQUIRE(c->isPracticable(t, Tide::HIGH_TIDE));
-    REQUIRE_FALSE(c->isPracticable(m, Tide::HIGH_TIDE));
+    SECTION("High Tide");
+    c->setTide(Tide::HIGH_TIDE);
+    REQUIRE(c->isPracticable(h));
+    REQUIRE(c->isPracticable(t));
+    REQUIRE_FALSE(c->isPracticable(m));
 }
 
 TEST_CASE("tests SeaCell", "tests the behavior of a sea cell") {
@@ -117,20 +141,23 @@ TEST_CASE("tests SeaCell", "tests the behavior of a sea cell") {
     std::shared_ptr<Piece> t = std::make_shared<TankPiece>();
     std::shared_ptr<Piece> m = std::make_shared<PatrolBoatPiece>();
 
-    SECTION("Low Tide")
-    REQUIRE_FALSE(c->isPracticable(h, Tide::LOW_TIDE));
-    REQUIRE_FALSE(c->isPracticable(t, Tide::LOW_TIDE));
-    REQUIRE(c->isPracticable(m, Tide::LOW_TIDE));
+    SECTION("Low Tide");
+    c->setTide(Tide::LOW_TIDE);
+    REQUIRE_FALSE(c->isPracticable(h));
+    REQUIRE_FALSE(c->isPracticable(t));
+    REQUIRE(c->isPracticable(m));
 
-    SECTION("Medium Tide")
-    REQUIRE_FALSE(c->isPracticable(h, Tide::MEDIUM_TIDE));
-    REQUIRE_FALSE(c->isPracticable(t, Tide::MEDIUM_TIDE));
-    REQUIRE(c->isPracticable(m, Tide::MEDIUM_TIDE));
+    SECTION("Medium Tide");
+    c->setTide(Tide::MEDIUM_TIDE);
+    REQUIRE_FALSE(c->isPracticable(h));
+    REQUIRE_FALSE(c->isPracticable(t));
+    REQUIRE(c->isPracticable(m));
 
-    SECTION("High Tide")
-    REQUIRE_FALSE(c->isPracticable(h, Tide::HIGH_TIDE));
-    REQUIRE_FALSE(c->isPracticable(t, Tide::HIGH_TIDE));
-    REQUIRE(c->isPracticable(m, Tide::HIGH_TIDE));
+    SECTION("High Tide");
+    c->setTide(Tide::HIGH_TIDE);
+    REQUIRE_FALSE(c->isPracticable(h));
+    REQUIRE_FALSE(c->isPracticable(t));
+    REQUIRE(c->isPracticable(m));
 }
 
 TEST_CASE("tests MountainCell", "tests the behavior of a mountain cell") {
@@ -139,20 +166,23 @@ TEST_CASE("tests MountainCell", "tests the behavior of a mountain cell") {
     std::shared_ptr<Piece> t = std::make_shared<TankPiece>();
     std::shared_ptr<Piece> m = std::make_shared<PatrolBoatPiece>();
 
-    SECTION("Low Tide")
-    REQUIRE_FALSE(c->isPracticable(h, Tide::LOW_TIDE));
-    REQUIRE(c->isPracticable(t, Tide::LOW_TIDE));
-    REQUIRE_FALSE(c->isPracticable(m, Tide::LOW_TIDE));
+    SECTION("Low Tide");
+    c->setTide(Tide::LOW_TIDE);
+    REQUIRE_FALSE(c->isPracticable(h));
+    REQUIRE(c->isPracticable(t));
+    REQUIRE_FALSE(c->isPracticable(m));
 
-    SECTION("Medium Tide")
-    REQUIRE_FALSE(c->isPracticable(h, Tide::MEDIUM_TIDE));
-    REQUIRE(c->isPracticable(t, Tide::MEDIUM_TIDE));
-    REQUIRE_FALSE(c->isPracticable(m, Tide::MEDIUM_TIDE));
+    SECTION("Medium Tide");
+    c->setTide(Tide::MEDIUM_TIDE);
+    REQUIRE_FALSE(c->isPracticable(h));
+    REQUIRE(c->isPracticable(t));
+    REQUIRE_FALSE(c->isPracticable(m));
 
-    SECTION("High Tide")
-    REQUIRE_FALSE(c->isPracticable(h, Tide::HIGH_TIDE));
-    REQUIRE(c->isPracticable(t, Tide::HIGH_TIDE));
-    REQUIRE_FALSE(c->isPracticable(m, Tide::HIGH_TIDE));
+    SECTION("High Tide");
+    c->setTide(Tide::HIGH_TIDE);
+    REQUIRE_FALSE(c->isPracticable(h));
+    REQUIRE(c->isPracticable(t));
+    REQUIRE_FALSE(c->isPracticable(m));
 }
 
 TEST_CASE("tests SwampCell", "tests the behavior of a swamp cell") {
@@ -161,21 +191,26 @@ TEST_CASE("tests SwampCell", "tests the behavior of a swamp cell") {
     std::shared_ptr<Piece> t = std::make_shared<TankPiece>();
     std::shared_ptr<Piece> m = std::make_shared<PatrolBoatPiece>();
 
+    SECTION("Low Tide");
+    c->setTide(Tide::LOW_TIDE);
+    REQUIRE(c->getType() == "swamp_low");
+    REQUIRE(c->isPracticable(h));
+    REQUIRE(c->isPracticable(t));
+    REQUIRE_FALSE(c->isPracticable(m));
 
-    SECTION("Low Tide")
-    REQUIRE(c->isPracticable(h, Tide::LOW_TIDE));
-    REQUIRE(c->isPracticable(t, Tide::LOW_TIDE));
-    REQUIRE_FALSE(c->isPracticable(m, Tide::LOW_TIDE));
+    SECTION("Medium Tide");
+    c->setTide(Tide::MEDIUM_TIDE);
+    REQUIRE(c->getType() == "swamp_medium");
+    REQUIRE(c->isPracticable(h));
+    REQUIRE(c->isPracticable(t));
+    REQUIRE_FALSE(c->isPracticable(m));
 
-    SECTION("Medium Tide")
-    REQUIRE(c->isPracticable(h, Tide::MEDIUM_TIDE));
-    REQUIRE(c->isPracticable(t, Tide::MEDIUM_TIDE));
-    REQUIRE_FALSE(c->isPracticable(m, Tide::MEDIUM_TIDE));
-
-    SECTION("High Tide")
-    REQUIRE_FALSE(c->isPracticable(h, Tide::HIGH_TIDE));
-    REQUIRE_FALSE(c->isPracticable(t, Tide::HIGH_TIDE));
-    REQUIRE(c->isPracticable(m, Tide::HIGH_TIDE));
+    SECTION("High Tide");
+    c->setTide(Tide::HIGH_TIDE);
+    REQUIRE(c->getType() == "swamp_high");
+    REQUIRE_FALSE(c->isPracticable(h));
+    REQUIRE_FALSE(c->isPracticable(t));
+    REQUIRE(c->isPracticable(m));
 }
 
 TEST_CASE("tests ReefCell", "tests the behavior of a reef cell") {
@@ -183,19 +218,22 @@ TEST_CASE("tests ReefCell", "tests the behavior of a reef cell") {
     std::shared_ptr<Piece> h = std::make_shared<BigTankPiece>();
     std::shared_ptr<Piece> t = std::make_shared<TankPiece>();
     std::shared_ptr<Piece> m = std::make_shared<PatrolBoatPiece>();
+ 
+    SECTION("Low Tide");
+    c->setTide(Tide::LOW_TIDE);
+    REQUIRE(c->isPracticable(h));
+    REQUIRE(c->isPracticable(t));
+    REQUIRE_FALSE(c->isPracticable(m));
 
-    SECTION("Low Tide")
-    REQUIRE(c->isPracticable(h, Tide::LOW_TIDE));
-    REQUIRE(c->isPracticable(t, Tide::LOW_TIDE));
-    REQUIRE_FALSE(c->isPracticable(m, Tide::LOW_TIDE));
+    SECTION("Medium Tide");
+    c->setTide(Tide::MEDIUM_TIDE);
+    REQUIRE_FALSE(c->isPracticable(h));
+    REQUIRE_FALSE(c->isPracticable(t));
+    REQUIRE(c->isPracticable(m));
 
-    SECTION("Medium Tide")
-    REQUIRE_FALSE(c->isPracticable(h, Tide::MEDIUM_TIDE));
-    REQUIRE_FALSE(c->isPracticable(t, Tide::MEDIUM_TIDE));
-    REQUIRE(c->isPracticable(m, Tide::MEDIUM_TIDE));
-
-    SECTION("High Tide")
-    REQUIRE_FALSE(c->isPracticable(h, Tide::HIGH_TIDE));
-    REQUIRE_FALSE(c->isPracticable(t, Tide::HIGH_TIDE));
-    REQUIRE(c->isPracticable(m, Tide::HIGH_TIDE));
+    SECTION("High Tide");
+    c->setTide(Tide::HIGH_TIDE);
+    REQUIRE_FALSE(c->isPracticable(h));
+    REQUIRE_FALSE(c->isPracticable(t));
+    REQUIRE(c->isPracticable(m));
 }
