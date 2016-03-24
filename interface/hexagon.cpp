@@ -1,6 +1,6 @@
 #include "hexagon.h"
 
-const float Hexagon::SIZE = { 100 };
+const float Hexagon::SIZE = { 75 };
 const float Hexagon::WIDTH = { SIZE * 2 };
 const float Hexagon::HEIGHT = { (float)sqrt(3) / 2 * WIDTH };
 
@@ -48,7 +48,7 @@ sf::Vector2f Hexagon::CellToPix(int xCell, int yCell)
         y = (yCell - 0.5) * HEIGHT; // above the previous one
     }
 
-    y += HEIGHT / 2; // adding an offset
+    y += HEIGHT / 2;
 
     return sf::Vector2f(x, y);
 }
