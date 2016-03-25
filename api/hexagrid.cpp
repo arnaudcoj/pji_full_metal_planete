@@ -314,7 +314,7 @@ int heuristic(std::shared_ptr<Cell> origin, std::shared_ptr<Cell> dest)
     return abs(coordOrigin.x - coordDest.x) + abs(coordOrigin.y - coordDest.y);
 }
 
-std::stack<std::shared_ptr<Cell> >
+std::list<std::shared_ptr<Cell> >
 Hexagrid::getPath_Astar(std::shared_ptr<Cell> origin, std::shared_ptr<Cell> dest, std::shared_ptr<Piece> piece) const
 {
     // on associe un entier (priorité) et un pointeur de Cell
@@ -347,12 +347,12 @@ Hexagrid::getPath_Astar(std::shared_ptr<Cell> origin, std::shared_ptr<Cell> dest
         }
     }
 
-    std::stack<std::shared_ptr<Cell> > path;
+    std::list<std::shared_ptr<Cell> > path;
     std::shared_ptr<Cell> current = dest;
-    path.push(current);
+    path.push_front(current);
     while(current != origin) {
         current = cameFrom[current];
-        path.push(current);
+        path.push_front(current);
     }
 
     return path;

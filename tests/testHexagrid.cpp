@@ -258,19 +258,19 @@ TEST_CASE("tests A*pathfinding", "tests if the piece avoids the obstacle and get
     //player.move(blockingpiece, grid.getCell(3,3), Tide::MEDIUM_TIDE);
     player.move(piece, grid.getCell(1,3));
     
-    std::stack<std::shared_ptr<Cell> > path = grid.getPath_Astar(piece->getCell(), grid.getCell(4,3), piece);
+    std::list<std::shared_ptr<Cell> > path = grid.getPath_Astar(piece->getCell(), grid.getCell(4,3), piece);
     
-    REQUIRE(path.top()->getArea() == 13);
-        path.pop();
-    REQUIRE(path.top()->getArea() == 22);
-        path.pop();
-    REQUIRE(path.top()->getArea() == 21);
-        path.pop();
-    REQUIRE(path.top()->getArea() == 31);
-        path.pop();
-    REQUIRE(path.top()->getArea() == 41);
-        path.pop();
-    REQUIRE(path.top()->getArea() == 42);
-        path.pop();
-    REQUIRE(path.top()->getArea() == 43);
+    REQUIRE(path.front()->getArea() == 13);
+        path.pop_front();
+    REQUIRE(path.front()->getArea() == 22);
+        path.pop_front();
+    REQUIRE(path.front()->getArea() == 21);
+        path.pop_front();
+    REQUIRE(path.front()->getArea() == 31);
+        path.pop_front();
+    REQUIRE(path.front()->getArea() == 41);
+        path.pop_front();
+    REQUIRE(path.front()->getArea() == 42);
+        path.pop_front();
+    REQUIRE(path.front()->getArea() == 43);
 }
