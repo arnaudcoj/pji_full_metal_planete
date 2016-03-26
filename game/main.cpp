@@ -12,6 +12,23 @@
 
 using namespace std;
 
+void centerView(sf::Vector2f worldPos, sf::Vector2f worldSize, sf::View& view)
+{
+    if(worldPos.x < view.getSize().x / 2) {
+        worldPos.x = view.getSize().x / 2;
+    } else if(worldPos.x > worldSize.x - view.getSize().x / 2) {
+        worldPos.x = worldSize.x - view.getSize().x / 2;
+    }
+
+    if(worldPos.y < view.getSize().y / 2) {
+        worldPos.y = view.getSize().y / 2;
+    } else if(worldPos.y > worldSize.y - view.getSize().y / 2) {
+        worldPos.y = worldSize.y - view.getSize().y / 2;
+    }
+
+    view.setCenter(worldPos.x, worldPos.y);
+}
+
 int main()
 {
     AssetManager manager;
@@ -41,11 +58,10 @@ int main()
 
     auto wSize = window.getSize();
     sf::View view(sf::FloatRect(0, 0, wSize.x, wSize.y));
-
-    // Initialize the view
-    // view.move(0, -Hexagon::HEIGHT / 2);
-
     window.setView(view);
+
+    sf::Vector2f worldSize(Hexagon::WIDTH * (game.getHexagrid().getWidth() - 1) * 3 / 4,
+        Hexagon::HEIGHT * (game.getHexagrid().getHeight() - 0.5));
 
     string tide = "";
 
@@ -122,30 +138,22 @@ int main()
                 break;
             case sf::Event::KeyPressed:
                 switch(event.key.code) {
-                case sf::Keyboard::Key::Up:
-                    view.move(0, -20);
-                    window.setView(view);
-                    break;
-                case sf::Keyboard::Key::Down:
-                    view.move(0, 20);
-                    window.setView(view);
-                    break;
-                case sf::Keyboard::Key::Right:
-                    view.move(20, 0);
-                    window.setView(view);
-                    break;
-                case sf::Keyboard::Key::Left:
-                    view.move(-20, 0);
-                    window.setView(view);
-                    break;
-                case sf::Keyboard::Key::Z:
-                    view.zoom(0.90);
-                    window.setView(view);
-                    break;
-                case sf::Keyboard::Key::S:
-                    view.zoom(1.10);
-                    window.setView(view);
-                    break;
+                case sf::Keyboard::Key::Up: {
+                    if(view.getSize().x * 0.9 > wSize.x && view.getSize().y * 0.9 > wSize.y) {
+                        view.zoom(0.9);
+                        sf::Vector2f worldPos(view.getCenter());
+                        centerView(worldPos, worldSize, view);
+                        window.setView(view);
+                    }
+                } break;
+                case sf::Keyboard::Key::Down: {
+                    if(view.getSize().x * 1.1 < worldSize.x && view.getSize().y * 1.1 < worldSize.y) {
+                        view.zoom(1.1);
+                        sf::Vector2f worldPos(view.getCenter());
+                        centerView(worldPos, worldSize, view);
+                        window.setView(view);
+                    }
+                } break;
                 default:
                     break;
                 }
@@ -159,28 +167,35 @@ int main()
                 sf::Vector2f vector = grid.PixToCell(worldPos.x, worldPos.y);
                 std::shared_ptr<Cell> cell = game.getHexagrid().getCell(vector.x, vector.y);
 
-                if(selectedPiece != nullptr && !travelling) {
-                    grid.getHexagon(selectedPiece->getCell())->setSelected(false);
-                    grid.getHexagon(cell)->setFocused(false);
+                if(cell != nullptr) {
+                    if(selectedPiece != nullptr && !travelling) {
+                        grid.getHexagon(selectedPiece->getCell())->setSelected(false);
+                        grid.getHexagon(cell)->setFocused(false);
 
-                    if(accessibleCells.count(cell) == 1 &&
-                        player.canMove(selectedPiece, cell)) {
-                        path = game.getHexagrid().getPath_Astar(
-                            selectedPiece->getCell(), cell, selectedPiece);
+                        if(accessibleCells.count(cell) == 1 && player.canMove(selectedPiece, cell)) {
+                            path = game.getHexagrid().getPath_Astar(selectedPiece->getCell(), cell, selectedPiece);
 
-                        path.pop();
-                        pawns.getPawn(selectedPiece)->travelTo(path.top());
+                            path.pop();
+                            pawns.getPawn(selectedPiece)->travelTo(path.top());
 
-                        travelling = true;
+                            travelling = true;
+                        } else {
+                            selectedPiece = nullptr;
+                        }
+                    } else if(cell->isOccupied() && !travelling) {
+                        selectedPiece = cell->getPiece();
+
+                        accessibleCells = game.getHexagrid().getAccessibleCells(player, selectedPiece);
+                        grid.getHexagon(cell)->setSelected(true);
+                        for(std::shared_ptr<Cell> cell : accessibleCells) {
+                            // grid.getHexagon(cell)->setFocused(true);
+                        }
                     } else {
-                        selectedPiece = nullptr;
+                        centerView(worldPos, worldSize, view);
+                        window.setView(view);
                     }
-                } else if(cell->isOccupied() && !travelling) {
-                    selectedPiece = cell->getPiece();
-                    accessibleCells =
-                        game.getHexagrid().getAccessibleCells(player, selectedPiece);
-                    grid.getHexagon(cell)->setSelected(true);
                 }
+
             } break;
             case sf::Event::MouseMoved: {
                 if(selectedPiece != nullptr && !travelling) {
@@ -201,8 +216,7 @@ int main()
                         if(cell->getPiece() != selectedPiece) {
                             std::shared_ptr<Hexagon> hexagon = grid.getHexagon(cell);
                             hexagon->setFocused(true);
-                            if(accessibleCells.count(cell) == 1 &&
-                                player.canMove(selectedPiece, cell)) {
+                            if(accessibleCells.count(cell) == 1 && player.canMove(selectedPiece, cell)) {
                                 hexagon->setAccessible(true);
 
                             } else {
@@ -226,7 +240,7 @@ int main()
 
         if(selectedPiece != nullptr) {
             sf::Vector2f position = pawns.getPawn(selectedPiece)->m_sprite.getPosition();
-            view.setCenter(pawns.getPawn(selectedPiece)->m_sprite.getPosition());
+            centerView(position, worldSize, view);
             window.setView(view);
         }
 
