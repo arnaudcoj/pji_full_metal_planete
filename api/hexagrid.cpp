@@ -432,6 +432,8 @@ std::unordered_set<std::shared_ptr<Cell> > Hexagrid::getAccessibleCells(Player& 
         }
         fringes.pop_front();
     }
+    
+    return cells;
 }
 
 std::shared_ptr<Cell> createCell(int i, int j, bool halfCell, int type, int area)

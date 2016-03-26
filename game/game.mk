@@ -5,18 +5,18 @@
 ## Debug
 ProjectName            :=game
 ConfigurationName      :=Debug
-WorkspacePath          := "/data/Arnaud/Mes Documents/Cours/Info/Master/M1/S2/pji_full_metal_planete"
-ProjectPath            := "/data/Arnaud/Mes Documents/Cours/Info/Master/M1/S2/pji_full_metal_planete/game"
+WorkspacePath          := "/home/non0w/Documents/M1/S2/pji_full_metal_planete"
+ProjectPath            := "/home/non0w/Documents/M1/S2/pji_full_metal_planete/game"
 IntermediateDirectory  :=./Debug
 OutDir                 := $(IntermediateDirectory)
 CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=
-Date                   :=03/25/16
+Date                   :=03/26/16
 CodeLitePath           :="/home/non0w/.codelite"
-LinkerName             :=/usr/bin/g++
-SharedObjectLinkerName :=/usr/bin/g++ -shared -fPIC
+LinkerName             :=/usr/bin/clang++
+SharedObjectLinkerName :=/usr/bin/clang++ -shared -fPIC
 ObjectSuffix           :=.o
 DependSuffix           :=.o.d
 PreprocessSuffix       :=.i
@@ -48,8 +48,8 @@ LibPath                := $(LibraryPathSwitch). $(LibraryPathSwitch)/usr/local/l
 ## AR, CXX, CC, AS, CXXFLAGS and CFLAGS can be overriden using an environment variables
 ##
 AR       := /usr/bin/ar rcu
-CXX      := /usr/bin/g++
-CC       := /usr/bin/gcc
+CXX      := /usr/bin/clang++
+CC       := /usr/bin/clang
 CXXFLAGS :=  -g -O0 -std=c++11 $(Preprocessors)
 CFLAGS   :=  -g -O0 -Wall $(Preprocessors)
 ASFLAGS  := 
@@ -104,7 +104,7 @@ PreBuild:
 ## Objects
 ##
 $(IntermediateDirectory)/main.cpp$(ObjectSuffix): main.cpp $(IntermediateDirectory)/main.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/data/Arnaud/Mes Documents/Cours/Info/Master/M1/S2/pji_full_metal_planete/game/main.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IncludePath)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/non0w/Documents/M1/S2/pji_full_metal_planete/game/main.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/main.cpp$(DependSuffix): main.cpp
 	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/main.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/main.cpp$(DependSuffix) -MM "main.cpp"
 
