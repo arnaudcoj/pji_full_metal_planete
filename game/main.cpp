@@ -8,6 +8,7 @@
 #include <iostream>
 #include "pawns.h"
 
+#include <list>
 #include <cmath>
 
 using namespace std;
@@ -84,7 +85,7 @@ int main()
     sf::Clock clock;
 
     std::shared_ptr<Piece> selectedPiece = nullptr;
-    std::stack<std::shared_ptr<Cell> > path;
+    std::list<std::shared_ptr<Cell> > path;
     std::unordered_set<std::shared_ptr<Cell> > accessibleCells;
 
     std::shared_ptr<Cell> previous_cell = nullptr;
@@ -175,8 +176,8 @@ int main()
                         if(accessibleCells.count(cell) == 1 && player.canMove(selectedPiece, cell)) {
                             path = game.getHexagrid().getPath_Astar(selectedPiece->getCell(), cell, selectedPiece);
 
-                            path.pop();
-                            pawns.getPawn(selectedPiece)->travelTo(path.top());
+                            path.pop_front();
+                            pawns.getPawn(selectedPiece)->travelTo(path.front());
 
                             travelling = true;
                         } else {
@@ -247,14 +248,14 @@ int main()
         if(travelling && !pawns.getPawn(selectedPiece)->isTravelling()) {
             // Move the selected piece to the cell
 
-            player.move(selectedPiece, path.top());
-            path.pop();
+            player.move(selectedPiece, path.front());
+            path.pop_front();
 
             if(path.empty()) {
                 selectedPiece = nullptr;
                 travelling = false;
             } else {
-                pawns.getPawn(selectedPiece)->travelTo(path.top());
+                pawns.getPawn(selectedPiece)->travelTo(path.front());
             }
         }
 

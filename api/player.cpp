@@ -1,7 +1,7 @@
 #include "player.h"
 
 Player::Player(int number)
-    : m_action_points(5)
+    : m_action_points(15)
     , m_number(number)
 {
 }
