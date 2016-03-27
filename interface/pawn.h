@@ -14,8 +14,6 @@ class Pawn
 {
 private:
     std::shared_ptr<Piece> m_piece;
-
-public:
     sf::Sprite m_sprite;
     sf::Vector2i m_size;
     Animator m_animator;
@@ -34,6 +32,7 @@ public:
     Pawn(std::shared_ptr<Piece> const& piece);
     bool isTravelling();
     void travelTo(std::shared_ptr<Cell> destination);
+    sf::Vector2f getPosition();
     void update(sf::Time const& deltaTime);
     void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 

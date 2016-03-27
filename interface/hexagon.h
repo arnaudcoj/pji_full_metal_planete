@@ -17,6 +17,7 @@ private:
     bool m_selected;
     bool m_focused;
     bool m_accessible;
+    bool m_path;
 
 public:
     static const float SIZE;
@@ -27,6 +28,7 @@ public:
     void setSelected(bool selected);
     void setFocused(bool focused);
     void setAccessible(bool accessible);
+    void setInPath(bool path);
     void update();
     void draw(sf::RenderTarget& target, sf::RenderStates states) const;
     static sf::Vector2f CellToPix(int xCell, int yCell);

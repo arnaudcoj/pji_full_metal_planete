@@ -91,6 +91,10 @@ void Pawn::travelTo(std::shared_ptr<Cell> destination)
     m_rotating = true;
 }
 
+sf::Vector2f Pawn::getPosition() {
+    return m_sprite.getPosition();
+}
+
 // updates the pion
 void Pawn::update(sf::Time const& deltaTime)
 {

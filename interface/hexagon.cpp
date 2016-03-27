@@ -18,6 +18,7 @@ Hexagon::Hexagon(std::shared_ptr<Cell> cell)
     , m_selected(false)
     , m_focused(false)
     , m_accessible(false)
+    , m_path(false)
 {
     m_sprite.setPointCount(6); // the number of points
 
@@ -59,33 +60,11 @@ sf::Vector2f Hexagon::CellToPix(int xCell, int yCell)
 void Hexagon::setSelected(bool selected)
 {
     m_selected = selected;
-
-    if(m_selected) {
-        m_sprite.setOutlineColor(sf::Color(0, 128, 128));
-        m_sprite.setOutlineThickness(-Hexagon::SIZE / 10);
-    } else {
-        m_sprite.setOutlineColor(sf::Color::Black);
-        m_sprite.setOutlineThickness(-Hexagon::SIZE / 25);
-    }
 }
 
 void Hexagon::setFocused(bool focused)
 {
     m_focused = focused;
-
-    if(!m_selected) {
-        if(m_focused) {
-            m_sprite.setOutlineThickness(-Hexagon::SIZE / 10);
-            if(m_accessible) {
-                m_sprite.setOutlineColor(sf::Color::Green);
-            } else {
-                m_sprite.setOutlineColor(sf::Color::Red);
-            }
-        } else {
-            m_sprite.setOutlineColor(sf::Color::Black);
-            m_sprite.setOutlineThickness(-Hexagon::SIZE / 25);
-        }
-    }
 }
 
 void Hexagon::setAccessible(bool accessible)
@@ -93,10 +72,42 @@ void Hexagon::setAccessible(bool accessible)
     m_accessible = accessible;
 }
 
+void Hexagon::setInPath(bool path)
+{
+    m_path = path;
+}
+
 // updates the hexagon
 void Hexagon::update()
 {
     m_sprite.setTexture(&AssetManager::GetTexture(m_cell->getType()));
+
+    if(!m_cell->isHalfCell()) {
+        if(m_path) {
+            m_sprite.setFillColor(sf::Color::Magenta);
+        } else if(m_accessible) {
+            m_sprite.setFillColor(sf::Color::Green);
+        } else {
+            m_sprite.setFillColor(sf::Color::White);
+        }
+    }
+
+    if(!m_selected) {
+        if(m_focused) {
+            if(m_accessible) {
+                m_sprite.setOutlineColor(sf::Color::Green);
+            } else {
+                m_sprite.setOutlineColor(sf::Color::Red);
+            }
+            m_sprite.setOutlineThickness(-Hexagon::SIZE / 10);
+        } else {
+            m_sprite.setOutlineColor(sf::Color::Black);
+            m_sprite.setOutlineThickness(-Hexagon::SIZE / 25);
+        }
+    } else {
+        m_sprite.setOutlineColor(sf::Color(0, 128, 128));
+        m_sprite.setOutlineThickness(-Hexagon::SIZE / 10);
+    }
 }
 
 // draws the hexagon the the entities inside of it

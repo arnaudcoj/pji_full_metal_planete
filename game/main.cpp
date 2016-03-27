@@ -44,7 +44,6 @@ int main()
     player.move(stock.takePiece(), game.getHexagrid().getCell(1, 1));
     // player.move(stock.takePiece(), game.getHexagrid().getCell(6, 4));
     // std::cout << stock.takePiece()->getType() << std::endl; // Pontoon
-
     stock.takePiece();
     player.move(stock.takePiece(), game.getHexagrid().getCell(7, 7)); // Boat
     player.move(stock.takePiece(), game.getHexagrid().getCell(1, 3));
@@ -176,6 +175,10 @@ int main()
                         if(accessibleCells.count(cell) == 1 && player.canMove(selectedPiece, cell)) {
                             path = game.getHexagrid().getPath_Astar(selectedPiece->getCell(), cell, selectedPiece);
 
+                            for(std::shared_ptr<Cell> cell : path) {
+                                grid.getHexagon(cell)->setInPath(false);
+                            }
+
                             path.pop_front();
                             pawns.getPawn(selectedPiece)->travelTo(path.front());
 
@@ -183,13 +186,18 @@ int main()
                         } else {
                             selectedPiece = nullptr;
                         }
+
+                        for(std::shared_ptr<Cell> cell : accessibleCells) {
+                            grid.getHexagon(cell)->setAccessible(false);
+                        }
                     } else if(cell->isOccupied() && !travelling) {
                         selectedPiece = cell->getPiece();
 
                         accessibleCells = game.getHexagrid().getAccessibleCells(player, selectedPiece);
                         grid.getHexagon(cell)->setSelected(true);
+
                         for(std::shared_ptr<Cell> cell : accessibleCells) {
-                            // grid.getHexagon(cell)->setFocused(true);
+                            grid.getHexagon(cell)->setAccessible(true);
                         }
                     } else {
                         centerView(worldPos, worldSize, view);
@@ -212,17 +220,30 @@ int main()
 
                         if(previous_cell != nullptr) {
                             grid.getHexagon(previous_cell)->setFocused(false);
+
+                            if(accessibleCells.count(previous_cell) == 1 &&
+                                player.canMove(selectedPiece, previous_cell)) {
+                                path = game.getHexagrid().getPath_Astar(
+                                    selectedPiece->getCell(), previous_cell, selectedPiece);
+
+                                for(std::shared_ptr<Cell> cell : path) {
+                                    grid.getHexagon(cell)->setInPath(false);
+                                }
+                            }
                         }
 
                         if(cell->getPiece() != selectedPiece) {
                             std::shared_ptr<Hexagon> hexagon = grid.getHexagon(cell);
                             hexagon->setFocused(true);
-                            if(accessibleCells.count(cell) == 1 && player.canMove(selectedPiece, cell)) {
-                                hexagon->setAccessible(true);
 
-                            } else {
-                                hexagon->setAccessible(false);
+                            if(accessibleCells.count(cell) == 1 && player.canMove(selectedPiece, cell)) {
+                                path = game.getHexagrid().getPath_Astar(selectedPiece->getCell(), cell, selectedPiece);
+
+                                for(std::shared_ptr<Cell> cell : path) {
+                                    grid.getHexagon(cell)->setInPath(true);
+                                }
                             }
+
                             previous_cell = cell;
                         } else {
                             previous_cell = nullptr;
@@ -240,7 +261,7 @@ int main()
         pawns.update(deltaTime);
 
         if(selectedPiece != nullptr) {
-            sf::Vector2f position = pawns.getPawn(selectedPiece)->m_sprite.getPosition();
+            sf::Vector2f position = pawns.getPawn(selectedPiece)->getPosition();
             centerView(position, worldSize, view);
             window.setView(view);
         }
