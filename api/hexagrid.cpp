@@ -404,7 +404,7 @@ std::unordered_set<std::shared_ptr<Cell> > Hexagrid::getAccessibleCells(Player& 
     std::unordered_set<std::shared_ptr<Cell> > cells;
 
     // return an empty set  (range < 1)
-    if(player.getActionPoints() < 1) {
+    if(!piece->getCell()->isPracticable(piece) || player.getActionPoints() < 1) {
         return cells;
     }
 
