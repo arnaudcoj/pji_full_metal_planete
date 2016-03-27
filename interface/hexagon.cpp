@@ -29,7 +29,7 @@ Hexagon::Hexagon(std::shared_ptr<Cell> cell)
 
     // setting the color of the hexagon depending of if it's a half cell or not
     if(m_cell->isHalfCell())
-        m_sprite.setFillColor(sf::Color(150, 150, 150, 255));
+        m_sprite.setFillColor(sf::Color(150, 150, 150));
 
     m_sprite.setOutlineColor(sf::Color::Black);
     m_sprite.setOutlineThickness(-SIZE / 25);
@@ -84,9 +84,9 @@ void Hexagon::update()
 
     if(!m_cell->isHalfCell()) {
         if(m_path) {
-            m_sprite.setFillColor(sf::Color::Magenta);
+            m_sprite.setFillColor(sf::Color(206, 153, 255));
         } else if(m_accessible) {
-            m_sprite.setFillColor(sf::Color::Green);
+            m_sprite.setFillColor(sf::Color(175, 255, 175));
         } else {
             m_sprite.setFillColor(sf::Color::White);
         }
@@ -95,9 +95,9 @@ void Hexagon::update()
     if(!m_selected) {
         if(m_focused) {
             if(m_accessible) {
-                m_sprite.setOutlineColor(sf::Color::Green);
+                m_sprite.setOutlineColor(sf::Color(0, 128, 0));
             } else {
-                m_sprite.setOutlineColor(sf::Color::Red);
+                m_sprite.setOutlineColor(sf::Color(128, 0, 0));
             }
             m_sprite.setOutlineThickness(-Hexagon::SIZE / 10);
         } else {
