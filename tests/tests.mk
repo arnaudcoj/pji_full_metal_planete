@@ -12,11 +12,19 @@ OutDir                 := $(IntermediateDirectory)
 CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
+<<<<<<< HEAD
 User                   :=Tristan Camus
 Date                   :=26/03/2016
 CodeLitePath           :="/Users/Kaendan/Library/Application Support/codelite"
 LinkerName             :=/usr/bin/g++
 SharedObjectLinkerName :=/usr/bin/g++ -dynamiclib -fPIC
+=======
+User                   :=
+Date                   :=03/26/16
+CodeLitePath           :="/home/non0w/.codelite"
+LinkerName             :=/usr/bin/clang++
+SharedObjectLinkerName :=/usr/bin/clang++ -shared -fPIC
+>>>>>>> cce45c7332b30a31b6427c6eb7dc48853883982c
 ObjectSuffix           :=.o
 DependSuffix           :=.o.d
 PreprocessSuffix       :=.i
