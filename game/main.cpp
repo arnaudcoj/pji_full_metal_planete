@@ -172,7 +172,7 @@ int main()
                         grid.getHexagon(selectedPiece->getCell())->setSelected(false);
                         grid.getHexagon(cell)->setFocused(false);
 
-                        if(accessibleCells.count(cell) == 1 && player.canMove(selectedPiece, cell)) {
+                        if(accessibleCells.count(cell) == 1) {
                             path = game.getHexagrid().getPath_Astar(selectedPiece->getCell(), cell, selectedPiece);
 
                             for(std::shared_ptr<Cell> cell : path) {
@@ -221,8 +221,7 @@ int main()
                         if(previous_cell != nullptr) {
                             grid.getHexagon(previous_cell)->setFocused(false);
 
-                            if(accessibleCells.count(previous_cell) == 1 &&
-                                player.canMove(selectedPiece, previous_cell)) {
+                            if(accessibleCells.count(previous_cell) == 1) {
                                 path = game.getHexagrid().getPath_Astar(
                                     selectedPiece->getCell(), previous_cell, selectedPiece);
 
@@ -236,7 +235,7 @@ int main()
                             std::shared_ptr<Hexagon> hexagon = grid.getHexagon(cell);
                             hexagon->setFocused(true);
 
-                            if(accessibleCells.count(cell) == 1 && player.canMove(selectedPiece, cell)) {
+                            if(accessibleCells.count(cell) == 1) {
                                 path = game.getHexagrid().getPath_Astar(selectedPiece->getCell(), cell, selectedPiece);
 
                                 for(std::shared_ptr<Cell> cell : path) {
