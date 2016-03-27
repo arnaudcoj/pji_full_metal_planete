@@ -11,7 +11,7 @@ Animator::Animator(sf::Sprite& sprite)
 {
 }
 
-Animator::Animation& Animator::CreateAnimation(std::string const& name,
+Animator::Animation& Animator::createAnimation(std::string const& name,
 
     std::string const& textureName,
     sf::Time const& duration,
@@ -27,12 +27,12 @@ Animator::Animation& Animator::CreateAnimation(std::string const& name,
 
     if(m_CurrentAnimation == nullptr)
 
-        SwitchAnimation(&m_Animations.back());
+        switchAnimation(&m_Animations.back());
 
     return m_Animations.back();
 }
 
-Animator::Animation* Animator::FindAnimation(std::string const& name)
+Animator::Animation* Animator::findAnimation(std::string const& name)
 
 {
 
@@ -48,7 +48,7 @@ Animator::Animation* Animator::FindAnimation(std::string const& name)
     return nullptr;
 }
 
-void Animator::Update(sf::Time const& dt)
+void Animator::update(sf::Time const& dt)
 
 {
 
@@ -83,17 +83,17 @@ void Animator::Update(sf::Time const& dt)
     m_Sprite.setTextureRect(m_CurrentAnimation->m_Frames[currentFrame]);
 }
 
-bool Animator::SwitchAnimation(std::string const& name)
+bool Animator::switchAnimation(std::string const& name)
 
 {
 
-    auto animation = FindAnimation(name);
+    auto animation = findAnimation(name);
 
     if(animation != nullptr)
 
     {
 
-        SwitchAnimation(animation);
+        switchAnimation(animation);
 
         return true;
     }
@@ -101,7 +101,7 @@ bool Animator::SwitchAnimation(std::string const& name)
     return false;
 }
 
-void Animator::SwitchAnimation(Animator::Animation* animation)
+void Animator::switchAnimation(Animator::Animation* animation)
 
 {
 
@@ -111,7 +111,7 @@ void Animator::SwitchAnimation(Animator::Animation* animation)
 
     {
 
-        m_Sprite.setTexture(AssetManager::GetTexture(animation->m_TextureName));
+        m_Sprite.setTexture(AssetManager::getTexture(animation->m_TextureName));
     }
 
     m_CurrentAnimation = animation;
@@ -119,7 +119,7 @@ void Animator::SwitchAnimation(Animator::Animation* animation)
     m_CurrentTime = sf::Time::Zero; // Reset the time
 }
 
-std::string Animator::GetCurrentAnimationName() const
+std::string Animator::getCurrentAnimationName() const
 
 {
 

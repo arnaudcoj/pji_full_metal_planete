@@ -41,11 +41,11 @@ Pawn::Pawn(std::shared_ptr<Piece> const& piece)
 
     m_sprite.setScale(size, size);
 
-    auto& animation_idle = m_animator.CreateAnimation("idle", m_piece->getType(), sf::seconds(0.2), true);
-    animation_idle.AddFrames(sf::Vector2i(0, 0), m_size, 1);
+    auto& animation_idle = m_animator.createAnimation("idle", m_piece->getType(), sf::seconds(0.2), true);
+    animation_idle.addFrames(sf::Vector2i(0, 0), m_size, 1);
 
-    auto& animation_moving = m_animator.CreateAnimation("moving", m_piece->getType(), sf::seconds(0.2), true);
-    animation_moving.AddFrames(sf::Vector2i(0, 0), m_size, nbSprites);
+    auto& animation_moving = m_animator.createAnimation("moving", m_piece->getType(), sf::seconds(0.2), true);
+    animation_moving.addFrames(sf::Vector2i(0, 0), m_size, nbSprites);
 }
 
 bool Pawn::isTravelling()
@@ -109,7 +109,7 @@ void Pawn::update(sf::Time const& deltaTime)
         } else if(m_rotating) {
             m_rotating = false;
             m_moving = true;
-            m_animator.SwitchAnimation("moving");
+            m_animator.switchAnimation("moving");
         } else if(m_moving && m_progress < m_distance) {
             float speed = m_speed;
             if(m_progress + m_speed > m_distance) {
@@ -120,14 +120,14 @@ void Pawn::update(sf::Time const& deltaTime)
             m_progress += speed;
         } else if(m_moving && m_progress == m_distance) {
             m_moving = false;
-            m_animator.SwitchAnimation("idle");
+            m_animator.switchAnimation("idle");
             m_progress = 0;
             m_distance = 0;
 
             m_travelling = false;
         }
 
-        m_animator.Update(deltaTime);
+        m_animator.update(deltaTime);
     }
 }
 

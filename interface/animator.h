@@ -45,7 +45,7 @@ public:
 
         // Adds frames horizontally
 
-        void AddFrames(sf::Vector2i const& startFrom,
+        void addFrames(sf::Vector2i const& startFrom,
 
             sf::Vector2i const& frameSize,
             unsigned int frames)
@@ -71,28 +71,28 @@ public:
 
     Animator(sf::Sprite& sprite);
 
-    Animator::Animation& CreateAnimation(std::string const& name,
+    Animator::Animation& createAnimation(std::string const& name,
 
         std::string const& textureName,
         sf::Time const& duration,
         bool loop = false);
 
-    void Update(sf::Time const& dt);
+    void update(sf::Time const& dt);
 
     // Returns if the switch was successful
 
-    bool SwitchAnimation(std::string const& name);
+    bool switchAnimation(std::string const& name);
 
-    std::string GetCurrentAnimationName() const;
+    std::string getCurrentAnimationName() const;
 
 private:
     // Returns the animation with the passed name
 
     // Returns nullptr if no such animation is found
 
-    Animator::Animation* FindAnimation(std::string const& name);
+    Animator::Animation* findAnimation(std::string const& name);
 
-    void SwitchAnimation(Animator::Animation* animation);
+    void switchAnimation(Animator::Animation* animation);
 
     // Reference to the sprite
 

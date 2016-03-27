@@ -80,7 +80,7 @@ void Hexagon::setInPath(bool path)
 // updates the hexagon
 void Hexagon::update()
 {
-    m_sprite.setTexture(&AssetManager::GetTexture(m_cell->getType()));
+    m_sprite.setTexture(&AssetManager::getTexture(m_cell->getType()));
 
     if(!m_cell->isHalfCell()) {
         if(m_path) {

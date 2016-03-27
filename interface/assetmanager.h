@@ -15,7 +15,7 @@ private:
 
 public:
     AssetManager();
-    static sf::Texture& GetTexture(std::string const& filename);
+    static sf::Texture& getTexture(std::string const& filename);
 };
 
 #endif // ASSETMANAGER_H

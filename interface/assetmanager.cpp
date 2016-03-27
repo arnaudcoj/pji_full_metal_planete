@@ -12,7 +12,7 @@ AssetManager::AssetManager() {
     sInstance = this;
 }
 
-sf::Texture& AssetManager::GetTexture(std::string const& filename) {
+sf::Texture& AssetManager::getTexture(std::string const& filename) {
     auto& textMap = sInstance->m_textures;
 
     // See if the texture is already loaded
