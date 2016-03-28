@@ -34,6 +34,8 @@ int main()
 {
     AssetManager manager;
 
+    sf::Sound selected_sound(AssetManager::getSoundBuffer(("bop.ogg")));
+
     // Creating the game objects
     Game game = Game("../../assets/maps/fmp.yaml", 1);
     Grid grid(game.getHexagrid());
@@ -194,7 +196,7 @@ int main()
                         }
                     } else if(cell->isOccupied() && !travelling) {
                         selectedPiece = cell->getPiece();
-
+                        
                         accessibleCells = game.getHexagrid().getAccessibleCells(player, selectedPiece);
                         grid.getHexagon(cell)->setSelected(true);
 
@@ -207,6 +209,8 @@ int main()
                         for(std::shared_ptr<Cell> cell : accessibleCells) {
                             grid.getHexagon(cell)->setAccessible(true);
                         }
+                        
+                        selected_sound.play();
                     } else {
                         centerView(worldPos, worldSize, view);
                         window.setView(view);
@@ -218,7 +222,7 @@ int main()
                 if(selectedPiece != nullptr && !travelling) {
                     sf::Vector2i pixelPos = sf::Mouse::getPosition(window);
 
-                    // conversion en coordonnées "monde"
+                    // conversion en coordonnÃ©es "monde"
                     sf::Vector2f worldPos = window.mapPixelToCoords(pixelPos);
 
                     sf::Vector2f vector = grid.PixToCell(worldPos.x, worldPos.y);

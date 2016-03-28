@@ -104,7 +104,7 @@ void Hexagon::update()
             outlineThickness = -Hexagon::SIZE / 10;
         }
 
-        if(m_path) {
+        if(m_path || m_selected) {
             fillColor = sf::Color(255, 255, 255, 160);
         } else if(!m_accessible) {
             fillColor = sf::Color(144, 144, 144);
