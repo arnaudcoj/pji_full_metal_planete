@@ -187,14 +187,22 @@ int main()
                             selectedPiece = nullptr;
                         }
 
-                        for(std::shared_ptr<Cell> cell : accessibleCells) {
-                            grid.getHexagon(cell)->setAccessible(false);
+                        for(int i = 0; i < game.getHexagrid().getWidth(); i++) {
+                            for(int j = 0; j < game.getHexagrid().getHeight(); j++) {
+                                grid.getHexagon(game.getHexagrid().getCell(i, j))->setAccessible(true);
+                            }
                         }
                     } else if(cell->isOccupied() && !travelling) {
                         selectedPiece = cell->getPiece();
 
                         accessibleCells = game.getHexagrid().getAccessibleCells(player, selectedPiece);
                         grid.getHexagon(cell)->setSelected(true);
+
+                        for(int i = 0; i < game.getHexagrid().getWidth(); i++) {
+                            for(int j = 0; j < game.getHexagrid().getHeight(); j++) {
+                                grid.getHexagon(game.getHexagrid().getCell(i, j))->setAccessible(false);
+                            }
+                        }
 
                         for(std::shared_ptr<Cell> cell : accessibleCells) {
                             grid.getHexagon(cell)->setAccessible(true);
@@ -280,7 +288,7 @@ int main()
         }
 
         // Render frame
-        window.clear(sf::Color::Black);
+        window.clear(sf::Color::White);
 
         window.draw(grid); // drawing the grid
         window.draw(pawns);

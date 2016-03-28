@@ -17,7 +17,7 @@ Hexagon::Hexagon(std::shared_ptr<Cell> cell)
     , m_sprite()
     , m_selected(false)
     , m_focused(false)
-    , m_accessible(false)
+    , m_accessible(true)
     , m_path(false)
 {
     m_sprite.setPointCount(6); // the number of points
@@ -29,7 +29,7 @@ Hexagon::Hexagon(std::shared_ptr<Cell> cell)
 
     // setting the color of the hexagon depending of if it's a half cell or not
     if(m_cell->isHalfCell())
-        m_sprite.setFillColor(sf::Color(150, 150, 150));
+        m_sprite.setFillColor(sf::Color(144, 144, 144));
 
     m_sprite.setOutlineColor(sf::Color::Black);
     m_sprite.setOutlineThickness(-SIZE / 25);
@@ -83,30 +83,36 @@ void Hexagon::update()
     m_sprite.setTexture(&AssetManager::getTexture(m_cell->getType()));
 
     if(!m_cell->isHalfCell()) {
-        if(m_path) {
-            m_sprite.setFillColor(sf::Color(206, 153, 255));
-        } else if(m_accessible) {
-            m_sprite.setFillColor(sf::Color(175, 255, 175));
-        } else {
-            m_sprite.setFillColor(sf::Color::White);
-        }
-    }
 
-    if(!m_selected) {
-        if(m_focused) {
+        sf::Color fillColor = sf::Color::White;
+        sf::Color outlineColor = sf::Color::Black;
+        float outlineThickness = -Hexagon::SIZE / 25;
+
+        if(m_selected) {
+            outlineColor = sf::Color(0, 128, 128);
+        } else if(m_focused) {
             if(m_accessible) {
-                m_sprite.setOutlineColor(sf::Color(0, 128, 0));
+                outlineColor = sf::Color(0, 128, 0);
             } else {
-                m_sprite.setOutlineColor(sf::Color(128, 0, 0));
+                outlineColor = sf::Color(128, 0, 0);
             }
-            m_sprite.setOutlineThickness(-Hexagon::SIZE / 10);
-        } else {
-            m_sprite.setOutlineColor(sf::Color::Black);
-            m_sprite.setOutlineThickness(-Hexagon::SIZE / 25);
         }
-    } else {
-        m_sprite.setOutlineColor(sf::Color(0, 128, 128));
-        m_sprite.setOutlineThickness(-Hexagon::SIZE / 10);
+
+        if(m_selected) {
+            outlineThickness = -Hexagon::SIZE / 10;
+        } else if(m_focused) {
+            outlineThickness = -Hexagon::SIZE / 10;
+        }
+
+        if(m_path) {
+            fillColor = sf::Color(255, 255, 255, 160);
+        } else if(!m_accessible) {
+            fillColor = sf::Color(144, 144, 144);
+        }
+
+        m_sprite.setFillColor(fillColor);
+        m_sprite.setOutlineColor(outlineColor);
+        m_sprite.setOutlineThickness(outlineThickness);
     }
 }
 
