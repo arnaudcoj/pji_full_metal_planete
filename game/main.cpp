@@ -5,8 +5,8 @@
 #include "assetmanager.h"
 #include "animator.h"
 #include "grid.h"
-#include <iostream>
 #include "pawns.h"
+#include "userinterface.h"
 
 #include <list>
 #include <cmath>
@@ -34,7 +34,7 @@ int main()
 {
     AssetManager manager;
 
-    sf::Sound selected_sound(AssetManager::getSoundBuffer(("bop.ogg")));
+    sf::Sound selected_sound(AssetManager::getSoundBuffer("bop.ogg"));
 
     // Creating the game objects
     Game game = Game("../../assets/maps/fmp.yaml", 1);
@@ -60,28 +60,11 @@ int main()
 
     auto wSize = window.getSize();
     sf::View view(sf::FloatRect(0, 0, wSize.x, wSize.y));
-    window.setView(view);
 
     sf::Vector2f worldSize(Hexagon::WIDTH * (game.getHexagrid().getWidth() - 1) * 3 / 4,
         Hexagon::HEIGHT * (game.getHexagrid().getHeight() - 0.5));
 
-    string tide = "";
-
-    switch(game.getGameState().getTide()) {
-    case Tide::LOW_TIDE:
-        tide = "low";
-        break;
-    case Tide::MEDIUM_TIDE:
-        tide = "medium";
-        break;
-    case Tide::HIGH_TIDE:
-        tide = "high";
-        break;
-    default:
-        break;
-    }
-
-    cout << tide << endl;
+    UserInterface userInterface(game, window);
 
     sf::Clock clock;
 
@@ -111,24 +94,7 @@ int main()
                 case sf::Keyboard::Key::Space: {
                     if(selectedPiece == nullptr) {
                         game.passTurn();
-
-                        switch(game.getGameState().getTide()) {
-                        case Tide::LOW_TIDE:
-                            tide = "low";
-                            break;
-                        case Tide::MEDIUM_TIDE:
-                            tide = "medium";
-                            break;
-                        case Tide::HIGH_TIDE:
-                            tide = "high";
-                            break;
-                        default:
-                            break;
-                        }
-
-                        cout << tide << endl;
                     }
-
                     break;
                 }
                 case sf::Keyboard::Key::Escape:
@@ -145,7 +111,6 @@ int main()
                         view.zoom(0.9);
                         sf::Vector2f worldPos(view.getCenter());
                         centerView(worldPos, worldSize, view);
-                        window.setView(view);
                     }
                 } break;
                 case sf::Keyboard::Key::Down: {
@@ -153,7 +118,6 @@ int main()
                         view.zoom(1.1);
                         sf::Vector2f worldPos(view.getCenter());
                         centerView(worldPos, worldSize, view);
-                        window.setView(view);
                     }
                 } break;
                 default:
@@ -196,7 +160,7 @@ int main()
                         }
                     } else if(cell->isOccupied() && !travelling) {
                         selectedPiece = cell->getPiece();
-                        
+
                         accessibleCells = game.getHexagrid().getAccessibleCells(player, selectedPiece);
                         grid.getHexagon(cell)->setSelected(true);
 
@@ -209,11 +173,10 @@ int main()
                         for(std::shared_ptr<Cell> cell : accessibleCells) {
                             grid.getHexagon(cell)->setAccessible(true);
                         }
-                        
+
                         selected_sound.play();
                     } else {
                         centerView(worldPos, worldSize, view);
-                        window.setView(view);
                     }
                 }
 
@@ -270,11 +233,11 @@ int main()
         // Update frame
         grid.update();
         pawns.update(deltaTime);
+        userInterface.update();
 
         if(selectedPiece != nullptr) {
             sf::Vector2f position = pawns.getPawn(selectedPiece)->getPosition();
             centerView(position, worldSize, view);
-            window.setView(view);
         }
 
         if(travelling && !pawns.getPawn(selectedPiece)->isTravelling()) {
@@ -296,7 +259,10 @@ int main()
 
         window.draw(grid); // drawing the grid
         window.draw(pawns);
-
+        window.draw(userInterface);
+        
+        window.setView(view);
+        
         window.display();
     }
 

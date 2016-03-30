@@ -60,7 +60,7 @@ AS       := /usr/bin/as
 ## User defined environment variables
 ##
 CodeLiteDir:=/Users/Kaendan/Downloads/codelite.app/Contents/SharedSupport/
-Objects0=$(IntermediateDirectory)/assetmanager.cpp$(ObjectSuffix) $(IntermediateDirectory)/grid.cpp$(ObjectSuffix) $(IntermediateDirectory)/hexagon.cpp$(ObjectSuffix) $(IntermediateDirectory)/pawn.cpp$(ObjectSuffix) $(IntermediateDirectory)/animator.cpp$(ObjectSuffix) $(IntermediateDirectory)/pawns.cpp$(ObjectSuffix) 
+Objects0=$(IntermediateDirectory)/assetmanager.cpp$(ObjectSuffix) $(IntermediateDirectory)/grid.cpp$(ObjectSuffix) $(IntermediateDirectory)/hexagon.cpp$(ObjectSuffix) $(IntermediateDirectory)/pawn.cpp$(ObjectSuffix) $(IntermediateDirectory)/animator.cpp$(ObjectSuffix) $(IntermediateDirectory)/pawns.cpp$(ObjectSuffix) $(IntermediateDirectory)/userinterface.cpp$(ObjectSuffix) 
 
 
 
@@ -140,6 +140,14 @@ $(IntermediateDirectory)/pawns.cpp$(DependSuffix): pawns.cpp
 
 $(IntermediateDirectory)/pawns.cpp$(PreprocessSuffix): pawns.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/pawns.cpp$(PreprocessSuffix) "pawns.cpp"
+
+$(IntermediateDirectory)/userinterface.cpp$(ObjectSuffix): userinterface.cpp $(IntermediateDirectory)/userinterface.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/Users/Kaendan/Documents/Code/Master/S2/PJI/FMP/interface/userinterface.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/userinterface.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/userinterface.cpp$(DependSuffix): userinterface.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/userinterface.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/userinterface.cpp$(DependSuffix) -MM "userinterface.cpp"
+
+$(IntermediateDirectory)/userinterface.cpp$(PreprocessSuffix): userinterface.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/userinterface.cpp$(PreprocessSuffix) "userinterface.cpp"
 
 
 -include $(IntermediateDirectory)/*$(DependSuffix)

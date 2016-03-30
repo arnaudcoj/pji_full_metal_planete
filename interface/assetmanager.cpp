@@ -3,6 +3,7 @@
 
 const std::string AssetManager::IMG_PATH = { "../../assets/tiles/" };
 const std::string AssetManager::SOUND_PATH = { "../../assets/sounds/" };
+const std::string AssetManager::FONT_PATH = { "../../assets/fonts/" };
 
 AssetManager* AssetManager::sInstance = nullptr;
 
@@ -59,7 +60,7 @@ sf::Font& AssetManager::getFont(std::string const& filename)
     } else {
         // Create an element in the Fonts map
         auto& font = fontMap[filename];
-        font.loadFromFile(filename);
+        font.loadFromFile(FONT_PATH + filename);
         return font;
     }
 }

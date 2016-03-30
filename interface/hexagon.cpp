@@ -1,6 +1,6 @@
 #include "hexagon.h"
 
-const float Hexagon::SIZE = { 100 };
+const float Hexagon::SIZE = { 75 };
 const float Hexagon::WIDTH = { SIZE * 2 };
 const float Hexagon::HEIGHT = { (float)sqrt(3) / 2 * WIDTH };
 

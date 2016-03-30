@@ -18,6 +18,7 @@ public:
 private:
     static const std::string IMG_PATH;
     static const std::string SOUND_PATH;
+    static const std::string FONT_PATH;
     
     std::map<std::string, sf::Texture> m_Textures;
     std::map<std::string, sf::SoundBuffer> m_SoundBuffers;
