@@ -109,7 +109,7 @@ int main()
             case sf::Event::KeyReleased:
                 switch(event.key.code) {
                 case sf::Keyboard::Key::Space: {
-                    if(!travelling) {
+                    if(selectedPiece == nullptr) {
                         game.passTurn();
 
                         switch(game.getGameState().getTide()) {
