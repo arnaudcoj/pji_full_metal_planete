@@ -15,5 +15,5 @@ bool MineralPiece::canBeCarried(Container::Type containerType) const
 }
 
 std::string MineralPiece::getType() {
-    return m_type;
+    return "mineral";
 }

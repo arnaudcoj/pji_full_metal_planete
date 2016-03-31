@@ -3,6 +3,7 @@
 Player::Player(int number)
     : m_action_points(15)
     , m_number(number)
+    , m_pieceStock()
 {
 }
 
@@ -62,4 +63,8 @@ bool Player::removePiece(std::shared_ptr<Piece> piece)
     piece->removeCell();
 
     return false;
+}
+
+PieceStock& Player::getPieceStock() {
+    return m_pieceStock;
 }

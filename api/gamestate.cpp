@@ -1,40 +1,50 @@
 #include "gamestate.h"
 
-
-GameState::GameState() : m_maxTurns(25), m_nbTurns(m_maxTurns), m_tideVector()
+GameState::GameState()
+    : m_maxTurns(25)
+    , m_turn(1)
+    , m_tideVector()
 {
     m_RNG.seed(std::random_device()());
     initTideVector();
 }
 
-std::vector<Tide> &GameState::getTides() {
+std::vector<Tide>& GameState::getTides()
+{
     return m_tideVector;
 }
 
-Tide& GameState::getTide() {
+Tide& GameState::getTide()
+{
     return m_tideVector.back();
 }
 
-int GameState::getNbTurns() {
-    return m_nbTurns;
+int GameState::getTurn()
+{
+    return m_turn;
 }
 
-int GameState::getMaxTurns() {
+int GameState::getMaxTurns()
+{
     return m_maxTurns;
 }
 
-void GameState::nextTurn() {
-    if(m_nbTurns < 0) {
-    //  comportement à déterminer
-        return;
+void GameState::nextTurn()
+{
+    if(m_turn <= m_maxTurns) {
+        m_turn++;
     }
-    m_nbTurns--;
+}
+
+void GameState::nextTide()
+{
     m_tideVector.pop_back();
     if(m_tideVector.size() <= 0)
         initTideVector();
 }
 
-void GameState::initTideVector() {
+void GameState::initTideVector()
+{
 
     m_tideVector.clear();
 
@@ -49,5 +59,4 @@ void GameState::initTideVector() {
 
     for(int i = 0; i < 6; i++)
         m_tideVector.pop_back();
-
 }

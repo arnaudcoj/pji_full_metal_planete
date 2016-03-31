@@ -18,5 +18,5 @@ bool TankPiece::canBeCarried(Container::Type containerType) const
 }
 
 std::string TankPiece::getType() {
-    return m_type;
+    return "tank";
 }

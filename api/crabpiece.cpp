@@ -16,5 +16,5 @@ bool CrabPiece::canBeCarried(Container::Type containerType) const
 }
 
 std::string CrabPiece::getType() {
-    return m_type;
+    return "crab";
 }

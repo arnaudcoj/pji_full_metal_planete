@@ -8,8 +8,6 @@
 
 class CrabPiece : public Piece
 {
-private:
-    std::string m_type = "crab";
 
 public:
     CrabPiece();

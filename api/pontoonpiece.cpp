@@ -18,5 +18,5 @@ bool PontoonPiece::canBeCarried(Container::Type containerType) const
 }
 
 std::string PontoonPiece::getType() {
-    return m_type;
+    return "pontoon";
 }

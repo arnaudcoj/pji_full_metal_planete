@@ -8,8 +8,6 @@
 
 class WeatherLayerPiece : public Piece
 {
-private:
-    std::string m_type = "weather_layer";
 
 public:
     WeatherLayerPiece();

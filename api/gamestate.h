@@ -11,7 +11,7 @@ typedef std::mt19937 RNG;
 class GameState
 {
     int m_maxTurns;
-    int m_nbTurns;
+    int m_turn;
 
     RNG m_RNG;
 
@@ -22,9 +22,11 @@ public:
     GameState();
     std::vector<Tide>& getTides();
 
-    int getNbTurns();
+    int getTurn();
     int getMaxTurns();
     void nextTurn();
+    void nextTide();
+
     Tide& getTide();
 };
 

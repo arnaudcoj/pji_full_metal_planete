@@ -9,8 +9,6 @@
 
 class MineralPiece : public Piece
 {
-private:
-    std::string m_type = "mineral";
 
 public:
     MineralPiece();

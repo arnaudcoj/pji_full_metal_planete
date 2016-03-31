@@ -5,8 +5,6 @@
 
 class TankPiece : public Piece
 {
-private:
-    std::string m_type = "tank";
 
 public:
     TankPiece();

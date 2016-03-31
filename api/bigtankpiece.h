@@ -8,8 +8,6 @@
 
 class BigTankPiece : public Piece
 {
-private:
-    std::string m_type = "big_tank";
 
 public:
     BigTankPiece();

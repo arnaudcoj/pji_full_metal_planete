@@ -16,11 +16,13 @@
 #include "bigtankpiece.h"
 #include "bargepiece.h"
 #include "crabpiece.h"
+#include "MineralPiece.h"
 #include "patrolboatpiece.h"
 #include "pontoonpiece.h"
 #include "weatherlayerpiece.h"
+#include "cell.h"
 
-//contient les informations sur l'etat du jeu
+// contient les informations sur l'etat du jeu
 class Game
 {
     Hexagrid m_hexagrid;
@@ -29,20 +31,24 @@ class Game
     GameState m_gameState;
     PieceStock m_pieceStock;
 
+    void init(int nbPlayer);
     void newTurn();
-public:
+    void placePiece(std::shared_ptr<Cell> cell, std::shared_ptr<Piece> piece);
+    void populatePieceStock(int nbPlayers);
+    void distributeArmy();
 
+public:
     Game(int nbPlayer = 1);
     Game(const std::string& gridFile, int nbPlayer = 1);
     Game(Hexagrid grid, int nbPlayer = 1);
-    
+
     void passTurn();
-    
+
     std::list<Player> getPlayers() const;
-    Player& getCurrentPlayer() ;
-    Hexagrid& getHexagrid() ;
-    GameState& getGameState() ;
-    PieceStock& getPieceStock() ;
+    Player& getCurrentPlayer();
+    Hexagrid& getHexagrid();
+    GameState& getGameState();
+    PieceStock& getPieceStock();
 };
 
 #endif // GAME_H

@@ -8,8 +8,6 @@
 
 class PontoonPiece : public Piece
 {
-private:
-    std::string m_type = "pontoon";
 
 public:
     PontoonPiece();
