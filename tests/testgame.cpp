@@ -32,35 +32,35 @@ TEST_CASE("test getGameState", "tests if getGameState returns a correct gameStat
     Game g;
     GameState gs = g.getGameState();
 
-    REQUIRE(gs.getNbTurns() == gs.getMaxTurns());
+    REQUIRE(gs.getTurn() == 0);
     REQUIRE(gs.getTides().size() == 9);
 }
 
 
 TEST_CASE("test passTurn", "tests if all players are iterated over. And if we get the next turn and we start over when we reach the end of the list") {
     Game game(3);
-    
-    REQUIRE(game.getGameState().getNbTurns() == 25);
+
+    REQUIRE(game.getGameState().getTurn() == 0);
     REQUIRE(game.getCurrentPlayer().getNumber() == 1);
     
     game.passTurn();
     
-    REQUIRE(game.getGameState().getNbTurns() == 25);
+    REQUIRE(game.getGameState().getTurn() == 0);
     REQUIRE(game.getCurrentPlayer().getNumber() == 2);
     
     game.passTurn();
     
-    REQUIRE(game.getGameState().getNbTurns() == 25);
+    REQUIRE(game.getGameState().getTurn() == 0);
     REQUIRE(game.getCurrentPlayer().getNumber() == 3);
     
     game.passTurn();
     
-    REQUIRE(game.getGameState().getNbTurns() == 24);
+    REQUIRE(game.getGameState().getTurn() == 1);
     REQUIRE(game.getCurrentPlayer().getNumber() == 1);
     
     game.passTurn();
     
-    REQUIRE(game.getGameState().getNbTurns() == 24);
+    REQUIRE(game.getGameState().getTurn() == 1);
     REQUIRE(game.getCurrentPlayer().getNumber() == 2);
     
 }
@@ -68,27 +68,27 @@ TEST_CASE("test passTurn", "tests if all players are iterated over. And if we ge
 TEST_CASE("test passTurn when just 1 player", "tests if the turn changes and if the player stays the same each time we call passTurn") {
     Game game(1);
     
-    REQUIRE(game.getGameState().getNbTurns() == 25);
+    REQUIRE(game.getGameState().getTurn() == 0);
     REQUIRE(game.getCurrentPlayer().getNumber() == 1);
     
     game.passTurn();
     
-    REQUIRE(game.getGameState().getNbTurns() == 24);
+    REQUIRE(game.getGameState().getTurn() == 1);
     REQUIRE(game.getCurrentPlayer().getNumber() == 1);
     
     game.passTurn();
     
-    REQUIRE(game.getGameState().getNbTurns() == 23);
+    REQUIRE(game.getGameState().getTurn() == 2);
     REQUIRE(game.getCurrentPlayer().getNumber() == 1);
     
     game.passTurn();
     
-    REQUIRE(game.getGameState().getNbTurns() == 22);
+    REQUIRE(game.getGameState().getTurn() == 3);
     REQUIRE(game.getCurrentPlayer().getNumber() == 1);
     
     game.passTurn();
     
-    REQUIRE(game.getGameState().getNbTurns() == 21);
+    REQUIRE(game.getGameState().getTurn() == 4);
     REQUIRE(game.getCurrentPlayer().getNumber() == 1);
     
 }

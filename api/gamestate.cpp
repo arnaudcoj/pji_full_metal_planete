@@ -2,7 +2,7 @@
 
 GameState::GameState()
     : m_maxTurns(25)
-    , m_turn(1)
+    , m_turn(0)
     , m_tideVector()
 {
     m_RNG.seed(std::random_device()());

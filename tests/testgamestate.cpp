@@ -2,20 +2,20 @@
 #include <memory>
 #include <gamestate.h>
 
-TEST_CASE("test getNbTurns and getMaxTurns", "tests if the nbTurns is the same as maxTurns when the game is created") {
+TEST_CASE("test getTurn and getMaxTurns", "tests if the nbTurns is the same as maxTurns when the game is created") {
     GameState gs;
 
-    REQUIRE(gs.getNbTurns() == gs.getMaxTurns());
+    REQUIRE(gs.getTurn() == gs.getMaxTurns());
 }
 
 TEST_CASE("test nextTurn", "tests if the nbTurns is updated when we call nextTurn") {
     GameState gs;
 
-    REQUIRE(gs.getNbTurns() == gs.getMaxTurns());
+    REQUIRE(gs.getTurn() == gs.getMaxTurns());
     gs.nextTurn();
-    REQUIRE(gs.getNbTurns() == gs.getMaxTurns() - 1);
+    REQUIRE(gs.getTurn() == gs.getMaxTurns() - 1);
     gs.nextTurn();
-    REQUIRE(gs.getNbTurns() == gs.getMaxTurns() - 2);
+    REQUIRE(gs.getTurn() == gs.getMaxTurns() - 2);
 }
 
 TEST_CASE("test getTides()", "tests the amount of cells at init and when we get to the next turn") {
