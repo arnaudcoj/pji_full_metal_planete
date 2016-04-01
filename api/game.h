@@ -49,6 +49,9 @@ public:
     Hexagrid& getHexagrid();
     GameState& getGameState();
     PieceStock& getPieceStock();
+    bool isStarted() const;
+    bool isFinished() const;
+    void startGame();
 };
 
 #endif // GAME_H

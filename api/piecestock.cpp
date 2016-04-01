@@ -7,12 +7,14 @@ PieceStock::PieceStock()
 
 std::shared_ptr<Piece> PieceStock::takePiece(std::string id)
 {
-    auto p = mPieces.find(id);
-    if(p == mPieces.end())
+    auto found = mPieces.find(id);
+    if(found == mPieces.end())
         return nullptr;
 
-    mPieces.erase(p);
-    return p->second;
+    std::shared_ptr<Piece> p = found->second;
+    
+    mPieces.erase(found);
+    return p;
 }
 
 std::shared_ptr<Piece> PieceStock::takeBargePiece()

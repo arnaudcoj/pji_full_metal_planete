@@ -9,22 +9,22 @@ GameState::GameState()
     initTideVector();
 }
 
-std::vector<Tide>& GameState::getTides()
+std::vector<Tide> GameState::getTides() const
 {
     return m_tideVector;
 }
 
-Tide& GameState::getTide()
+Tide GameState::getTide() const
 {
     return m_tideVector.back();
 }
 
-int GameState::getTurn()
+int GameState::getTurn() const
 {
     return m_turn;
 }
 
-int GameState::getMaxTurns()
+int GameState::getMaxTurns() const
 {
     return m_maxTurns;
 }

@@ -20,14 +20,14 @@ class GameState
 
 public:
     GameState();
-    std::vector<Tide>& getTides();
+    std::vector<Tide> getTides() const;
 
-    int getTurn();
-    int getMaxTurns();
+    int getTurn() const;
+    int getMaxTurns() const;
     void nextTurn();
     void nextTide();
 
-    Tide& getTide();
+    Tide getTide() const;
 };
 
 #endif // GAMESTATE_H

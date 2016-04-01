@@ -2,6 +2,8 @@
 #include <memory>
 #include <piecestock.h>
 #include <tankpiece.h>
+#include <bigtankpiece.h>
+#include <pontoonpiece.h>
 #include <piece.h>
 
 TEST_CASE("test pieceStock Construction and size", "tests if the stock contains the given amount of Pieces after construction") {
@@ -18,12 +20,15 @@ TEST_CASE("test pieceStock Construction and size", "tests if the stock contains 
 TEST_CASE("test addPiece ", "tests if the stock is correctly updated when adding a piece") {
     PieceStock stock;
     std::shared_ptr<Piece> piece = std::make_shared<TankPiece>();
-    std::shared_ptr<Piece> piece2 = std::make_shared<TankPiece>();
+    std::shared_ptr<Piece> piece2 = std::make_shared<BigTankPiece>();
+    std::shared_ptr<Piece> piece3 = std::make_shared<PontoonPiece>();
 
     stock.addPiece(piece);
     REQUIRE(stock.getAllPieces().size() == 1);
     stock.addPiece(piece2);
     REQUIRE(stock.getAllPieces().size() == 2);
+    stock.addPiece(piece3);
+    REQUIRE(stock.getAllPieces().size() == 3);
 }
 
 TEST_CASE("test takePiece", "tests if the stock is correctly updated when taking a piece") {
@@ -37,6 +42,6 @@ TEST_CASE("test takePiece", "tests if the stock is correctly updated when taking
     stock.takeTankPiece();
     REQUIRE(stock.getAllPieces().size() == 0);
 
-    REQUIRE_THROWS_AS(stock.takeTankPiece(), std::logic_error);
+    REQUIRE(stock.takeTankPiece() == nullptr);
     REQUIRE(stock.getAllPieces().size() == 0);
 }

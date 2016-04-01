@@ -58,33 +58,33 @@ void Game::populatePieceStock(int nbPlayers)
         m_pieceStock.addPiece(std::make_shared<CrabPiece>());
         m_pieceStock.addPiece(std::make_shared<PontoonPiece>());
     }
-    
+
     // Reserve pour chaque player
     for(int i = 0; i < nbPlayers; i++) {
         m_pieceStock.addPiece(std::make_shared<PontoonPiece>());
         m_pieceStock.addPiece(std::make_shared<BigTankPiece>());
         m_pieceStock.addPiece(std::make_shared<BargePiece>());
-        m_pieceStock.addPiece(std::make_shared<PatrolBoatPiece>());
         m_pieceStock.addPiece(std::make_shared<CrabPiece>());
         m_pieceStock.addPiece(std::make_shared<WeatherLayerPiece>());
         for(int j = 0; j < 4; j++)
             m_pieceStock.addPiece(std::make_shared<TankPiece>());
-        for(int j = 0; j < 2; j++) 
+        for(int j = 0; j < 2; j++)
             m_pieceStock.addPiece(std::make_shared<PatrolBoatPiece>());
     }
 }
 
-void Game::distributeArmy() {
-    for(Player player : m_players) {
+void Game::distributeArmy()
+{
+    for(Player& player : m_players) {
         player.getPieceStock().addPiece(m_pieceStock.takePontoonPiece());
         player.getPieceStock().addPiece(m_pieceStock.takeBigTankPiece());
-        for(int i = 0; i < 4; i++)
-            player.getPieceStock().addPiece(m_pieceStock.takeTankPiece());
         player.getPieceStock().addPiece(m_pieceStock.takeBargePiece());
-        for(int i = 0; i < 2; i++)
-            player.getPieceStock().addPiece(m_pieceStock.takePatrolBoatPiece());
         player.getPieceStock().addPiece(m_pieceStock.takeCrabPiece());
         player.getPieceStock().addPiece(m_pieceStock.takeWeatherLayerPiece());
+        for(int i = 0; i < 4; i++)
+            player.getPieceStock().addPiece(m_pieceStock.takeTankPiece());
+        for(int i = 0; i < 2; i++)
+            player.getPieceStock().addPiece(m_pieceStock.takePatrolBoatPiece());
     }
 }
 
@@ -113,8 +113,25 @@ PieceStock& Game::getPieceStock()
     return m_pieceStock;
 }
 
+bool Game::isStarted() const {
+    return m_gameState.getTurn() != 0;
+}
+
+bool Game::isFinished() const {
+    return m_gameState.getTurn() > 25;
+}
+
+void Game::startGame()
+{
+    distributeArmy();
+    newTurn();
+}
+
 void Game::passTurn()
 {
+    if(m_gameState.getTurn() <= 0 || m_gameState.getTurn() > 25)
+        return;
+
     m_currentPlayer++;
     if(m_currentPlayer == m_players.end()) {
         m_currentPlayer = m_players.begin();
@@ -130,7 +147,7 @@ void Game::newTurn()
         // choix de la zone d'aterrissage
         break;
     case 2:
-        distributeArmy();
+        // deploiement
         break;
     case 3:
         // 5 points d'action
