@@ -110,8 +110,8 @@
       </Completion>
     </Configuration>
   </Settings>
-  <Dependencies Name="Release"/>
   <Dependencies Name="Debug">
     <Project Name="api"/>
   </Dependencies>
+  <Dependencies Name="Release"/>
 </CodeLite_Project>
