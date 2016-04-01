@@ -13,3 +13,8 @@ bool SeaCell::isPracticableCurrent(std::shared_ptr<Piece> piece) {
 std::string SeaCell::getType() {
     return m_type;
 }
+
+bool SeaCell::canContainMineral()
+{
+    return false;
+}

@@ -18,6 +18,7 @@ public:
     SeaCell(sf::Vector2i coord, bool halfCell = false, unsigned int area = 0);
     SeaCell(int x, int y, bool halfCell = false, unsigned int area = 0);
     virtual bool isPracticableCurrent(std::shared_ptr<Piece> piece);
+    virtual bool canContainMineral();
     virtual std::string getType();
 };
 

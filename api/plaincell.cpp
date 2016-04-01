@@ -13,3 +13,8 @@ bool PlainCell::isPracticableCurrent(std::shared_ptr<Piece> piece) {
 std::string PlainCell::getType() {
     return m_type;
 }
+
+bool PlainCell::canContainPod()
+{
+    return true;
+}

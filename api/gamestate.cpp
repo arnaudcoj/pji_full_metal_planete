@@ -1,7 +1,8 @@
 #include "gamestate.h"
 
 GameState::GameState()
-    : m_maxTurns(25)
+    : m_RNG()
+    , m_maxTurns(25)
     , m_turn(0)
     , m_tideVector()
 {

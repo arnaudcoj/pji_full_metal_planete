@@ -5,6 +5,8 @@
 #include <list>
 #include <iterator>
 #include <string>
+#include <random>
+#include <SFML/System/Vector2.hpp>
 
 #include "hexagrid.h"
 #include "gamestate.h"
@@ -22,6 +24,8 @@
 #include "weatherlayerpiece.h"
 #include "cell.h"
 
+typedef std::mt19937 RNG;
+    
 // contient les informations sur l'etat du jeu
 class Game
 {
@@ -36,6 +40,7 @@ class Game
     void placePiece(std::shared_ptr<Cell> cell, std::shared_ptr<Piece> piece);
     void populatePieceStock(int nbPlayers);
     void distributeArmy();
+    void placeMinerals(sf::Vector2i firstMineral);
 
 public:
     Game(int nbPlayer = 1);
@@ -51,7 +56,7 @@ public:
     PieceStock& getPieceStock();
     bool isStarted() const;
     bool isFinished() const;
-    void startGame();
+    void startGame(sf::Vector2i firstMineral = sf::Vector2i(-1, -1));
 };
 
 #endif // GAME_H
