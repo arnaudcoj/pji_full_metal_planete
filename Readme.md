@@ -14,8 +14,6 @@ Aucun exécutable n'est distribué pour l'instant. Pour compiler et lancer le je
   1. installer la bibliothèque **[SFML](http://www.sfml-dev.org/)** ;
   2. installer **[boost](https://www.Boost.org/)** ;
   3. installer **[yaml-cpp](https://github.com/jbeder/yaml-cpp)** ;
-  4. installer **[Qt Creator](http://qt.digia.com/product/)** ;
-  5. ouvrir full_metal_planete/full_metal_planete.pro dans **Qt  Creator** ;
-  6. clic-droit sur le sous-projet **api**, choisissez *Compiler* ;
-  7. faîtes de même avec **interface**, puis **app** ;
-  7. clic-droit sur **app**, choisissez *Exécuter* pour lancer le jeu.
+  4. installer **[Codelite](http://www.codelite.org/)** ;
+  5. ouvrir **FMP.workpace** dans **Codelite** ;
+  6. sélectionner **Build and Run** pour lancer le programme.
