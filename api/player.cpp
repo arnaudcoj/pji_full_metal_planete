@@ -35,6 +35,13 @@ bool Player::canMove(std::shared_ptr<Piece> piece, std::shared_ptr<Cell> cell)
         (piece->getCell() != nullptr && !piece->getCell()->isPracticable(piece))));
 }
 
+bool Player::canCarry(std::shared_ptr<Piece> transporter, std::shared_ptr<Piece> targetPiece, Hexagrid& grid) {
+    assert(transporter != nullptr);
+    assert(targetPiece != nullptr);
+
+    return grid.areNeighbours(transporter->getCell(), targetPiece->getCell()) && targetPiece->canBeCarried(transporter->getContainer()) ;
+}
+
 bool Player::move(std::shared_ptr<Piece> piece, std::shared_ptr<Cell> cell)
 {
     assert(cell != nullptr);
@@ -53,6 +60,25 @@ bool Player::move(std::shared_ptr<Piece> piece, std::shared_ptr<Cell> cell)
     return true;
 }
 
+bool Player::pickPiece(std::shared_ptr<Piece> transporter, std::shared_ptr<Piece> targetPiece, Hexagrid& grid)
+{
+    assert(transporter != nullptr);
+    assert(targetPiece != nullptr);
+
+    if(canCarry(transporter, targetPiece, grid)) {
+        return false;
+    }
+
+    transporter->getContainer().takePiece(targetPiece);
+
+    if(targetPiece->isOnCell())
+        targetPiece->getCell()->removePiece();
+
+    targetPiece->setCell(nullptr);
+
+    return true;
+}
+
 bool Player::removePiece(std::shared_ptr<Piece> piece)
 {
     if(!piece->isOnCell()) {
@@ -67,4 +93,44 @@ bool Player::removePiece(std::shared_ptr<Piece> piece)
 
 PieceStock& Player::getPieceStock() {
     return m_pieceStock;
+}
+
+std::unordered_set<std::shared_ptr<Cell> > Player::getAccessibleCells(Hexagrid& grid, std::shared_ptr<Piece> piece)
+{
+    assert(piece != nullptr);
+    assert(piece->getCell() != nullptr);
+
+    std::unordered_set<std::shared_ptr<Cell> > cells;
+
+    // return an empty set  (range < 1)
+    if(!piece->getCell()->isPracticable(piece) || getActionPoints() < 1) {
+        return cells;
+    }
+
+    std::list<std::list<std::shared_ptr<Cell> > > fringes;
+
+    // add first cell's neighbours (range = 1)
+    fringes.emplace_back();
+    for(std::shared_ptr<Cell> neighbour : grid.getDirectPracticableNeighbours(piece->getCell(), piece)) {
+        if(!cells.count(neighbour)) {
+            cells.insert(neighbour);
+            fringes.back().push_back(neighbour);
+        }
+    }
+
+    // flood-fill for the other cells (range > 2)
+    for(int k = 1; k < getActionPoints(); k++) {
+        fringes.emplace_back();
+        for(std::shared_ptr<Cell> cell : fringes.front()) {
+            for(std::shared_ptr<Cell> neighbour : grid.getDirectPracticableNeighbours(cell, piece)) {
+                if(!cells.count(neighbour)) {
+                    cells.insert(neighbour);
+                    fringes.back().push_back(neighbour);
+                }
+            }
+        }
+        fringes.pop_front();
+    }
+    
+    return cells;
 }

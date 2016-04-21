@@ -11,7 +11,7 @@ class CrabPiece : public Piece
 
 public:
     CrabPiece();
-    virtual bool canBeCarried(Container::Type containerType) const;
+    virtual bool canBeCarried(Container container) const;
     virtual std::string getType();
 };
 

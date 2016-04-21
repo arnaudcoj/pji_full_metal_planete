@@ -5,8 +5,9 @@ PontoonPiece::PontoonPiece() : Piece(Engine::Type::NO_ENGINE, Weapon::Type::NO_W
 
 }
 
-bool PontoonPiece::canBeCarried(Container::Type containerType) const
+bool PontoonPiece::canBeCarried(Container container) const
 {
+    Container::Type containerType = container.getType();
     switch(containerType) {
         case Container::Type::BIG_CONTAINER:
             return true;

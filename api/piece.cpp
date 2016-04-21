@@ -43,6 +43,6 @@ int Piece::getWeight()
     return m_weight + m_container.getWeight();
 }
 
-bool Piece::canBeCarried(Container::Type containerType) const {
+bool Piece::canBeCarried(Container container) const {
     return false;
 }

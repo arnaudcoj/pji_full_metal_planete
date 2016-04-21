@@ -28,7 +28,7 @@ public:
     bool removeCell();
     int getWeight();
     
-    virtual bool canBeCarried(Container::Type containerType) const;
+    virtual bool canBeCarried(Container container) const;
     virtual std::string getType() = 0;
 
     Engine& getEngine();

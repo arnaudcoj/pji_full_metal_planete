@@ -14,7 +14,6 @@
 #include <cmath>
 #include <yaml-cpp/yaml.h>
 
-#include "player.h"
 #include "cell.h"
 #include "piece.h"
 #include "tide.h"
@@ -50,9 +49,6 @@ public:
 
     void update(Tide tide);
 
-    // gets the cells where a piece can move
-    std::unordered_set<std::shared_ptr<Cell> > getAccessibleCells(Player& player, std::shared_ptr<Piece> piece);
-
     // gets the cell in a given range from origin
     std::list<std::shared_ptr<Cell> > getCellsInRange(std::shared_ptr<Cell> origin, int range = 1) const;
 
@@ -62,14 +58,6 @@ public:
         std::shared_ptr<Cell> dest,
         std::shared_ptr<Piece> piece) const;
 
-private:
-    //used by getAccessibleCells
-    /*std::unordered_set<std::shared_ptr<Cell> > getAccessibleCells_rec(Player& player,
-        std::shared_ptr<Piece> piece,
-        std::unordered_set<std::shared_ptr<Cell> >& cells,
-        std::shared_ptr<Cell> currentCell,
-        std::vector<std::vector<bool> >& alreadyVisited,
-        int actionPoints);*/
 };
 
 #endif // HEXAGRID_H
