@@ -1,4 +1,4 @@
-#include "AssetManager.h"
+#include "assetmanager.h"
 #include <assert.h>
 
 const std::string AssetManager::IMG_PATH = { "../../assets/tiles/" };

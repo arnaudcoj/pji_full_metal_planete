@@ -33,7 +33,7 @@ TEST_CASE("test getGameState", "tests if getGameState returns a correct gameStat
     GameState gs = g.getGameState();
 
     REQUIRE(gs.getNbTurns() == gs.getMaxTurns());
-    REQUIRE(gs.getTides().size() == 9);
+    REQUIRE(gs.getTides().size() == 10);
 }
 
 

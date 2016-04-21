@@ -5,6 +5,8 @@ GameState::GameState() : m_maxTurns(25), m_nbTurns(m_maxTurns), m_tideVector()
 {
     m_RNG.seed(std::random_device()());
     initTideVector();
+    //1ere marée = normal
+    m_tideVector.push_back(Tide::MEDIUM_TIDE);
 }
 
 std::vector<Tide> &GameState::getTides() {

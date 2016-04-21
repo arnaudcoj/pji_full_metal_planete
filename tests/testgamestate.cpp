@@ -21,11 +21,11 @@ TEST_CASE("test nextTurn", "tests if the nbTurns is updated when we call nextTur
 TEST_CASE("test getTides()", "tests the amount of cells at init and when we get to the next turn") {
     GameState gs;
 
-    REQUIRE(gs.getTides().size() == 9);
+    REQUIRE(gs.getTides().size() == 10);
     gs.nextTurn();
-    REQUIRE(gs.getTides().size() == 8);
+    REQUIRE(gs.getTides().size() == 9);
 
-    for(int i = 8; i > 0 ; i--) {
+    for(int i = 9; i > 0 ; i--) {
         REQUIRE(gs.getTides().size() == i);
         gs.nextTurn();
     }
