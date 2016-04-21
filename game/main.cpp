@@ -37,10 +37,10 @@ int main()
     sf::Sound selected_sound(AssetManager::getSoundBuffer("bop.ogg"));
 
     // Creating the game objects
-    Game game = Game("../../assets/maps/fmp.yaml", 1);
+    Game game = Game("../../assets/maps/fmp.yaml", 2);
     Grid grid(game.getHexagrid());
-    Player player = game.getCurrentPlayer();
     PieceStock stock = game.getPieceStock();
+    Player player = game.getCurrentPlayer();
     Pawns pawns(stock);
 
     player.move(stock.takePiece(), game.getHexagrid().getCell(1, 1));
@@ -57,6 +57,8 @@ int main()
     sf::Uint32 style = sf::Style::Titlebar | sf::Style::Close;
     sf::RenderWindow window(sf::VideoMode(1024, 1024), "Full Metal Planete", style);
     window.setFramerateLimit(60); // Set target Frames per second
+
+    // window.setMouseCursorVisible(false);
 
     auto wSize = window.getSize();
     sf::View view(sf::FloatRect(0, 0, wSize.x, wSize.y));
@@ -75,6 +77,8 @@ int main()
     std::shared_ptr<Cell> previous_cell = nullptr;
 
     bool travelling = false;
+
+    sf::Vector2i oldPos(0, 0);
 
     // Game loop
     while(window.isOpen()) {
@@ -124,8 +128,9 @@ int main()
                     break;
                 }
                 break;
-            case sf::Event::MouseButtonReleased: {
+            case sf::Event::MouseButtonPressed: {
                 sf::Vector2i pixelPos = sf::Mouse::getPosition(window);
+                oldPos = pixelPos;
 
                 // conversion en coordonnées "monde"
                 sf::Vector2f worldPos = window.mapPixelToCoords(pixelPos);
@@ -175,19 +180,42 @@ int main()
                         }
 
                         selected_sound.play();
-                    } else {
-                        centerView(worldPos, worldSize, view);
+
+                        sf::Vector2f position = pawns.getPawn(selectedPiece)->getPosition();
+                        centerView(position, worldSize, view);
+                        window.setView(view);
+
+                        sf::Vector2f centerPos = pawns.getPawn(selectedPiece)->getPosition();
+                        // conversion en coordonnées "fenetre"
+                        sf::Vector2i windowPos = window.mapCoordsToPixel(centerPos);
+
+                        sf::Vector2i posMouse(windowPos.x, windowPos.y);
+                        sf::Mouse::setPosition(posMouse, window);
+
+                        oldPos = posMouse;
                     }
                 }
 
             } break;
             case sf::Event::MouseMoved: {
+                sf::Vector2i pixelPos = sf::Mouse::getPosition(window);
+
+                // conversion en coordonnées "monde"
+                sf::Vector2f worldPos = window.mapPixelToCoords(pixelPos);
+
                 if(selectedPiece != nullptr && !travelling) {
                     sf::Vector2i pixelPos = sf::Mouse::getPosition(window);
 
-                    // conversion en coordonnÃ©es "monde"
-                    sf::Vector2f worldPos = window.mapPixelToCoords(pixelPos);
+                    int x = pixelPos.x - oldPos.x;
+                    int y = pixelPos.y - oldPos.y;
+                    view.move(x, y);
 
+                    oldPos = pixelPos;
+
+                    centerView(view.getCenter(), worldSize, view);
+                    window.setView(view);
+
+                    std::cout << "moved" << std::endl;
                     sf::Vector2f vector = grid.PixToCell(worldPos.x, worldPos.y);
                     std::shared_ptr<Cell> cell = game.getHexagrid().getCell(vector.x, vector.y);
 
@@ -230,12 +258,24 @@ int main()
             }
         }
 
+        if(sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && selectedPiece == nullptr) {
+            sf::Vector2i pixelPos = sf::Mouse::getPosition(window);
+
+            int x = oldPos.x - pixelPos.x;
+            int y = oldPos.y - pixelPos.y;
+            view.move(x, y);
+
+            oldPos = pixelPos;
+
+            centerView(view.getCenter(), worldSize, view);
+        }
+
         // Update frame
         grid.update();
         pawns.update(deltaTime);
         userInterface.update();
 
-        if(selectedPiece != nullptr) {
+        if(travelling) {
             sf::Vector2f position = pawns.getPawn(selectedPiece)->getPosition();
             centerView(position, worldSize, view);
         }
@@ -260,9 +300,9 @@ int main()
         window.draw(grid); // drawing the grid
         window.draw(pawns);
         window.draw(userInterface);
-        
+
         window.setView(view);
-        
+
         window.display();
     }
 

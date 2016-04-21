@@ -41,7 +41,7 @@ TEST_CASE("test getGameState", "tests if getGameState returns a correct gameStat
     GameState gs = g.getGameState();
 
     REQUIRE(gs.getTurn() == 0);
-    REQUIRE(gs.getTides().size() == 9);
+    REQUIRE(gs.getTides().size() == 10);
 }
 
 TEST_CASE("test placeMinerals", "tests if the minerals are properly placed on the grid after game started")

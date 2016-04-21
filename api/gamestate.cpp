@@ -8,6 +8,8 @@ GameState::GameState()
 {
     m_RNG.seed(std::random_device()());
     initTideVector();
+    //1ere marée = normal
+    m_tideVector.push_back(Tide::MEDIUM_TIDE);
 }
 
 std::vector<Tide> GameState::getTides() const
