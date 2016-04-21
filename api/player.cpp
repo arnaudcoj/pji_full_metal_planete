@@ -39,7 +39,7 @@ bool Player::canCarry(std::shared_ptr<Piece> transporter, std::shared_ptr<Piece>
     assert(transporter != nullptr);
     assert(targetPiece != nullptr);
 
-    return grid.areNeighbours(transporter->getCell(), targetPiece->getCell()) && targetPiece->canBeCarried(transporter->getContainer()) ;
+    return grid.areNeighbours(transporter->getCell(), targetPiece->getCell()) && transporter->getContainer().canCarry(targetPiece) ;
 }
 
 bool Player::move(std::shared_ptr<Piece> piece, std::shared_ptr<Cell> cell)
@@ -76,6 +76,21 @@ bool Player::pickPiece(std::shared_ptr<Piece> transporter, std::shared_ptr<Piece
 
     targetPiece->setCell(nullptr);
 
+    return true;
+}
+
+bool Player::putPieceDown(std::shared_ptr<Piece> transporter, std::shared_ptr<Piece> targetPiece, std::shared_ptr<Cell> targetCell, Hexagrid& grid) 
+{
+    assert(transporter);
+    //check si est à l'intérieur
+    assert(targetPiece);
+    
+    if(targetCell->isOccupied() || !targetCell->isPracticable(targetPiece))
+        return false;
+        
+    targetPiece->getContainer().removePiece(targetPiece);
+    targetCell->setPiece(targetPiece);
+        
     return true;
 }
 

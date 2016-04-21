@@ -6,7 +6,6 @@
     <File Name="game.cpp"/>
     <File Name="gamestate.cpp"/>
     <File Name="hexagrid.cpp"/>
-    <File Name="player.cpp"/>
     <VirtualDirectory Name="cells">
       <File Name="cell.cpp"/>
       <File Name="mountaincell.cpp"/>
@@ -32,6 +31,7 @@
       <File Name="MineralPiece.cpp"/>
       <File Name="piecestock.cpp"/>
     </VirtualDirectory>
+    <File Name="player.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="include">
     <File Name="game.h"/>

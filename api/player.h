@@ -24,6 +24,7 @@ public:
     bool useActionPoints(int points = 1);
     bool canMove(std::shared_ptr<Piece> piece, std::shared_ptr<Cell> cell);
     bool canCarry(std::shared_ptr<Piece> transporter, std::shared_ptr<Piece> targetPiece, Hexagrid& grid);
+    bool putPieceDown(std::shared_ptr<Piece> transporter, std::shared_ptr<Piece> targetPiece, std::shared_ptr<Cell> targetCell, Hexagrid& grid);
     bool move(std::shared_ptr<Piece> piece, std::shared_ptr<Cell> cell);
     bool pickPiece(std::shared_ptr<Piece> transporter, std::shared_ptr<Piece> targetPiece, Hexagrid& grid);
     bool removePiece(std::shared_ptr<Piece> piece);
