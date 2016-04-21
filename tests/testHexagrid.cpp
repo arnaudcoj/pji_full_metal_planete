@@ -313,3 +313,18 @@ TEST_CASE("tests A*pathfinding", "tests if the piece avoids the obstacle and get
     path.pop_front();
     REQUIRE(path.front()->getArea() == 43);
 }
+
+TEST_CASE("tests areNeighbours", "tests if the cells are neighbours or not") {
+    Hexagrid grid(10, 10);
+    
+    //test pour tous les voisins si areNeighbours retourne vrai
+    for(std::shared_ptr<Cell> neighbour : grid.getDirectNeighbours(grid.getCell(2,2))) {
+        REQUIRE(grid.areNeighbours(grid.getCell(2,2), neighbour));
+    }
+    
+    REQUIRE_FALSE(grid.areNeighbours(grid.getCell(2, 2), grid.getCell(1, 4)));
+    REQUIRE_FALSE(grid.areNeighbours(grid.getCell(2, 2), grid.getCell(4, 3)));
+    REQUIRE_FALSE(grid.areNeighbours(grid.getCell(2, 2), grid.getCell(2, 0)));
+    REQUIRE_FALSE(grid.areNeighbours(grid.getCell(2, 2), grid.getCell(4, 1)));
+
+}

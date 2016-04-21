@@ -43,6 +43,7 @@ public:
     std::shared_ptr<Cell> getRightTopCell(std::shared_ptr<Cell> cell) const;
     std::shared_ptr<Cell> getRightBottomCell(std::shared_ptr<Cell> cell) const;
 
+    bool areNeighbours(std::shared_ptr<Cell> cell1, std::shared_ptr<Cell> cell2) const;
     std::list<std::shared_ptr<Cell> > getDirectNeighbours(std::shared_ptr<Cell> origin) const;
     std::list<std::shared_ptr<Cell> >
     getDirectPracticableNeighbours(std::shared_ptr<Cell> origin, std::shared_ptr<Piece> piece) const;
