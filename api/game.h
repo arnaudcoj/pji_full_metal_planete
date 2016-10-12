@@ -5,6 +5,8 @@
 #include <list>
 #include <iterator>
 #include <string>
+#include <random>
+#include <SFML/System/Vector2.hpp>
 
 #include "hexagrid.h"
 #include "gamestate.h"
@@ -16,11 +18,15 @@
 #include "bigtankpiece.h"
 #include "bargepiece.h"
 #include "crabpiece.h"
+#include "MineralPiece.h"
 #include "patrolboatpiece.h"
 #include "pontoonpiece.h"
 #include "weatherlayerpiece.h"
+#include "cell.h"
 
-//contient les informations sur l'etat du jeu
+typedef std::mt19937 RNG;
+    
+// contient les informations sur l'etat du jeu
 class Game
 {
     Hexagrid m_hexagrid;
@@ -29,20 +35,28 @@ class Game
     GameState m_gameState;
     PieceStock m_pieceStock;
 
+    void init(int nbPlayer);
     void newTurn();
-public:
+    void placePiece(std::shared_ptr<Cell> cell, std::shared_ptr<Piece> piece);
+    void populatePieceStock(int nbPlayers);
+    void distributeArmy();
+    void placeMinerals(sf::Vector2i firstMineral);
 
+public:
     Game(int nbPlayer = 1);
     Game(const std::string& gridFile, int nbPlayer = 1);
     Game(Hexagrid grid, int nbPlayer = 1);
-    
+
     void passTurn();
-    
+
     std::list<Player> getPlayers() const;
-    Player& getCurrentPlayer() ;
-    Hexagrid& getHexagrid() ;
-    GameState& getGameState() ;
-    PieceStock& getPieceStock() ;
+    Player& getCurrentPlayer();
+    Hexagrid& getHexagrid();
+    GameState& getGameState();
+    PieceStock& getPieceStock();
+    bool isStarted() const;
+    bool isFinished() const;
+    void startGame(sf::Vector2i firstMineral = sf::Vector2i(-1, -1));
 };
 
 #endif // GAME_H

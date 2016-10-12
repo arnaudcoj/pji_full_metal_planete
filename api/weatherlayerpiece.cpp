@@ -4,8 +4,9 @@ WeatherLayerPiece::WeatherLayerPiece() : Piece(Engine::Type::TERRESTRIAL_ENGINE,
 {
 }
 
-bool WeatherLayerPiece::canBeCarried(Container::Type containerType) const
+bool WeatherLayerPiece::canBeCarried(Container container) const
 {
+    Container::Type containerType = container.getType();
     switch(containerType) {
         case Container::Type::BIG_CONTAINER:
             return true;
@@ -15,5 +16,5 @@ bool WeatherLayerPiece::canBeCarried(Container::Type containerType) const
 }
 
 std::string WeatherLayerPiece::getType() {
-    return m_type;
+    return "weather_layer";
 }

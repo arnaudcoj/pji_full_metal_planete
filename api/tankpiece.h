@@ -5,12 +5,10 @@
 
 class TankPiece : public Piece
 {
-private:
-    std::string m_type = "tank";
 
 public:
     TankPiece();
-    virtual bool canBeCarried(Container::Type containerType) const;
+    virtual bool canBeCarried(Container container) const;
     virtual std::string getType();
 };
 

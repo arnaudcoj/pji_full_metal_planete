@@ -5,8 +5,9 @@ BigTankPiece::BigTankPiece() : Piece(Engine::Type::HEAVY_TERRESTRIAL_ENGINE, Wea
 
 }
 
-bool BigTankPiece::canBeCarried(Container::Type containerType) const
+bool BigTankPiece::canBeCarried(Container container) const
 {
+    Container::Type containerType = container.getType();
     switch(containerType) {
         case Container::Type::BIG_CONTAINER:
             return true;
@@ -18,5 +19,5 @@ bool BigTankPiece::canBeCarried(Container::Type containerType) const
 }
 
 std::string BigTankPiece::getType() {
-    return m_type;
+    return "big_tank";
 }

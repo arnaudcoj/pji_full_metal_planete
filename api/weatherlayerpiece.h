@@ -8,12 +8,10 @@
 
 class WeatherLayerPiece : public Piece
 {
-private:
-    std::string m_type = "weather_layer";
 
 public:
     WeatherLayerPiece();
-    virtual bool canBeCarried(Container::Type containerType) const;
+    virtual bool canBeCarried(Container container) const;
     virtual std::string getType();
 };
 

@@ -222,6 +222,16 @@ std::list<std::shared_ptr<Cell> > Hexagrid::getCellsInRange(std::shared_ptr<Cell
     return cellsInRange;
 }
 
+bool Hexagrid::areNeighbours(std::shared_ptr<Cell> cell1, std::shared_ptr<Cell> cell2) const 
+{
+    assert(cell1);
+    assert(cell2);
+    assert(cell1 != cell2);
+    
+    std::list<std::shared_ptr<Cell> > neighbours = getDirectNeighbours(cell1);
+    return std::find(neighbours.begin(), neighbours.end(), cell2) != neighbours.end();
+}
+
 std::list<std::shared_ptr<Cell> > Hexagrid::getDirectNeighbours(std::shared_ptr<Cell> origin) const
 {
     assert(origin != nullptr);
@@ -395,46 +405,6 @@ std::unordered_set<std::shared_ptr<Cell> > Hexagrid::getAccessibleCells_rec(Play
     return cells;
 }
 */
-
-std::unordered_set<std::shared_ptr<Cell> > Hexagrid::getAccessibleCells(Player& player, std::shared_ptr<Piece> piece)
-{
-    assert(piece != nullptr);
-    assert(piece->getCell() != nullptr);
-
-    std::unordered_set<std::shared_ptr<Cell> > cells;
-
-    // return an empty set  (range < 1)
-    if(!piece->getCell()->isPracticable(piece) || player.getActionPoints() < 1) {
-        return cells;
-    }
-
-    std::list<std::list<std::shared_ptr<Cell> > > fringes;
-
-    // add first cell's neighbours (range = 1)
-    fringes.emplace_back();
-    for(std::shared_ptr<Cell> neighbour : getDirectPracticableNeighbours(piece->getCell(), piece)) {
-        if(!cells.count(neighbour)) {
-            cells.insert(neighbour);
-            fringes.back().push_back(neighbour);
-        }
-    }
-
-    // flood-fill for the other cells (range > 2)
-    for(int k = 1; k < player.getActionPoints(); k++) {
-        fringes.emplace_back();
-        for(std::shared_ptr<Cell> cell : fringes.front()) {
-            for(std::shared_ptr<Cell> neighbour : getDirectPracticableNeighbours(cell, piece)) {
-                if(!cells.count(neighbour)) {
-                    cells.insert(neighbour);
-                    fringes.back().push_back(neighbour);
-                }
-            }
-        }
-        fringes.pop_front();
-    }
-    
-    return cells;
-}
 
 std::shared_ptr<Cell> createCell(int i, int j, bool halfCell, int type, int area)
 {

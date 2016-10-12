@@ -4,8 +4,9 @@ MineralPiece::MineralPiece() : Piece(Engine::Type::NO_ENGINE, Weapon::Type::NO_W
 {
 }
 
-bool MineralPiece::canBeCarried(Container::Type containerType) const
+bool MineralPiece::canBeCarried(Container container) const
 {
+    Container::Type containerType = container.getType();
     switch(containerType) {
         case Container::Type::NO_CONTAINER:
             return false;
@@ -15,5 +16,5 @@ bool MineralPiece::canBeCarried(Container::Type containerType) const
 }
 
 std::string MineralPiece::getType() {
-    return m_type;
+    return "mineral";
 }

@@ -5,8 +5,9 @@ CrabPiece::CrabPiece() : Piece(Engine::Type::TERRESTRIAL_ENGINE, Weapon::Type::N
 
 }
 
-bool CrabPiece::canBeCarried(Container::Type containerType) const
+bool CrabPiece::canBeCarried(Container container) const
 {
+    Container::Type containerType = container.getType();
     switch(containerType) {
         case Container::Type::BIG_CONTAINER:
             return true;
@@ -16,5 +17,5 @@ bool CrabPiece::canBeCarried(Container::Type containerType) const
 }
 
 std::string CrabPiece::getType() {
-    return m_type;
+    return "crab";
 }

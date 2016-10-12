@@ -35,10 +35,12 @@ public:
     int getY() const;
     unsigned int getArea();
     bool isPracticable(std::shared_ptr<Piece> piece);
+    virtual int getRangeBonus();
+    virtual bool canContainMineral();
+    virtual bool canContainPod();
 
     virtual std::string getType() = 0;
 
-    virtual int getRangeBonus();
 
 private:
     virtual bool isPracticableCurrent(std::shared_ptr<Piece> piece) = 0;

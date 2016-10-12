@@ -223,62 +223,6 @@ TEST_CASE("test update", "tests if update correctly updates the cells")
     }
 }
 
-TEST_CASE("getAccessibleCells",
-    "checks if cells are accessibles or not according for the piece, with an amount of 2 action points")
-{
-    YAML::Node primes = YAML::Load("{name : terrain1, cells : ["
-                                   "[[0,0], [0,10], [0,20], [0,30]],"
-                                   "[[0,1], [0,11], [0,21], [0,31]],"
-                                   "[[0,2], [2,12], [0,22], [0,32]],"
-                                   "[[0,3], [0,13], [0,23], [0,33]]]}");
-
-    Hexagrid grid(primes);
-
-    Player player(1);
-    player.useActionPoints(13); // we want the player to have 2 action points
-
-    std::shared_ptr<Piece> piece = std::make_shared<TankPiece>();
-    player.move(piece, grid.getCell(1, 1));
-
-    std::unordered_set<std::shared_ptr<Cell> > accessibleCells = grid.getAccessibleCells(player, piece);
-
-    // il doit y avoir 20 21 et 22
-    REQUIRE(accessibleCells.size() == 3);
-    REQUIRE(accessibleCells.count(grid.getCell(2, 0)));
-    REQUIRE(accessibleCells.count(grid.getCell(2, 1)));
-    REQUIRE(accessibleCells.count(grid.getCell(2, 2)));
-
-    REQUIRE_FALSE(accessibleCells.count(grid.getCell(1, 1)));
-    REQUIRE_FALSE(accessibleCells.count(grid.getCell(1, 2)));
-    REQUIRE_FALSE(accessibleCells.count(grid.getCell(1, 3)));
-}
-
-TEST_CASE("getAccessibleCells with piece stuck",
-    "checks if getAccessibleCells returns an empty list when the piece is stuck")
-{
-    YAML::Node primes = YAML::Load("{name : terrain1, cells : ["
-                                   "[[0,0], [0,10], [0,20], [0,30]],"
-                                   "[[0,1], [0,11], [0,21], [0,31]],"
-                                   "[[0,2], [3,12], [0,22], [0,32]],"
-                                   "[[0,3], [0,13], [0,23], [0,33]]]}");
-
-    Hexagrid grid(primes);
-
-    Player player(1);
-
-    std::shared_ptr<Piece> piece = std::make_shared<TankPiece>();
-    player.move(piece, grid.getCell(1, 2));
-
-    //the piece can move
-    std::unordered_set<std::shared_ptr<Cell> > accessibleCells = grid.getAccessibleCells(player, piece);
-    REQUIRE_FALSE(accessibleCells.empty());
-
-    grid.update(Tide::HIGH_TIDE);
-    //now the piece is stuck
-    accessibleCells = grid.getAccessibleCells(player, piece);
-    REQUIRE(accessibleCells.empty());
-}
-
 TEST_CASE("tests A*pathfinding", "tests if the piece avoids the obstacle and gets to the destination")
 {
     YAML::Node primes = YAML::Load("{name : terrain1, cells : ["
@@ -312,4 +256,19 @@ TEST_CASE("tests A*pathfinding", "tests if the piece avoids the obstacle and get
     REQUIRE(path.front()->getArea() == 42);
     path.pop_front();
     REQUIRE(path.front()->getArea() == 43);
+}
+
+TEST_CASE("tests areNeighbours", "tests if the cells are neighbours or not") {
+    Hexagrid grid(10, 10);
+    
+    //test pour tous les voisins si areNeighbours retourne vrai
+    for(std::shared_ptr<Cell> neighbour : grid.getDirectNeighbours(grid.getCell(2,2))) {
+        REQUIRE(grid.areNeighbours(grid.getCell(2,2), neighbour));
+    }
+    
+    REQUIRE_FALSE(grid.areNeighbours(grid.getCell(2, 2), grid.getCell(1, 4)));
+    REQUIRE_FALSE(grid.areNeighbours(grid.getCell(2, 2), grid.getCell(4, 3)));
+    REQUIRE_FALSE(grid.areNeighbours(grid.getCell(2, 2), grid.getCell(2, 0)));
+    REQUIRE_FALSE(grid.areNeighbours(grid.getCell(2, 2), grid.getCell(4, 1)));
+
 }

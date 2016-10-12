@@ -66,3 +66,13 @@ void Cell::setTide(Tide tide)
 {
     m_tide = tide;
 }
+
+bool Cell::canContainMineral()
+{
+    return true;
+}
+
+bool Cell::canContainPod()
+{
+    return false;
+}

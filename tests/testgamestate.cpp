@@ -2,32 +2,32 @@
 #include <memory>
 #include <gamestate.h>
 
-TEST_CASE("test getNbTurns and getMaxTurns", "tests if the nbTurns is the same as maxTurns when the game is created") {
+TEST_CASE("test getTurn and getMaxTurns", "tests if the nbTurns is the same as maxTurns when the game is created") {
     GameState gs;
 
-    REQUIRE(gs.getNbTurns() == gs.getMaxTurns());
+    REQUIRE(gs.getTurn() == 0);
 }
 
 TEST_CASE("test nextTurn", "tests if the nbTurns is updated when we call nextTurn") {
     GameState gs;
 
-    REQUIRE(gs.getNbTurns() == gs.getMaxTurns());
+    REQUIRE(gs.getTurn() == 0);
     gs.nextTurn();
-    REQUIRE(gs.getNbTurns() == gs.getMaxTurns() - 1);
+    REQUIRE(gs.getTurn() == 1);
     gs.nextTurn();
-    REQUIRE(gs.getNbTurns() == gs.getMaxTurns() - 2);
+    REQUIRE(gs.getTurn() == 2);
 }
 
-TEST_CASE("test getTides()", "tests the amount of cells at init and when we get to the next turn") {
+TEST_CASE("test getTides() and nextTide", "tests the amount of cells at init and when we use nextTide") {
     GameState gs;
 
+    REQUIRE(gs.getTides().size() == 10);
+    gs.nextTide();
     REQUIRE(gs.getTides().size() == 9);
-    gs.nextTurn();
-    REQUIRE(gs.getTides().size() == 8);
 
-    for(int i = 8; i > 0 ; i--) {
+    for(int i = 9; i > 0 ; i--) {
         REQUIRE(gs.getTides().size() == i);
-        gs.nextTurn();
+        gs.nextTide();
     }
     REQUIRE(gs.getTides().size() == 9);
 

@@ -18,6 +18,7 @@ public:
     PlainCell(sf::Vector2i coord, bool halfCell = false, unsigned int area = 0);
     PlainCell(int x, int y, bool halfCell = false, unsigned int area = 0);
     virtual bool isPracticableCurrent(std::shared_ptr<Piece> piece);
+    virtual bool canContainPod();
     virtual std::string getType();
 };
 

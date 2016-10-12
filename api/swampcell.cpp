@@ -39,3 +39,8 @@ std::string SwampCell::getType()
         return m_type + "_medium";
     }
 }
+
+bool SwampCell::canContainPod()
+{
+    return true;
+}
