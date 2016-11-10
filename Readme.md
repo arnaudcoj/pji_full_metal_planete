@@ -20,3 +20,5 @@ Aucun exécutable n'est distribué pour l'instant. Pour compiler et lancer le je
   7. **Run** le projet **game** ou **tests**
 
 ![preview](/preview.gif)
+
+## Un rapport de ce qui a été fait est disponible [ici](/RapportProjetIndividuel.pdf). ##
