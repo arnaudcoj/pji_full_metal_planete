@@ -215,7 +215,6 @@ int main()
                     centerView(view.getCenter(), worldSize, view);
                     window.setView(view);
 
-                    std::cout << "moved" << std::endl;
                     sf::Vector2f vector = grid.PixToCell(worldPos.x, worldPos.y);
                     std::shared_ptr<Cell> cell = game.getHexagrid().getCell(vector.x, vector.y);
 

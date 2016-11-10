@@ -5,16 +5,16 @@
 ## Debug
 ProjectName            :=game
 ConfigurationName      :=Debug
-WorkspacePath          := "/home/non0w/Documents/M1/S2/pji_full_metal_planete"
-ProjectPath            := "/home/non0w/Documents/M1/S2/pji_full_metal_planete/game"
+WorkspacePath          :=/home/non0w/Documents/Cours/Info/Master/M1/S2/pji_full_metal_planete
+ProjectPath            :=/home/non0w/Documents/Cours/Info/Master/M1/S2/pji_full_metal_planete/game
 IntermediateDirectory  :=./Debug
 OutDir                 := $(IntermediateDirectory)
 CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
-User                   :=
-Date                   :=04/21/16
-CodeLitePath           :="/home/non0w/.codelite"
+User                   :=Non0w
+Date                   :=11/02/16
+CodeLitePath           :=/home/non0w/.codelite
 LinkerName             :=/usr/bin/clang++
 SharedObjectLinkerName :=/usr/bin/clang++ -shared -fPIC
 ObjectSuffix           :=.o
@@ -78,6 +78,18 @@ $(OutputFile): $(IntermediateDirectory)/.d $(Objects)
 	@echo $(Objects0)  > $(ObjectsFileList)
 	$(LinkerName) $(OutputSwitch)$(OutputFile) @$(ObjectsFileList) $(LibPath) $(Libs) $(LinkOptions)
 
+"../.build-debug/api":
+	@$(MakeDirCommand) "../.build-debug"
+	@echo stam > "../.build-debug/api"
+
+
+"../.build-debug/interface":
+	@$(MakeDirCommand) "../.build-debug"
+	@echo stam > "../.build-debug/interface"
+
+
+
+
 MakeIntermediateDirs:
 	@test -d ./Debug || $(MakeDirCommand) ./Debug
 
@@ -92,12 +104,12 @@ PreBuild:
 ## Objects
 ##
 $(IntermediateDirectory)/main.cpp$(ObjectSuffix): main.cpp $(IntermediateDirectory)/main.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/non0w/Documents/M1/S2/pji_full_metal_planete/game/main.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IncludePath)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/non0w/Documents/Cours/Info/Master/M1/S2/pji_full_metal_planete/game/main.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/main.cpp$(DependSuffix): main.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/main.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/main.cpp$(DependSuffix) -MM "main.cpp"
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/main.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/main.cpp$(DependSuffix) -MM main.cpp
 
 $(IntermediateDirectory)/main.cpp$(PreprocessSuffix): main.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/main.cpp$(PreprocessSuffix) "main.cpp"
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/main.cpp$(PreprocessSuffix)main.cpp
 
 
 -include $(IntermediateDirectory)/*$(DependSuffix)

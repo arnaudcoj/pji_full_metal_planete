@@ -11,9 +11,12 @@ Ce projet a pour ambition de faire un portage de ce jeu sur PC (Windows, Mac, Li
 
 Aucun exécutable n'est distribué pour l'instant. Pour compiler et lancer le jeu, nous vous recommandons de :
 
-  1. installer la bibliothèque **[SFML](http://www.sfml-dev.org/)** ;
+  1. installer la bibliothèque **[SFML](http://www.sfml-dev.org/)** (2.3+);
   2. installer **[boost](https://www.Boost.org/)** ;
   3. installer **[yaml-cpp](https://github.com/jbeder/yaml-cpp)** ;
   4. installer **[Codelite](http://www.codelite.org/)** ;
   5. ouvrir **FMP.workpace** dans **Codelite** ;
-  6. sélectionner **Build and Run** pour lancer le programme.
+  6. **Build** les projets **api > interface > game** ou **api > tests**.
+  7. **Run** le projet **game** ou **tests**
+
+![preview](/preview.gif)
