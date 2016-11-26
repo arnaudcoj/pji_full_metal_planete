@@ -19,6 +19,8 @@ Aucun exécutable n'est distribué pour l'instant. Pour compiler et lancer le je
   6. **Build** les projets **api > interface > game** ou **api > tests**.
   7. **Run** le projet **game** ou **tests**
 
+  Sous OSX, il peut être nécessaire de se rendre dans "Settings/Build Settings" dans Codelite et de décocher "Pass object list to the linker via file"
+
 ![preview](/preview.gif)
 
 ## Un rapport de ce qui a été fait est disponible [ici](/RapportProjetIndividuel.pdf). ##
